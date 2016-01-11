@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hzfh.service.employee.mapper.OtherMapper">
+	<resultMap type="com.hzfh.api.employee.model.Other" id="resultMapOther">
+		<result property="id" column="id"/>
+		<result property="type" column="type"/>
+		<result property="empNo" column="emp_no"/>
+		<result property="apply" column="apply" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
+		<result property="begin" column="begin" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
+		<result property="end" column="end" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
+		<result property="days" column="days"/>
+		<result property="reason" column="reason"/>
+		<result property="leavetypeNo" column="leavetype_no"/>
+		<result property="checkEmpNo" column="check_emp_no"/>
+		<result property="checkOk" column="check_ok"/>
+		<result property="inUserNo" column="in_user_no"/>
+		<result property="inTime" column="in_time" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
+		<result property="editUserNo" column="edit_user_no"/>
+		<result property="editTime" column="edit_time" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
+		<result property="editComment" column="edit_comment"/>
+	</resultMap>
+	<select id="getList" resultMap="resultMapOther">
+		SELECT id,type,emp_no,apply,begin,end,days,reason,leavetype_no,check_emp_no,check_ok,in_user_no,in_time,edit_user_no,edit_time,edit_comment
+		FROM other
+	</select>
+	<select id="getPagingList" resultMap="resultMapOther" parameterType="com.hzfh.api.employee.model.query.OtherCondition" statementType="STATEMENT">
+		SELECT id,type,emp_no,apply,begin,end,days,reason,leavetype_no,check_emp_no,check_ok,in_user_no,in_time,edit_user_no,edit_time,edit_comment FROM other where 1=1
+
+		ORDER BY
+		<foreach item="item" collection="sortItemList" separator=",">
+			${item.sortFeild} ${item.sortType}
+		</foreach>
+		LIMIT ${startIndex},${pageSize}
+	</select>
+	<select id="getTotalCount" resultType="int" parameterType="com.hzfh.api.employee.model.query.OtherCondition" statementType="STATEMENT">
+		SELECT count(1) FROM other where 1=1
+	</select>
+	<select id="getInfo" resultMap="resultMapOther" parameterType="int">
+		SELECT id,type,emp_no,apply,begin,end,days,reason,leavetype_no,check_emp_no,check_ok,in_user_no,in_time,edit_user_no,edit_time,edit_comment FROM other where id=#{id}
+	</select>
+	<insert id="add" parameterType="com.hzfh.api.employee.model.Other" useGeneratedKeys="true" keyProperty="id">
+		insert into other
+		(type,emp_no,apply,begin,end,days,reason,leavetype_no,check_emp_no,check_ok,in_user_no,in_time,edit_user_no,edit_time,edit_comment)
+		values
+		(#{type},#{empNo},#{apply},#{begin},#{end},#{days},#{reason},#{leavetypeNo},#{checkEmpNo},#{checkOk},#{inUserNo},current_timestamp(),#{editUserNo},current_timestamp(),#{editComment})
+	</insert>
+	<update id="update" parameterType="com.hzfh.api.employee.model.Other">
+		update other set 
+		type=#{type},emp_no=#{empNo},apply=#{apply},begin=#{begin},end=#{end},days=#{days},reason=#{reason},leavetype_no=#{leavetypeNo},check_emp_no=#{checkEmpNo},check_ok=#{checkOk},edit_user_no=#{editUserNo},edit_time=current_timestamp(),edit_comment=#{editComment}
+		where id=#{id}
+	</update>
+	<delete id="delete" parameterType="int">
+		delete from other where id = #{id}
+	</delete>
+</mapper>

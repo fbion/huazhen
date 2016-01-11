@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hzfh.service.permission.mapper.UserMapper">
+	<resultMap type="com.hzfh.api.permission.model.User" id="resultMapUser">
+		<result property="id" column="id" />
+		<result property="name" column="name" />
+		<result property="password" column="password" />
+		<result property="lastLogin" column="last_login" jdbcType="TIMESTAMP"
+			javaType="java.sql.Timestamp" />
+		<result property="inUserNo" column="in_user_no" />
+		<result property="inTime" column="in_time" jdbcType="TIMESTAMP"
+			javaType="java.sql.Timestamp" />
+		<result property="editUserNo" column="edit_user_no" />
+		<result property="editTime" column="edit_time" jdbcType="TIMESTAMP"
+			javaType="java.sql.Timestamp" />
+		<result property="editComment" column="edit_comment" />
+	</resultMap>
+	<select id="getList" resultMap="resultMapUser">
+		SELECT
+		id,name,password,last_login,in_user_no,in_time,edit_user_no,edit_time,edit_comment
+		FROM user
+	</select>
+	<select id="getPagingList" resultMap="resultMapUser"
+		parameterType="com.hzfh.api.permission.model.query.UserCondition"
+		statementType="STATEMENT">
+		SELECT
+		id,name,password,last_login,in_user_no,in_time,edit_user_no,edit_time,edit_comment
+		FROM user where 1=1
+		<if test="id != 0">and id=${id}</if>
+		<if test="name != null and name !=''">and name LIKE CONCAT('%','${name}','%')</if>
+		ORDER BY
+		<foreach item="item" collection="sortItemList" separator=",">
+			${item.sortFeild} ${item.sortType}
+		</foreach>
+		LIMIT ${startIndex},${pageSize}
+	</select>
+	<select id="getTotalCount" resultType="int"
+		parameterType="com.hzfh.api.permission.model.query.UserCondition"
+		statementType="STATEMENT">
+		SELECT count(1) FROM user where 1=1
+		<if test="id != 0">and id=${id}</if>
+		<if test="name != null and name !=''"> and name LIKE CONCAT('%','${name}','%')</if>
+	</select>
+	<select id="getInfo" resultMap="resultMapUser" parameterType="int">
+		SELECT
+		id,name,password,last_login,in_user_no,in_time,edit_user_no,edit_time,edit_comment
+		FROM user where id=#{id}
+	</select>
+	<insert id="add" parameterType="com.hzfh.api.permission.model.User"
+		useGeneratedKeys="true" keyProperty="id">
+		insert into user
+		(name,password,last_login,in_user_no,in_time,edit_user_no,edit_time,edit_comment)
+		values
+		(#{name},#{password},#{lastLogin},#{inUserNo},current_timestamp(),#{editUserNo},current_timestamp(),#{editComment})
+	</insert>
+	<update id="update" parameterType="com.hzfh.api.permission.model.User">
+		update user set
+		name=#{name},password=#{password},last_login=#{lastLogin},edit_user_no=#{editUserNo},edit_time=current_timestamp(),edit_comment=#{editComment}
+		where id=#{id}
+	</update>
+	<delete id="delete" parameterType="int">
+		delete from user where id =
+		#{id}
+	</delete>
+	<select id="login" parameterType="com.hzfh.api.permission.model.User"
+		resultMap="resultMapUser">
+		SELECT
+		id,name,password,last_login,in_user_no,in_time,edit_user_no,edit_time,edit_comment
+		FROM user where 1=1 and name=#{name} and password=#{password}
+	</select>
+	<update id="updatePwd">
+		update user set
+		password=#{1}
+		where id=#{0}
+	</update>
+	<select id="getPwdById"   resultType="String" parameterType="int">
+		SELECT
+		password
+		FROM user where id=#{id}
+	</select>
+	<select id="getUserByUserName"   resultMap="resultMapUser" parameterType="String">
+		SELECT
+		id,name,password,last_login,in_user_no,in_time,edit_user_no,edit_time,edit_comment
+		FROM user
+		where name=#{userName}
+	</select>
+	<update id="updateLastLoginById">
+		UPDATE user set last_login=#{currentTime} WHERE id=#{id}
+	</update>
+
+
+</mapper>

@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hzfh.service.baseInfo.mapper.LetterMapper">
+	<resultMap type="com.hzfh.api.baseInfo.model.Letter" id="resultMapLetter">
+		<result property="id" column="id"/>
+		<result property="recipient" column="recipient"/>
+		<result property="subject" column="subject"/>
+		<result property="content" column="content"/>
+		<result property="sendTime" column="send_time" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
+		<result property="isRead" column="is_read"/>
+		<result property="readTime" column="read_time" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
+		<result property="level" column="level"/>
+		<result property="type" column="type"/>
+		<result property="inUserNo" column="in_user_no"/>
+		<result property="inTime" column="in_time" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
+		<result property="editUserNo" column="edit_user_no"/>
+		<result property="editTime" column="edit_time" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
+		<result property="editComment" column="edit_comment"/>
+        <result property="status" column="status"/>
+        <result property="sendDeplicate" column="send_deplicate"/>
+        <result property="importantDegree" column="important_degree"/>
+        <result property="solveUserNo" column="solve_user_no"/>
+        <result property="solveTime" column="solve_time"/>
+        <result property="solvePlan" column="solve_plan"/>
+        <result property="closeUserNo" column="close_user_no"/>
+        <result property="closeTime" column="close_time"/>
+        <result property="expectFinishTime" column="expect_finish_time" jdbcType="DATE" javaType="java.sql.Date"/>
+
+	</resultMap>
+	<select id="getList" resultMap="resultMapLetter">
+		SELECT id,recipient,subject,content,send_time,is_read,read_time,level,type,in_user_no,in_time,edit_user_no,edit_time,edit_comment,status,send_deplicate,
+		important_degree,solve_user_no,solve_time,solve_plan,close_user_no,close_time,expect_finish_time
+		FROM letter
+	</select>
+    <select id="getListByTime" resultMap="resultMapLetter">
+        SELECT id,recipient,subject,content,send_time,is_read,read_time,
+        level,type,in_user_no,in_time,edit_user_no,edit_time,edit_comment
+        ,status,send_deplicate, important_degree,solve_user_no,
+        solve_time,solve_plan,close_user_no,close_time,expect_finish_time
+        FROM letter where recipient = 0 and DATE_SUB(CURDATE(), INTERVAL 5 DAY) &lt; in_time
+    </select>
+    <select id="getListLimitByEmpId" resultMap="resultMapLetter" parameterType="int">
+        SELECT id,recipient,subject,content,send_time,is_read,read_time,level,type,in_user_no,in_time,edit_user_no,edit_time,edit_comment,status,send_deplicate,
+		important_degree,solve_user_no,solve_time,solve_plan,close_user_no,close_time,expect_finish_time
+        FROM letter where (recipient = ${empId}  or  send_deplicate = ${empId}  or recipient  = 0) and status in (1,2,3)  order by in_time desc LIMIT 10 ;
+    </select>
+	<select id="getPagingList" resultMap="resultMapLetter" parameterType="com.hzfh.api.baseInfo.model.query.LetterCondition" statementType="STATEMENT">
+		SELECT id,recipient,subject,content,send_time,is_read,read_time,level,type,in_user_no,in_time,edit_user_no,edit_time,edit_comment,status,send_deplicate,
+        important_degree,solve_user_no,solve_time,solve_plan,close_user_no,close_time,expect_finish_time
+        FROM letter where (recipient = ${empId}  or  send_deplicate = ${empId}  or recipient  = 0 or in_user_no = ${empId})
+        <if test="recipient != -1 "> and recipient=${recipient}</if>
+        <if test="subject != null and subject !=''">and subject LIKE CONCAT('%','${subject}','%')</if>
+        <if test="inUserNo!=0"> and in_user_no = ${inUserNo}</if>
+        <if test="status!=0"> and status = ${status}</if>
+		<if test="isRead != -1"> and is_read = ${isRead}</if>
+        <if test="type != '' and type != null"> and type in(${type}) </if>
+        <if test="importantDegree!=0"> and important_degree = ${importantDegree}</if>
+		<if test="eStatus != 0">AND status != ${eStatus}</if>
+		ORDER BY
+		<foreach item="item" collection="sortItemList" separator=",">
+			${item.sortFeild} ${item.sortType}
+		</foreach>
+		LIMIT ${startIndex},${pageSize}
+	</select>
+	<select id="getTotalCount" resultType="int" parameterType="com.hzfh.api.baseInfo.model.query.LetterCondition" statementType="STATEMENT">
+		SELECT count(1) FROM letter
+        where (recipient = ${empId}  or  send_deplicate = ${empId}  or recipient  = 0 or in_user_no = ${empId})
+        <if test="recipient != -1 "> and recipient=${recipient}</if>
+        <if test="subject != null and subject !=''">and subject LIKE CONCAT('%','${subject}','%')</if>
+        <if test="inUserNo!=0"> and in_user_no = ${inUserNo}</if>
+        <if test="status!=0"> and status = ${status}</if>
+		<if test="isRead != -1"> and is_read = ${isRead}</if>
+        <if test="type != '' and type != null"> and type in(${type}) </if>
+        <if test="importantDegree!=0"> and important_degree = ${importantDegree}</if>
+		<if test="eStatus != 0">AND status != ${eStatus}</if>
+	</select>
+	<select id="getInfo" resultMap="resultMapLetter" parameterType="int">
+		SELECT id,recipient,subject,content,send_time,is_read,read_time,level,type,in_user_no,in_time,edit_user_no,edit_time,edit_comment,status,send_deplicate,
+		important_degree,solve_user_no,solve_time,solve_plan,close_user_no,close_time,expect_finish_time
+		 FROM letter where id=#{id}
+	</select>
+	<insert id="add" parameterType="com.hzfh.api.baseInfo.model.Letter" useGeneratedKeys="true" keyProperty="id">
+		insert into letter
+		(recipient,subject,content,send_time,is_read,read_time,level,type,in_user_no,in_time,edit_user_no,edit_time,edit_comment,status,send_deplicate,important_degree,expect_finish_time)
+		values
+		(#{recipient},#{subject},#{content},current_timestamp(),#{isRead},current_timestamp(),#{level},#{type},#{inUserNo},current_timestamp(),#{editUserNo},current_timestamp(),#{editComment},#{status},#{sendDeplicate},#{importantDegree},#{expectFinishTime})
+	</insert>
+	<update id="update" parameterType="com.hzfh.api.baseInfo.model.Letter">
+		update letter set 
+		recipient=#{recipient},subject=#{subject},content=#{content},send_time=current_timestamp(),is_read=#{isRead},read_time=current_timestamp(),level=#{level},type=#{type},edit_user_no=#{editUserNo},edit_time=current_timestamp(),edit_comment=#{editComment},
+        status=#{status},send_deplicate=#{sendDeplicate},important_degree=#{importantDegree},expect_finish_time=#{expectFinishTime}
+		where id=#{id}
+	</update>
+
+    <update id="updateSolve" parameterType="com.hzfh.api.baseInfo.model.Letter">
+        update letter set
+        solve_time = current_timestamp(),solve_user_no = #{solveUserNo},solve_plan = #{solvePlan},status=#{status},recipient=#{recipient}
+        where id=#{id}
+    </update>
+    <update id="updateClose" parameterType="com.hzfh.api.baseInfo.model.Letter">
+        update letter set
+        close_time = current_timestamp(),close_user_no = #{closeUserNo},status=#{status}
+        where id=#{id}
+    </update>
+	<delete id="delete" parameterType="int">
+		delete from letter where id = #{id}
+	</delete>
+</mapper>

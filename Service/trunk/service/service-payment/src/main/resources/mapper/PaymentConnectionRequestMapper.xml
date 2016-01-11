@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hzfh.service.payment.mapper.PaymentConnectionRequestMapper">
+	<resultMap type="com.hzfh.api.payment.model.PaymentConnectionRequest" id="resultMapPaymentConnectionRequest">
+		<result property="id" column="id"/>
+		<result property="url" column="url"/>
+		<result property="service" column="service"/>
+		<result property="param" column="param"/>
+		<result property="reqTime" column="req_time" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
+	</resultMap>
+	<select id="getList" resultMap="resultMapPaymentConnectionRequest">
+		SELECT id,url,service,param,req_time
+		FROM payment_connection_required
+	</select>
+	<select id="getPagingList" resultMap="resultMapPaymentConnectionRequest" parameterType="com.hzfh.api.payment.model.query.PaymentConnectionRequestCondition" statementType="STATEMENT">
+		SELECT id,url,service,param,req_time FROM payment_connection_required where 1=1
+		ORDER BY
+		<foreach item="item" collection="sortItemList" separator=",">
+			${item.sortFeild} ${item.sortType}
+		</foreach>
+		LIMIT ${startIndex},${pageSize}
+	</select>
+	<select id="getTotalCount" resultType="int" parameterType="com.hzfh.api.payment.model.query.PaymentConnectionRequestCondition" statementType="STATEMENT">
+		SELECT count(1) FROM payment_connection_required where 1=1
+	</select>
+	<select id="getInfo" resultMap="resultMapPaymentConnectionRequest" parameterType="int">
+		SELECT id,url,service,param,req_time FROM payment_connection_required where id=#{id}
+	</select>
+	<insert id="add" parameterType="com.hzfh.api.payment.model.PaymentConnectionRequest" useGeneratedKeys="true" keyProperty="id">
+		insert into payment_connection_required
+		(url,service,param,req_time)
+		values
+		(#{url},#{service},#{param},#{reqTime})
+	</insert>
+	<update id="update" parameterType="com.hzfh.api.payment.model.PaymentConnectionRequest">
+		update payment_connection_required set 
+		url=#{url},service=#{service},param=#{param},req_time=#{reqTime}
+		where id=#{id}
+	</update>
+	<delete id="delete" parameterType="int">
+		delete from payment_connection_required where id = #{id}
+	</delete>
+</mapper>

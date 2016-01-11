@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hzfh.service.employee.mapper.RecruitAskRecordMapper">
+	<resultMap type="com.hzfh.api.employee.model.RecruitAskRecord" id="resultMapRecruitAskRecord">
+		<result property="id" column="id"/>
+		<result property="name" column="name"/>
+		<result property="resumeSource" column="resume_source"/>
+		<result property="resumeAttachment" column="resume_attachment"/>
+		<result property="firstContactTime" column="first_contact_time" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
+		<result property="workCondition" column="work_condition"/>
+		<result property="positionNo" column="position_no"/>
+		<result property="cellphone" column="cellphone"/>
+		<result property="email" column="email"/>
+		<result property="firstTime" column="first_time" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
+		<result property="isInterview" column="is_interview"/>
+		<result property="secondTime" column="second_time" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
+		<result property="isEmploy" column="is_employ"/>
+		<result property="firstContactSituation" column="first_contact_situation"/>
+		<result property="visitRecord" column="visit_record"/>
+		<result property="laterContactRecord" column="later_contact_record"/>
+		<result property="inUserNo" column="in_user_no"/>
+		<result property="inTime" column="in_time" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
+		<result property="editUserNo" column="edit_user_no"/>
+		<result property="editTime" column="edit_time" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
+		<result property="editComment" column="edit_comment"/>
+	</resultMap>
+	<select id="getList" resultMap="resultMapRecruitAskRecord">
+		SELECT id,name,resume_source,resume_attachment,first_contact_time,work_condition,position_no,cellphone,email,first_time,is_interview,second_time,is_employ,first_contact_situation,visit_record,later_contact_record,in_user_no,in_time,edit_user_no,edit_time,edit_comment
+		FROM recruit_ask_record
+	</select>
+	<select id="getPagingList" resultMap="resultMapRecruitAskRecord" parameterType="com.hzfh.api.employee.model.query.RecruitAskRecordCondition" statementType="STATEMENT">
+		SELECT id,name,resume_source,resume_attachment,first_contact_time,work_condition,position_no,cellphone,email,first_time,is_interview,second_time,is_employ,first_contact_situation,visit_record,later_contact_record,in_user_no,in_time,edit_user_no,edit_time,edit_comment FROM recruit_ask_record where 1=1
+		<if test="name!=null and name!=''"> and name='${name}'</if>
+		<if test="positionNo!=0"> and position_no=${positionNo}</if>
+        <if test="byInUserNo!=0"> and in_user_no =${byInUserNo}</if>
+		<if test="isInterview>-1"> and is_interview=${isInterview}</if>
+		<if test="isEmploy>-1"> and is_employ=${isEmploy}</if>
+		<if test="workMateString !=null">and in_user_no in (${workMateString})	</if>
+		<if test="dateUp !=null and dateDown !=null"> and '${dateDown}' &lt;= first_time and first_time &lt; '${dateUp}'</if>
+		ORDER BY
+		<foreach item="item" collection="sortItemList" separator=",">
+			${item.sortFeild} ${item.sortType}
+		</foreach>
+		LIMIT ${startIndex},${pageSize}
+	</select>
+	<select id="getTotalCount" resultType="int" parameterType="com.hzfh.api.employee.model.query.RecruitAskRecordCondition" statementType="STATEMENT">
+		SELECT count(1) FROM recruit_ask_record where 1=1
+        <if test="name!=null and name!=''"> and name='${name}'</if>
+        <if test="positionNo!=0"> and position_no=${positionNo}</if>
+        <if test="byInUserNo!=0"> and in_user_no =${byInUserNo}</if>
+        <if test="isInterview>-1"> and is_interview=${isInterview}</if>
+        <if test="isEmploy>-1"> and is_employ=${isEmploy}</if>
+        <if test="dateUp !=null and dateDown !=null"> and '${dateDown}' &lt;= first_time and first_time &lt; '${dateUp}'</if>
+	</select>
+	<select id="getInfo" resultMap="resultMapRecruitAskRecord" parameterType="int">
+		SELECT id,name,resume_source,resume_attachment,first_contact_time,work_condition,position_no,cellphone,email,first_time,is_interview,second_time,is_employ,first_contact_situation,visit_record,later_contact_record,in_user_no,in_time,edit_user_no,edit_time,edit_comment FROM recruit_ask_record where id=#{id}
+	</select>
+	<insert id="add" parameterType="com.hzfh.api.employee.model.RecruitAskRecord" useGeneratedKeys="true" keyProperty="id">
+		insert into recruit_ask_record
+		(name,resume_source,resume_attachment,first_contact_time,work_condition,position_no,cellphone,email,first_time,is_interview,second_time,is_employ,first_contact_situation,visit_record,later_contact_record,in_user_no,in_time,edit_user_no,edit_time,edit_comment)
+		values
+		(#{name},#{resumeSource},#{resumeAttachment},#{firstContactTime},#{workCondition},#{positionNo},#{cellphone},#{email},#{firstTime},#{isInterview},#{secondTime},#{isEmploy},#{firstContactSituation},#{visitRecord},#{laterContactRecord},#{inUserNo},current_timestamp(),#{editUserNo},current_timestamp(),#{editComment})
+	</insert>
+	<update id="update" parameterType="com.hzfh.api.employee.model.RecruitAskRecord">
+		update recruit_ask_record set 
+		name=#{name},resume_source=#{resumeSource},resume_attachment=#{resumeAttachment},first_contact_time=#{firstContactTime},work_condition=#{workCondition},position_no=#{positionNo},cellphone=#{cellphone},email=#{email},first_time=#{firstTime},is_interview=#{isInterview},second_time=#{secondTime},is_employ=#{isEmploy},first_contact_situation=#{firstContactSituation},visit_record=#{visitRecord},later_contact_record=#{laterContactRecord},edit_user_no=#{editUserNo},edit_time=current_timestamp(),edit_comment=#{editComment}
+		where id=#{id}
+	</update>
+	
+	<delete id="delete" parameterType="int">
+		delete from recruit_ask_record where id = #{id}
+	</delete>
+	
+	<select id="getListForExcel" resultMap="resultMapRecruitAskRecord" parameterType="com.hzfh.api.employee.model.query.RecruitAskRecordCondition" statementType="STATEMENT">
+		SELECT id,name,resume_source,resume_attachment,first_contact_time,work_condition,position_no,cellphone,email,first_time,is_interview,second_time,is_employ,first_contact_situation,visit_record,later_contact_record,in_user_no,in_time,edit_user_no,edit_time,edit_comment FROM recruit_ask_record where 1=1
+		<if test="name!=null and name!=''"> and name='${name}'</if>
+		<if test="positionNo!=0"> and position_no=${positionNo}</if>
+		<if test="isInterview>-1"> and is_interview=${isInterview}</if>
+		<if test="isEmploy>-1"> and is_employ=${isEmploy}</if>
+		<if test="dateUp !=null and dateDown !=null"> and '${dateDown}' &lt;= first_time and first_time &lt; '${dateUp}'</if>
+		ORDER BY
+		<foreach item="item" collection="sortItemList" separator=",">
+			${item.sortFeild} ${item.sortType}
+		</foreach>
+	</select>
+	
+	<update id="updateResumeAttachmentById" parameterType="com.hzfh.api.employee.model.RecruitAskRecord">
+		update recruit_ask_record set 
+		resume_attachment=#{filePath}
+		where id=#{id}
+	</update>
+</mapper>

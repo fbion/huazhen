@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="userService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+        <property name="serviceUrl">
+            <value>http://permissionservice.hzfh.com:8080/service-permission/user</value>
+        </property>
+        <property name="serviceInterface">
+            <value>com.hzfh.api.permission.service.UserService</value>
+        </property>
+
+        <property name="overloadEnabled" value="true"></property>
+    </bean>
+    <bean id="menuService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+        <property name="serviceUrl">
+            <value>http://permissionservice.hzfh.com:8080/service-permission/menu</value>
+        </property>
+        <property name="serviceInterface">
+            <value>com.hzfh.api.permission.service.MenuService</value>
+        </property>
+        <property name="overloadEnabled" value="true"></property>
+    </bean>
+	<bean id="roleService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+        <property name="serviceUrl">
+            <value>http://permissionservice.hzfh.com:8080/service-permission/role</value>
+        </property>
+        <property name="serviceInterface">
+            <value>com.hzfh.api.permission.service.RoleService</value>
+        </property>
+
+        <property name="overloadEnabled" value="true"></property>
+    </bean>
+	<bean id="userRoleService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+        <property name="serviceUrl">
+            <value>http://permissionservice.hzfh.com:8080/service-permission/userRole</value>
+        </property>
+        <property name="serviceInterface">
+            <value>com.hzfh.api.permission.service.UserRoleService</value>
+        </property>
+
+        <property name="overloadEnabled" value="true"></property>
+    </bean>
+    <bean id="elementService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+        <property name="serviceUrl">
+            <value>http://permissionservice.hzfh.com:8080/service-permission/element</value>
+        </property>
+        <property name="serviceInterface">
+            <value>com.hzfh.api.permission.service.ElementService</value>
+        </property>
+
+        <property name="overloadEnabled" value="true"></property>
+    </bean>
+    <bean id="roleElementService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+        <property name="serviceUrl">
+            <value>http://permissionservice.hzfh.com:8080/service-permission/roleElement</value>
+        </property>
+        <property name="serviceInterface">
+            <value>com.hzfh.api.permission.service.RoleElementService</value>
+        </property>
+
+        <property name="overloadEnabled" value="true"></property>
+    </bean>
+
+</beans>

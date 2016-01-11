@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+        "http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+    <package name="activityDetails" extends="json-default,default" namespace="/baseInfo">
+    	<action name="activityDetails" class="com.hzfh.market.controller.baseInfo.ActivityDetailsAction">
+    		<result>/baseInfo/activityDetails.jsp</result>
+    	</action>
+    	<action name="ajaxActivityApply" class="com.hzfh.market.controller.baseInfo.ajax.AjaxActivityApplyAction">
+    		<result type="json">
+    			<param name="includeProperties">
+    				message.*
+    			</param>
+    			<param name="noCache">true</param>
+    			<param name="ignoreHierarchy">false</param>
+    		</result>
+    	</action>
+        <action name="coreProcess" class="weixin.core.CoreProcess" method="coreProcess"></action>
+    </package>
+</struts>

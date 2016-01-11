@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hzfh.service.permission.mapper.MenuMapper">
+    <resultMap type="com.hzfh.api.permission.model.Element" id="resultMapMenu">
+        <result property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="value" column="value"/>
+        <result property="parentNo" column="parent_no"/>
+        <result property="level" column="level"/>
+    </resultMap>
+
+    <select id="getUserElement" resultMap="resultMapMenu"
+            parameterType="com.hzfh.api.permission.model.query.MenuCondition" statementType="STATEMENT">
+		 select DISTINCT e.id,e.name,e.value,e.parent_no,e.level from user_role u,role_element r,element e where u.role_no=r.role_no and r.ele_no=e.id and u.role_no=${roleNo} and e.is_show=1 and r.query=1   order by e.priority DESC
+	</select>
+
+    <select id="getUserElementByRoleNoAndLevel" resultMap="resultMapMenu">
+		SELECT DISTINCT e.id, e.NAME, e.parent_no, e.level, e.value FROM role_element AS re LEFT JOIN element AS e ON re.ele_no = e.id WHERE e.is_show = 1 AND re.QUERY = 1
+		<if test="roleNo != 0">
+			AND re.role_no = #{roleNo}
+		</if>
+		<if test="parentNo != 0">
+		AND e.parent_no=#{parentNo}
+		</if>
+		<if test="level != null and level != ''">
+			AND e.level IN(${level})
+		</if>
+
+		  ORDER BY e.priority DESC
+	</select>
+</mapper>

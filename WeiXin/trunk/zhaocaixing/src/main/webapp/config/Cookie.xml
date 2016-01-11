@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<cookieConfig xmlns="http://www.hzfh.com/web"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://www.hzfh.com/web ./Schemas/Cookie.xsd">
+     <cookie name="captcha" topLevelDomain="true" path="/" expiresAfter="00.00:00:00" secureOnly="false" renderInClient="true"/>
+    <cookie name="userId" topLevelDomain="true" path="/" expiresAfter="90.00:00:00" secureOnly="false" renderInClient="true"/>
+    <cookie name="lastLogin" topLevelDomain="true" path="/" expiresAfter="90.00:00:00" secureOnly="false" renderInClient="true"/>
+     <cookie name="userName" topLevelDomain="true" path="/" expiresAfter="90.00:00:00" secureOnly="false" renderInClient="true"/>
+     <cookie name="uk" topLevelDomain="true" path="/" expiresAfter="90.00:00:00" secureOnly="false" renderInClient="true"/>
+</cookieConfig>

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <mappers>
+    	<mapper resource="mapper/ActivitiesMapper.xml"/>
+		<mapper resource="mapper/ActivityAwardRelationMapper.xml"/>
+		<mapper resource="mapper/ActivityCashBonusMapper.xml"/>
+		<mapper resource="mapper/ActivityConditionMapper.xml"/>
+		<mapper resource="mapper/ActivityConditionRelationMapper.xml"/>
+		<mapper resource="mapper/ActivityCouponsMapper.xml"/>
+		<mapper resource="mapper/ActivityCouponsCodeMapper.xml"/>
+		<mapper resource="mapper/ActivityCouponsProductMapper.xml"/>
+		<mapper resource="mapper/ActivityCustomerCashBonusMapper.xml"/>
+		<mapper resource="mapper/ActivityCustomerCouponsMapper.xml"/>
+		<mapper resource="mapper/ActivityCustomerDetailMapper.xml"/>
+		<mapper resource="mapper/ActivityCustomerExperienceGoldMapper.xml"/>
+		<mapper resource="mapper/ActivityCustomerInvitationMapper.xml"/>
+		<mapper resource="mapper/ActivityCustomerPresentMapper.xml"/>
+		<mapper resource="mapper/ActivityCustomerTaskMapper.xml"/>
+		<mapper resource="mapper/ActivityExperienceGoldMapper.xml"/>
+		<mapper resource="mapper/ActivityFeedbackMapper.xml"/>
+		<mapper resource="mapper/ActivityIntegralMapper.xml"/>
+		<mapper resource="mapper/ActivityIntegralDetailMapper.xml"/>
+		<mapper resource="mapper/ActivityMessageMapper.xml"/>
+		<mapper resource="mapper/ActivityMessageStatusMapper.xml"/>
+		<mapper resource="mapper/ActivityMessageTemplateMapper.xml"/>
+		<mapper resource="mapper/ActivityPresentMapper.xml"/>
+		<mapper resource="mapper/ActivityRuleRelationMapper.xml"/>
+		<mapper resource="mapper/AgentAdviserMapper.xml"/>
+		<mapper resource="mapper/AgentBusinessMapper.xml"/>
+		<mapper resource="mapper/CustomerCompanyMapper.xml"/>
+		<mapper resource="mapper/CustomerFollowMapper.xml"/>
+		<mapper resource="mapper/CustomerPersonalMapper.xml"/>
+		<mapper resource="mapper/P2pCustomerMapper.xml"/>
+		<mapper resource="mapper/AgentFollowMapper.xml"/>
+		<mapper resource="mapper/ChangeManagerLogMapper.xml"/>
+		<mapper resource="mapper/EmailChangeMapper.xml"/>
+		<mapper resource="mapper/PaymentAccountInformationMapper.xml"/>
+		<mapper resource="mapper/PaymentAccountOperMapper.xml"/>
+		<mapper resource="mapper/PaymentBankCodeMapper.xml"/>
+		<mapper resource="mapper/PaymentBankInfoMapper.xml"/>
+		<mapper resource="mapper/PaymentMoneyChangeMapper.xml"/>
+		<mapper resource="mapper/PaymentMoneyFreezeMapper.xml"/>
+		<mapper resource="mapper/PaymentMoneyRechargeMapper.xml"/>
+		<mapper resource="mapper/PaymentMoneyWithdrawMapper.xml"/>
+		<mapper resource="mapper/PaymentPayTypeMapper.xml"/>
+		<mapper resource="mapper/PaymentPlatformMapper.xml"/>
+        <mapper resource="mapper/PaymentCustomerBankMapper.xml"/>
+        <mapper resource="mapper/TradeReqnoInfoMapper.xml"/>
+    </mappers>
+</configuration>

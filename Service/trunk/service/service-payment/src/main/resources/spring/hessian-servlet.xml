@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://www.springframework.org/schema/beans" xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+
+       http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context-4.0.xsd"
+	default-autowire="byName" default-lazy-init="false">
+	<context:component-scan base-package="com.hzfh.service" />
+	<context:annotation-config />
+	<bean id="hessianMapping" class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+		<property name="mappings">
+			<props>
+				<prop key="/controller">controllerService</prop>
+				<prop key="/gateway">gatewayService</prop>
+				<prop key="/sign">signService</prop>
+			    <prop key="/paymentConnectionRequest">paymentConnectionRequestService</prop>
+			    <prop key="/paymentGatewayRequest">paymentGatewayRequestService</prop>
+			    <prop key="/paymentyCallbackNotify">paymentyCallbackNotifyService</prop>
+			    <prop key="/paymentRefund">paymentRefundService</prop>
+			    <prop key="/autoChecking">autoCheckingService</prop>
+			    <prop key="/examineCallbackRecord">examineCallbackRecordService</prop>
+			</props>
+		</property>
+	</bean>
+	<bean id="examineCallbackRecordServiceImpl" class="com.hzfh.service.payment.serviceImpl.ExamineCallbackRecordServiceImpl" />
+  <bean id="examineCallbackRecordService"
+		class="org.springframework.remoting.caucho.HessianServiceExporter">
+    <property name="service" ref="examineCallbackRecordServiceImpl" />
+    <property name="serviceInterface" value="com.hzfh.api.payment.service.ExamineCallbackRecordService" />
+  </bean>
+  <bean id="gatewayServiceImpl" class="com.hzfh.service.payment.serviceImpl.GatewayServiceImpl" />
+  <bean id="gatewayService"
+		class="org.springframework.remoting.caucho.HessianServiceExporter">
+    <property name="service" ref="gatewayServiceImpl" />
+    <property name="serviceInterface" value="com.hzfh.api.payment.service.GatewayService" />
+  </bean>
+  <bean id="controllerServiceImpl" class="com.hzfh.service.payment.serviceImpl.ControllerServiceImpl" />
+  <bean id="controllerService" class="org.springframework.remoting.caucho.HessianServiceExporter">
+    <property name="service" ref="controllerServiceImpl" />
+    <property name="serviceInterface" value="com.hzfh.api.payment.service.ControllerService" />
+  </bean>
+  <bean id="signServiceImpl" class="com.hzfh.service.payment.serviceImpl.SignServiceImpl" />
+  <bean id="signService" class="org.springframework.remoting.caucho.HessianServiceExporter">
+    <property name="service" ref="signServiceImpl" />
+    <property name="serviceInterface" value="com.hzfh.api.payment.service.SignService" />
+  </bean>
+
+  <bean id="paymentConnectionRequestServiceImpl" class="com.hzfh.service.payment.serviceImpl.PaymentConnectionRequestServiceImpl" />
+  <bean id="paymentConnectionRequestService"
+    class="org.springframework.remoting.caucho.HessianServiceExporter">
+    <property name="service" ref="paymentConnectionRequestServiceImpl" />
+    <property name="serviceInterface" value="com.hzfh.api.payment.service.PaymentConnectionRequestService" />
+  </bean>
+
+  <bean id="paymentGatewayRequestServiceImpl" class="com.hzfh.service.payment.serviceImpl.PaymentGatewayRequestServiceImpl" />
+  <bean id="paymentGatewayRequestService"
+    class="org.springframework.remoting.caucho.HessianServiceExporter">
+    <property name="service" ref="paymentGatewayRequestServiceImpl" />
+    <property name="serviceInterface" value="com.hzfh.api.payment.service.PaymentGatewayRequestService" />
+  </bean>
+  
+  <bean id="paymentyCallbackNotifyServiceImpl" class="com.hzfh.service.payment.serviceImpl.PaymentyCallbackNotifyServiceImpl" />
+  <bean id="paymentyCallbackNotifyService"
+    class="org.springframework.remoting.caucho.HessianServiceExporter">
+    <property name="service" ref="paymentyCallbackNotifyServiceImpl" />
+    <property name="serviceInterface" value="com.hzfh.api.payment.service.PaymentyCallbackNotifyService" />
+  </bean>
+
+  <bean id="paymentRefundServiceImpl" class="com.hzfh.service.payment.serviceImpl.PaymentRefundServiceImpl" />
+  <bean id="paymentRefundService"
+        class="org.springframework.remoting.caucho.HessianServiceExporter">
+    <property name="service" ref="paymentRefundServiceImpl" />
+    <property name="serviceInterface" value="com.hzfh.api.payment.service.PaymentRefundService" />
+  </bean>
+  <bean id="autoCheckingServiceImpl" class="com.hzfh.service.payment.serviceImpl.AutoCheckingServiceImpl" />
+  <bean id="autoCheckingService"
+        class="org.springframework.remoting.caucho.HessianServiceExporter">
+    <property name="service" ref="autoCheckingServiceImpl" />
+    <property name="serviceInterface" value="com.hzfh.api.payment.service.AutoCheckingService" />
+  </bean>
+
+
+  
+</beans>

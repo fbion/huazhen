@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hzfh.service.customer.mapper.PaymentAccountInformationMapper">
+    <resultMap type="com.hzfh.api.customer.model.PaymentAccountInformation" id="resultMapPaymentAccountInformation">
+        <result property="id" column="id"/>
+        <result property="customerNo" column="customer_no"/>
+        <result property="accountType" column="account_type"/>
+        <result property="customerName" column="customer_name"/>
+        <result property="moneyAmount" column="money_amount"/>
+        <result property="moneyWithdraw" column="money_withdraw"/>
+        <result property="moneyFreeze" column="money_freeze"/>
+        <result property="property" column="property"/>
+        <result property="state" column="state"/>
+        <result property="platformNo" column="platform_no"/>
+        <result property="platformCardNo" column="platform_card_no"/>
+        <result property="timeCreate" column="time_create" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
+        <result property="earnings" column="earnings"/>
+        <result property="earningsRecently" column="earnings_recently"/>
+        <result property="integralAmount" column="Integral_amount"/>
+        <result property="integralWithdraw" column="Integral_withdraw"/>
+        <result property="accrualBase" column="accrual_base"/>
+        <result property="accrualTimePeriod" column="accrual_time_period" jdbcType="TIMESTAMP"
+                javaType="java.sql.Timestamp"/>
+        <result property="moneyAmountPeriod" column="money_amount_period"/>
+        <result property="checkValue" column="check_value"/>
+        <result property="authenticationName" column="authentication_name"/>
+        <result property="authenticationIdcard" column="authentication_idcard"/>
+        <result property="authenticationBankCard" column="authentication_bank_card"/>
+        <result property="authenticationTel" column="authentication_tel"/>
+        <result property="accountPwd" column="account_pwd"/>
+        <result property="authenticationEmail" column="authentication_email"/>
+        <result property="sn" column="sn"/>
+    </resultMap>
+    <select id="getList" resultMap="resultMapPaymentAccountInformation">
+		SELECT id,customer_no,account_type,customer_name,money_amount,money_withdraw,money_freeze,property,state,platform_no,platform_card_no,time_create,earnings,earnings_recently,Integral_amount,Integral_withdraw,accrual_base,accrual_time_period,money_amount_period,check_value,authentication_name,authentication_idcard,authentication_bank_card,authentication_tel,account_pwd,authentication_email,sn
+		FROM payment_account_information
+	</select>
+    <select id="getListByAuthenticationName" resultMap="resultMapPaymentAccountInformation">
+		SELECT id,customer_no,account_type,customer_name,money_amount,money_withdraw,money_freeze,property,state,platform_no,platform_card_no,time_create,earnings,earnings_recently,Integral_amount,Integral_withdraw,accrual_base,accrual_time_period,money_amount_period,check_value,authentication_name,authentication_idcard,authentication_bank_card,authentication_tel,account_pwd,authentication_email,sn
+		FROM payment_account_information where authentication_name = ${status}
+	</select>
+    <select id="getPagingList" resultMap="resultMapPaymentAccountInformation"
+            parameterType="com.hzfh.api.customer.model.query.PaymentAccountInformationCondition"
+            statementType="STATEMENT">
+        SELECT
+        id,customer_no,account_type,customer_name,money_amount,money_withdraw,money_freeze,property,state,platform_no,platform_card_no,time_create,earnings,earnings_recently,Integral_amount,Integral_withdraw,accrual_base,accrual_time_period,money_amount_period,check_value,authentication_name,authentication_idcard,authentication_bank_card,authentication_tel,account_pwd,authentication_email,sn
+        FROM payment_account_information where 1=1
+        <if test="customerNo!=0">and customer_no=${customerNo}</if>
+        ORDER BY
+        <foreach item="item" collection="sortItemList" separator=",">
+            ${item.sortFeild} ${item.sortType}
+        </foreach>
+        LIMIT ${startIndex},${pageSize}
+    </select>
+    <select id="getTotalCount" resultType="int"
+            parameterType="com.hzfh.api.customer.model.query.PaymentAccountInformationCondition"
+            statementType="STATEMENT">
+        SELECT count(1) FROM payment_account_information where 1=1
+        <if test="customerNo!=0">and customer_no=${customerNo}</if>
+    </select>
+    <select id="getInfo" resultMap="resultMapPaymentAccountInformation" parameterType="int">
+		SELECT id,customer_no,account_type,customer_name,money_amount,money_withdraw,money_freeze,property,state,platform_no,platform_card_no,time_create,earnings,earnings_recently,Integral_amount,Integral_withdraw,accrual_base,accrual_time_period,money_amount_period,check_value,authentication_name,authentication_idcard,authentication_bank_card,authentication_tel,sn FROM payment_account_information,account_pwd,authentication_email where id=#{id}
+	</select>
+    <insert id="add" parameterType="com.hzfh.api.customer.model.PaymentAccountInformation" useGeneratedKeys="true"
+            keyProperty="id">
+		insert into payment_account_information
+		(customer_no,account_type,customer_name,money_amount,money_withdraw,money_freeze,property,state,platform_no,platform_card_no,time_create,earnings,earnings_recently,Integral_amount,Integral_withdraw,accrual_base,accrual_time_period,money_amount_period,check_value,authentication_name,authentication_idcard,authentication_bank_card,authentication_tel,account_pwd,authentication_email,sn)
+		values
+		(#{customerNo},#{accountType},#{customerName},#{moneyAmount},#{moneyWithdraw},#{moneyFreeze},#{property},#{state},#{platformNo},#{platformCardNo},#{timeCreate},#{earnings},#{earningsRecently},#{integralAmount},#{integralWithdraw},#{accrualBase},#{accrualTimePeriod},#{moneyAmountPeriod},#{checkValue},#{authenticationName},#{authenticationIdcard},#{authenticationBankCard},#{authenticationTel},#{accountPwd},#{authenticationEmail},#{sn})
+	</insert>
+    <update id="update" parameterType="com.hzfh.api.customer.model.PaymentAccountInformation">
+		update payment_account_information set 
+		customer_no=#{customerNo},account_type=#{accountType},customer_name=#{customerName},money_amount=#{moneyAmount},money_withdraw=#{moneyWithdraw},money_freeze=#{moneyFreeze},property=#{property},state=#{state},platform_no=#{platformNo},platform_card_no=#{platformCardNo},time_create=#{timeCreate},earnings=#{earnings},earnings_recently=#{earningsRecently},Integral_amount=#{integralAmount},Integral_withdraw=#{integralWithdraw},accrual_base=#{accrualBase},accrual_time_period=#{accrualTimePeriod},money_amount_period=#{moneyAmountPeriod},check_value=#{checkValue},authentication_name=#{authenticationName},authentication_idcard=#{authenticationIdcard},authentication_bank_card=#{authenticationBankCard},authentication_tel=#{authenticationTel},account_pwd=#{accountPwd},authentication_email=#{authenticationEmail},sn=#{sn}
+		where id=#{id}
+	</update>
+    <delete id="delete" parameterType="int">
+		delete from payment_account_information where id = #{id}
+	</delete>
+    <update id="updateAuthenticationTelByCustomerNo">
+		update payment_account_information set authentication_tel=#{authenticationTel}
+		where customer_no=#{customerId}
+	</update>
+
+    <select id="getInfoByCustomerNo" resultMap="resultMapPaymentAccountInformation" parameterType="int">
+		SELECT id,customer_no,account_type,customer_name,money_amount,money_withdraw,money_freeze,property,state,platform_no,platform_card_no,time_create,earnings,earnings_recently,Integral_amount,Integral_withdraw,accrual_base,accrual_time_period,money_amount_period,check_value,authentication_name,authentication_idcard,authentication_bank_card,authentication_tel,account_pwd,authentication_email,sn
+		FROM payment_account_information  where customer_no=#{customerId}
+	</select>
+
+    <update id="updateMoneyAmount">
+		update payment_account_information set money_amount=money_amount+#{money}
+		where customer_no=#{customerNo}
+	</update>
+
+    <update id="updateMoneyWithDarw">
+		update payment_account_information set money_withdraw=money_withdraw+#{money}
+		where customer_no=#{customerNo}
+	</update>
+
+    <update id="updateMoneyFreeze">
+		update payment_account_information set money_freeze=money_freeze+#{money}
+		where customer_no=#{customerNo}
+	</update>
+
+    <update id="updateIntegralAmount">
+		update payment_account_information set Integral_amount=#{money}
+		where customer_no=#{customerNo}
+	</update>
+
+    <update id="updateIntegralWithDraw">
+		update payment_account_information set Integral_withdraw=#{money}
+		where customer_no=#{customerNo}
+	</update>
+
+    <update id="updateProperty">
+		update payment_account_information set property=#{property}
+		where customer_no=#{customerNo}
+	</update>
+
+    <update id="updateState">
+		update payment_account_information set state=#{state}
+		where customer_no=#{customerNo}
+	</update>
+
+    <update id="updateAuthenticationName">
+		update payment_account_information set authentication_name=#{authenticationNo}
+		where customer_no=#{customerNo}
+	</update>
+
+    <update id="updateAuthenticationEmail">
+		update payment_account_information set authentication_email=#{authenticationNo}
+		where customer_no=#{customerNo}
+	</update>
+
+    <update id="updateAuthenticationBankCard">
+		update payment_account_information set authentication_bank_card=#{authenticationNo}
+		where customer_no=#{customerNo}
+	</update>
+
+    <update id="updateAuthenticationIdcard">
+		update payment_account_information set authentication_idcard=#{authenticationNo}
+		where customer_no=#{customerNo}
+	</update>
+
+</mapper>

@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hzfh.service.product.mapper.ProductMapper">
+	<resultMap type="com.hzfh.api.product.model.Product" id="resultMapProduct">
+		<result property="id" column="id" />
+		<result property="productNo" column="product_no" />
+		<result property="code" column="code" />
+		<result property="type" column="type" />
+		<result property="name" column="name" />
+		<result property="sumMoney" column="sum_money" />
+		<result property="isSaleAll" column="is_sale_all" />
+		<result property="pricePackage" column="price_package" />
+		<result property="partnerRateNo" column="partner_rate_no" />
+		<result property="payType" column="pay_type" />
+		<result property="deptNo" column="dept_no" />
+		<result property="comment" column="comment" />
+		<result property="baseLimit" column="base_limit" />
+		<result property="deadLine" column="dead_line" />
+		<result property="onlineTime" column="online_time" jdbcType="DATE" javaType="java.sql.Date"/>
+		<result property="start" column="start" jdbcType="DATE" javaType="java.sql.Date" />
+		<result property="end" column="end" jdbcType="DATE" javaType="java.sql.Date" />
+		<result property="issuerNo" column="issuer_no" />
+		<result property="status" column="status" />
+		<result property="empNo" column="emp_no" />
+		<result property="path" column="path" />
+		<result property="tendType" column="tend_type" />
+		<result property="purpose" column="purpose" />
+		<result property="salesPolicy" column="sales_policy" />
+		<result property="quota" column="quota" />
+		<result property="remainAmount" column="remain_amount" />
+		<result property="remainSmall" column="remain_small" />
+		<result property="dueDate" column="due_date" jdbcType="DATE" javaType="java.sql.Date" />
+		<result property="agreementStatus" column="agreement_status" />
+		<result property="settlementType" column="settlement_type" />
+		<result property="bankAddress" column="bank_address" />
+		<result property="bankName" column="bank_name" />
+		<result property="accountNumber" column="account_number" />
+		<result property="inUserNo" column="in_user_no" />
+		<result property="inTime" column="in_time" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp" />
+		<result property="editUserNo" column="edit_user_no" />
+		<result property="editTime" column="edit_time" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp" />
+		<result property="editComment" column="edit_comment" />
+		<result property="financierType" column="financier_type" />
+		<result property="financierNo" column="financier_no" />
+		<result property="isTest" column="is_test" />
+        <result property="baseNumber" column="base_number" />
+        <result property="expectProfit" column="expect_profit" />
+        <result property="activitiNo" column="activiti_no" />
+    </resultMap>
+	<select id="getList" resultMap="resultMapProduct">
+		SELECT
+		id,product_no,code,type,name,expect_profit,activiti_no,sum_money,is_sale_all,price_package,partner_rate_no,pay_type,dept_no,comment,base_limit,dead_line,online_time,start,end,issuer_no,status,emp_no,path,tend_type,purpose,sales_policy,quota,remain_amount,remain_small,due_date,agreement_status,settlement_type,bank_address,bank_name,account_number,in_user_no,in_time,edit_user_no,edit_time,edit_comment,financier_type,financier_no,is_test
+		FROM product
+	</select>
+	<select id="getPagingList" resultMap="resultMapProduct"
+		parameterType="com.hzfh.api.product.model.query.ProductCondition"
+		statementType="STATEMENT">
+		SELECT
+		id,product_no,code,type,name,sum_money,activiti_no,expect_profit,is_sale_all,price_package,partner_rate_no,pay_type,dept_no,comment,base_limit,dead_line,online_time,start,end,issuer_no,status,emp_no,path,tend_type,purpose,sales_policy,quota,remain_amount,remain_small,due_date,agreement_status,settlement_type,bank_address,bank_name,account_number,in_user_no,in_time,edit_user_no,edit_time,edit_comment,financier_type,financier_no,is_test
+		FROM product where 1=1
+		<if test="name != null and name !=''">and name LIKE CONCAT('%','${name}','%')</if>
+		<if test="status != 0">and status = ${status}</if>
+		<if test="statusLeft != 0">and status &gt;= ${statusLeft}</if>
+		<if test="statusRight != 0">and status &lt;= ${statusRight}</if>
+		<if test="type != 0">and type = ${type}</if>
+		<if test="isTest>-1">and is_test = ${isTest}</if>
+		<if test="manageNo != 0">and emp_no = ${manageNo}</if>
+		
+		<if test="status1!=0 and status2!=0">and status in (${status1},${status2})</if>
+
+		<if test="deadLineDown>-1">and ${deadLineDown} &lt;= dead_line</if>
+        <if test="deadLineUp>-1"> and dead_line &lt;= ${deadLineUp}</if>
+        <if test="expectProfitDown>-1">and ${expectProfitDown} &lt;= expect_profit</if>
+        <if test="expectProfitUp>-1"> and expect_profit &lt;= ${expectProfitUp}</if>
+        
+		ORDER BY
+		<foreach item="item" collection="sortItemList" separator=",">
+			${item.sortFeild} ${item.sortType}
+		</foreach>
+		LIMIT ${startIndex},${pageSize}
+	</select>
+	<select id="getTotalCount" resultType="int"
+		parameterType="com.hzfh.api.product.model.query.ProductCondition"
+		statementType="STATEMENT">
+		SELECT count(1) FROM product where 1=1
+		<if test="name != null and name !=''">and name LIKE CONCAT('%','${name}','%')</if>
+		<if test="status != 0">and status = ${status}</if>
+		<if test="statusLeft != 0">and status &gt;= ${statusLeft}</if>
+		<if test="statusRight != 0">and status &lt;= ${statusRight}</if>
+		<if test="type != 0">and type = ${type}</if>
+		<if test="isTest>-1">and is_test = ${isTest}</if>
+		<if test="manageNo != 0">and emp_no = ${manageNo}</if>
+		
+		<if test="status1!=0 and status2!=0">and status in (${status1},${status2})</if>
+		<if test="deadLineDown>-1">and ${deadLineDown} &lt;= dead_line</if>
+        <if test="deadLineUp>-1"> and dead_line &lt;= ${deadLineUp}</if>
+        <if test="expectProfitDown>-1">and ${expectProfitDown} &lt;= expect_profit</if>
+        <if test="expectProfitUp>-1"> and expect_profit &lt;= ${expectProfitUp}</if>
+	</select>
+	<select id="getInfo" resultMap="resultMapProduct" parameterType="int">
+		SELECT
+		id,product_no,code,type,name,sum_money,activiti_no,expect_profit,is_sale_all,price_package,partner_rate_no,pay_type,dept_no,comment,base_limit,dead_line,online_time,start,end,issuer_no,status,emp_no,path,tend_type,purpose,sales_policy,quota,remain_amount,remain_small,due_date,agreement_status,settlement_type,bank_address,bank_name,account_number,in_user_no,in_time,edit_user_no,edit_time,edit_comment,financier_type,financier_no,is_test,base_number
+		FROM product where id=#{id}
+	</select>
+	<insert id="add" parameterType="com.hzfh.api.product.model.Product"
+		useGeneratedKeys="true" keyProperty="id">
+		insert into product
+		(product_no,code,type,name,sum_money,is_sale_all,activiti_no,expect_profit,price_package,partner_rate_no,pay_type,dept_no,comment,base_limit,dead_line,online_time,start,end,issuer_no,status,emp_no,path,tend_type,purpose,sales_policy,quota,remain_amount,remain_small,due_date,agreement_status,settlement_type,bank_address,bank_name,account_number,in_user_no,in_time,edit_user_no,edit_time,edit_comment,financier_type,financier_no,is_test,base_number)
+		values
+		(#{productNo},#{code},#{type},#{name},#{sumMoney},#{isSaleAll},#{activitiNo},#{expectProfit},#{pricePackage},#{partnerRateNo},#{payType},#{deptNo},#{comment},#{baseLimit},#{deadLine},#{onlineTime},#{start},#{end},#{issuerNo},#{status},#{empNo},#{path},#{tendType},#{purpose},#{salesPolicy},#{quota},#{remainAmount},#{remainSmall},#{dueDate},#{agreementStatus},#{settlementType},#{bankAddress},#{bankName},#{accountNumber},#{inUserNo},current_timestamp(),#{editUserNo},current_timestamp(),#{editComment},#{financierType},#{financierNo},#{isTest},#{baseNumber})
+	</insert>
+	<update id="update" parameterType="com.hzfh.api.product.model.Product">
+		update product set
+		product_no=#{productNo},code=#{code},type=#{type},activiti_no=#{activitiNo},name=#{name},sum_money=#{sumMoney},is_sale_all=#{isSaleAll},price_package=#{pricePackage},partner_rate_no=#{partnerRateNo},pay_type=#{payType},dept_no=#{deptNo},comment=#{comment},base_limit=#{baseLimit},dead_line=#{deadLine},online_time=#{onlineTime},start=#{start},end=#{end},issuer_no=#{issuerNo},status=#{status},emp_no=#{empNo},path=#{path},tend_type=#{tendType},purpose=#{purpose},sales_policy=#{salesPolicy},quota=#{quota},remain_amount=#{remainAmount},remain_small=#{remainSmall},due_date=#{dueDate},agreement_status=#{agreementStatus},settlement_type=#{settlementType},bank_address=#{bankAddress},bank_name=#{bankName},account_number=#{accountNumber},edit_user_no=#{editUserNo},edit_time=current_timestamp(),edit_comment=#{editComment},financier_type=#{financierType},financier_no=#{financierNo},is_test=#{isTest},
+		base_number=#{baseNumber},expect_profit=#{expectProfit}
+		where id=#{id}
+	</update>
+	<delete id="delete" parameterType="int">
+		delete from product where id =
+		#{id}
+	</delete>
+	<select id="getListByType" resultMap="resultMapProduct">
+		SELECT
+		id,product_no,code,name,sum_money,type,activiti_no,expect_profit,is_sale_all,price_package,partner_rate_no,pay_type,dept_no,comment,base_limit,dead_line,online_time,start,end,issuer_no,status,emp_no,path,tend_type,purpose,sales_policy,quota,remain_amount,remain_small,due_date,agreement_status,settlement_type,bank_address,bank_name,account_number,in_user_no,in_time,edit_user_no,edit_time,edit_comment
+		FROM product WHERE type=#{type} and is_test = 0
+	</select>
+
+	<select id="getProductListByStatus" resultMap="resultMapProduct">
+		SELECT
+		id,product_no,code,name,sum_money,expect_profit,activiti_no,type,is_sale_all,price_package,partner_rate_no,pay_type,dept_no,comment,base_limit,dead_line,online_time,start,end,issuer_no,status,emp_no,path,tend_type,purpose,sales_policy,quota,remain_amount,remain_small,due_date,agreement_status,settlement_type,bank_address,bank_name,account_number,in_user_no,in_time,edit_user_no,edit_time,edit_comment
+		FROM product WHERE status &gt;= ${statusLeft} and status &lt;= ${statusRight} and is_test = 0
+	</select>
+
+
+	<update id="updateBasicInfo" parameterType="com.hzfh.api.product.model.Product">
+		update product set
+		product_no=#{productNo},bank_address=#{bankAddress},bank_name=#{bankName},account_number=#{accountNumber},code=#{code},name=#{name},sum_money=#{sumMoney},type=#{type},is_sale_all=#{isSaleAll},price_package=#{pricePackage},partner_rate_no=#{partnerRateNo},pay_type=#{payType},dept_no=#{deptNo},comment=#{comment},base_limit=#{baseLimit},dead_line=#{deadLine},online_time=#{onlineTime},start=#{start},end=#{end},issuer_no=#{issuerNo},status=#{status},emp_no=#{empNo},path=#{path},tend_type=#{tendType},purpose=#{purpose},sales_policy=#{salesPolicy},quota=#{quota},remain_amount=#{remainAmount},remain_small=#{remainSmall},due_date=#{dueDate},agreement_status=#{agreementStatus},settlement_type=#{settlementType},edit_user_no=#{editUserNo},edit_time=current_timestamp(),edit_comment=#{editComment},base_number=#{baseNumber}
+		where id=#{id}
+	</update>
+
+	<update id="updateStatus">
+		update product set
+		status=#{1}
+		where
+		id=#{0}
+	</update>
+
+	<update id="updateManager">
+		update product set
+		emp_no=#{1}
+		where
+		id=#{0}
+	</update>
+
+
+	<update id="updateStatusAndTime" parameterType="com.hzfh.api.product.model.Product">
+		update product
+		set
+		start=#{start},end=#{end},status=#{status}
+		where id=#{id}
+	</update>
+	<!-- 更新创建时间 -->
+	<update id="updateStartTime" parameterType="com.hzfh.api.product.model.Product">
+		update product set
+		start=#{start}
+		where id=#{id}
+	</update>
+
+	<update id="updateRemain" parameterType="com.hzfh.api.product.model.Product">
+		update product set remain_amount=remain_amount-#{remainAmount}
+		<if test="remainSmall != 0">,remain_small=remain_small-#{remainSmall}</if>
+		where id=#{id}
+	</update>
+
+	<update id="updateReRemain" parameterType="com.hzfh.api.product.model.Product">
+		update product set remain_amount=remain_amount+#{remainAmount}
+		<if test="remainSmall != 0">,remain_small=remain_small+#{remainSmall}</if>
+		where id=#{id}
+	</update>
+
+	<select id="getProductByTypeAndStatus" resultMap="resultMapProduct">
+		SELECT
+		id,product_no,code,name,sum_money,type,is_sale_all,expect_profit,price_package,partner_rate_no,pay_type,dept_no,comment,base_limit,dead_line,online_time,start,end,issuer_no,status,emp_no,path,tend_type,purpose,sales_policy,quota,remain_amount,remain_small,due_date,agreement_status,settlement_type,bank_address,bank_name,account_number,in_user_no,in_time,edit_user_no,edit_time,edit_comment
+		FROM product WHERE is_test = 0 and type=#{type} and status=#{status}
+	</select>
+
+    <select id="getProductListWithNoPaging" resultMap="resultMapProduct" parameterType="com.hzfh.api.product.model.query.ProductCondition"
+            statementType="STATEMENT">
+        SELECT id,product_no,code,expect_profit,type,name,sum_money,is_sale_all,price_package,partner_rate_no,pay_type,dept_no,comment,base_limit,dead_line,online_time,start,end,issuer_no,status,emp_no,path,tend_type,purpose,sales_policy,quota,remain_amount,remain_small,due_date,agreement_status,settlement_type,bank_address,bank_name,account_number,in_user_no,in_time,edit_user_no,edit_time,edit_comment,financier_type,financier_no FROM product where 1=1
+        <if test="isTest>-1">and is_test = ${isTest}</if>
+        <if test="statusLeft != 0">
+            and <![CDATA[status >= ${statusLeft}]]>
+        </if>
+        <if test="statusRight != 0">
+            and <![CDATA[status <= ${statusRight}]]>
+        </if>
+        <if test="workMateString !=null">and <![CDATA[emp_no in (${workMateString})]]> </if>
+        ORDER BY status DESC
+    </select>
+    
+	<update id="updateAddRemainAmountAndRemainSmall">
+		update product set
+		remain_amount=remain_amount+#{remainAmount},remain_small=remain_small+1
+		where id=#{id}
+	</update>
+
+	<update id="updateReduceRemainAmountAndRemainSmall">
+		update product set
+		remain_amount=remain_amount-#{remainAmount},remain_small=remain_small-1
+		where id=#{id}
+	</update>
+
+    <update id="updateReduceRemainAmount">
+        update product set
+		remain_amount=remain_amount-#{money} where id=#{id}
+    </update>
+
+    <update id="updateAddRemainAmount">
+        update product set
+		remain_amount=remain_amount+#{money} where id=#{id}
+    </update>
+
+	<select id="getInfoByActivitiNo" resultMap="resultMapProduct">
+		SELECT
+		id,product_no,code,type,name,sum_money,activiti_no,expect_profit,is_sale_all,price_package,partner_rate_no,pay_type,dept_no,comment,base_limit,dead_line,online_time,start,end,issuer_no,status,emp_no,path,tend_type,purpose,sales_policy,quota,remain_amount,remain_small,due_date,agreement_status,settlement_type,bank_address,bank_name,account_number,in_user_no,in_time,edit_user_no,edit_time,edit_comment,financier_type,financier_no,is_test,base_number
+		FROM product where activiti_no=#{activitiNo}
+	</select>
+
+</mapper>

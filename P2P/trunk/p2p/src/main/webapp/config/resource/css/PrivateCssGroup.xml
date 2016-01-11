@@ -1,0 +1,76 @@
+<?xml version="1.0"?>
+<cssConfig xmlns="http://www.hzfh.com/web" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.hzfh.com/web ../../Schemas/Resources/Css.xsd">
+	<privateCssGroups>
+		<cssGroup name="p2p" sharedCssGroup="Common">
+			<pages>
+				<pageName>eidtPassword</pageName>
+				<pageName>emailValidation</pageName>
+				<pageName>forgetPassword</pageName>
+				<pageName>chooseWayPassword</pageName>
+				<pageName>byEmailPassword</pageName>
+				<pageName>byCellphonePassword</pageName>
+				<pageName>resetPassword</pageName>
+				<pageName>resetSuccess</pageName>
+				<pageName>index</pageName>
+				<pageName>login</pageName>
+				<pageName>helpCenter</pageName>
+				<!-- <pageName>myInvestment</pageName>
+				<pageName>myReservation</pageName> -->
+				<pageName>personalInfo</pageName>
+				<!-- <pageName>productDetails</pageName> -->
+				<pageName>productFeatures</pageName>
+				<!-- <pageName>p2pProductList</pageName> -->
+				<pageName>register</pageName>
+				<pageName>registerSuccess</pageName>
+                <pageName>productConfirm</pageName>
+                <pageName>contractConfirm</pageName>
+                <pageName>bankCard</pageName>
+                <pageName>myInfo</pageName>
+
+                <pageName>knowledgeForum</pageName>
+                <pageName>popularize</pageName>
+                <pageName>reservationHelp</pageName>
+                <pageName>financing</pageName>
+                <pageName>accountCentral</pageName>
+                <pageName>noviceArea</pageName>
+
+                <pageName>productSuperiority</pageName>
+                <pageName>securityAssurance</pageName>
+                <pageName>lawsRegulations</pageName>
+
+                <pageName>mediaReports</pageName>
+                <pageName>enterpriseCulture</pageName>
+                <pageName>aboutCompany</pageName>
+                <!-- <pageName>bulletin</pageName> -->
+                <pageName>contactUs</pageName>
+                <pageName>joinUs</pageName>
+                <pageName>storeDetail</pageName>
+			</pages>
+		</cssGroup>
+		<cssGroup name="p2pPagination" sharedCssGroup="Common">
+			<cssName>pagination</cssName>
+			<pages>
+				<pageName>myInvestment</pageName>
+				<pageName>myReservation</pageName>
+				<pageName>myInvite</pageName>
+				<pageName>myPaymentMoneyRechargeList</pageName>
+				<pageName>myPaymentMoneyWithdrawList</pageName>
+				<pageName>moneyDetail</pageName>
+				<pageName>p2pProductList</pageName>
+				<pageName>productDetails</pageName>
+				<pageName>account</pageName>
+				<pageName>myCoupons</pageName>
+				<pageName>myIntegral</pageName>
+				<pageName>myReward</pageName>
+				<pageName>bulletin</pageName>
+				<pageName>storeList</pageName>
+			</pages>
+		</cssGroup>
+		<cssGroup name="p2pEmpty" sharedCssGroup="Empty">
+			<pages>
+				<pageName>employeePhoto</pageName>
+			</pages>
+		</cssGroup>
+	</privateCssGroups>
+</cssConfig>

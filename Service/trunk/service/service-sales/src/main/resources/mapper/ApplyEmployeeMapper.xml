@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hzfh.service.sales.mapper.ApplyEmployeeMapper">
+	<resultMap type="com.hzfh.api.sales.model.ApplyEmployee" id="resultMapApplyEmployee">
+		<result property="id" column="id"/>
+		<result property="activityNo" column="activity_no"/>
+		<result property="empNo" column="emp_no"/>
+		<result property="name" column="name"/>
+		<result property="tel" column="tel"/>
+		<result property="sex" column="sex"/>
+		<result property="deptNo" column="dept_no"/>
+		<result property="companyNo" column="company_no"/>
+		<result property="parentNo" column="parent_no"/>
+		<result property="positionNo" column="position_no"/>
+		<result property="isInvite" column="is_invite"/>
+		<result property="inviteNum" column="invite_num"/>
+		<result property="arriveNum" column="arrive_num"/>
+		<result property="isSign" column="is_sign"/>
+		<result property="mark" column="mark"/>
+		<result property="inUserNo" column="in_user_no"/>
+		<result property="inTime" column="in_time" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
+		<result property="editUserNo" column="edit_user_no"/>
+		<result property="editTime" column="edit_time" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
+		<result property="editComment" column="edit_comment"/>
+	</resultMap>
+	<select id="getList" resultMap="resultMapApplyEmployee">
+		SELECT id,activity_no,emp_no,name,tel,sex,dept_no,company_no,parent_no,position_no,is_invite,invite_num,arrive_num,is_sign,mark,in_user_no,in_time,edit_user_no,edit_time,edit_comment
+		FROM apply_employee
+	</select>
+	<!-- 导出参加活动的所有员工 -->
+	<select id="getListForExcel" resultMap="resultMapApplyEmployee" parameterType="com.hzfh.api.sales.model.query.ApplyEmployeeCondition" statementType="STATEMENT">
+		SELECT id,activity_no,emp_no,name,tel,sex,dept_no,company_no,parent_no,position_no,is_invite,invite_num,arrive_num,is_sign,mark,in_user_no,in_time,edit_user_no,edit_time,edit_comment
+		FROM apply_employee where 1=1
+		<if test="activityNo!=0"> and activity_no=${activityNo}</if>
+		ORDER BY
+		<foreach item="item" collection="sortItemList" separator=",">
+			${item.sortFeild} ${item.sortType}
+		</foreach>
+		 
+	</select>
+	<!-- 导出参加活动的所有客户 -->
+	<select id="getCustomerListForExcel" resultMap="resultMapApplyEmployee" parameterType="com.hzfh.api.sales.model.query.ApplyEmployeeCondition" statementType="STATEMENT">
+		SELECT * from apply_customer c,apply_employee e where c.emp_no=e.emp_no 
+		<if test="activityNo!=0"> and c.activity_no=${activityNo} and e.activity_no=${activityNo}</if>
+		<!-- ORDER BY
+		<foreach item="item" collection="sortItemList" separator=",">
+			${item.sortFeild} ${item.sortType}
+		</foreach> -->
+	</select>
+	<select id="getPagingList" resultMap="resultMapApplyEmployee" parameterType="com.hzfh.api.sales.model.query.ApplyEmployeeCondition" statementType="STATEMENT">
+		SELECT id,activity_no,emp_no,name,tel,sex,dept_no,company_no,parent_no,position_no,is_invite,invite_num,arrive_num,is_sign,mark,in_user_no,in_time,edit_user_no,edit_time,edit_comment FROM apply_employee where 1=1
+		<if test="activityNo!=0"> and activity_no=${activityNo}</if>
+		<!-- <if test="parentNo!=0"> and parent_no=${parentNo}</if> -->
+        <if test="workMateString !=null"> and emp_no in (${workMateString})</if>
+		ORDER BY
+		<foreach item="item" collection="sortItemList" separator=",">
+			${item.sortFeild} ${item.sortType}
+		</foreach>
+		LIMIT ${startIndex},${pageSize}
+	</select>
+	<select id="getTotalCount" resultType="int" parameterType="com.hzfh.api.sales.model.query.ApplyEmployeeCondition" statementType="STATEMENT">
+		SELECT count(1) FROM apply_employee where 1=1
+		<if test="activityNo!=0"> and activity_no=${activityNo}</if>
+		<if test="workMateString !=null"> and emp_no in (${workMateString})</if>
+	</select>
+	<select id="getInfo" resultMap="resultMapApplyEmployee" parameterType="int">
+		SELECT id,activity_no,emp_no,name,tel,sex,dept_no,company_no,parent_no,position_no,is_invite,invite_num,arrive_num,is_sign,mark,in_user_no,in_time,edit_user_no,edit_time,edit_comment FROM apply_employee where id=#{id}
+	</select>
+	<select id="getInfoByAnoEno" resultMap="resultMapApplyEmployee"  parameterType="com.hzfh.api.sales.model.ApplyEmployee">
+		SELECT id,activity_no,emp_no,name,tel,sex,dept_no,company_no,parent_no,position_no,is_invite,invite_num,arrive_num,is_sign,mark,
+		in_user_no,in_time,edit_user_no,edit_time,edit_comment FROM apply_employee where activity_no=#{activityNo} and emp_no=#{empNo}
+	</select>
+	<insert id="add" parameterType="com.hzfh.api.sales.model.ApplyEmployee" useGeneratedKeys="true" keyProperty="id">
+		insert into apply_employee
+		(activity_no,emp_no,name,dept_no,company_no,tel,sex,parent_no,position_no,is_invite,invite_num,arrive_num,is_sign,mark,in_user_no,in_time,edit_user_no,edit_time,edit_comment)
+		values
+		(#{activityNo},#{empNo},#{name},#{deptNo},#{companyNo},#{tel},#{sex},#{parentNo},#{positionNo},#{isInvite},#{inviteNum},#{arriveNum},#{isSign},#{mark},#{inUserNo},current_timestamp(),#{editUserNo},current_timestamp(),#{editComment})
+	</insert>
+	<update id="update" parameterType="com.hzfh.api.sales.model.ApplyEmployee">
+		update apply_employee set 
+		activity_no=#{activityNo},emp_no=#{empNo},name=#{name},dept_no=#{deptNo},tel=#{tel},sex=#{sex},company_no=#{companyNo},parent_no=#{parentNo},position_no=#{positionNo},is_invite=#{isInvite},invite_num=#{inviteNum},arrive_num=#{arriveNum},is_sign=#{isSign},mark=#{mark},edit_user_no=#{editUserNo},edit_time=current_timestamp(),edit_comment=#{editComment}
+		where id=#{id}
+	</update>
+	<delete id="delete" parameterType="int">
+		delete from apply_employee where id = #{id}
+	</delete>
+</mapper>

@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hzfh.service.employee.mapper.AchievementCommissionMapper">
+	<resultMap type="com.hzfh.api.employee.model.AchievementCommission" id="resultMapAchievementCommission">
+		<result property="id" column="id"/>
+		<result property="empNo" column="emp_no"/>
+		<result property="empName" column="emp_name"/>
+		<result property="standard" column="standard"/>
+		<result property="salesMoney" column="sales_money"/>
+		<result property="finishScale" column="finish_scale"/>
+		<result property="commissionScale" column="commission_scale"/>
+		<result property="commissionMoney" column="commission_money"/>
+		<result property="editTime" column="edit_time" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
+		<result property="isExamine" column="is_examine"/>
+		<result property="deptNo" column="dept_no"/>
+		<result property="positionNo" column="position_no"/>
+		<result property="year" column="year"/>
+		<result property="month" column="month"/>
+	</resultMap>
+	<sql id="Base_Column_List" >
+		id,emp_no,emp_name,standard,sales_money,finish_scale,commission_scale,commission_money,edit_time,is_examine,dept_no,position_no,year,month
+	</sql>
+	<select id="getList" resultMap="resultMapAchievementCommission">
+		SELECT <include refid="Base_Column_List"/> FROM achievement_commission
+	</select>
+	<select id="getPagingList" resultMap="resultMapAchievementCommission" parameterType="com.hzfh.api.employee.model.query.AchievementCommissionCondition" statementType="STATEMENT">
+		SELECT <include refid="Base_Column_List"/>  FROM achievement_commission where 1=1
+		<if test="empName!=null and empName!=''"> and emp_name='${empName}'</if>
+		<if test="deptNo!=0"> and dept_no=${deptNo}</if>
+		<if test="positionNo!=0"> and position_no=${positionNo}</if>
+		<if test="workMateString !=null"> and emp_no in (${workMateString})</if>
+		<if test="year !=0"> and year =${year}</if>
+		<if test="month !=0"> and month =${month}</if>
+		ORDER BY
+		<foreach item="item" collection="sortItemList" separator=",">
+			${item.sortFeild} ${item.sortType}
+		</foreach>
+		LIMIT ${startIndex},${pageSize}
+	</select>
+	<select id="getTotalCount" resultType="int" parameterType="com.hzfh.api.employee.model.query.AchievementCommissionCondition" statementType="STATEMENT">
+		SELECT count(1) FROM achievement_commission where 1=1
+		<if test="empName!=null and empName!=''"> and emp_name='${empName}'</if>
+		<if test="deptNo!=0"> and dept_no=${deptNo}</if>
+		<if test="positionNo!=0"> and position_no=${positionNo}</if>
+		<if test="workMateString !=null"> and emp_no in (${workMateString})</if>
+		<if test="year !=0"> and year =${year}</if>
+		<if test="month !=0"> and month =${month}</if>
+		
+	</select>
+	<select id="getInfo" resultMap="resultMapAchievementCommission" parameterType="int">
+		SELECT <include refid="Base_Column_List"/> FROM achievement_commission where id=#{id}
+	</select>
+	<insert id="add" parameterType="com.hzfh.api.employee.model.AchievementCommission" useGeneratedKeys="true" keyProperty="id">
+		insert into achievement_commission
+		(emp_no,emp_name,standard,sales_money,finish_scale,commission_scale,commission_money,edit_time,is_examine,dept_no,position_no,year,month)
+		values
+		(#{empNo},#{empName},#{standard},#{salesMoney},#{finishScale},#{commissionScale},#{commissionMoney},current_timestamp(),#{isExamine},#{deptNo},#{positionNo},#{year},#{month})
+	</insert>
+	<update id="update" parameterType="com.hzfh.api.employee.model.AchievementCommission">
+		update achievement_commission set 
+		emp_no=#{empNo},emp_name=#{empName},standard=#{standard},sales_money=#{salesMoney},finish_scale=#{finishScale},commission_scale=#{commissionScale},commission_money=#{commissionMoney},edit_time=current_timestamp(),is_examine=#{isExamine},dept_no=#{deptNo},position_no=#{positionNo},year=#{year},month=#{month}
+		where id=#{id}
+	</update>
+	<delete id="delete" parameterType="int">
+		delete from achievement_commission where id = #{id}
+	</delete>
+	
+	<select id="getListForExcel" resultMap="resultMapAchievementCommission" parameterType="com.hzfh.api.employee.model.query.AchievementCommissionCondition" statementType="STATEMENT">
+		SELECT <include refid="Base_Column_List"/>
+        FROM achievement_commission where 1=1
+		<if test="empName!=null and empName!=''"> and emp_name='${empName}'</if>
+		<if test="deptNo!=0"> and dept_no=${deptNo}</if>
+		<if test="positionNo!=0"> and position_no=${positionNo}</if>
+		<if test="workMateString !=null"> and emp_no in (${workMateString})</if>
+		<if test="year !=0"> and year =${year}</if>
+		<if test="month !=0"> and month =${month}</if>
+		ORDER BY
+		<foreach item="item" collection="sortItemList" separator=",">
+			${item.sortFeild} ${item.sortType}
+		</foreach>
+	</select>
+	
+	<select id="getListByEmpNo" resultMap="resultMapAchievementCommission" parameterType="int">
+		SELECT <include refid="Base_Column_List"/>
+		FROM achievement_commission
+		WHERE emp_no=#{empNo}
+		ORDER BY id desc
+	</select>
+	
+</mapper>

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hzfh.service.sales.mapper.CreditorMapper">
+    <resultMap type="com.hzfh.api.sales.model.Creditor" id="resultMapCreditor">
+        <result property="id" column="id"/>
+        <result property="projectName" column="project_name"/>
+        <result property="roomNumber" column="room_number"/>
+        <result property="totalMoney" column="total_money"/>
+        <result property="remainAmount" column="remain_amount"/>
+        <result property="productNo" column="product_no"/>
+        <result property="inTime" column="in_time" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
+        <result property="inUserNo" column="in_user_no"/>
+        <result property="editTime" column="edit_time" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
+        <result property="editUserNo" column="edit_user_no"/>
+    </resultMap>
+    <select id="getListByPrductNo" resultMap="resultMapCreditor">
+        SELECT id,project_name,room_number,total_money,remain_amount,in_time,in_user_no,edit_time,edit_user_no,product_no
+        FROM creditor where product_no = #{productNo}
+    </select>
+    <select id="getList" resultMap="resultMapCreditor">
+        SELECT id,project_name,room_number,total_money,remain_amount,in_time,in_user_no,edit_time,edit_user_no,product_no
+        FROM creditor
+    </select>
+    <select id="getPagingList" resultMap="resultMapCreditor" parameterType="com.hzfh.api.sales.model.query.CreditorCondition" statementType="STATEMENT">
+        SELECT id,project_name,room_number,total_money,remain_amount,in_time,in_user_no,product_no,edit_time,edit_user_no FROM creditor where 1=1
+        ORDER BY
+        <foreach item="item" collection="sortItemList" separator=",">
+            ${item.sortFeild} ${item.sortType}
+        </foreach>
+        LIMIT ${startIndex},${pageSize}
+    </select>
+    <select id="getTotalCount" resultType="int" parameterType="com.hzfh.api.sales.model.query.CreditorCondition" statementType="STATEMENT">
+        SELECT count(1) FROM creditor where 1=1
+    </select>
+    <select id="getInfo" resultMap="resultMapCreditor" parameterType="int">
+        SELECT id,project_name,room_number,total_money,product_no,remain_amount,in_time,in_user_no,edit_time,edit_user_no FROM creditor where id=#{id}
+    </select>
+    <select id="getInfoEffectiveByProductNo" resultMap="resultMapCreditor" parameterType="int">
+         SELECT id,project_name,room_number,total_money,remain_amount,in_time,in_user_no,edit_time,edit_user_no,product_no
+         FROM creditor where remain_amount > 0 and  product_no = #{productNo} limit 1
+    </select>
+
+    <insert id="add" parameterType="com.hzfh.api.sales.model.Creditor" useGeneratedKeys="true" keyProperty="id">
+        insert into creditor
+        (project_name,product_no,room_number,total_money,remain_amount,in_time,in_user_no,edit_time,edit_user_no)
+        values
+        (#{projectName},#{productNo},#{roomNumber},#{totalMoney},#{remainAmount},current_timestamp(),#{inUserNo},current_timestamp(),#{editUserNo})
+    </insert>
+    <update id="update" parameterType="com.hzfh.api.sales.model.Creditor">
+        update creditor set
+        project_name=#{projectName},product_no=#{productNo},room_number=#{roomNumber},total_money=#{totalMoney},remain_amount=#{remainAmount},edit_time=current_timestamp(),edit_user_no=#{editUserNo}
+        where id=#{id}
+    </update>
+    <update id="updateRemainAmountById">
+        update creditor set
+        remain_amount = remain_amount-#{money}
+        where id=#{id}
+    </update>
+
+    <delete id="delete" parameterType="int">
+        delete from creditor where id = #{id}
+    </delete>
+
+    <select id="getRemainAmountByProductNo" parameterType="int" resultType="double">
+        SELECT SUM(remain_amount) FROM creditor WHERE product_no=#{productNo}
+    </select>
+</mapper>

@@ -1,0 +1,305 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+        "http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+	<package name="user" extends="struts-login" namespace="/permission/user">
+		<action name="list" class="com.hzfh.fmp.controller.permission.UserAction">
+			<result>/permission/userList.jsp</result>
+		</action>
+	</package>
+	<package name="ajaxUser" extends="struts-error" namespace="/permission/user">
+		<action name="ajaxListUser"
+			class="com.hzfh.fmp.controller.permission.ajax.AjaxUserAction">
+			<result type="json">
+				<param name="includeProperties">
+					resultList.*,pageSize, pageIndex, pageCount, recordCount
+				</param>
+				<param name="noCache">true</param>
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+		<action name="ajaxEditUser" class="com.hzfh.fmp.controller.permission.ajax.AjaxUserAction" method="edit">
+			<result type="json">
+				<param name="includeProperties">
+					errCode,errDesc
+				</param>
+				<param name="noCache">true</param>
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+	</package>
+
+	<package name="role" extends="struts-login" namespace="/permission/role">
+		<action name="list" class="com.hzfh.fmp.controller.permission.RoleAction">
+			<result>/permission/roleList.jsp</result>
+		</action>
+		<!-- <action name="AssignElements" class="com.hzfh.fmp.controller.permission.RoleAction" method="AssignElements">
+			<result>/permission/roleList.jsp</result>
+		</action> -->
+	</package>
+	<package name="ajaxRole" extends="struts-error"
+		namespace="/permission/role">
+		<action name="ajaxListRole"
+			class="com.hzfh.fmp.controller.permission.ajax.AjaxRoleAction">
+			<result type="json">
+				<param name="includeProperties">
+					resultList.*,
+					pageSize, pageIndex, pageCount, recordCount
+				</param>
+				<param name="noCache">true</param>
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+		<action name="ajaxEditRole"
+			class="com.hzfh.fmp.controller.permission.ajax.AjaxRoleAction"
+			method="edit">
+			<result type="json">
+				<param name="includeProperties">
+					errCode,errDesc
+				</param>
+				<param name="noCache">true</param>
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+	</package>
+	
+	<package name="userRole" extends="struts-login" namespace="/permission/userRole">
+		<action name="list"
+			class="com.hzfh.fmp.controller.permission.UserRoleAction">
+			<result>/permission/userRoleList.jsp</result>
+		</action>
+	</package>
+	<package name="ajaxUserRole" extends="struts-error"  namespace="/permission/userRole">
+		<action name="ajaxListUserRole" class="com.hzfh.fmp.controller.permission.ajax.AjaxUserRoleAction">
+			<result type="json">
+				<param name="includeProperties">
+					resultList.*,
+					pageSize, pageIndex, pageCount, recordCount
+				</param>
+				<param name="noCache">true</param>
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+		<action name="ajaxEditUserRole" class="com.hzfh.fmp.controller.permission.ajax.AjaxUserRoleAction" method="edit">
+			<result type="json">
+				<param name="includeProperties">
+					errCode,errDesc
+				</param>
+				<param name="noCache">true</param>
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+		<action name="ajaxUpDateRoles" class="com.hzfh.fmp.controller.permission.ajax.AjaxUserRoleAction" method="updateRoles">
+			<result type="json">
+				<param name="includeProperties">
+					date
+				</param>
+			</result>
+		</action>
+	</package>
+   <!-- mengchong bulid 2014/04/09  -->
+    <package name="element" extends="struts-login" namespace="/permission/element">
+        <action name="list" class="com.hzfh.fmp.controller.permission.ElementAction">
+            <result>/permission/elementList.jsp</result>
+        </action>
+        <action name="getElementTree" class="com.hzfh.fmp.controller.permission.ElementAction" method="getElementTree" ></action>
+    </package>
+    <package name="ajaxElement" extends="struts-error" namespace="/permission/element">
+        <action name="ajaxListElement" class="com.hzfh.fmp.controller.permission.ajax.AjaxElementAction">
+            <result type="json">
+                <param name="includeProperties">
+                    resultList.*,
+                    pageSize, pageIndex, pageCount, recordCount
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+        <action name="ajaxEditElement" class="com.hzfh.fmp.controller.permission.ajax.AjaxElementAction" method="edit">
+            <result type="json">
+                <param name="includeProperties">
+                    errCode,errDesc
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+        <action name="ajaxDeleteElement" class="com.hzfh.fmp.controller.permission.ajax.AjaxElementAction" method="delete">
+            <result type="json">
+                <param name="includeProperties">
+                    errCode,errDesc
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+        <action name="ajaxGetInfoElement" class="com.hzfh.fmp.controller.permission.ajax.AjaxElementAction" method="getInfo">
+            <result type="json">
+                <param name="includeProperties">
+                    elementInfo.*,errCode,errDesc
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+        <action name="ajaxCheckAliasExist" class="com.hzfh.fmp.controller.permission.ajax.AjaxElementAction" method="checkAliasExist">
+            <result type="json">
+                <param name="includeProperties">
+                    errCode,errDesc
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+    </package>
+
+    <package name="roleElement" extends="struts-login" namespace="/permission/roleElement">
+        <action name="list" class="com.hzfh.fmp.controller.permission.RoleElementAction">
+            <result>/permission/roleElementList.jsp</result>
+        </action>
+        <action name="getRoleElementTree" class="com.hzfh.fmp.controller.permission.RoleElementAction" method="getRoleElementTree" ></action>
+    </package>
+    <package name="ajaxRoleElement" extends="struts-error" namespace="/permission/roleElement">
+        <action name="ajaxListRoleElement" class="com.hzfh.fmp.controller.permission.ajax.AjaxRoleElementAction">
+            <result type="json">
+                <param name="includeProperties">
+                    resultList.*,
+                    pageSize, pageIndex, pageCount, recordCount
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+        <action name="ajaxEditRoleElement" class="com.hzfh.fmp.controller.permission.ajax.AjaxRoleElementAction" method="edit">
+            <result type="json">
+                <param name="includeProperties">
+                    errCode,errDesc
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+        <action name="ajaxGetInfoRoleElement" class="com.hzfh.fmp.controller.permission.ajax.AjaxRoleElementAction" method="getInfo">
+            <result type="json">
+                <param name="includeProperties">
+                    roleElementInfo.*,errCode,errDesc
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+        <action name="ajaxFlushMenuTree" class="com.hzfh.fmp.controller.permission.ajax.AjaxRoleElementAction" method="flushMenuTree">
+            <result type="json">
+                <param name="includeProperties">
+                    roleElementInfo.*,errCode,errDesc
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+    </package>
+    
+    
+    <package name="dataManage" extends="struts-login" namespace="/permission/dataManage">
+        <action name="dataManage" class="com.hzfh.fmp.controller.permission.DataManageAction">
+            <result>/permission/dataManage.jsp</result>
+        </action>
+    </package>
+    <package name="ajaxDataManage" extends="struts-error" namespace="/permission/dataManage">
+        <action name="ajaxDataManage" class="com.hzfh.fmp.controller.permission.ajax.AjaxDataManageAction">
+            <result type="json">
+                <param name="includeProperties">
+                    errCode,errDesc
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+        
+        <action name="flushAllCache" class="com.hzfh.fmp.controller.permission.ajax.AjaxDataManageAction" method="flushAllCache">
+            <result type="json">
+                <param name="includeProperties">
+                    errCode,errDesc
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+        
+        <action name="flushBaseInfoCache" class="com.hzfh.fmp.controller.permission.ajax.AjaxDataManageAction" method="flushBaseInfoCache">
+            <result type="json">
+                <param name="includeProperties">
+                    errCode,errDesc
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+        <action name="flushCustomerCache" class="com.hzfh.fmp.controller.permission.ajax.AjaxDataManageAction" method="flushCustomerCache">
+            <result type="json">
+                <param name="includeProperties">
+                    errCode,errDesc
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+        <action name="flushEnumListForDictionary" class="com.hzfh.fmp.controller.permission.ajax.AjaxDataManageAction" method="flushEnumListForDictionary">
+            <result type="json">
+                <param name="includeProperties">
+                    errCode,errDesc
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+        <action name="flushPermissionCache" class="com.hzfh.fmp.controller.permission.ajax.AjaxDataManageAction" method="flushPermissionCache">
+            <result type="json">
+                <param name="includeProperties">
+                    errCode,errDesc
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+        <action name="flushProductCache" class="com.hzfh.fmp.controller.permission.ajax.AjaxDataManageAction" method="flushProductCache">
+            <result type="json">
+                <param name="includeProperties">
+                    errCode,errDesc
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+        <action name="flushSalesCache" class="com.hzfh.fmp.controller.permission.ajax.AjaxDataManageAction" method="flushSalesCache">
+            <result type="json">
+                <param name="includeProperties">
+                    errCode,errDesc
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+        <action name="flushWorkflowCache" class="com.hzfh.fmp.controller.permission.ajax.AjaxDataManageAction" method="flushWorkflowCache">
+            <result type="json">
+                <param name="includeProperties">
+                    errCode,errDesc
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+        
+        
+        
+    </package>    
+    <!--2015-05-06 mengchong test  -->
+    <package name="test" extends="struts-login" namespace="/permission/test">
+        <action name="test" class="com.hzfh.fmp.controller.permission.TestAction">
+            <result>/permission/test.jsp</result>
+        </action>
+    </package>
+</struts>

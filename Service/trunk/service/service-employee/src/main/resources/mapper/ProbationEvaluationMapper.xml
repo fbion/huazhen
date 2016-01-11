@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hzfh.service.employee.mapper.ProbationEvaluationMapper">
+	<resultMap type="com.hzfh.api.employee.model.ProbationEvaluation" id="resultMapProbationEvaluation">
+		<result property="id" column="id"/>
+		<result property="code" column="code"/>
+		<result property="empNo" column="emp_no"/>
+		<result property="companyNo" column="company_no"/>
+		<result property="deptNo" column="dept_no"/>
+		<result property="positionNo" column="position_no"/>
+		<result property="startTime" column="start_time" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
+		<result property="totalScore" column="total_score"/>
+		<result property="activitiNo" column="activiti_no"/>
+		<result property="inUserNo" column="in_user_no"/>
+		<result property="inTime" column="in_time" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
+		<result property="editUserNo" column="edit_user_no"/>
+		<result property="editTime" column="edit_time" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
+		<result property="editComment" column="edit_comment"/>
+		<result property="activitiStatus" column="activiti_status"/>
+		<result property="probationDate" column="probation_date" jdbcType="DATE" javaType="java.sql.Date"/>
+	</resultMap>
+	<select id="getList" resultMap="resultMapProbationEvaluation">
+		SELECT id,code,emp_no,company_no,dept_no,position_no,start_time,total_score,activiti_no,in_user_no,in_time,edit_user_no,edit_time,edit_comment,activiti_status,probation_date
+		FROM probation_evaluation
+	</select>
+	<select id="getPagingList" resultMap="resultMapProbationEvaluation" parameterType="com.hzfh.api.employee.model.query.ProbationEvaluationCondition" statementType="STATEMENT">
+		SELECT id,code,emp_no,company_no,dept_no,position_no,start_time,total_score,activiti_no,in_user_no,in_time,edit_user_no,edit_time,edit_comment,activiti_status,probation_date FROM probation_evaluation where 1=1
+		<if test="empNo!=0"> and emp_no='${empNo}'</if>
+		<if test="companyNo!=0"> and company_no=${companyNo}</if>
+		<if test="deptNo!=0"> and dept_no=${deptNo}</if>
+		<if test="positionNo!=0"> and position_no=${positionNo}</if>
+		<if test="activitiStatus>-1"> and activiti_status=${activitiStatus}</if>
+		<if test="workMateString !=null"> and emp_no in (${workMateString})</if>
+		<if test="dateUp !=null and dateDown !=null"> and '${dateDown}' &lt;= start_time and start_time &lt; '${dateUp}'</if>
+		ORDER BY
+		<foreach item="item" collection="sortItemList" separator=",">
+			${item.sortFeild} ${item.sortType}
+		</foreach>
+		LIMIT ${startIndex},${pageSize}
+	</select>
+	<select id="getTotalCount" resultType="int" parameterType="com.hzfh.api.employee.model.query.ProbationEvaluationCondition" statementType="STATEMENT">
+		SELECT count(1) FROM probation_evaluation where 1=1
+		<if test="empNo!=0"> and emp_no='${empNo}'</if>
+		<if test="companyNo!=0"> and company_no=${companyNo}</if>
+		<if test="deptNo!=0"> and dept_no=${deptNo}</if>
+		<if test="positionNo!=0"> and position_no=${positionNo}</if>
+		<if test="activitiStatus>-1"> and activiti_status=${activitiStatus}</if>
+		<if test="workMateString !=null"> and emp_no in (${workMateString})</if>
+		<if test="dateUp !=null and dateDown !=null"> and '${dateDown}' &lt;= start_time and start_time &lt; '${dateUp}'</if>
+	</select>
+	<select id="getInfo" resultMap="resultMapProbationEvaluation" parameterType="int">
+		SELECT id,code,emp_no,company_no,dept_no,position_no,start_time,total_score,activiti_no,in_user_no,in_time,edit_user_no,edit_time,edit_comment,activiti_status,probation_date FROM probation_evaluation where id=#{id}
+	</select>
+	<select id="getInfoByActivitiNo" resultMap="resultMapProbationEvaluation" parameterType="String">
+		SELECT id,code,emp_no,company_no,dept_no,position_no,start_time,total_score,activiti_no,in_user_no,in_time,edit_user_no,edit_time,edit_comment,activiti_status,probation_date FROM probation_evaluation where activiti_no=#{activitiNo}
+	</select>
+	<insert id="add" parameterType="com.hzfh.api.employee.model.ProbationEvaluation" useGeneratedKeys="true" keyProperty="id">
+		insert into probation_evaluation
+		(code,emp_no,company_no,dept_no,position_no,start_time,total_score,activiti_no,in_user_no,in_time,edit_user_no,edit_time,edit_comment,activiti_status,probation_date)
+		values
+		(#{code},#{empNo},#{companyNo},#{deptNo},#{positionNo},#{startTime},#{totalScore},#{activitiNo},#{inUserNo},current_timestamp(),#{editUserNo},current_timestamp(),#{editComment},#{activitiStatus},#{probationDate})
+	</insert>
+	<update id="update" parameterType="com.hzfh.api.employee.model.ProbationEvaluation">
+		update probation_evaluation set 
+		code=#{code},emp_no=#{empNo},company_no=#{companyNo},dept_no=#{deptNo},position_no=#{positionNo},start_time=#{startTime},total_score=#{totalScore},activiti_no=#{activitiNo},edit_user_no=#{editUserNo},edit_time=current_timestamp(),edit_comment=#{editComment},activiti_status=#{activitiStatus},probation_date=#{probationDate}
+		where id=#{id}
+	</update>
+	<delete id="delete" parameterType="int">
+		delete from probation_evaluation where id = #{id}
+	</delete>
+	
+	<update id="updateActivitiStatusByActivitiNo" parameterType="String">
+		update probation_evaluation set 
+		activiti_status=1
+		where activiti_no=#{activitiNo}
+	</update>
+
+	<select id="getInfoByEmpNo" parameterType="int" resultMap="resultMapProbationEvaluation">
+		SELECT id,code,emp_no,company_no,dept_no,position_no,start_time,total_score,activiti_no,in_user_no,in_time,edit_user_no,edit_time,edit_comment,activiti_status,probation_date
+		FROM probation_evaluation WHERE emp_no=#{empNo}
+	</select>
+</mapper>

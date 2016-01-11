@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+        "http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+    <!--     <constant name="struts.enable.DynamicMethodInvocation" value="true"/> -->
+    <constant name="struts.devMode" value="false"/>
+    <constant name="struts.i18n.encoding" value="UTF-8"></constant>
+    <constant name="struts.multipart.saveDir" value="/Users/paul"></constant>
+    <constant name="struts.multipart.maxSize" value="50000000"/>
+    <package name="struts-login" namespace="/" extends="struts-error">
+        <interceptors>
+            <interceptor name="checkLogin" class="com.hzfh.fmp.controller.common.interceptor.CheckLoginInterceptor"/>
+            <interceptor-stack name="loginStack">
+                <interceptor-ref name="checkLogin"></interceptor-ref>
+                <interceptor-ref name="defaultStack"></interceptor-ref>
+            </interceptor-stack>
+        </interceptors>
+        <default-interceptor-ref name="loginStack"></default-interceptor-ref>
+        <!--<default-action-ref name="errorPage"></default-action-ref>-->
+        <global-results>
+            <result name="login" type="redirectAction">
+                <param name="namespace">/</param>
+                <param name="actionName">login</param>
+            </result>
+            <result name="goToEmployee" type="redirectAction">
+                <param name="namespace">/</param>
+                <param name="actionName">goToEmployee</param>
+            </result>
+        </global-results>
+        <action name="login" class="com.hzfh.fmp.controller.LoginAction" method="load">
+            <result name="input">/login.jsp</result>
+            <result type="redirectAction">main</result>
+        </action>
+        <action name="goToEmployee" class="com.hzfh.fmp.controller.employee.EmployeeAddAction">
+            <result>/employee/employeeAdd.jsp</result>
+        </action>
+        <action name="*" class="com.hzfh.fmp.controller.ErrorPageAction">
+            <result>/error.jsp</result>
+        </action>
+    </package>
+    <package name="struts-error" namespace="/" extends="struts-default,json-default">
+        <global-results>
+            <result name="errorPage" type="chain">
+                <param name="namespace">/</param>
+                <param name="actionName">errorPage</param>
+            </result>
+            <result name="error" type="chain">
+                <param name="namespace">/</param>
+                <param name="actionName">errorPage</param>
+            </result>
+        </global-results>
+        <global-exception-mappings>
+            <exception-mapping exception="java.lang.Exception" result="errorPage"/>
+        </global-exception-mappings>
+        <action name="errorPage" class="com.hzfh.fmp.controller.ErrorPageAction" >
+            <result>/errorPage.jsp</result>
+        </action>
+    </package>
+    <include file="struts/struts-product.xml"/>
+    <include file="struts/struts-employee.xml"/>
+    <include file="struts/struts-permission.xml"/>
+    <include file="struts/struts-customer.xml"/>
+    <include file="struts/struts-baseInfo.xml"/>
+    <include file="struts/struts-common.xml"/>
+    <include file="struts/struts-sales.xml"/>
+    <include file="struts/struts-workFlow.xml"/>
+    <include file="struts/struts-payment.xml"/>
+    <include file="struts/struts-report.xml"/>
+    <include file="struts/struts-market.xml"/>
+    <include file="struts/struts-employee-new.xml"/>
+    <include file="struts/struts-sales-new.xml"/>
+</struts>

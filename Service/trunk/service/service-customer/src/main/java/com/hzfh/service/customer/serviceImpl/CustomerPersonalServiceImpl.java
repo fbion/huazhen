@@ -1,0 +1,80 @@
+package com.hzfh.service.customer.serviceImpl;
+
+import com.hzfh.api.customer.model.CustomerPersonal;
+import com.hzfh.api.customer.model.query.CustomerPersonalCondition;
+import com.hzfh.api.customer.service.CustomerPersonalService;
+import com.hzfh.service.customer.dao.CustomerPersonalDao;
+import com.hzframework.data.serviceImpl.BaseServiceImpl;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+
+/*******************************************************************************
+ * 
+ * Copyright 2014 HZFH. All rights reserved. 
+ * Author: GuoZhenYu  
+ * Create Date: 2014/12/29 
+ * Description:
+ * 
+ * Revision History:
+ *      Date         Author               Description
+ * 
+ ******************************************************************************/
+
+
+@Service("customerPersonalService")
+public class CustomerPersonalServiceImpl extends BaseServiceImpl<CustomerPersonal, CustomerPersonalCondition, CustomerPersonalDao> implements CustomerPersonalService {
+    @Autowired
+    private CustomerPersonalDao customerPersonalDao;
+    @Override
+    public List<CustomerPersonal> getMyCustomerPersonalList(String workMateString) {
+        return customerPersonalDao.getMyCustomerPersonalList(workMateString);
+    }
+	@Override
+	public List<CustomerPersonal> cardCheck(String cardNumber, int id,String desCardNumber) {
+		return customerPersonalDao.cardCheck(cardNumber, id,desCardNumber);
+	}
+	@Override
+	public CustomerPersonal getCustomerByCardNumber(String cardNumber) {
+		
+		return customerPersonalDao.getCustomerByCardNumber(cardNumber);
+	}
+	@Override
+	public List<CustomerPersonal> getNoPagingList(CustomerPersonalCondition customerPersonalCondition) {
+		return customerPersonalDao.getNoPagingList(customerPersonalCondition);
+	}
+
+	@Override
+	public List<CustomerPersonal> checkCustomerPersonalByNameAndCellphone(int id,String name, String cellPhone,String desCellPhone) {
+		return customerPersonalDao.checkCustomerPersonalByNameAndCellphone(id, name, cellPhone,desCellPhone);
+	}
+	@Override
+	public List<CustomerPersonal> getCustomerPersonalListByManagerNo(int managerNo) {
+		return customerPersonalDao.getCustomerPersonalListByManagerNo(managerNo);
+	}
+
+	@Override
+	public int updateTradeTotalById(int id, double tradeTotal) {
+		return customerPersonalDao.updateTradeTotalById(id, tradeTotal);
+	}
+    @Override
+    public int updateLoginByP2pCustoemrNo(int p2pCustomerNo) {
+        return customerPersonalDao.updateLoginByP2pCustoemrNo(p2pCustomerNo);
+    }
+
+    @Override
+    public List<CustomerPersonal> getListForExcel(CustomerPersonalCondition customerPersonalCondition){
+        return customerPersonalDao.getListForExcel(customerPersonalCondition);
+    }
+
+	@Override
+	public CustomerPersonal getInfoByP2pCustsomerNo(int p2pCustomerNo) {
+		return customerPersonalDao.getInfoByP2pCustsomerNo(p2pCustomerNo);
+	}
+
+	@Override
+	public List<CustomerPersonal> getCurrentWeekCustomerPerson(CustomerPersonalCondition customerPersonalCondition) {
+		return customerPersonalDao.getCurrentWeekCustomerPerson(customerPersonalCondition);
+	}
+}

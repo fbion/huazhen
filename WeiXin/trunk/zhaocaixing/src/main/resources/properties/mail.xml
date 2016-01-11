@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+    <comment>邮件配置</comment>
+    <entry key="mail.host"><![CDATA[mail.bestinvestor.com.cn]]></entry>
+    <entry key="mail.user"><![CDATA[administrator]]></entry>
+    <entry key="mail.pass"><![CDATA[huazhen@123]]></entry>
+    <entry key="mail.postfix"><![CDATA[bestinvestor.com.cn]]></entry>
+    <entry key="mail.sender.name"><![CDATA[华镇社区金融]]></entry>
+    <entry key="mail.activate.subject"><![CDATA[账户注册成功]]></entry>
+    <entry key="mail.activate.body"><![CDATA[欢迎您加入华镇社区金融！
+
+您的华镇社区金融账号已经成功创建，请点击此链接激活账号：
+
+%s
+
+此链接%s天内有效
+请妥善保留这封电子邮件. 您的帐号资料如下:
+
+----------------------------
+帐号: %s
+----------------------------
+
+如果您忘记了密码，可以在用户登录界面通过“忘记密码”的链接，重置你的密码。
+
+注意：
+
+1、新用户注册成功之后，您可以完善个人信息和预约产品。
+2、在您使用华镇社区金融网站之前，务必仔细阅读华镇社区金融网站使用规则，并且严格遵守，避免发生不必要的误会。
+
+华镇社区金融和您一同成长，感谢您的注册！
+
+
+华镇社区金融网站管理员
+ ]]></entry>
+    <entry key="mail.reset.subject"><![CDATA[重置密码]]></entry>
+    <entry key="mail.reset.body">
+        <![CDATA[%s 您好,
+
+
+您收到这封这封电子邮件是因为您 (也可能是某人冒充您的名义) 申请设置新的密码. 假如这不是您本人所申请, 请不用理会这封电子邮件, 但是如果您持续收到这类的信件骚扰, 请您尽快联络管理员.
+
+请使用以下链接设置密码.
+
+
+
+%s
+
+
+如果您还有任何的疑问, 请拨打400-0340-668
+
+华镇社区金融和您一同成长
+
+华镇社区金融网站管理员
+                ]]>
+    </entry>
+    <entry key="mail.subscribe.receiver"><![CDATA[huj@bestinvestor.com.cn]]></entry>
+    <entry key="mail.subscribe.subject"><![CDATA[新的预约]]></entry>
+    <entry key="mail.subscribe.body">
+        <![CDATA[<b>%s</b>先生/女士于<b>%s</b>预约了产品<b>%s</b>，请您尽快与他取得联系，电话：<b>%s</b>
+
+
+<p style="margin-top:30px">华镇社区金融和您一同成长！</p>
+
+<p style="text-align:center">华镇社区金融网站管理员</p>
+                ]]>
+    </entry>
+</properties>

@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hzfh.service.customer.mapper.AgentFollowMapper">
+	<resultMap type="com.hzfh.api.customer.model.AgentFollow" id="resultMapAgentFollow">
+		<result property="id" column="id" />
+		<result property="productType" column="product_type" />
+		<result property="productNo" column="product_no" />
+		<result property="agentType" column="agent_type" />
+		<result property="agentNo" column="agent_no" />
+		<result property="contacts" column="contacts" />
+		<result property="position" column="position" />
+		<result property="type" column="type" />
+		<result property="time" column="time" jdbcType="TIMESTAMP"
+			javaType="java.sql.Timestamp" />
+		<result property="nexttime" column="nexttime" jdbcType="TIMESTAMP"
+			javaType="java.sql.Timestamp" />
+		<result property="content" column="content" />
+		<result property="result" column="result" />
+		<result property="inUserNo" column="in_user_no" />
+		<result property="inTime" column="in_time" jdbcType="TIMESTAMP"
+			javaType="java.sql.Timestamp" />
+		<result property="editUserNo" column="edit_user_no" />
+		<result property="editTime" column="edit_time" jdbcType="TIMESTAMP"
+			javaType="java.sql.Timestamp" />
+		<result property="editComment" column="edit_comment" />
+	</resultMap>
+	<select id="getList" resultMap="resultMapAgentFollow">
+		SELECT
+		id,product_type,product_no,agent_type,agent_no,contacts,position,type,time,nexttime,content,result,in_user_no,in_time,edit_user_no,edit_time,edit_comment
+		FROM agent_follow
+	</select>
+	<select id="getPagingList" resultMap="resultMapAgentFollow"
+		parameterType="com.hzfh.api.customer.model.query.AgentFollowCondition"
+		statementType="STATEMENT">
+		SELECT
+		id,product_type,product_no,agent_type,agent_no,contacts,position,type,time,nexttime,content,result,in_user_no,in_time,edit_user_no,edit_time,edit_comment
+		FROM agent_follow where 1=1
+		<if test="agentId != 0">and agent_no=${agentId}</if>
+		<if test="agentType != 0">and agent_type=${agentType}</if>
+
+		ORDER BY
+		<foreach item="item" collection="sortItemList" separator=",">
+			${item.sortFeild} ${item.sortType}
+		</foreach>
+		LIMIT ${startIndex},${pageSize}
+	</select>
+	<select id="getTotalCount" resultType="int"
+		parameterType="com.hzfh.api.customer.model.query.AgentFollowCondition"
+		statementType="STATEMENT">
+		SELECT count(1) FROM agent_follow where 1=1
+		<if test="agentId != 0">and agent_no=${agentId}</if>
+		<if test="agentType != 0">and agent_type=${agentType}</if>
+	</select>
+	<select id="getInfo" resultMap="resultMapAgentFollow"
+		parameterType="int">
+		SELECT
+		id,product_type,product_no,agent_type,agent_no,contacts,position,type,time,nexttime,content,result,in_user_no,in_time,edit_user_no,edit_time,edit_comment
+		FROM agent_follow where id=#{id}
+	</select>
+	<insert id="add" parameterType="com.hzfh.api.customer.model.AgentFollow"
+		useGeneratedKeys="true" keyProperty="id">
+		insert into agent_follow
+		(product_type,product_no,agent_type,agent_no,contacts,position,type,time,nexttime,content,result,in_user_no,in_time,edit_user_no,edit_time,edit_comment)
+		values
+		(#{productType},#{productNo},#{agentType},#{agentNo},#{contacts},#{position},#{type},#{time},#{nexttime},#{content},#{result},#{inUserNo},current_timestamp(),#{editUserNo},current_timestamp(),#{editComment})
+	</insert>
+	<update id="update" parameterType="com.hzfh.api.customer.model.AgentFollow">
+		update agent_follow set
+		product_type=#{productType},product_no=#{productNo},agent_type=#{agentType},agent_no=#{agentNo},contacts=#{contacts},position=#{position},type=#{type},time=#{time},nexttime=#{nexttime},content=#{content},result=#{result},edit_user_no=#{editUserNo},edit_time=current_timestamp(),edit_comment=#{editComment}
+		where id=#{id}
+	</update>
+	<delete id="delete" parameterType="int">
+		delete from agent_follow where
+		id = #{id}
+	</delete>
+</mapper>

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://www.springframework.org/schema/beans" xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+
+       http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context-4.0.xsd"
+	default-autowire="byName" default-lazy-init="false">
+	<context:component-scan base-package="com.hzfh.service" />
+	<context:annotation-config />
+	<bean id="hessianMapping" class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+		<property name="mappings">
+			<props>
+				<prop key="/auditTask">auditTaskService</prop>
+				<prop key="/processDefinition">processDefinitionService</prop>
+				<prop key="/processing">processingService</prop>
+				<prop key="/approvalHistoria">approvalHistoriaService</prop>
+				<prop key="/actHiProcinst">actHiProcinstService</prop>
+				<prop key="/actHiTaskinst">actHiTaskinstService</prop>
+				<prop key="/actRuTask">actRuTaskService</prop>
+			</props>
+		</property>
+	</bean>
+	  <bean id="actHiProcinstServiceImpl" class="com.hzfh.service.workFlow.serviceImpl.ActHiProcinstServiceImpl" />
+	  <bean id="actHiProcinstService" class="org.springframework.remoting.caucho.HessianServiceExporter">
+	    <property name="service" ref="actHiProcinstServiceImpl" />
+	    <property name="serviceInterface" value="com.hzfh.api.workFlow.service.ActHiProcinstService" />
+	  </bean>
+	
+	  <bean id="actHiTaskinstServiceImpl" class="com.hzfh.service.workFlow.serviceImpl.ActHiTaskinstServiceImpl" />
+	  <bean id="actHiTaskinstService" class="org.springframework.remoting.caucho.HessianServiceExporter">
+	    <property name="service" ref="actHiTaskinstServiceImpl" />
+	    <property name="serviceInterface" value="com.hzfh.api.workFlow.service.ActHiTaskinstService" />
+	  </bean>
+	    
+	  <bean id="actRuTaskServiceImpl" class="com.hzfh.service.workFlow.serviceImpl.ActRuTaskServiceImpl" />
+	  <bean id="actRuTaskService" class="org.springframework.remoting.caucho.HessianServiceExporter">
+	    <property name="service" ref="actRuTaskServiceImpl" />
+	    <property name="serviceInterface" value="com.hzfh.api.workFlow.service.ActRuTaskService" />
+	  </bean>
+	  
+  <!-- 20150717 mengchong workflow 优化 -->
+  <bean id="approvalHistoriaServiceImpl" class="com.hzfh.service.workFlow.serviceImpl.ApprovalHistoriaServiceImpl" />
+  <bean id="approvalHistoriaService" class="org.springframework.remoting.caucho.HessianServiceExporter">
+    <property name="service" ref="approvalHistoriaServiceImpl" />
+    <property name="serviceInterface" value="com.hzfh.api.workFlow.service.ApprovalHistoriaService" />
+  </bean>
+  <bean id="processingServiceImpl" class="com.hzfh.service.workFlow.serviceImpl.ProcessingServiceImpl" />
+  <bean id="processingService" class="org.springframework.remoting.caucho.HessianServiceExporter">
+    <property name="service" ref="processingServiceImpl" />
+    <property name="serviceInterface" value="com.hzfh.api.workFlow.service.ProcessingService" />
+  </bean>
+  <bean id="processDefinitionServiceImpl" class="com.hzfh.service.workFlow.serviceImpl.ProcessDefinitionServiceImpl" />
+  <bean id="processDefinitionService" class="org.springframework.remoting.caucho.HessianServiceExporter">
+    <property name="service" ref="processDefinitionServiceImpl" />
+    <property name="serviceInterface" value="com.hzfh.api.workFlow.service.ProcessDefinitionService" />
+  </bean>
+
+   <bean id="auditTaskServiceImpl" class="com.hzfh.service.workFlow.serviceImpl.AuditTaskServiceImpl" />
+  <bean id="auditTaskService" class="org.springframework.remoting.caucho.HessianServiceExporter">
+    <property name="service" ref="auditTaskServiceImpl" />
+    <property name="serviceInterface" value="com.hzfh.api.workFlow.service.AuditTaskService" />
+  </bean>
+</beans>

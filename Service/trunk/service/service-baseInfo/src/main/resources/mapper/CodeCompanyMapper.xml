@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hzfh.service.baseInfo.mapper.CodeCompanyMapper">
+	<resultMap type="com.hzfh.api.baseInfo.model.CodeCompany" id="resultMapCodeCompany">
+		<result property="id" column="id"/>
+		<result property="inTime" column="in_time" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
+	</resultMap>
+	<select id="getList" resultMap="resultMapCodeCompany">
+		SELECT id,in_time
+		FROM code_company order by in_time desc
+	</select>
+	<select id="getPagingList" resultMap="resultMapCodeCompany" parameterType="com.hzfh.api.baseInfo.model.query.CodeCompanyCondition" statementType="STATEMENT">
+		SELECT id,in_time FROM code_company where 1=1
+		ORDER BY
+		<foreach item="item" collection="sortItemList" separator=",">
+			${item.sortFeild} ${item.sortType}
+		</foreach>
+		LIMIT ${startIndex},${pageSize}
+	</select>
+	<select id="getTotalCount" resultType="int" parameterType="com.hzfh.api.baseInfo.model.query.CodeCompanyCondition" statementType="STATEMENT">
+		SELECT count(1) FROM code_company where 1=1
+	</select>
+	<select id="getInfo" resultMap="resultMapCodeCompany" parameterType="int">
+		SELECT id,in_time FROM code_company where id=#{id}
+	</select>
+	<insert id="add" parameterType="com.hzfh.api.baseInfo.model.CodeCompany" useGeneratedKeys="true" keyProperty="id">
+		insert into code_company
+		(in_time)
+		values
+		(current_timestamp())
+	</insert>
+	<update id="update" parameterType="com.hzfh.api.baseInfo.model.CodeCompany">
+		update code_company set 
+		
+		where id=#{id}
+	</update>
+	<delete id="delete" parameterType="int">
+		delete from code_company where id = #{id}
+	</delete>
+</mapper>

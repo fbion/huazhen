@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hzfh.service.employee.mapper.EmpBrokerageLadderMapper">
+	<resultMap type="com.hzfh.api.employee.model.EmpBrokerageLadder"
+		id="resultMapEmpBrokerageLadder">
+		<result property="id" column="id" />
+		<result property="code" column="code" />
+		<result property="empNo" column="emp_no" />
+		<result property="name" column="name" />
+		<result property="upperLimit" column="upper_limit" />
+		<result property="lowerLimit" column="lower_limit" />
+		<result property="moneyAdd" column="money_add" />
+		<result property="rate" column="rate" />
+		<result property="inUserNo" column="in_user_no" />
+		<result property="inTime" column="in_time" jdbcType="TIMESTAMP"
+			javaType="java.sql.Timestamp" />
+		<result property="editUserNo" column="edit_user_no" />
+		<result property="editTime" column="edit_time" jdbcType="TIMESTAMP"
+			javaType="java.sql.Timestamp" />
+		<result property="editComment" column="edit_comment" />
+	</resultMap>
+	<sql id="Base_Column_List" >
+		id,code,emp_no,name,upper_limit,lower_limit,money_add,rate,in_user_no,in_time,edit_user_no,edit_time,edit_comment
+	</sql>
+	<select id="getList" resultMap="resultMapEmpBrokerageLadder">
+		SELECT <include refid="Base_Column_List"/>
+			FROM emp_brokerage_ladder
+	</select>
+	<select id="getPagingList" resultMap="resultMapEmpBrokerageLadder"
+		parameterType="com.hzfh.api.employee.model.query.EmpBrokerageLadderCondition"
+		statementType="STATEMENT">
+		SELECT
+		<include refid="Base_Column_List"/> FROM emp_brokerage_ladder where 1=1
+		
+		ORDER BY
+		<foreach item="item" collection="sortItemList" separator=",">
+			${item.sortFeild} ${item.sortType}
+		</foreach>
+		LIMIT ${startIndex},${pageSize}
+	</select>
+	<select id="getTotalCount" resultType="int"
+		parameterType="com.hzfh.api.employee.model.query.EmpBrokerageLadderCondition"
+		statementType="STATEMENT">
+		SELECT count(1) FROM emp_brokerage_ladder where 1=1
+	</select>
+	<select id="getInfo" resultMap="resultMapEmpBrokerageLadder"
+		parameterType="int">
+		SELECT
+		 <include refid="Base_Column_List"/> FROM emp_brokerage_ladder where id=#{id}
+	</select>
+	<insert id="add" parameterType="com.hzfh.api.employee.model.EmpBrokerageLadder"
+		useGeneratedKeys="true" keyProperty="id">
+		insert into emp_brokerage_ladder
+		(code,emp_no,name,upper_limit,lower_limit,money_add,rate,in_user_no,in_time,edit_user_no,edit_time,edit_comment)
+		values
+		(#{code},#{empNo},#{name},#{upperLimit},#{lowerLimit},#{moneyAdd},#{rate},#{inUserNo},current_timestamp(),#{editUserNo},current_timestamp(),#{editComment})
+	</insert>
+	<update id="update" parameterType="com.hzfh.api.employee.model.EmpBrokerageLadder">
+		update emp_brokerage_ladder
+		set
+		code=#{code},emp_no=#{empNo},name=#{name},upper_limit=#{upperLimit},lower_limit=#{lowerLimit},money_add=#{moneyAdd},rate=#{rate},edit_user_no=#{editUserNo},edit_time=current_timestamp(),edit_comment=#{editComment}
+		where id=#{id}
+	</update>
+	<delete id="delete" parameterType="int">
+		delete from
+		emp_brokerage_ladder where id = #{id}
+	</delete>
+</mapper>

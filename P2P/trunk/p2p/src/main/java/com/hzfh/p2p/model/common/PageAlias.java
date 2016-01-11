@@ -1,0 +1,77 @@
+package com.hzfh.p2p.model.common;
+
+/**
+ * Created by paul on 15-3-10.
+ */
+public enum PageAlias {
+    index,
+    register,
+    emailValidation,
+    registerSuccess,
+    captcha,
+    login,
+    logout,
+    productDetails,
+    myInvestment,
+    myReservation,
+    personalInfo,
+    editPassword,
+    forgetPassword,
+    chooseWayPassword,//mengchong 2015/08/03
+    byEmailPassword,
+    byCellphonePassword,
+    resetPassword,
+    resetSuccess,
+    investorEducationt, 
+    p2pProductList, 
+    paymentAccountSecurity,
+    account, 
+    MyPaymentMoneyRechargeList,
+    moneyDetail,
+    productConfirm,
+    contractConfirm,
+    paymentConfirm,
+    myPaymentMoneyRechargeList,
+    myPaymentMoneyWithdrawList,
+    paymentComplete,
+    accountSuccess,
+    announcementList,
+    announcement, 
+    bankCard,
+    myCoupons,
+    myIntegral,
+    myReward,
+    //aboutUs
+    enterpriseCulture,
+    mediaReports,
+    aboutCompany,
+    bulletin,
+    joinUs,
+    joinUsContent,
+    contactUs,
+    storeList,
+    storeDetail,
+    
+    myInfo,
+    helpCenter,
+    knowledgeForum,
+    knowledgeForumContent,
+    //productFeatures
+    productFeatures,
+    securityAssurance,
+    lawsRegulations,
+    lawsRegulationsContent,
+    productSuperiority,
+    serviceContract,
+    popularize,
+    reservationHelp,
+    financing,
+    accountCentral,
+    noviceArea,
+    baiduMap,
+    employeePhoto,
+    myInvite,
+    
+    errorPage
+
+}

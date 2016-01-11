@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hzfh.service.employee.mapper.TempRecruitDetailMapper">
+	<resultMap type="com.hzfh.api.employee.model.TempRecruitDetail" id="resultMapTempRecruitDetail">
+		<result property="id" column="id"/>
+		<result property="tempRecruitNeedNo" column="temp_recruit_need_no"/>
+		<result property="deptNo" column="dept_no"/>
+		<result property="positionNo" column="position_no"/>
+		<result property="addPeople" column="add_people"/>
+		<result property="needCause" column="need_cause"/>
+		<result property="jobDuties" column="job_duties"/>
+		<result property="sex" column="sex"/>
+		<result property="education" column="education"/>
+		<result property="major" column="major"/>
+		<result property="age" column="age"/>
+		<result property="language" column="language"/>
+		<result property="certificate" column="certificate"/>
+		<result property="skill" column="skill"/>
+		<result property="experience" column="experience"/>
+		<result property="ability" column="ability"/>
+		<result property="other" column="other"/>
+		<result property="workDate" column="work_date" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
+		<result property="inUserNo" column="in_user_no"/>
+		<result property="inTime" column="in_time" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
+		<result property="editUserNo" column="edit_user_no"/>
+		<result property="editTime" column="edit_time" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
+		<result property="editComment" column="edit_comment"/>
+	</resultMap>
+	<select id="getList" resultMap="resultMapTempRecruitDetail">
+		SELECT id,temp_recruit_need_no,dept_no,position_no,add_people,need_cause,job_duties,sex,education,major,age,language,certificate,skill,experience,ability,other,work_date,in_user_no,in_time,edit_user_no,edit_time,edit_comment
+		FROM temp_recruit_detail
+	</select>
+	<select id="getPagingList" resultMap="resultMapTempRecruitDetail" parameterType="com.hzfh.api.employee.model.query.TempRecruitDetailCondition" statementType="STATEMENT">
+		SELECT id,temp_recruit_need_no,dept_no,position_no,add_people,need_cause,job_duties,sex,education,major,age,language,certificate,skill,experience,ability,other,work_date,in_user_no,in_time,edit_user_no,edit_time,edit_comment FROM temp_recruit_detail where 1=1
+		ORDER BY
+		<foreach item="item" collection="sortItemList" separator=",">
+			${item.sortFeild} ${item.sortType}
+		</foreach>
+		LIMIT ${startIndex},${pageSize}
+	</select>
+	<select id="getTotalCount" resultType="int" parameterType="com.hzfh.api.employee.model.query.TempRecruitDetailCondition" statementType="STATEMENT">
+		SELECT count(1) FROM temp_recruit_detail where 1=1
+	</select>
+	<select id="getInfo" resultMap="resultMapTempRecruitDetail" parameterType="int">
+		SELECT id,temp_recruit_need_no,dept_no,position_no,add_people,need_cause,job_duties,sex,education,major,age,language,certificate,skill,experience,ability,other,work_date,in_user_no,in_time,edit_user_no,edit_time,edit_comment FROM temp_recruit_detail where id=#{id}
+	</select>
+	<select id="getInfoByNeedNo" resultMap="resultMapTempRecruitDetail" parameterType="int">
+	SELECT id,temp_recruit_need_no,dept_no,position_no,add_people,need_cause,job_duties,sex,education,major,age,language,certificate,skill,experience,ability,other,work_date,in_user_no,in_time,edit_user_no,edit_time,edit_comment FROM temp_recruit_detail where temp_recruit_need_no=#{id}
+	</select>
+	<insert id="add" parameterType="com.hzfh.api.employee.model.TempRecruitDetail" useGeneratedKeys="true" keyProperty="id">
+		insert into temp_recruit_detail
+		(temp_recruit_need_no,dept_no,position_no,add_people,need_cause,job_duties,sex,education,major,age,language,certificate,skill,experience,ability,other,work_date,in_user_no,in_time,edit_user_no,edit_time,edit_comment)
+		values
+		(#{tempRecruitNeedNo},#{deptNo},#{positionNo},#{addPeople},#{needCause},#{jobDuties},#{sex},#{education},#{major},#{age},#{language},#{certificate},#{skill},#{experience},#{ability},#{other},#{workDate},#{inUserNo},current_timestamp(),#{editUserNo},current_timestamp(),#{editComment})
+	</insert>
+	<update id="update" parameterType="com.hzfh.api.employee.model.TempRecruitDetail">
+		update temp_recruit_detail set 
+		temp_recruit_need_no=#{tempRecruitNeedNo},dept_no=#{deptNo},position_no=#{positionNo},add_people=#{addPeople},need_cause=#{needCause},job_duties=#{jobDuties},sex=#{sex},education=#{education},major=#{major},age=#{age},language=#{language},certificate=#{certificate},skill=#{skill},experience=#{experience},ability=#{ability},other=#{other},work_date=#{workDate},edit_user_no=#{editUserNo},edit_time=current_timestamp(),edit_comment=#{editComment}
+		where id=#{id}
+	</update>
+	<update id="updateByNeedNo" parameterType="com.hzfh.api.employee.model.TempRecruitDetail">
+		update temp_recruit_detail set 
+		temp_recruit_need_no=#{tempRecruitNeedNo},dept_no=#{deptNo},position_no=#{positionNo},add_people=#{addPeople},need_cause=#{needCause},job_duties=#{jobDuties},sex=#{sex},education=#{education},major=#{major},age=#{age},language=#{language},certificate=#{certificate},skill=#{skill},experience=#{experience},ability=#{ability},other=#{other},work_date=#{workDate},edit_user_no=#{editUserNo},edit_time=current_timestamp(),edit_comment=#{editComment}
+		where temp_recruit_need_no=#{tempRecruitNeedNo}
+	</update>
+	<delete id="delete" parameterType="int">
+		delete from temp_recruit_detail where id = #{id}
+	</delete>
+</mapper>

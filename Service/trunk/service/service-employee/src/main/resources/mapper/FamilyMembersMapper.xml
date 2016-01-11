@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hzfh.service.employee.mapper.FamilyMembersMapper">
+	<resultMap type="com.hzfh.api.employee.model.FamilyMembers" id="resultMapFamilyMembers">
+		<result property="id" column="id"/>
+		<result property="empNo" column="emp_no"/>
+		<result property="familyName" column="family_name"/>
+		<result property="appellation" column="appellation"/>
+		<result property="familyAge" column="family_age"/>
+		<result property="familyWorkDepartment" column="family_work_department"/>
+		<result property="familyPosition" column="family_position"/>
+		<result property="familyCellphone" column="family_cellphone"/>
+		<result property="inUserNo" column="in_user_no"/>
+		<result property="inTime" column="in_time" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
+		<result property="editUserNo" column="edit_user_no"/>
+		<result property="editTime" column="edit_time" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
+		<result property="editComment" column="edit_comment"/>
+	</resultMap>
+	<select id="getList" resultMap="resultMapFamilyMembers">
+		SELECT id,emp_no,family_name,appellation,family_age,family_work_department,family_position,family_cellphone,in_user_no,in_time,edit_user_no,edit_time,edit_comment
+		FROM family_members
+	</select>
+	<select id="getPagingList" resultMap="resultMapFamilyMembers" parameterType="com.hzfh.api.employee.model.query.FamilyMembersCondition" statementType="STATEMENT">
+		SELECT id,emp_no,family_name,appellation,family_age,family_work_department,family_position,family_cellphone,in_user_no,in_time,edit_user_no,edit_time,edit_comment FROM family_members where 1=1
+		ORDER BY
+		<foreach item="item" collection="sortItemList" separator=",">
+			${item.sortFeild} ${item.sortType}
+		</foreach>
+		LIMIT ${startIndex},${pageSize}
+	</select>
+	<select id="getTotalCount" resultType="int" parameterType="com.hzfh.api.employee.model.query.FamilyMembersCondition" statementType="STATEMENT">
+		SELECT count(1) FROM family_members where 1=1
+	</select>
+	<select id="getInfo" resultMap="resultMapFamilyMembers" parameterType="int">
+		SELECT id,emp_no,family_name,appellation,family_age,family_work_department,family_position,family_cellphone,in_user_no,in_time,edit_user_no,edit_time,edit_comment FROM family_members where id=#{id}
+	</select>
+	<insert id="add" parameterType="com.hzfh.api.employee.model.FamilyMembers" useGeneratedKeys="true" keyProperty="id">
+		insert into family_members
+		(emp_no,family_name,appellation,family_age,family_work_department,family_position,family_cellphone,in_user_no,in_time,edit_user_no,edit_time,edit_comment)
+		values
+		(#{empNo},#{familyName},#{appellation},#{familyAge},#{familyWorkDepartment},#{familyPosition},#{familyCellphone},#{inUserNo},current_timestamp(),#{editUserNo},current_timestamp(),#{editComment})
+	</insert>
+	<update id="update" parameterType="com.hzfh.api.employee.model.FamilyMembers">
+		update family_members set 
+		emp_no=#{empNo},family_name=#{familyName},appellation=#{appellation},family_age=#{familyAge},family_work_department=#{familyWorkDepartment},family_position=#{familyPosition},family_cellphone=#{familyCellphone},edit_user_no=#{editUserNo},edit_time=current_timestamp(),edit_comment=#{editComment}
+		where id=#{id}
+	</update>
+	<delete id="delete" parameterType="int">
+		delete from family_members where id = #{id}
+	</delete>
+	<select id="getFamilyMembersByEmpNo" resultMap="resultMapFamilyMembers">
+		SELECT id,emp_no,family_name,appellation,family_age,family_work_department,family_position,family_cellphone,in_user_no,in_time,edit_user_no,edit_time,edit_comment FROM family_members
+		where emp_no=#{empNo}
+	</select>
+</mapper>

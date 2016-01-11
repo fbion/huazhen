@@ -1,0 +1,433 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="activitiesService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+        <property name="serviceUrl">
+            <value>http://customerservice.hzfh.com:8080/service-customer/activities</value>
+        </property>
+        <property name="serviceInterface">
+            <value>com.hzfh.api.customer.service.ActivitiesService</value>
+        </property>
+
+        <property name="overloadEnabled" value="true"></property>
+    </bean>
+	<bean id="activityAwardRelationService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+        <property name="serviceUrl">
+            <value>http://customerservice.hzfh.com:8080/service-customer/activityAwardRelation</value>
+        </property>
+        <property name="serviceInterface">
+            <value>com.hzfh.api.customer.service.ActivityAwardRelationService</value>
+        </property>
+
+        <property name="overloadEnabled" value="true"></property>
+    </bean>
+	<bean id="activityCashBonusService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+        <property name="serviceUrl">
+            <value>http://customerservice.hzfh.com:8080/service-customer/activityCashBonus</value>
+        </property>
+        <property name="serviceInterface">
+            <value>com.hzfh.api.customer.service.ActivityCashBonusService</value>
+        </property>
+
+        <property name="overloadEnabled" value="true"></property>
+    </bean>
+	<bean id="activityConditionService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+        <property name="serviceUrl">
+            <value>http://customerservice.hzfh.com:8080/service-customer/activityCondition</value>
+        </property>
+        <property name="serviceInterface">
+            <value>com.hzfh.api.customer.service.ActivityConditionService</value>
+        </property>
+
+        <property name="overloadEnabled" value="true"></property>
+    </bean>
+	<bean id="activityConditionRelationService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+        <property name="serviceUrl">
+            <value>http://customerservice.hzfh.com:8080/service-customer/activityConditionRelation</value>
+        </property>
+        <property name="serviceInterface">
+            <value>com.hzfh.api.customer.service.ActivityConditionRelationService</value>
+        </property>
+
+        <property name="overloadEnabled" value="true"></property>
+    </bean>
+	<bean id="activityCouponsService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+        <property name="serviceUrl">
+            <value>http://customerservice.hzfh.com:8080/service-customer/activityCoupons</value>
+        </property>
+        <property name="serviceInterface">
+            <value>com.hzfh.api.customer.service.ActivityCouponsService</value>
+        </property>
+
+        <property name="overloadEnabled" value="true"></property>
+    </bean>
+	<bean id="activityCouponsCodeService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+        <property name="serviceUrl">
+            <value>http://customerservice.hzfh.com:8080/service-customer/activityCouponsCode</value>
+        </property>
+        <property name="serviceInterface">
+            <value>com.hzfh.api.customer.service.ActivityCouponsCodeService</value>
+        </property>
+
+        <property name="overloadEnabled" value="true"></property>
+    </bean>
+	<bean id="activityCouponsProductService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+        <property name="serviceUrl">
+            <value>http://customerservice.hzfh.com:8080/service-customer/activityCouponsProduct</value>
+        </property>
+        <property name="serviceInterface">
+            <value>com.hzfh.api.customer.service.ActivityCouponsProductService</value>
+        </property>
+
+        <property name="overloadEnabled" value="true"></property>
+    </bean>
+	<bean id="activityCustomerCashBonusService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+        <property name="serviceUrl">
+            <value>http://customerservice.hzfh.com:8080/service-customer/activityCustomerCashBonus</value>
+        </property>
+        <property name="serviceInterface">
+            <value>com.hzfh.api.customer.service.ActivityCustomerCashBonusService</value>
+        </property>
+
+        <property name="overloadEnabled" value="true"></property>
+    </bean>
+	<bean id="activityCustomerCouponsService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+        <property name="serviceUrl">
+            <value>http://customerservice.hzfh.com:8080/service-customer/activityCustomerCoupons</value>
+        </property>
+        <property name="serviceInterface">
+            <value>com.hzfh.api.customer.service.ActivityCustomerCouponsService</value>
+        </property>
+
+        <property name="overloadEnabled" value="true"></property>
+    </bean>
+	<bean id="activityCustomerDetailService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+        <property name="serviceUrl">
+            <value>http://customerservice.hzfh.com:8080/service-customer/activityCustomerDetail</value>
+        </property>
+        <property name="serviceInterface">
+            <value>com.hzfh.api.customer.service.ActivityCustomerDetailService</value>
+        </property>
+
+        <property name="overloadEnabled" value="true"></property>
+    </bean>
+	<bean id="activityCustomerExperienceGoldService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+        <property name="serviceUrl">
+            <value>http://customerservice.hzfh.com:8080/service-customer/activityCustomerExperienceGold</value>
+        </property>
+        <property name="serviceInterface">
+            <value>com.hzfh.api.customer.service.ActivityCustomerExperienceGoldService</value>
+        </property>
+
+        <property name="overloadEnabled" value="true"></property>
+    </bean>
+	<bean id="activityCustomerInvitationService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+        <property name="serviceUrl">
+            <value>http://customerservice.hzfh.com:8080/service-customer/activityCustomerInvitation</value>
+        </property>
+        <property name="serviceInterface">
+            <value>com.hzfh.api.customer.service.ActivityCustomerInvitationService</value>
+        </property>
+
+        <property name="overloadEnabled" value="true"></property>
+    </bean>
+	<bean id="activityCustomerPresentService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+        <property name="serviceUrl">
+            <value>http://customerservice.hzfh.com:8080/service-customer/activityCustomerPresent</value>
+        </property>
+        <property name="serviceInterface">
+            <value>com.hzfh.api.customer.service.ActivityCustomerPresentService</value>
+        </property>
+
+        <property name="overloadEnabled" value="true"></property>
+    </bean>
+	<bean id="activityCustomerTaskService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+        <property name="serviceUrl">
+            <value>http://customerservice.hzfh.com:8080/service-customer/activityCustomerTask</value>
+        </property>
+        <property name="serviceInterface">
+            <value>com.hzfh.api.customer.service.ActivityCustomerTaskService</value>
+        </property>
+
+        <property name="overloadEnabled" value="true"></property>
+    </bean>
+	<bean id="activityExperienceGoldService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+        <property name="serviceUrl">
+            <value>http://customerservice.hzfh.com:8080/service-customer/activityExperienceGold</value>
+        </property>
+        <property name="serviceInterface">
+            <value>com.hzfh.api.customer.service.ActivityExperienceGoldService</value>
+        </property>
+
+        <property name="overloadEnabled" value="true"></property>
+    </bean>
+	<bean id="activityFeedbackService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+        <property name="serviceUrl">
+            <value>http://customerservice.hzfh.com:8080/service-customer/activityFeedback</value>
+        </property>
+        <property name="serviceInterface">
+            <value>com.hzfh.api.customer.service.ActivityFeedbackService</value>
+        </property>
+
+        <property name="overloadEnabled" value="true"></property>
+    </bean>
+	<bean id="activityIntegralService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+        <property name="serviceUrl">
+            <value>http://customerservice.hzfh.com:8080/service-customer/activityIntegral</value>
+        </property>
+        <property name="serviceInterface">
+            <value>com.hzfh.api.customer.service.ActivityIntegralService</value>
+        </property>
+
+        <property name="overloadEnabled" value="true"></property>
+    </bean>
+	<bean id="activityIntegralDetailService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+        <property name="serviceUrl">
+            <value>http://customerservice.hzfh.com:8080/service-customer/activityIntegralDetail</value>
+        </property>
+        <property name="serviceInterface">
+            <value>com.hzfh.api.customer.service.ActivityIntegralDetailService</value>
+        </property>
+
+        <property name="overloadEnabled" value="true"></property>
+    </bean>
+	<bean id="activityMessageService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+        <property name="serviceUrl">
+            <value>http://customerservice.hzfh.com:8080/service-customer/activityMessage</value>
+        </property>
+        <property name="serviceInterface">
+            <value>com.hzfh.api.customer.service.ActivityMessageService</value>
+        </property>
+
+        <property name="overloadEnabled" value="true"></property>
+    </bean>
+	<bean id="activityMessageStatusService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+        <property name="serviceUrl">
+            <value>http://customerservice.hzfh.com:8080/service-customer/activityMessageStatus</value>
+        </property>
+        <property name="serviceInterface">
+            <value>com.hzfh.api.customer.service.ActivityMessageStatusService</value>
+        </property>
+
+        <property name="overloadEnabled" value="true"></property>
+    </bean>
+	<bean id="activityMessageTemplateService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+        <property name="serviceUrl">
+            <value>http://customerservice.hzfh.com:8080/service-customer/activityMessageTemplate</value>
+        </property>
+        <property name="serviceInterface">
+            <value>com.hzfh.api.customer.service.ActivityMessageTemplateService</value>
+        </property>
+
+        <property name="overloadEnabled" value="true"></property>
+    </bean>
+	<bean id="activityPresentService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+        <property name="serviceUrl">
+            <value>http://customerservice.hzfh.com:8080/service-customer/activityPresent</value>
+        </property>
+        <property name="serviceInterface">
+            <value>com.hzfh.api.customer.service.ActivityPresentService</value>
+        </property>
+
+        <property name="overloadEnabled" value="true"></property>
+    </bean>
+	<bean id="activityRuleRelationService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+        <property name="serviceUrl">
+            <value>http://customerservice.hzfh.com:8080/service-customer/activityRuleRelation</value>
+        </property>
+        <property name="serviceInterface">
+            <value>com.hzfh.api.customer.service.ActivityRuleRelationService</value>
+        </property>
+    </bean>
+	<bean id="agentAdviserService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+        <property name="serviceUrl">
+            <value>http://customerservice.hzfh.com:8080/service-customer/agentAdviser</value>
+        </property>
+        <property name="serviceInterface">
+            <value>com.hzfh.api.customer.service.AgentAdviserService</value>
+        </property>
+
+        <property name="overloadEnabled" value="true"></property>
+    </bean>
+	<bean id="agentBusinessService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+        <property name="serviceUrl">
+            <value>http://customerservice.hzfh.com:8080/service-customer/agentBusiness</value>
+        </property>
+        <property name="serviceInterface">
+            <value>com.hzfh.api.customer.service.AgentBusinessService</value>
+        </property>
+
+        <property name="overloadEnabled" value="true"></property>
+    </bean>
+	<bean id="customerCompanyService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+        <property name="serviceUrl">
+            <value>http://customerservice.hzfh.com:8080/service-customer/customerCompany</value>
+        </property>
+        <property name="serviceInterface">
+            <value>com.hzfh.api.customer.service.CustomerCompanyService</value>
+        </property>
+
+        <property name="overloadEnabled" value="true"></property>
+    </bean>
+	<bean id="customerFollowService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+        <property name="serviceUrl">
+            <value>http://customerservice.hzfh.com:8080/service-customer/customerFollow</value>
+        </property>
+        <property name="serviceInterface">
+            <value>com.hzfh.api.customer.service.CustomerFollowService</value>
+        </property>
+
+        <property name="overloadEnabled" value="true"></property>
+    </bean>
+	<bean id="customerPersonalService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+        <property name="serviceUrl">
+            <value>http://customerservice.hzfh.com:8080/service-customer/customerPersonal</value>
+        </property>
+        <property name="serviceInterface">
+            <value>com.hzfh.api.customer.service.CustomerPersonalService</value>
+        </property>
+
+        <property name="overloadEnabled" value="true"></property>
+    </bean>
+    <bean id="p2pCustomerService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+        <property name="serviceUrl">
+            <value>http://customerservice.hzfh.com:8080/service-customer/p2pCustomer</value>
+        </property>
+        <property name="serviceInterface">
+            <value>com.hzfh.api.customer.service.P2pCustomerService</value>
+        </property>
+        <property name="overloadEnabled" value="true"></property>
+        
+    </bean>
+    	<bean id="agentFollowService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+        <property name="serviceUrl">
+            <value>http://customerservice.hzfh.com:8080/service-customer/agentFollow</value>
+        </property>
+        <property name="serviceInterface">
+            <value>com.hzfh.api.customer.service.AgentFollowService</value>
+        </property>
+
+        <property name="overloadEnabled" value="true"></property>
+    </bean>
+    
+    <bean id="changeManagerLogService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+        <property name="serviceUrl">
+            <value>http://customerservice.hzfh.com:8080/service-customer/changeManagerLog</value>
+        </property>
+        <property name="serviceInterface">
+            <value>com.hzfh.api.customer.service.ChangeManagerLogService</value>
+        </property>
+
+        <property name="overloadEnabled" value="true"></property>
+    </bean>
+
+
+
+    <!-- payment -->
+    <bean id="paymentAccountInformationService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+        <property name="serviceUrl">
+            <value>http://customerservice.hzfh.com:8080/service-customer/paymentAccountInformation</value>
+        </property>
+        <property name="serviceInterface">
+            <value>com.hzfh.api.customer.service.PaymentAccountInformationService</value>
+        </property>
+
+        <property name="overloadEnabled" value="true"></property>
+    </bean>
+	<bean id="paymentAccountOperService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+        <property name="serviceUrl">
+            <value>http://customerservice.hzfh.com:8080/service-customer/paymentAccountOper</value>
+        </property>
+        <property name="serviceInterface">
+            <value>com.hzfh.api.customer.service.PaymentAccountOperService</value>
+        </property>
+
+        <property name="overloadEnabled" value="true"></property>
+    </bean>
+	<bean id="paymentBankCodeService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+        <property name="serviceUrl">
+            <value>http://customerservice.hzfh.com:8080/service-customer/paymentBankCode</value>
+        </property>
+        <property name="serviceInterface">
+            <value>com.hzfh.api.customer.service.PaymentBankCodeService</value>
+        </property>
+
+        <property name="overloadEnabled" value="true"></property>
+    </bean>
+	<bean id="paymentBankInfoService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+        <property name="serviceUrl">
+            <value>http://customerservice.hzfh.com:8080/service-customer/paymentBankInfo</value>
+        </property>
+        <property name="serviceInterface">
+            <value>com.hzfh.api.customer.service.PaymentBankInfoService</value>
+        </property>
+
+        <property name="overloadEnabled" value="true"></property>
+    </bean>
+	<bean id="paymentMoneyChangeService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+        <property name="serviceUrl">
+            <value>http://customerservice.hzfh.com:8080/service-customer/paymentMoneyChange</value>
+        </property>
+        <property name="serviceInterface">
+            <value>com.hzfh.api.customer.service.PaymentMoneyChangeService</value>
+        </property>
+
+        <property name="overloadEnabled" value="true"></property>
+    </bean>
+	<bean id="paymentMoneyFreezeService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+        <property name="serviceUrl">
+            <value>http://customerservice.hzfh.com:8080/service-customer/paymentMoneyFreeze</value>
+        </property>
+        <property name="serviceInterface">
+            <value>com.hzfh.api.customer.service.PaymentMoneyFreezeService</value>
+        </property>
+
+        <property name="overloadEnabled" value="true"></property>
+    </bean>
+	<bean id="paymentMoneyRechargeService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+        <property name="serviceUrl">
+            <value>http://customerservice.hzfh.com:8080/service-customer/paymentMoneyRecharge</value>
+        </property>
+        <property name="serviceInterface">
+            <value>com.hzfh.api.customer.service.PaymentMoneyRechargeService</value>
+        </property>
+
+        <property name="overloadEnabled" value="true"></property>
+    </bean>
+	<bean id="paymentMoneyWithdrawService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+        <property name="serviceUrl">
+            <value>http://customerservice.hzfh.com:8080/service-customer/paymentMoneyWithdraw</value>
+        </property>
+        <property name="serviceInterface">
+            <value>com.hzfh.api.customer.service.PaymentMoneyWithdrawService</value>
+        </property>
+
+        <property name="overloadEnabled" value="true"></property>
+    </bean>
+	<bean id="paymentPayTypeService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+        <property name="serviceUrl">
+            <value>http://customerservice.hzfh.com:8080/service-customer/paymentPayType</value>
+        </property>
+        <property name="serviceInterface">
+            <value>com.hzfh.api.customer.service.PaymentPayTypeService</value>
+        </property>
+
+        <property name="overloadEnabled" value="true"></property>
+    </bean>
+	<bean id="paymentPlatformService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+        <property name="serviceUrl">
+            <value>http://customerservice.hzfh.com:8080/service-customer/paymentPlatform</value>
+        </property>
+        <property name="serviceInterface">
+            <value>com.hzfh.api.customer.service.PaymentPlatformService</value>
+        </property>
+
+        <property name="overloadEnabled" value="true"></property>
+    </bean>
+    
+    
+    
+    
+</beans>

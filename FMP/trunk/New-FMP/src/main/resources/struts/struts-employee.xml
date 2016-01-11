@@ -1,0 +1,1778 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+        "http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+    <package name="ajaxKnowledgeAttachment" extends="struts-error" namespace="/employee/knowledgeAttachment">
+        <action name="ajaxListKnowledgeAttachment" class="com.hzfh.fmp.controller.employee.ajax.AjaxKnowledgeAttachmentAction">
+            <result type="json">
+                <param name="includeProperties">
+                    resultList.*,
+                    pageSize, pageIndex, pageCount, recordCount
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+        <action name="ajaxSaveFilePath" class="com.hzfh.fmp.controller.employee.ajax.AjaxKnowledgeAttachmentAction" method="uploadFile">
+            <result type="json">
+                <param name="includeProperties">
+                    errCode,errDesc
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+        <action name="ajaxDeleteFile" class="com.hzfh.fmp.controller.employee.ajax.AjaxKnowledgeAttachmentAction" method="deleteFile">
+            <result type="json">
+                <param name="includeProperties">
+                    errCode,errDesc
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+        <action name="ajaxListFile" class="com.hzfh.fmp.controller.employee.ajax.AjaxKnowledgeAttachmentAction" method="getFileList">
+            <result type="json">
+                <param name="includeProperties">
+                    resultList.*,errCode,errDesc
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+    </package>
+     <package name="knowledgeBase" extends="struts-login" namespace="/employee/knowledgeBase">
+        <action name="list" class="com.hzfh.fmp.controller.employee.KnowledgeBaseAction">
+            <result>/employee/knowledgeBaseList.jsp</result>
+        </action>
+		<action name="edit" class="com.hzfh.fmp.controller.employee.KnowledgeBaseAddAction">
+            <result>/employee/knowledgeBaseAdd.jsp</result>
+        </action>
+        <action name="info" class="com.hzfh.fmp.controller.employee.KnowledgeBaseInfoAction">
+            <result>/employee/knowledgeBaseInfo.jsp</result>
+        </action>
+    </package>
+    <package name="ajaxKnowledgeBase" extends="json-default" namespace="/employee/knowledgeBase">
+        <action name="ajaxListKnowledgeBase" class="com.hzfh.fmp.controller.employee.ajax.AjaxKnowledgeBaseAction">
+             <result type="json">
+                <param name="includeProperties">
+                    resultList.*,
+                    pageSize, pageIndex, pageCount, recordCount
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result> 
+        </action>
+        <action name="ajaxEditKnowledgeBase" class="com.hzfh.fmp.controller.employee.ajax.AjaxKnowledgeBaseAction" method="edit">
+            <result type="json">
+                <param name="includeProperties">
+                    errCode,errDesc
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+		<action name="ajaxGetKnowledgeBase" class="com.hzfh.fmp.controller.employee.ajax.AjaxKnowledgeBaseAction" method="getInfoById">
+            <result type="json">
+                <param name="includeProperties">
+                    info.*,errCode,errDesc
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+    </package>
+    <package name="company" extends="struts-login" namespace="/employee/company">
+        <action name="list" class="com.hzfh.fmp.controller.employee.CompanyAction">
+            <result>/employee/companyList.jsp</result>
+        </action>
+        <action name="edit" class="com.hzfh.fmp.controller.employee.CompanyAddAction">
+            <result>/employee/companyAdd.jsp</result>
+        </action>
+        <action name="detail" class="com.hzfh.fmp.controller.employee.CompanyAddAction" method="executeDetail">
+            <result>/employee/companyDetail.jsp</result>
+        </action>
+    </package>
+    <package name="easyUICompany" extends="json-default" namespace="/employee/company">
+        <action name="easyUICompanyList" class="com.hzfh.fmp.controller.employee.easyUI.EasyUICompanyAction">
+            <result type="json">
+                <param name="includeProperties">
+                    rows.*,total
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+        <action name="ajaxGetCompany" class="com.hzfh.fmp.controller.employee.ajax.AjaxCompanyAction" method="getInfoById">
+            <result type="json">
+                <param name="includeProperties">
+                    info.*,errCode,errDesc
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+    </package>
+    <package name="department" extends="struts-login" namespace="/employee/department">
+        <action name="list" class="com.hzfh.fmp.controller.employee.DepartmentAction">
+            <result>/employee/departmentList.jsp</result>
+        </action>
+		<action name="edit" class="com.hzfh.fmp.controller.employee.DepartmentAddAction">
+            <result>/employee/departmentAdd.jsp</result>
+        </action>
+    </package>
+    <package name="ajaxDepartment" extends="struts-error" namespace="/employee/department">
+        <action name="easyUIDepartmentList" class="com.hzfh.fmp.controller.employee.easyUI.EasyUIDepartmentAction">
+            <result type="json">
+                <param name="includeProperties">
+                    rows.*,total
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+        <action name="ajaxGetDepartmentByDistrictNo" class="com.hzfh.fmp.controller.employee.ajax.AjaxDepartmentAction" method="getDepartmentByDistrictNo">
+            <result type="json">
+                <param name="includeProperties">
+                    resultList.*
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+        <action name="ajaxEditDepartment" class="com.hzfh.fmp.controller.employee.ajax.AjaxDepartmentAction" method="edit">
+            <result type="json">
+                <param name="includeProperties">
+                    errCode,errDesc
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+        
+        <action name="ajaxGetDepartment" class="com.hzfh.fmp.controller.employee.ajax.AjaxDepartmentAction" method="getInfoById">
+            <result type="json">
+                <param name="includeProperties">
+                    info.*,errCode,errDesc
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+        
+    </package>
+     <package name="extendProbationApplication" extends="struts-login" namespace="/employee/extendProbationApplication">
+        <action name="list" class="com.hzfh.fmp.controller.employee.ExtendProbationApplicationAction">
+            <result>/employee/extendProbationApplicationList.jsp</result>
+        </action>
+		<action name="edit" class="com.hzfh.fmp.controller.employee.ExtendProbationApplicationAddAction">
+            <result>/employee/extendProbationApplicationAdd.jsp</result>
+        </action>
+    </package>
+     <package name="ajaxExtendProbationApplication" extends="struts-error" namespace="/employee/extendProbationApplication">
+        <action name="ajaxListExtendProbationApplication" class="com.hzfh.fmp.controller.employee.ajax.AjaxExtendProbationApplicationAction">
+            <result type="json">
+                <param name="includeProperties">
+                    resultList.*,
+                    pageSize, pageIndex, pageCount, recordCount
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+        <action name="ajaxEditExtendProbationApplication" class="com.hzfh.fmp.controller.employee.ajax.AjaxExtendProbationApplicationAction" method="edit">
+            <result type="json">
+                <param name="includeProperties">
+                    errCode,errDesc
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+		<action name="ajaxGetExtendProbationApplication" class="com.hzfh.fmp.controller.employee.ajax.AjaxExtendProbationApplicationAction" method="getInfoById">
+            <result type="json">
+                <param name="includeProperties">
+                    info.*,errCode,errDesc,empName
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+    </package>
+    <package name="deptYearNeed" extends="struts-login" namespace="/employee/deptYearNeed">
+        <action name="list" class="com.hzfh.fmp.controller.employee.DeptYearNeedAction">
+            <result>/employee/deptYearNeedList.jsp</result>
+        </action>
+		<action name="edit" class="com.hzfh.fmp.controller.employee.DeptYearNeedAddAction">
+            <result>/employee/deptYearNeedAdd.jsp</result>
+        </action>
+    </package>
+    <package name="ajaxDeptYearNeed" extends="struts-error" namespace="/employee/deptYearNeed">
+        <action name="ajaxListDeptYearNeed" class="com.hzfh.fmp.controller.employee.ajax.AjaxDeptYearNeedAction" >
+            <result type="json">
+                <param name="includeProperties">
+                    resultList.*,
+                    pageSize, pageIndex, pageCount, recordCount
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+        <action name="ajaxEditDeptYearNeed" class="com.hzfh.fmp.controller.employee.ajax.AjaxDeptYearNeedAction" method="edit">
+            <result type="json">
+                <param name="includeProperties">
+                    errCode,errDesc
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+		<action name="ajaxGetDeptYearNeed" class="com.hzfh.fmp.controller.employee.ajax.AjaxDeptYearNeedAction" method="getInfoById">
+            <result type="json">
+                <param name="includeProperties">
+                    info.*,deptYearNeedDetails.*,errCode,errDesc,empName
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+    </package> 
+    <package name="deptYearNeedDetail" extends="struts-login" namespace="/employee/deptYearNeedDetail">
+        <action name="list" class="com.hzfh.fmp.controller.employee.DeptYearNeedDetailAction">
+            <result>/employee/deptYearNeedDetailList.jsp</result>
+        </action>
+		<action name="edit" class="com.hzfh.fmp.controller.employee.DeptYearNeedDetailAddAction">
+            <result>/employee/deptYearNeedDetailAdd.jsp</result>
+        </action>
+    </package>
+    <package name="ajaxDeptYearNeedDetail" extends="struts-error" namespace="/employee/deptYearNeedDetail">
+        <action name="ajaxListDeptYearNeedDetail" class="com.hzfh.fmp.controller.employee.ajax.AjaxDeptYearNeedDetailAction">
+                 <result>/employee/deptYearNeedDetailAdd.jsp</result>
+        </action>
+        <action name="ajaxEditDeptYearNeedDetail" class="com.hzfh.fmp.controller.employee.ajax.AjaxDeptYearNeedDetailAction" method="edit">
+            <result type="json">
+                <param name="includeProperties">
+                    errCode,errDesc
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+		<action name="ajaxGetDeptYearNeedDetail" class="com.hzfh.fmp.controller.employee.ajax.AjaxDeptYearNeedDetailAction" method="getInfoById">
+            <result type="json">
+                <param name="includeProperties">
+                    info.*,errCode,errDesc
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+    </package>
+    
+     <package name="yearNeed" extends="struts-login" namespace="/employee/yearNeed">
+        <action name="list" class="com.hzfh.fmp.controller.employee.YearNeedAction">
+            <result>/employee/yearNeedList.jsp</result>
+        </action>
+		<action name="edit" class="com.hzfh.fmp.controller.employee.YearNeedAddAction">
+            <result>/employee/yearNeedAdd.jsp</result>
+        </action>
+    </package>
+     <package name="ajaxYearNeed" extends="struts-error" namespace="/employee/yearNeed">
+        <action name="ajaxListYearNeed" class="com.hzfh.fmp.controller.employee.ajax.AjaxYearNeedAction" >
+           <!--  <result type="json">
+                <param name="includeProperties">
+                    yearNeeds.*,
+                    yearNeedDetails.*, recordCount
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result> -->
+              <result>/employee/yearNeedDetailList.jsp</result>
+        </action>
+    <!--    <action name="ajaxEditDeptYearNeed" class="com.hzfh.fmp.controller.employee.ajax.AjaxDeptYearNeedAction" method="edit">
+            <result type="json">
+                <param name="includeProperties">
+                    errCode,errDesc
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+		<action name="ajaxGetDeptYearNeed" class="com.hzfh.fmp.controller.employee.ajax.AjaxDeptYearNeedAction" method="getInfoById">
+            <result type="json">
+                <param name="includeProperties">
+                    info.*,errCode,errDesc
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+    </package> 
+    <package name="deptYearNeedDetail" extends="struts-login" namespace="/employee/deptYearNeedDetail">
+        <action name="list" class="com.hzfh.fmp.controller.employee.DeptYearNeedDetailAction">
+            <result>/employee/deptYearNeedDetailList.jsp</result>
+        </action>
+		<action name="edit" class="com.hzfh.fmp.controller.employee.DeptYearNeedDetailAddAction">
+            <result>/employee/deptYearNeedDetailAdd.jsp</result>
+        </action>
+    </package>
+    <package name="ajaxDeptYearNeedDetail" extends="struts-error" namespace="/employee/deptYearNeedDetail">
+        <action name="ajaxListDeptYearNeedDetail" class="com.hzfh.fmp.controller.employee.ajax.AjaxDeptYearNeedDetailAction">
+                 <result>/employee/deptYearNeedDetailAdd.jsp</result>
+        </action>
+        <action name="ajaxEditDeptYearNeedDetail" class="com.hzfh.fmp.controller.employee.ajax.AjaxDeptYearNeedDetailAction" method="edit">
+            <result type="json">
+                <param name="includeProperties">
+                    errCode,errDesc
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+		<action name="ajaxGetDeptYearNeedDetail" class="com.hzfh.fmp.controller.employee.ajax.AjaxDeptYearNeedDetailAction" method="getInfoById">
+            <result type="json">
+                <param name="includeProperties">
+                    info.*,errCode,errDesc
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>-->
+    </package> 
+
+    <package name="empBrokerageLadder" extends="struts-login" namespace="/employee/empBrokerageLadder">
+        <action name="list" class="com.hzfh.fmp.controller.employee.EmpBrokerageLadderAction">
+            <result>/employee/empBrokerageLadderList.jsp</result>
+        </action>
+    </package>
+    <package name="ajaxEmpBrokerageLadder" extends="struts-error" namespace="/employee/empBrokerageLadder">
+        <action name="ajaxListEmpBrokerageLadder" class="com.hzfh.fmp.controller.employee.ajax.AjaxEmpBrokerageLadderAction">
+            <result type="json">
+                <param name="includeProperties">
+                    resultList.*,
+                    pageSize, pageIndex, pageCount, recordCount
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+        <action name="ajaxEditEmpBrokerageLadder" class="com.hzfh.fmp.controller.employee.ajax.AjaxEmpBrokerageLadderAction" method="edit">
+            <result type="json">
+                <param name="includeProperties">
+                    errCode,errDesc
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+    </package>
+    <package name="employee" extends="struts-login" namespace="/employee/employee">
+        <action name="list" class="com.hzfh.fmp.controller.employee.EmployeeAction">
+            <result>/employee/employeeList.jsp</result>
+        </action>
+        <action name="edit" class="com.hzfh.fmp.controller.employee.EmployeeAddAction">
+        	<result>/employee/employeeAdd.jsp</result>
+        </action>
+    </package>
+    <package name="ajaxbtnAddNew" extends="struts-error" namespace="/employee/employee">
+        <action name="ajaxPositive" class="com.hzfh.fmp.controller.employee.ajax.AjaxEmployeeAction" method="positive">
+            <result type="json">
+                <param name="includeProperties">
+                    errCode,errDesc
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+        <action name="ajaxExtendEmp" class="com.hzfh.fmp.controller.employee.ajax.AjaxEmployeeAction" method="extendEmp">
+            <result type="json">
+                <param name="includeProperties">
+                    employee.*,errCode,errDesc
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+        <!-- <action name="ajaxListEmployee" class="com.hzfh.fmp.controller.employee.ajax.AjaxEmployeeAction">
+            <result type="json">
+                <param name="includeProperties">
+                    resultList.*,
+                    pageSize, pageIndex, pageCount, recordCount
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action> -->
+        <action name="easyUIEmployeeList" class="com.hzfh.fmp.controller.employee.easyUI.EasyUIEmployeeAction">
+            <result type="json">
+                <param name="includeProperties">
+                    rows.*,total
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+        <action name="ajaxEditEmployee" class="com.hzfh.fmp.controller.employee.ajax.AjaxEmployeeAction" method="edit">
+            <result type="json">
+                <param name="includeProperties">
+                    errCode,errDesc
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+        <action name="ajaxGetEmployee" class="com.hzfh.fmp.controller.employee.ajax.AjaxEmployeeAction" method="getInfoById">
+            <result type="json">
+                <param name="includeProperties">
+                    info.*,errCode,errDesc
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+        <action name="ajaxGetEmployeeForIndex" class="com.hzfh.fmp.controller.employee.ajax.AjaxEmployeeAction" method="getEmployeeForIndex">
+            <result type="json">
+                <param name="includeProperties">
+                    info.*,errCode,errDesc
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+       <!-- ajaxGetEmployeeById -->
+       <action name="ajaxGetEmployeeById" class="com.hzfh.fmp.controller.employee.ajax.AjaxEmployeeAction" method="ajaxGetEmployeeById">
+            <result type="json">
+                <param name="includeProperties">
+                    errCode,errDesc,employee.*
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+        <action name="ajaxGetEmpListByDept" class="com.hzfh.fmp.controller.employee.ajax.AjaxEmployeeAction" method="ajaxGetEmpListByDept">
+            <result type="json">
+                <param name="includeProperties">
+                    resultList.*
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+        <action name="ajaxGetEmpListByDeptAndStatus" class="com.hzfh.fmp.controller.employee.ajax.AjaxEmployeeAction" method="ajaxGetEmpListByDeptAndStatus">
+            <result type="json">
+                <param name="includeProperties">
+                    resultList.*
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+
+        <action name="ajaxCheckUserExist"  class="com.hzfh.fmp.controller.employee.ajax.AjaxEmployeeAction" method="checkUserName">
+            <result type="json">
+                <param name="includeProperties">
+                    message.*,msgType.*,msgDescribe.*
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+        <action name="ajaxUpdateCheck" class="com.hzfh.fmp.controller.employee.ajax.AjaxEmployeeAction" method="updateCheck">
+            <result type="json">
+                <param name="includeProperties">
+                    errCode,errDesc
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+
+        <action name="ajaxGetInfoByCondition" class="com.hzfh.fmp.controller.employee.ajax.AjaxEmployeeAction" method="ajaxGetInfoByCondition">
+            <result type="json">
+                <param name="includeProperties">
+                    info.*,errCode,errDesc
+                </param>
+                <param name="noCache">true</param>s
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+    </package>
+    <package name="ajaxEmployeeDetail" extends="struts-error" namespace="/employee/employeeDetail">
+        <action name="ajaxEditEmployeeDetail" class="com.hzfh.fmp.controller.employee.ajax.AjaxEmployeeDetailAction" method="edit">
+            <result type="json">
+                <param name="includeProperties">
+                    errCode,errDesc
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+        <action name="ajaxGetEmployeeDetail" class="com.hzfh.fmp.controller.employee.ajax.AjaxEmployeeDetailAction" method="getInfoById">
+            <result type="json">
+                <param name="includeProperties">
+                    info.*,errCode,errDesc
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+    </package>
+    <package name="ajaxEmployeeEducation" extends="struts-error" namespace="/employee/employeeEducation">
+        <action name="ajaxEditEmployeeEducation" class="com.hzfh.fmp.controller.employee.ajax.AjaxEmployeeEducationAction" method="edit">
+            <result type="json">
+                <param name="includeProperties">
+                    errCode,errDesc
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+        <action name="ajaxGetEmployeeEducation" class="com.hzfh.fmp.controller.employee.ajax.AjaxEmployeeEducationAction" method="getInfoById">
+            <result type="json">
+                <param name="includeProperties">
+                    employeeEducationInfoList.*,errCode,errDesc
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+    </package>
+    <package name="ajaxFamilyMembers" extends="struts-error" namespace="/employee/familyMembers">
+        <action name="ajaxEditFamilyMembers" class="com.hzfh.fmp.controller.employee.ajax.AjaxFamilyMembersAction" method="edit">
+            <result type="json">
+                <param name="includeProperties">
+                    errCode,errDesc
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+        <action name="ajaxGetFamilyMembers" class="com.hzfh.fmp.controller.employee.ajax.AjaxFamilyMembersAction" method="getInfoById">
+            <result type="json">
+                <param name="includeProperties">
+                    familyMembersInfoList.*,errCode,errDesc
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+    </package>
+    <package name="ajaxWorkExperience" extends="struts-error" namespace="/employee/workExperience">
+        <action name="ajaxEditWorkExperience" class="com.hzfh.fmp.controller.employee.ajax.AjaxWorkExperienceAction" method="edit">
+            <result type="json">
+                <param name="includeProperties">
+                    errCode,errDesc
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+        <action name="ajaxGetWorkExperience" class="com.hzfh.fmp.controller.employee.ajax.AjaxWorkExperienceAction" method="getInfoById">
+            <result type="json">
+                <param name="includeProperties">
+                    workExperienceInfoList.*,errCode,errDesc
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+    </package>
+    <package name="ajaxEmployeeOtherInfo" extends="struts-error" namespace="/employee/employeeOtherInfo">
+        <action name="ajaxEditEmployeeOtherInfo" class="com.hzfh.fmp.controller.employee.ajax.AjaxEmployeeOtherInfoAction" method="edit">
+            <result type="json">
+                <param name="includeProperties">
+                    errCode,errDesc
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+        <action name="ajaxGetEmployeeOtherInfo" class="com.hzfh.fmp.controller.employee.ajax.AjaxEmployeeOtherInfoAction" method="getInfoById">
+            <result type="json">
+                <param name="includeProperties">
+                    empOtherInfo.*,certificateInfoList.*,errCode,errDesc
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+    </package>
+    <!--<package name="interviewEvaluationRecord" extends="struts-login" namespace="/employee/interviewEvaluationRecord">
+        <action name="list" class="com.hzfh.fmp.controller.employee.InterviewEvaluationRecordAction">
+            <result>/employee/interviewEvaluationRecordList.jsp</result>
+        </action>
+        <action name="edit" class="com.hzfh.fmp.controller.employee.InterviewEvaluationRecordAddAction">
+            <result>/employee/interviewEvaluationRecordAdd.jsp</result>
+        </action>
+    </package>
+    <package name="other" extends="struts-login" namespace="/employee/other">
+        <action name="list" class="com.hzfh.fmp.controller.employee.OtherAction">
+            <result>/employee b/otherList.jsp</result>
+        </action>
+    </package>
+    <package name="ajaxOther" extends="struts-error" namespace="/employee/other">
+        <action name="ajaxListOther" class="com.hzfh.fmp.controller.employee.ajax.AjaxOtherAction">
+            <result type="json">
+                <param name="includeProperties">
+                    resultList.*,
+                    pageSize, pageIndex, pageCount, recordCount
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+        <action name="ajaxEditOther" class="com.hzfh.fmp.controller.employee.ajax.AjaxOtherAction" method="edit">
+            <result type="json">
+                <param name="includeProperties">
+                    errCode,errDesc
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+    </package>--><!--<package name="interviewEvaluationRecord" extends="struts-login" namespace="/employee/interviewEvaluationRecord">
+        <action name="list" class="com.hzfh.fmp.controller.employee.InterviewEvaluationRecordAction">
+            <result>/employee/interviewEvaluationRecordList.jsp</result>
+        </action>
+        <action name="edit" class="com.hzfh.fmp.controller.employee.InterviewEvaluationRecordAddAction">
+            <result>/employee/interviewEvaluationRecordAdd.jsp</result>
+        </action>
+    </package>
+    <package name="other" extends="struts-login" namespace="/employee/other">
+        <action name="list" class="com.hzfh.fmp.controller.employee.OtherAction">
+            <result>/employee/otherList.jsp</result>
+        </action>
+    </package>
+    <package name="ajaxOther" extends="struts-error" namespace="/employee/other">
+        <action name="ajaxListOther" class="com.hzfh.fmp.controller.employee.ajax.AjaxOtherAction">
+            <result type="json">
+                <param name="includeProperties">
+                    resultList.*,
+                    pageSize, pageIndex, pageCount, recordCount
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+        <action name="ajaxEditOther" class="com.hzfh.fmp.controller.employee.ajax.AjaxOtherAction" method="edit">
+            <result type="json">
+                <param name="includeProperties">
+                    errCode,errDesc
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+    </package>-->
+    <package name="overtime" extends="struts-login" namespace="/employee/overtime">
+        <action name="list" class="com.hzfh.fmp.controller.employee.OvertimeAction">
+            <result>/employee/overtimeList.jsp</result>
+        </action>
+    </package>
+    <package name="ajaxOvertime" extends="struts-error" namespace="/employee/overtime">
+        <action name="ajaxListOvertime" class="com.hzfh.fmp.controller.employee.ajax.AjaxOvertimeAction">
+            <result type="json">
+                <param name="includeProperties">
+                    resultList.*,
+                    pageSize, pageIndex, pageCount, recordCount
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+        <action name="ajaxEditOvertime" class="com.hzfh.fmp.controller.employee.ajax.AjaxOvertimeAction" method="edit">
+            <result type="json">
+                <param name="includeProperties">
+                    errCode,errDesc
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+    </package>
+    <package name="tempRecruitNeed" extends="struts-login" namespace="/employee/tempRecruitNeed">
+        <action name="list" class="com.hzfh.fmp.controller.employee.TempRecruitNeedAction">
+            <result>/employee/tempRecruitNeedList.jsp</result>
+        </action>
+		<action name="edit" class="com.hzfh.fmp.controller.employee.TempRecruitNeedAddAction">
+            <result>/employee/tempRecruitNeedAdd.jsp</result>
+        </action>
+    </package>
+    <package name="ajaxTempRecruitNeed" extends="struts-error" namespace="/employee/tempRecruitNeed">
+        <action name="ajaxListTempRecruitNeed" class="com.hzfh.fmp.controller.employee.ajax.AjaxTempRecruitNeedAction">
+            <result type="json">
+                <param name="includeProperties">
+                    resultList.*,
+                    pageSize, pageIndex, pageCount, recordCount
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+        <action name="ajaxEditTempRecruitNeed" class="com.hzfh.fmp.controller.employee.ajax.AjaxTempRecruitNeedAction" method="edit">
+            <result type="json">
+                <param name="includeProperties">
+                    errCode,errDesc
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+		<action name="ajaxGetTempRecruitNeed" class="com.hzfh.fmp.controller.employee.ajax.AjaxTempRecruitNeedAction" method="getInfoById">
+            <result type="json">
+                <param name="includeProperties">
+                    info.*,detail.*,errCode,errDesc,comments.*,empName
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+    </package>
+    <package name="recruitFollow" extends="struts-login" namespace="/employee/recruitFollow">
+        <action name="list" class="com.hzfh.fmp.controller.employee.RecruitFollowAction">
+            <result>/employee/recruitFollowList.jsp</result>
+        </action>
+		<action name="edit" class="com.hzfh.fmp.controller.employee.RecruitFollowAddAction">
+            <result>/employee/recruitFollowAdd.jsp</result>
+        </action>
+        <action name="detail" class="com.hzfh.fmp.controller.employee.RecruitFollowAddAction" method="executeDetail">
+            <result>/employee/recruitFollowDetail.jsp</result>
+        </action>
+    </package>
+    <package name="ajaxRecruitFollow" extends="struts-error" namespace="/employee/recruitFollow">
+        <action name="ajaxListRecruitFollow" class="com.hzfh.fmp.controller.employee.ajax.AjaxRecruitFollowAction">
+            <result type="json">
+                <param name="includeProperties">
+                    resultList.*,
+                    pageSize, pageIndex, pageCount, recordCount
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+        <action name="ajaxEditRecruitFollow" class="com.hzfh.fmp.controller.employee.ajax.AjaxRecruitFollowAction" method="edit">
+            <result type="json">
+                <param name="includeProperties">
+                    errCode,errDesc
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+		<action name="ajaxGetRecruitFollow" class="com.hzfh.fmp.controller.employee.ajax.AjaxRecruitFollowAction" method="getInfoById">
+            <result type="json">
+                <param name="includeProperties">
+                    info.*,errCode,errDesc
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+    </package>
+    <package name="payment" extends="struts-login" namespace="/employee/payment">
+        <action name="list" class="com.hzfh.fmp.controller.employee.PaymentAction">
+            <result>/employee/paymentList.jsp</result>
+        </action>
+    </package>
+    <package name="ajaxPayment" extends="struts-error" namespace="/employee/payment">
+        <action name="ajaxListPayment" class="com.hzfh.fmp.controller.employee.ajax.AjaxPaymentAction">
+            <result type="json">
+                <param name="includeProperties">
+                    resultList.*,
+                    pageSize, pageIndex, pageCount, recordCount
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+        <action name="ajaxEditPayment" class="com.hzfh.fmp.controller.employee.ajax.AjaxPaymentAction" method="edit">
+            <result type="json">
+                <param name="includeProperties">
+                    errCode,errDesc
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+    </package>
+    <package name="position" extends="struts-login" namespace="/employee/position">
+        <action name="list" class="com.hzfh.fmp.controller.employee.PositionAction">
+            <result>/employee/positionList.jsp</result>
+        </action>
+    </package>
+    <package name="ajaxPosition" extends="struts-error" namespace="/employee/position">
+        <action name="ajaxListPosition" class="com.hzfh.fmp.controller.employee.ajax.AjaxPositionAction">
+            <result type="json">
+                <param name="includeProperties">
+                    resultList.*,
+                    pageSize, pageIndex, pageCount, recordCount
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+        <action name="ajaxEditPosition" class="com.hzfh.fmp.controller.employee.ajax.AjaxPositionAction" method="edit">
+            <result type="json">
+                <param name="includeProperties">
+                    errCode,errDesc
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+    </package>
+    <package name="positionLevel" extends="struts-login" namespace="/employee/positionLevel">
+        <action name="list" class="com.hzfh.fmp.controller.employee.PositionLevelAction">
+            <result>/employee/positionLevelList.jsp</result>
+        </action>
+    </package>
+    <package name="ajaxPositionLevel" extends="struts-error" namespace="/employee/positionLevel">
+        <action name="ajaxListPositionLevel" class="com.hzfh.fmp.controller.employee.ajax.AjaxPositionLevelAction">
+            <result type="json">
+                <param name="includeProperties">
+                    resultList.*,
+                    pageSize, pageIndex, pageCount, recordCount
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+        <action name="ajaxEditPositionLevel" class="com.hzfh.fmp.controller.employee.ajax.AjaxPositionLevelAction" method="edit">
+            <result type="json">
+                <param name="includeProperties">
+                    errCode,errDesc
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+    </package>
+    <!--<package name="sign" extends="struts-login" namespace="/employee/sign">-->
+        <!--<action name="list" class="com.hzfh.fmp.controller.employee.SignAction">-->
+            <!--<result>/employee/signList.jsp</result>-->
+        <!--</action>-->
+    <!--</package>-->
+    <!--<package name="ajaxSign" extends="struts-error" namespace="/employee/sign">-->
+        <!--<action name="ajaxListSign" class="com.hzfh.fmp.controller.employee.ajax.AjaxSignAction">-->
+            <!--<result type="json">-->
+                <!--<param name="includeProperties">-->
+                    <!--resultList.*,-->
+                    <!--pageSize, pageIndex, pageCount, recordCount-->
+                <!--</param>-->
+                <!--<param name="noCache">true</param>-->
+                <!--<param name="ignoreHierarchy">false</param>-->
+            <!--</result>-->
+        <!--</action>-->
+        <!--<action name="ajaxEditSign" class="com.hzfh.fmp.controller.employee.ajax.AjaxSignAction" method="edit">-->
+            <!--<result type="json">-->
+                <!--<param name="includeProperties">-->
+                    <!--errCode,errDesc-->
+                <!--</param>-->
+                <!--<param name="noCache">true</param>-->
+                <!--<param name="ignoreHierarchy">false</param>-->
+            <!--</result>-->
+        <!--</action>-->
+    <!--</package>-->
+    <package name="welfare" extends="struts-login" namespace="/employee/welfare">
+        <action name="list" class="com.hzfh.fmp.controller.employee.WelfareAction">
+            <result>/employee/welfareList.jsp</result>
+        </action>
+    </package>
+    <package name="ajaxWelfare" extends="struts-error" namespace="/employee/welfare">
+        <action name="ajaxListWelfare" class="com.hzfh.fmp.controller.employee.ajax.AjaxWelfareAction">
+            <result type="json">
+                <param name="includeProperties">
+                    resultList.*,
+                    pageSize, pageIndex, pageCount, recordCount
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+        <action name="ajaxEditWelfare" class="com.hzfh.fmp.controller.employee.ajax.AjaxWelfareAction" method="edit">
+            <result type="json">
+                <param name="includeProperties">
+                    errCode,errDesc
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+    </package>
+
+	<package name="achievementCommission" extends="struts-login" namespace="/employee/achievementCommission">
+        <action name="list" class="com.hzfh.fmp.controller.employee.AchievementCommissionAction">
+            <result>/employee/achievementCommissionList.jsp</result>
+        </action>
+    </package>
+    <package name="ajaxAchievementCommission" extends="struts-error" namespace="/employee/achievementCommission">
+        <action name="ajaxListAchievementCommission" class="com.hzfh.fmp.controller.employee.ajax.AjaxAchievementCommissionAction">
+            <result type="json">
+                <param name="includeProperties">
+                    resultList.*,
+                    pageSize, pageIndex, pageCount, recordCount
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+        <action name="ajaxEditAchievementCommission" class="com.hzfh.fmp.controller.employee.ajax.AjaxAchievementCommissionAction" method="edit">
+            <result type="json">
+                <param name="includeProperties">
+                    errCode,errDesc
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+        <action name="ajaxExportExcel"
+			class="com.hzfh.fmp.controller.employee.ajax.AjaxAchievementCommissionAction"
+			method="exportExcel">
+		</action>
+        
+    </package>
+    
+    <!--subsidy start  -->
+    <package name="subsidy" extends="struts-login" namespace="/employee/subsidy">
+        <action name="list" class="com.hzfh.fmp.controller.employee.SubsidyAction">
+            <result>/employee/subsidyList.jsp</result>
+        </action>
+    </package>
+    <package name="ajaxSubsidy" extends="struts-error" namespace="/employee/subsidy">
+        <action name="ajaxListSubsidy" class="com.hzfh.fmp.controller.employee.ajax.AjaxSubsidyAction">
+            <result type="json">
+                <param name="includeProperties">
+                    resultList.*,
+                    pageSize, pageIndex, pageCount, recordCount
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+        <action name="ajaxEditSubsidy" class="com.hzfh.fmp.controller.employee.ajax.AjaxSubsidyAction" method="edit">
+            <result type="json">
+                <param name="includeProperties">
+                    errCode,errDesc
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+		<action name="ajaxGetSubsidy" class="com.hzfh.fmp.controller.employee.ajax.AjaxSubsidyAction" method="getInfoById">
+            <result type="json">
+                <param name="includeProperties">
+                    info.*,errCode,errDesc
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+		<action name="ajaxGetInfoByEmpNoAndSendTime" class="com.hzfh.fmp.controller.employee.ajax.AjaxSubsidyAction" method="getInfoByEmpNoAndSendTime">
+            <result type="json">
+                <param name="includeProperties">
+                    subsidyList.*,errCode,errDesc,deptName,positionName,source
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+         <action name="ajaxExportExcel"
+			class="com.hzfh.fmp.controller.employee.ajax.AjaxSubsidyAction"
+			method="exportExcel">
+		</action>
+    </package>
+    <package name="subsidyTotal" extends="struts-login" namespace="/employee/subsidyTotal">
+        <action name="list" class="com.hzfh.fmp.controller.employee.SubsidyTotalAction">
+            <result>/employee/subsidyTotalList.jsp</result>
+        </action>
+		<action name="edit" class="com.hzfh.fmp.controller.employee.SubsidyTotalAddAction">
+            <result>/employee/subsidyTotalAdd.jsp</result>
+        </action>
+    </package>
+    <package name="ajaxSubsidyTotal" extends="struts-error" namespace="/employee/subsidyTotal">
+        <action name="ajaxListSubsidyTotal" class="com.hzfh.fmp.controller.employee.ajax.AjaxSubsidyTotalAction">
+            <result type="json">
+                <param name="includeProperties">
+                    resultList.*,
+                    pageSize, pageIndex, pageCount, recordCount
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+        <action name="ajaxEditSubsidyTotal" class="com.hzfh.fmp.controller.employee.ajax.AjaxSubsidyTotalAction" method="edit">
+            <result type="json">
+                <param name="includeProperties">
+                    errCode,errDesc,empNo
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+		<action name="ajaxGetSubsidyTotal" class="com.hzfh.fmp.controller.employee.ajax.AjaxSubsidyTotalAction" method="getInfoById">
+            <result type="json">
+                <param name="includeProperties">
+                    info.*,errCode,errDesc
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+		<action name="ajaxUpdateIsExamine" class="com.hzfh.fmp.controller.employee.ajax.AjaxSubsidyTotalAction" method="updateIsExamine">
+            <result type="json">
+                <param name="includeProperties">
+                    info.*,errCode,errDesc
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+        <action name="ajaxExportExcel"
+			class="com.hzfh.fmp.controller.employee.ajax.AjaxSubsidyTotalAction"
+			method="exportExcel">
+		</action>
+        <!-- <action name="ajaxCheckAliasExist" class="com.hzfh.fmp.controller.employee.ajax.AjaxSubsidyTotalAction" method="checkAliasExist">
+            <result type="json">
+                <param name="includeProperties">
+                    errCode,errDesc
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action> -->
+
+
+    </package>
+    <!--subsidy end  -->
+    
+    <!-- recruitAskRecord strat -->
+    <package name="recruitAskRecord" extends="struts-login" namespace="/employee/recruitAskRecord">
+        <action name="list" class="com.hzfh.fmp.controller.employee.RecruitAskRecordAction">
+            <result>/employee/recruitAskRecordList.jsp</result>
+        </action>
+		<action name="edit" class="com.hzfh.fmp.controller.employee.RecruitAskRecordAddAction">
+            <result>/employee/recruitAskRecordAdd.jsp</result>
+        </action>
+    </package>
+    <package name="ajaxRecruitAskRecord" extends="struts-error" namespace="/employee/recruitAskRecord">
+        <action name="ajaxListRecruitAskRecord" class="com.hzfh.fmp.controller.employee.ajax.AjaxRecruitAskRecordAction">
+            <result type="json">
+                <param name="includeProperties">
+                    resultList.*,
+                    pageSize, pageIndex, pageCount, recordCount
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+        <action name="ajaxEditRecruitAskRecord" class="com.hzfh.fmp.controller.employee.ajax.AjaxRecruitAskRecordAction" method="edit">
+            <result type="json">
+                <param name="includeProperties">
+                    errCode,errDesc,inEmpName
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+        <action name="ajaxSms" class="com.hzfh.fmp.controller.employee.ajax.AjaxRecruitAskRecordAction" method="sms">
+            <result type="json">
+                <param name="includeProperties">
+                    errCode,errDesc,inEmpName
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+		<action name="ajaxGetRecruitAskRecord" class="com.hzfh.fmp.controller.employee.ajax.AjaxRecruitAskRecordAction" method="getInfoById">
+            <result type="json">
+                <param name="includeProperties">
+                    info.*,errCode,errDesc,inEmpName
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+        <action name="ajaxExportExcel"
+			class="com.hzfh.fmp.controller.employee.ajax.AjaxRecruitAskRecordAction"
+			method="exportExcel">
+		</action>
+    </package>
+    <package name="ajaxRecruitAskRecordAttachment" extends="struts-error" namespace="/employee/recruitAskRecordAttachment">
+        <action name="ajaxListRecruitAskRecordAttachment" class="com.hzfh.fmp.controller.employee.ajax.AjaxRecruitAskRecordAction">
+            <result type="json">
+                <param name="includeProperties">
+                    resultList.*,
+                    pageSize, pageIndex, pageCount, recordCount
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+        <action name="ajaxSaveFilePath" class="com.hzfh.fmp.controller.employee.ajax.AjaxRecruitAskRecordAction" method="uploadFile">
+            <result type="json">
+                <param name="includeProperties">
+                    errCode,errDesc
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+        <action name="ajaxDeleteFile" class="com.hzfh.fmp.controller.employee.ajax.AjaxRecruitAskRecordAction" method="deleteFile">
+            <result type="json">
+                <param name="includeProperties">
+                    errCode,errDesc,fileName
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+        <action name="ajaxListFile" class="com.hzfh.fmp.controller.employee.ajax.AjaxRecruitAskRecordAction" method="getFileList">
+            <result type="json">
+                <param name="includeProperties">
+                    recruitAskRecordFile.*,errCode,errDesc
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+    </package>
+    <!-- recruitAskRecord end -->
+    
+    <!-- interviewEvaluationRecord strat -->
+    <package name="interviewEvaluationRecord" extends="struts-login" namespace="/employee/interviewEvaluationRecord">
+        <action name="list" class="com.hzfh.fmp.controller.employee.InterviewEvaluationRecordAction">
+            <result>/employee/interviewEvaluationRecordList.jsp</result>
+        </action>
+		<action name="edit" class="com.hzfh.fmp.controller.employee.InterviewEvaluationRecordAddAction">
+            <result>/employee/interviewEvaluationRecordAdd.jsp</result>
+        </action>
+    </package>
+    <package name="ajaxInterviewEvaluationRecord" extends="struts-error" namespace="/employee/interviewEvaluationRecord">
+        <action name="ajaxListInterviewEvaluationRecord" class="com.hzfh.fmp.controller.employee.ajax.AjaxInterviewEvaluationRecordAction">
+            <result type="json">
+                <param name="includeProperties">
+                    resultList.*,
+                    pageSize, pageIndex, pageCount, recordCount
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+        <action name="ajaxEditInterviewEvaluationRecord" class="com.hzfh.fmp.controller.employee.ajax.AjaxInterviewEvaluationRecordAction" method="edit">
+            <result type="json">
+                <param name="includeProperties">
+                    errCode,errDesc
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+		<action name="ajaxGetInterviewEvaluationRecord" class="com.hzfh.fmp.controller.employee.ajax.AjaxInterviewEvaluationRecordAction" method="getInfoById">
+            <result type="json">
+                <param name="includeProperties">
+                    info.*,errCode,errDesc
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+		<action name="ajaxGetInfoListByName" class="com.hzfh.fmp.controller.employee.ajax.AjaxInterviewEvaluationRecordAction" method="getInfoListByName">
+            <result>/employee/interviewEvaluationConTent.jsp</result>
+        </action>
+        
+    </package>
+    <!--interviewEvaluationRecord end -->
+
+    <package name="empCompilePlan" extends="struts-login" namespace="/employee/empCompilePlan">
+        <action name="list" class="com.hzfh.fmp.controller.employee.EmpCompilePlanAction">
+            <result>/employee/empCompilePlanList.jsp</result>
+        </action>
+    </package>
+    <package name="ajaxEmpCompilePlan" extends="struts-error" namespace="/employee/empCompilePlan">
+        <action name="ajaxListEmpCompilePlan" class="com.hzfh.fmp.controller.employee.ajax.AjaxEmpCompilePlanAction">
+            <result type="json">
+                <param name="includeProperties">
+                    resultList.*,
+                    pageSize, pageIndex, pageCount, recordCount
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+        <action name="ajaxExportExcel" class="com.hzfh.fmp.controller.employee.ajax.AjaxEmpCompilePlanAction" method="exportExcel">
+            <result type="json">
+                <param name="includeProperties">
+                    resultList.*,
+                    pageSize, pageIndex, pageCount, recordCount
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+    </package>
+    <package name="ajaxEmployeeInformation" extends="struts-error" namespace="/employee/employeeInformation">
+        <action name="ajaxExportExcel" class="com.hzfh.fmp.controller.employee.ajax.AjaxEmployeeInformationAction" method="exportExcel">
+            <result type="json">
+                <param name="includeProperties">
+                    resultList.*,
+                    pageSize, pageIndex, pageCount, recordCount
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+        <action name="ajaxWxExportExcel" class="com.hzfh.fmp.controller.employee.ajax.AjaxEmployeeInformationAction" method="wxExportExcel">
+            <result type="json">
+                <param name="includeProperties">
+                    resultList.*,
+                    pageSize, pageIndex, pageCount, recordCount
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+        <action name="ajaxEmployeeInformationStartTime" class="com.hzfh.fmp.controller.employee.ajax.AjaxEmployeeInformationAction" method="extendEmpStartTime">
+            <result type="json">
+                <param name="includeProperties">
+                    employeeInformation.*,errCode,errDesc
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+    </package>
+    <package name="attendanceApplication" extends="struts-login" namespace="/employee/attendanceApplication">
+        <action name="list" class="com.hzfh.fmp.controller.employee.AttendanceApplicationAction">
+            <result>/employee/attendanceApplicationList.jsp</result>
+        </action>
+		<action name="edit" class="com.hzfh.fmp.controller.employee.AttendanceApplicationAddAction">
+            <result>/employee/attendanceApplicationAdd.jsp</result>
+        </action>
+    </package>
+    <package name="ajaxAttendanceApplication" extends="struts-error" namespace="/employee/attendanceApplication">
+        <action name="easyUIAttendanceApplicationList" class="com.hzfh.fmp.controller.employee.easyUI.EasyUIAttendanceApplicationAction">
+            <result type="json">
+                <param name="includeProperties">
+                    rows.*,total
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+        <action name="ajaxEditAttendanceApplication" class="com.hzfh.fmp.controller.employee.ajax.AjaxAttendanceApplicationAction" method="edit">
+            <result type="json">
+                <param name="includeProperties">
+                    errCode,errDesc
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+		<action name="ajaxGetAttendanceApplication" class="com.hzfh.fmp.controller.employee.ajax.AjaxAttendanceApplicationAction" method="getInfoById">
+            <result type="json">
+                <param name="includeProperties">
+                    info.*,errCode,errDesc,empName
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+        <action name="ajaxExportExcel" class="com.hzfh.fmp.controller.employee.ajax.AjaxAttendanceApplicationAction"
+                method="exportExcel">
+        </action>
+    </package>
+    
+    
+    <package name="personalChange" extends="struts-login" namespace="/employee/personalChange">
+        <action name="list" class="com.hzfh.fmp.controller.employee.PersonalChangeAction">
+            <result>/employee/personalChangeList.jsp</result>
+        </action>
+		<action name="edit" class="com.hzfh.fmp.controller.employee.PersonalChangeAddAction">
+            <result>/employee/personalChangeAdd.jsp</result>
+        </action>
+    </package>
+    <package name="ajaxPersonalChange" extends="struts-error" namespace="/employee/personalChange">
+        <action name="ajaxListPersonalChange" class="com.hzfh.fmp.controller.employee.ajax.AjaxPersonalChangeAction">
+            <result type="json">
+                <param name="includeProperties">
+                    resultList.*,
+                    pageSize, pageIndex, pageCount, recordCount
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+        <action name="ajaxEditPersonalChange" class="com.hzfh.fmp.controller.employee.ajax.AjaxPersonalChangeAction" method="edit">
+            <result type="json">
+                <param name="includeProperties">
+                    errCode,errDesc
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+		<action name="ajaxGetPersonalChange" class="com.hzfh.fmp.controller.employee.ajax.AjaxPersonalChangeAction" method="getInfoById">
+            <result type="json">
+                <param name="includeProperties">
+                    info.*,errCode,errDesc,empName
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+    </package>
+    
+    <package name="resignApplication" extends="struts-login" namespace="/employee/resignApplication">
+        <action name="list" class="com.hzfh.fmp.controller.employee.ResignApplicationAction">
+            <result>/employee/resignApplicationList.jsp</result>
+        </action>
+		<action name="edit" class="com.hzfh.fmp.controller.employee.ResignApplicationAddAction">
+            <result>/employee/resignApplicationAdd.jsp</result>
+        </action>
+    </package>
+    <package name="ajaxResignApplication" extends="struts-error" namespace="/employee/resignApplication">
+        <action name="ajaxListResignApplication" class="com.hzfh.fmp.controller.employee.ajax.AjaxResignApplicationAction">
+            <result type="json">
+                <param name="includeProperties">
+                    resultList.*,
+                    pageSize, pageIndex, pageCount, recordCount
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+        <action name="ajaxEditResignApplication" class="com.hzfh.fmp.controller.employee.ajax.AjaxResignApplicationAction" method="edit">
+            <result type="json">
+                <param name="includeProperties">
+                    errCode,errDesc
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+		<action name="ajaxGetResignApplication" class="com.hzfh.fmp.controller.employee.ajax.AjaxResignApplicationAction" method="getInfoById">
+            <result type="json">
+                <param name="includeProperties">
+                    info.*,errCode,errDesc,empName
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+    </package>
+    
+    <package name="probationWorkSummary" extends="struts-login" namespace="/employee/probationWorkSummary">
+        <action name="list" class="com.hzfh.fmp.controller.employee.ProbationWorkSummaryAction">
+            <result>/employee/probationWorkSummaryList.jsp</result>
+        </action>
+		<action name="edit" class="com.hzfh.fmp.controller.employee.ProbationWorkSummaryAddAction">
+            <result>/employee/probationWorkSummaryAdd.jsp</result>
+        </action>
+    </package>
+    <package name="ajaxProbationWorkSummary" extends="struts-error" namespace="/employee/probationWorkSummary">
+        <action name="ajaxListProbationWorkSummary" class="com.hzfh.fmp.controller.employee.ajax.AjaxProbationWorkSummaryAction">
+            <result type="json">
+                <param name="includeProperties">
+                    resultList.*,
+                    pageSize, pageIndex, pageCount, recordCount
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+        <action name="ajaxEditProbationWorkSummary" class="com.hzfh.fmp.controller.employee.ajax.AjaxProbationWorkSummaryAction" method="edit">
+            <result type="json">
+                <param name="includeProperties">
+                    info.*,errCode,errDesc
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+		<action name="ajaxGetProbationWorkSummary" class="com.hzfh.fmp.controller.employee.ajax.AjaxProbationWorkSummaryAction" method="getInfoById">
+            <result type="json">
+                <param name="includeProperties">
+                    info.*,errCode,errDesc
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+        <action name="ajaxGetWorkSummaryByEmpNo" class="com.hzfh.fmp.controller.employee.ajax.AjaxProbationWorkSummaryAction" method="ajaxGetWorkSummaryByEmpNo">
+            <result type="json">
+                <param name="includeProperties">
+                    info.*,errCode,errDesc
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+
+    </package>
+    
+    <!--managerEvaluation strat  -->
+    <package name="managerEvaluation" extends="struts-login" namespace="/employee/managerEvaluation">
+        <action name="list" class="com.hzfh.fmp.controller.employee.ManagerEvaluationAction">
+            <result>/employee/managerEvaluationList.jsp</result>
+        </action>
+		<action name="edit" class="com.hzfh.fmp.controller.employee.ManagerEvaluationAddAction">
+            <result>/employee/managerEvaluationAdd.jsp</result>
+        </action>
+    </package>
+    <package name="ajaxManagerEvaluation" extends="struts-error" namespace="/employee/managerEvaluation">
+        <action name="ajaxListManagerEvaluation" class="com.hzfh.fmp.controller.employee.ajax.AjaxManagerEvaluationAction">
+            <result type="json">
+                <param name="includeProperties">
+                    resultList.*,
+                    pageSize, pageIndex, pageCount, recordCount
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+        <action name="ajaxEditManagerEvaluation" class="com.hzfh.fmp.controller.employee.ajax.AjaxManagerEvaluationAction" method="edit">
+            <result type="json">
+                <param name="includeProperties">
+                    errCode,errDesc
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+		<action name="ajaxGetManagerEvaluation" class="com.hzfh.fmp.controller.employee.ajax.AjaxManagerEvaluationAction" method="getInfoById">
+            <result type="json">
+                <param name="includeProperties">
+                    info.*,errCode,errDesc,empName
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+    </package>
+    <!-- managerEvaluation end -->
+    
+    <!-- probationEvaluation strat -->
+    <package name="probationEvaluation" extends="struts-login" namespace="/employee/probationEvaluation">
+        <action name="list" class="com.hzfh.fmp.controller.employee.ProbationEvaluationAction">
+            <result>/employee/probationEvaluationList.jsp</result>
+        </action>
+		<action name="edit" class="com.hzfh.fmp.controller.employee.ProbationEvaluationAddAction">
+            <result>/employee/probationEvaluationAdd.jsp</result>
+        </action>
+    </package>
+    <package name="ajaxProbationEvaluation" extends="struts-error" namespace="/employee/probationEvaluation">
+        <action name="ajaxListProbationEvaluation" class="com.hzfh.fmp.controller.employee.ajax.AjaxProbationEvaluationAction">
+            <result type="json">
+                <param name="includeProperties">
+                    resultList.*,
+                    pageSize, pageIndex, pageCount, recordCount
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+        <action name="ajaxEditProbationEvaluation" class="com.hzfh.fmp.controller.employee.ajax.AjaxProbationEvaluationAction" method="edit">
+            <result type="json">
+                <param name="includeProperties">
+                    errCode,errDesc
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+		<action name="ajaxGetProbationEvaluation" class="com.hzfh.fmp.controller.employee.ajax.AjaxProbationEvaluationAction" method="getInfoById">
+            <result>
+                /employee/probationEvaluationContent.jsp
+            </result>
+        </action>
+		<action name="ajaxGetEmployeeStartTime" class="com.hzfh.fmp.controller.employee.ajax.AjaxProbationEvaluationAction" method="getEmployeeStartTime">
+            <result type="json">
+                <param name="includeProperties">
+                    startTime
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+        <action name="ajaxGetProbationDate" class="com.hzfh.fmp.controller.employee.ajax.AjaxProbationEvaluationAction" method="getProbationDate">
+            <result type="json">
+                <param name="includeProperties">
+                    info.*
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+    </package>
+    
+      <package name="yearNeedTotal" extends="struts-login" namespace="/employee/yearNeedTotal">
+        <action name="list" class="com.hzfh.fmp.controller.employee.YearNeedTotalAction">
+            <result>/employee/yearNeedTotalList.jsp</result>
+        </action>
+		<action name="edit" class="com.hzfh.fmp.controller.employee.YearNeedTotalAddAction">
+            <result>/employee/yearNeedTotalAdd.jsp</result>
+        </action>
+    </package>
+    <package name="ajaxYearNeedTotal" extends="struts-error" namespace="/employee/yearNeedTotal">
+        <action name="ajaxListYearNeedTotal" class="com.hzfh.fmp.controller.employee.ajax.AjaxYearNeedTotalAction">
+            <result type="json">
+                <param name="includeProperties">
+                    resultList.*,
+                    pageSize, pageIndex, pageCount, recordCount
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+        <action name="ajaxEditYearNeedTotal" class="com.hzfh.fmp.controller.employee.ajax.AjaxYearNeedTotalAction" method="edit">
+            <result type="json">
+                <param name="includeProperties">
+                   info.*,errCode,errDesc
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+		<action name="ajaxGetYearNeedTotal" class="com.hzfh.fmp.controller.employee.ajax.AjaxYearNeedTotalAction" method="getInfoById">
+            <result type="json">
+                <param name="includeProperties">
+                    info.*,errCode,errDesc
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+    </package>
+     <package name="needRelease" extends="struts-login" namespace="/employee/needRelease">
+        <action name="list" class="com.hzfh.fmp.controller.employee.NeedReleaseAction">
+            <result>/employee/needReleaseList.jsp</result>
+        </action>
+         <action name="needReleaseTask" class="com.hzfh.fmp.controller.employee.NeedReleaseTaskAction">
+            <result>/employee/needReleaseTask.jsp</result>
+        </action>
+		<action name="edit" class="com.hzfh.fmp.controller.employee.NeedReleaseAddAction">
+            <result>/employee/needReleaseAdd.jsp</result>
+        </action>
+    </package>
+    <package name="ajaxNeedRelease" extends="struts-error" namespace="/employee/needRelease">
+        <action name="ajaxListNeedRelease" class="com.hzfh.fmp.controller.employee.ajax.AjaxNeedReleaseAction">
+            <result type="json">
+                <param name="includeProperties">
+                    resultList.*,
+                    pageSize, pageIndex, pageCount, recordCount
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+         <!-- <action name="ajaxListNeedRelease" class="com.hzfh.fmp.controller.employee.ajax.AjaxNeedReleaseAction">
+            <result type="json">
+                <param name="includeProperties">
+                    resultList.*,
+                    pageSize, pageIndex, pageCount, recordCount
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action> -->
+        <action name="ajaxEditNeedRelease" class="com.hzfh.fmp.controller.employee.ajax.AjaxNeedReleaseAction" method="edit">
+            <result type="json">
+                <param name="includeProperties">
+                    errCode,errDesc
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+		<action name="ajaxGetNeedRelease" class="com.hzfh.fmp.controller.employee.ajax.AjaxNeedReleaseAction" method="getInfoById">
+            <result type="json">
+                <param name="includeProperties">
+                    info.*,errCode,errDesc
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+    </package>
+
+    <package name="commissionWealthCenter" extends="struts-login" namespace="/employee/commissionWealthCenter">
+        <action name="list" class="com.hzfh.fmp.controller.employee.CommissionWealthCenterAction">
+            <result>/employee/commissionWealthCenterList.jsp</result>
+        </action>
+    </package>
+
+    <package name="ajaxCommissionWealthCenter" extends="struts-error" namespace="/employee/commissionWealthCenter">
+        <action name="ajaxListCommissionWealthCenter" class="com.hzfh.fmp.controller.employee.ajax.AjaxCommissionWealthCenterAction">
+            <result type="json">
+                <param name="includeProperties">
+                    resultList.*,
+                    pageSize, pageIndex, pageCount, recordCount
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+
+        <action name="ajaxExportExcel"
+                class="com.hzfh.fmp.controller.employee.ajax.AjaxCommissionWealthCenterAction"
+                method="exportExcel">
+        </action>
+    </package>
+    <!-- probationEvaluation end -->
+    <package name="fixedAssets" extends="struts-login" namespace="/employee/fixedAssets">
+        <action name="list" class="com.hzfh.fmp.controller.employee.FixedAssetsAction">
+            <result>/employee/fixedAssetsList.jsp</result>
+        </action>
+		<action name="edit" class="com.hzfh.fmp.controller.employee.FixedAssetsAddAction">
+            <result>/employee/fixedAssetsAdd.jsp</result>
+        </action>
+        <action name="detail" class="com.hzfh.fmp.controller.employee.FixedAssetsAddAction" method="executeDetail">
+            <result>/employee/fixedAssetsDetail.jsp</result>
+        </action>
+        <action name="addAll" class="com.hzfh.fmp.controller.employee.FixedAssetsAddAction" method="executeAddAll">
+            <result>/employee/fixedAssetsAddAll.jsp</result>
+        </action>
+    </package>
+    <package name="ajaxFixedAssets" extends="struts-error" namespace="/employee/fixedAssets">
+        <action name="ajaxListFixedAssets" class="com.hzfh.fmp.controller.employee.ajax.AjaxFixedAssetsAction">
+            <result type="json">
+                <param name="includeProperties">
+                    resultList.*,
+                    pageSize, pageIndex, pageCount, recordCount
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+        <action name="ajaxEditFixedAssets" class="com.hzfh.fmp.controller.employee.ajax.AjaxFixedAssetsAction" method="edit">
+            <result type="json">
+                <param name="includeProperties">
+                    errCode,errDesc
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+		<action name="ajaxGetFixedAssets" class="com.hzfh.fmp.controller.employee.ajax.AjaxFixedAssetsAction" method="getInfoById">
+            <result type="json">
+                <param name="includeProperties">
+                    rigInfo.*,info.*,errCode,errDesc
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+        <action name="ajaxGetAssetTypeList" class="com.hzfh.fmp.controller.employee.ajax.AjaxFixedAssetsAction" method="getAssetTypeList">
+            <result type="json">
+                <param name="includeProperties">
+                    jsonObject
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+        <action name="ajaxGetDeptList" class="com.hzfh.fmp.controller.employee.ajax.AjaxFixedAssetsAction" method="getDeptList">
+            <result type="json">
+                <param name="includeProperties">
+                    jsonObject
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+        <action name="ajaxGetEmpList" class="com.hzfh.fmp.controller.employee.ajax.AjaxFixedAssetsAction" method="getEmpList">
+            <result type="json">
+                <param name="includeProperties">
+                    jsonObject
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+    </package>
+    
+    <package name="suppliers" extends="struts-login" namespace="/employee/suppliers">
+        <action name="list" class="com.hzfh.fmp.controller.employee.SuppliersAction">
+            <result>/employee/suppliersList.jsp</result>
+        </action>
+		<action name="edit" class="com.hzfh.fmp.controller.employee.SuppliersAddAction">
+            <result>/employee/suppliersAdd.jsp</result>
+        </action>
+        <action name="detail" class="com.hzfh.fmp.controller.employee.SuppliersAddAction" method="executeDetail">
+            <result>/employee/suppliersDetail.jsp</result>
+        </action>
+    </package>
+    <package name="ajaxSuppliers" extends="struts-error" namespace="/employee/suppliers">
+        <action name="ajaxListSuppliers" class="com.hzfh.fmp.controller.employee.ajax.AjaxSuppliersAction">
+            <result type="json">
+                <param name="includeProperties">
+                    resultList.*,
+                    pageSize, pageIndex, pageCount, recordCount
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+        <action name="ajaxEditSuppliers" class="com.hzfh.fmp.controller.employee.ajax.AjaxSuppliersAction" method="edit">
+            <result type="json">
+                <param name="includeProperties">
+                    errCode,errDesc
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+		<action name="ajaxGetSuppliers" class="com.hzfh.fmp.controller.employee.ajax.AjaxSuppliersAction" method="getInfoById">
+            <result type="json">
+                <param name="includeProperties">
+                    info.*,errCode,errDesc
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+    </package>
+    <package name="registration" extends="struts-login" namespace="/employee/registration">
+        <action name="list" class="com.hzfh.fmp.controller.employee.RegistrationAction">
+            <result>/employee/registrationList.jsp</result>
+        </action>
+		<action name="edit" class="com.hzfh.fmp.controller.employee.RegistrationAddAction">
+            <result>/employee/registrationAdd.jsp</result>
+        </action>
+        <action name="detail" class="com.hzfh.fmp.controller.employee.RegistrationAddAction" method="executeDetail">
+            <result>/employee/registrationDetail.jsp</result>
+        </action>
+    </package>
+    <package name="ajaxRegistration" extends="struts-error" namespace="/employee/registration">
+		<action name="easyUIRegistrationList" class="com.hzfh.fmp.controller.employee.easyUI.EasyUIRegistrationAction">
+            <result type="json">
+                <param name="includeProperties">
+                    rows.*,total
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+        <action name="ajaxEditRegistration" class="com.hzfh.fmp.controller.employee.ajax.AjaxRegistrationAction" method="edit">
+            <result type="json">
+                <param name="includeProperties">
+                    errCode,errDesc
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+		<action name="ajaxGetRegistration" class="com.hzfh.fmp.controller.employee.ajax.AjaxRegistrationAction" method="getInfoById">
+            <result type="json">
+                <param name="includeProperties">
+                    info.*,errCode,errDesc
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+    </package>
+</struts>

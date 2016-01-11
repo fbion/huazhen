@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hzfh.service.customer.mapper.AgentAdviserMapper">
+	<resultMap type="com.hzfh.api.customer.model.AgentAdviser"
+		id="resultMapAgentAdviser">
+		<result property="id" column="id" />
+		<result property="code" column="code" />
+		<result property="name" column="name" />
+		<result property="email" column="email" />
+		<result property="weixin" column="weixin" />
+		<result property="qq" column="qq" />
+		<result property="cellphone1" column="cellphone1" />
+		<result property="cellphone2" column="cellphone2" />
+		<result property="telephone" column="telephone" />
+		<result property="saleTotal" column="sale_total" />
+		<result property="address" column="address" />
+		<result property="managerNo" column="manager_no" />
+		<result property="inUserNo" column="in_user_no" />
+		<result property="inTime" column="in_time" jdbcType="TIMESTAMP"
+			javaType="java.sql.Timestamp" />
+		<result property="editUserNo" column="edit_user_no" />
+		<result property="editTime" column="edit_time" jdbcType="TIMESTAMP"
+			javaType="java.sql.Timestamp" />
+		<result property="editComment" column="edit_comment" />
+        <result property="company" column="company" />
+        <result property="position" column="position" />
+		<result property="isTest" column="is_test" />
+		<result property="relationLevel" column="relation_level" />
+		<result property="sourceType" column="source_type" />
+	</resultMap>
+	<select id="getList" resultMap="resultMapAgentAdviser">
+		SELECT
+		id,code,name,email,weixin,qq,cellphone1,cellphone2,telephone,sale_total,address,manager_no,in_user_no,in_time,edit_user_no,edit_time,edit_comment,is_test,company,position,relation_level,source_type
+		FROM agent_adviser
+	</select>
+	<select id="getPagingList" resultMap="resultMapAgentAdviser"
+		parameterType="com.hzfh.api.customer.model.query.AgentAdviserCondition"
+		statementType="STATEMENT">
+		SELECT
+		id,code,name,email,weixin,qq,cellphone1,cellphone2,telephone,sale_total,address,manager_no,in_user_no,in_time,edit_user_no,edit_time,edit_comment,is_test,company,position,relation_level,source_type
+		FROM agent_adviser where 1=1
+		<if test="name !=null and name!=''">and name LIKE CONCAT('%','${name}','%')</if>
+        <if test="empNo != 0">and manager_no=${empNo}</if>
+		<if test="workMateString !=null">and manager_no in (${workMateString})	</if>
+		<if test="relationLevel != 0">and relation_level=${relationLevel}</if>
+		<if test="findTimeUp!=null and findTimeUp!=''">and   in_time &lt;= '${findTimeUp}'</if>
+        <if test="findTimeDown!=null and findTimeDown!=''">and   in_time &gt;= '${findTimeDown}'</if>
+		<if test="isTest>-1">and is_test=${isTest}</if>
+		<if test="isSales > 0">and sale_total &gt; 0</if>
+		ORDER BY
+		<foreach item="item" collection="sortItemList" separator=",">
+			${item.sortFeild} ${item.sortType}
+		</foreach>
+		LIMIT ${startIndex},${pageSize}
+	</select>
+    <select id="getListForExcel" resultMap="resultMapAgentAdviser"
+            parameterType="com.hzfh.api.customer.model.query.AgentAdviserCondition"
+            statementType="STATEMENT">
+        SELECT
+        id,code,name,email,weixin,qq,cellphone1,cellphone2,telephone,sale_total,address,manager_no,in_user_no,in_time,edit_user_no,edit_time,edit_comment,is_test,company,position,relation_level,source_type
+        FROM agent_adviser where 1=1
+        <if test="name !=null and name!=''">and name LIKE CONCAT('%','${name}','%')</if>
+        <if test="empNo != 0">and manager_no=${empNo}</if>
+        <if test="workMateString !=null">and manager_no in (${workMateString})	</if>
+        <if test="relationLevel != 0">and relation_level=${relationLevel}</if>
+        <if test="findTimeUp!=null and findTimeUp!=''">and   in_time &lt;= '${findTimeUp}'</if>
+        <if test="findTimeDown!=null and findTimeDown!=''">and   in_time &gt;= '${findTimeDown}'</if>
+        <if test="isTest>-1">and is_test=${isTest}</if>
+        <if test="isSales > 0">and sale_total &gt; 0</if>
+        ORDER BY
+        <foreach item="item" collection="sortItemList" separator=",">
+            ${item.sortFeild} ${item.sortType}
+        </foreach>
+    </select>
+
+	<select id="getTotalCount" resultType="int"
+		parameterType="com.hzfh.api.customer.model.query.AgentAdviserCondition"
+		statementType="STATEMENT">
+		SELECT count(1) FROM agent_adviser where 1=1
+		<if test="name !=null and name!=''">and name LIKE CONCAT('%','${name}','%')</if>
+        <if test="empNo != 0">and manager_no=${empNo}</if>
+		<if test="workMateString !=null">and manager_no in (${workMateString})	</if>
+		<if test="relationLevel != 0">and relation_level=${relationLevel}</if>
+		<if test="findTimeUp!=null and findTimeUp!=''">and   in_time &lt;= '${findTimeUp}'</if>
+        <if test="findTimeDown!=null and findTimeDown!=''">and   in_time &gt;= '${findTimeDown}'</if>
+		<if test="isTest>-1">and is_test=${isTest}</if>
+		<if test="isSales > 0">and sale_total &gt; 0</if>
+	</select>
+	<select id="getInfo" resultMap="resultMapAgentAdviser"
+		parameterType="int">
+		SELECT
+		id,code,name,email,weixin,qq,cellphone1,cellphone2,telephone,sale_total,address,manager_no,in_user_no,in_time,edit_user_no,edit_time,edit_comment,is_test,company,position,relation_level,source_type
+		FROM agent_adviser where id=#{id}
+	</select>
+	<insert id="add" parameterType="com.hzfh.api.customer.model.AgentAdviser"
+		useGeneratedKeys="true" keyProperty="id">
+		insert into agent_adviser
+		(code,name,email,weixin,qq,cellphone1,cellphone2,telephone,sale_total,address,manager_no,in_user_no,in_time,edit_user_no,edit_time,edit_comment,is_test,company,position,relation_level,source_type)
+		values
+		(#{code},#{name},#{email},#{weixin},#{qq},#{cellphone1},#{cellphone2},#{telephone},#{saleTotal},#{address},#{managerNo},#{inUserNo},current_timestamp(),#{editUserNo},current_timestamp(),#{editComment},#{isTest},#{company},#{position},#{relationLevel},#{sourceType})
+	</insert>
+	<update id="update" parameterType="com.hzfh.api.customer.model.AgentAdviser">
+		update agent_adviser set
+		code=#{code},name=#{name},email=#{email},weixin=#{weixin},qq=#{qq},cellphone1=#{cellphone1},cellphone2=#{cellphone2},telephone=#{telephone},sale_total=#{saleTotal},address=#{address},manager_no=#{managerNo},edit_user_no=#{editUserNo},edit_time=current_timestamp(),edit_comment=#{editComment},is_test=#{isTest},
+		company=#{company},position=#{position},relation_level=#{relationLevel},source_type=#{sourceType}
+		where id=#{id}
+	</update>
+	<delete id="delete" parameterType="int">
+		delete from agent_adviser
+		where id = #{id}
+	</delete>
+    <select id="getMyAgentAdviser" parameterType="java.lang.String" resultMap="resultMapAgentAdviser">
+        SELECT
+		id,code,name,email,weixin,qq,cellphone1,cellphone2,telephone,sale_total,address,manager_no,in_user_no,in_time,edit_user_no,edit_time,edit_comment,is_test,company,position,relation_level,source_type
+		FROM agent_adviser where 1=1
+        <if test="workMateString !=null">and manager_no in (${workMateString})	</if>
+    </select>
+    
+    <!-- getNoPagingList create By Zorro 2015/4/30 -->
+    <select id="getNoPagingList" resultMap="resultMapAgentAdviser"
+		parameterType="com.hzfh.api.customer.model.query.AgentAdviserCondition"
+		statementType="STATEMENT">
+		SELECT
+		id,code,name,email,weixin,qq,cellphone1,cellphone2,telephone,sale_total,address,manager_no,in_user_no,in_time,edit_user_no,edit_time,edit_comment,is_test,company,position,relation_level,source_type
+		FROM agent_adviser where 1=1
+		<if test="name !=null and name!=''">and name LIKE CONCAT('%','${name}','%')</if>
+        <if test="empNo != 0">and manager_no=${empNo}</if>
+		<if test="workMateString !=null">and manager_no in (${workMateString})	</if>
+		<if test="isTest>-1">and is_test=${isTest}</if>
+		<if test="isSales > 0">and sale_total &gt; 0</if>
+		ORDER BY
+		<foreach item="item" collection="sortItemList" separator=",">
+			${item.sortFeild} ${item.sortType}
+		</foreach>
+	</select>
+    <update id="updateTradeTotalById">
+		UPDATE agent_adviser SET sale_total=sale_total+#{tradeTotal} WHERE id=#{id}
+	</update>
+</mapper>

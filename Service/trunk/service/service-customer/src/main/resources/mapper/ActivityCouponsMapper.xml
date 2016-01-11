@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hzfh.service.customer.mapper.ActivityCouponsMapper">
+	<resultMap type="com.hzfh.api.customer.model.ActivityCoupons" id="resultMapActivityCoupons">
+		<result property="id" column="id"/>
+		<result property="couponsValue" column="coupons_value"/>
+		<result property="couponsGetWay" column="coupons_get_way"/>
+		<result property="couponsMode" column="coupons_mode"/>
+		<result property="couponsRule" column="coupons_rule"/>
+		<result property="couponsIntegralCount" column="coupons_integral_count"/>
+		<result property="couponsTotal" column="coupons_total"/>
+		<result property="couponsStartTime" column="coupons_start_time" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
+		<result property="couponsEndTime" column="coupons_end_time" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
+		<result property="couponsSurplus" column="coupons_surplus"/>
+		<result property="couponsComment" column="coupons_comment"/>
+		<result property="activityNo" column="activity_no"/>
+		<result property="isTest" column="is_test"/>
+		<result property="couponsCdkey" column="coupons_cdkey"/>
+		<result property="conditionDescription" column="condition_description"/>
+	</resultMap>
+	<select id="getList" resultMap="resultMapActivityCoupons">
+		SELECT id,coupons_value,coupons_get_way,coupons_mode,coupons_rule,coupons_integral_count,coupons_total,coupons_start_time,coupons_end_time,coupons_surplus,coupons_comment,activity_no,is_test,condition_description,coupons_cdkey
+		FROM activity_coupons
+	</select>
+	<select id="getPagingList" resultMap="resultMapActivityCoupons" parameterType="com.hzfh.api.customer.model.query.ActivityCouponsCondition" statementType="STATEMENT">
+		SELECT id,coupons_value,coupons_get_way,coupons_mode,coupons_rule,coupons_integral_count,coupons_total,coupons_start_time,coupons_end_time,coupons_surplus,coupons_comment,activity_no,is_test,condition_description,coupons_cdkey FROM activity_coupons where 1=1
+		ORDER BY
+		<foreach item="item" collection="sortItemList" separator=",">
+			${item.sortFeild} ${item.sortType}
+		</foreach>
+		LIMIT ${startIndex},${pageSize}
+	</select>
+	<select id="getTotalCount" resultType="int" parameterType="com.hzfh.api.customer.model.query.ActivityCouponsCondition" statementType="STATEMENT">
+		SELECT count(1) FROM activity_coupons where 1=1
+	</select>
+	<select id="getInfo" resultMap="resultMapActivityCoupons" parameterType="int">
+		SELECT id,coupons_value,coupons_get_way,coupons_mode,coupons_rule,coupons_integral_count,coupons_total,coupons_start_time,coupons_end_time,coupons_surplus,coupons_comment,activity_no,is_test,condition_description,coupons_cdkey FROM activity_coupons where id=#{id}
+	</select>
+	<insert id="add" parameterType="com.hzfh.api.customer.model.ActivityCoupons" useGeneratedKeys="true" keyProperty="id">
+		insert into activity_coupons
+		(coupons_value,coupons_get_way,coupons_mode,coupons_rule,coupons_integral_count,coupons_total,coupons_start_time,coupons_end_time,coupons_surplus,coupons_comment,activity_no,is_test,condition_description,coupons_cdkey)
+		values
+		(#{couponsValue},#{couponsGetWay},#{couponsMode},#{couponsRule},#{couponsIntegralCount},#{couponsTotal},#{couponsStartTime},#{couponsEndTime},#{couponsSurplus},#{couponsComment},#{activityNo},#{isTest},#{conditionDescription},#{couponsCdkey})
+	</insert>
+	<update id="update" parameterType="com.hzfh.api.customer.model.ActivityCoupons">
+		update activity_coupons set 
+		coupons_value=#{couponsValue},coupons_get_way=#{couponsGetWay},coupons_mode=#{couponsMode},coupons_rule=#{couponsRule},coupons_integral_count=#{couponsIntegralCount},coupons_total=#{couponsTotal},coupons_start_time=#{couponsStartTime},coupons_end_time=#{couponsEndTime},coupons_surplus=#{couponsSurplus},coupons_comment=#{couponsComment},activity_no=#{activityNo},is_test=#{isTest},condition_description=#{conditionDescription},coupons_cdkey=#{couponsCdkey}
+		where id=#{id}
+	</update>
+	<delete id="delete" parameterType="int">
+		delete from activity_coupons where id = #{id}
+	</delete>
+	<select id="getActivityCouponsByActId" resultMap="resultMapActivityCoupons">
+		SELECT * FROM activity_coupons where activity_no = #{activityNo}
+	</select>
+</mapper>

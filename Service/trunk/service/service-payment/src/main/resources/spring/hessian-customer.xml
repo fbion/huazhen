@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <bean id="paymentAccountOperService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+        <property name="serviceUrl">
+            <value>http://customerservice.hzfh.com:8080/service-customer/paymentAccountOper</value>
+        </property>
+        <property name="serviceInterface">
+            <value>com.hzfh.api.customer.service.PaymentAccountOperService</value>
+        </property>
+
+        <property name="overloadEnabled" value="true"></property>
+    </bean>
+     <bean id="paymentAccountInformationService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+        <property name="serviceUrl">
+            <value>http://customerservice.hzfh.com:8080/service-customer/paymentAccountInformation</value>
+        </property>
+        <property name="serviceInterface">
+            <value>com.hzfh.api.customer.service.PaymentAccountInformationService</value>
+        </property>
+
+        <property name="overloadEnabled" value="true"></property>
+    </bean>
+    <bean id="paymentMoneyRechargeService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+        <property name="serviceUrl">
+            <value>http://customerservice.hzfh.com:8080/service-customer/paymentMoneyRecharge</value>
+        </property>
+        <property name="serviceInterface">
+            <value>com.hzfh.api.customer.service.PaymentMoneyRechargeService</value>
+        </property>
+
+        <property name="overloadEnabled" value="true"></property>
+    </bean>
+	<bean id="paymentMoneyWithdrawService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+        <property name="serviceUrl">
+            <value>http://customerservice.hzfh.com:8080/service-customer/paymentMoneyWithdraw</value>
+        </property>
+        <property name="serviceInterface">
+            <value>com.hzfh.api.customer.service.PaymentMoneyWithdrawService</value>
+        </property>
+
+        <property name="overloadEnabled" value="true"></property>
+    </bean>
+    <bean id="paymentMoneyChangeService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+        <property name="serviceUrl">
+            <value>http://customerservice.hzfh.com:8080/service-customer/paymentMoneyChange</value>
+        </property>
+        <property name="serviceInterface">
+            <value>com.hzfh.api.customer.service.PaymentMoneyChangeService</value>
+        </property>
+
+        <property name="overloadEnabled" value="true"></property>
+    </bean>
+    <bean id="p2pCustomerService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+        <property name="serviceUrl"><!-- http://customerservice.hzfh.com:8080 -->
+            <value>http://customerservice.hzfh.com:8080/service-customer/p2pCustomer</value>
+        </property>
+        <property name="serviceInterface">
+            <value>com.hzfh.api.customer.service.P2pCustomerService</value>
+        </property>
+
+        <property name="overloadEnabled" value="true"></property>
+    </bean>
+    <bean id="paymentMoneyFreezeService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+        <property name="serviceUrl">
+            <value>http://customerservice.hzfh.com:8080/service-customer/paymentMoneyFreeze</value>
+        </property>
+        <property name="serviceInterface">
+            <value>com.hzfh.api.customer.service.PaymentMoneyFreezeService</value>
+        </property>
+
+        <property name="overloadEnabled" value="true"></property>
+    </bean>
+</beans>

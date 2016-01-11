@@ -1,0 +1,380 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<bean id="dicDataService"
+		class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+		<property name="serviceUrl">
+			<value>http://baseinfoservice.hzfh.com:8080/service-baseInfo/dicData
+			</value>
+		</property>
+		<property name="serviceInterface">
+			<value>com.hzfh.api.baseInfo.service.DicDataService</value>
+		</property>
+
+		<property name="overloadEnabled" value="true"></property>
+	</bean>
+    <bean id="smstempleteService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+        <property name="serviceUrl">
+            <value>http://baseinfoservice.hzfh.com:8080/service-baseInfo/smstemplete</value>
+        </property>
+        <property name="serviceInterface">
+            <value>com.hzfh.api.baseInfo.service.SmstempleteService</value>
+        </property>
+
+        <property name="overloadEnabled" value="true"></property>
+    </bean>
+    <bean id="smsService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+        <property name="serviceUrl">
+            <value>http://baseinfoservice.hzfh.com:8080/service-baseInfo/sms</value>
+        </property>
+        <property name="serviceInterface">
+            <value>com.hzfh.api.baseInfo.service.SmsService</value>
+        </property>
+
+        <property name="overloadEnabled" value="true"></property>
+    </bean>
+    <bean id="announcementService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+        <property name="serviceUrl">
+            <value>http://baseinfoservice.hzfh.com:8080/service-baseInfo/announcement</value>
+        </property>
+        <property name="serviceInterface">
+            <value>com.hzfh.api.baseInfo.service.AnnouncementService</value>
+        </property>
+
+        <property name="overloadEnabled" value="true"></property>
+    </bean>
+	<bean id="dicTypeService"
+		class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+		<property name="serviceUrl">
+			<value>http://baseinfoservice.hzfh.com:8080/service-baseInfo/dicType
+			</value>
+		</property>
+		<property name="serviceInterface">
+			<value>com.hzfh.api.baseInfo.service.DicTypeService</value>
+		</property>
+
+		<property name="overloadEnabled" value="true"></property>
+	</bean>
+
+	<bean id="codeCompanyService"
+		class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+		<property name="serviceUrl">
+			<value>http://baseinfoservice.hzfh.com:8080/service-baseInfo/codeCompany</value>
+		</property>
+		<property name="serviceInterface">
+			<value>com.hzfh.api.baseInfo.service.CodeCompanyService</value>
+		</property>
+
+		<property name="overloadEnabled" value="true"></property>
+	</bean>
+
+	<bean id="codeAdviserService"
+		class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+		<property name="serviceUrl">
+			<value>http://baseinfoservice.hzfh.com:8080/service-baseInfo/codeAdviser</value>
+		</property>
+		<property name="serviceInterface">
+			<value>com.hzfh.api.baseInfo.service.CodeAdviserService</value>
+		</property>
+
+		<property name="overloadEnabled" value="true"></property>
+	</bean>
+	<bean id="codeAgentService"
+		class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+		<property name="serviceUrl">
+			<value>http://baseinfoservice.hzfh.com:8080/service-baseInfo/codeAgent</value>
+		</property>
+		<property name="serviceInterface">
+			<value>com.hzfh.api.baseInfo.service.CodeAgentService</value>
+		</property>
+
+		<property name="overloadEnabled" value="true"></property>
+	</bean>
+	<bean id="codeCus1Service"
+		class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+		<property name="serviceUrl">
+			<value>http://baseinfoservice.hzfh.com:8080/service-baseInfo/codeCus1</value>
+		</property>
+		<property name="serviceInterface">
+			<value>com.hzfh.api.baseInfo.service.CodeCus1Service</value>
+		</property>
+
+		<property name="overloadEnabled" value="true"></property>
+	</bean>
+	<bean id="codeCus2Service"
+		class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+		<property name="serviceUrl">
+			<value>http://baseinfoservice.hzfh.com:8080/service-baseInfo/codeCus2</value>
+		</property>
+		<property name="serviceInterface">
+			<value>com.hzfh.api.baseInfo.service.CodeCus2Service</value>
+		</property>
+
+		<property name="overloadEnabled" value="true"></property>
+	</bean>
+	<bean id="codeDeptService"
+		class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+		<property name="serviceUrl">
+			<value>http://baseinfoservice.hzfh.com:8080/service-baseInfo/codeDept</value>
+		</property>
+		<property name="serviceInterface">
+			<value>com.hzfh.api.baseInfo.service.CodeDeptService</value>
+		</property>
+
+		<property name="overloadEnabled" value="true"></property>
+	</bean>
+	<bean id="codeEmpService"
+		class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+		<property name="serviceUrl">
+			<value>http://baseinfoservice.hzfh.com:8080/service-baseInfo/codeEmp</value>
+		</property>
+		<property name="serviceInterface">
+			<value>com.hzfh.api.baseInfo.service.CodeEmpService</value>
+		</property>
+
+		<property name="overloadEnabled" value="true"></property>
+	</bean>
+	<bean id="codeExpenseService"
+		class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+		<property name="serviceUrl">
+			<value>http://baseinfoservice.hzfh.com:8080/service-baseInfo/codeExpense</value>
+		</property>
+		<property name="serviceInterface">
+			<value>com.hzfh.api.baseInfo.service.CodeExpenseService</value>
+		</property>
+
+		<property name="overloadEnabled" value="true"></property>
+	</bean>
+	<bean id="codeIncomeService"
+		class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+		<property name="serviceUrl">
+			<value>http://baseinfoservice.hzfh.com:8080/service-baseInfo/codeIncome</value>
+		</property>
+		<property name="serviceInterface">
+			<value>com.hzfh.api.baseInfo.service.CodeIncomeService</value>
+		</property>
+
+		<property name="overloadEnabled" value="true"></property>
+	</bean>
+	<bean id="codeIssueService"
+		class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+		<property name="serviceUrl">
+			<value>http://baseinfoservice.hzfh.com:8080/service-baseInfo/codeIssue</value>
+		</property>
+		<property name="serviceInterface">
+			<value>com.hzfh.api.baseInfo.service.CodeIssueService</value>
+		</property>
+
+		<property name="overloadEnabled" value="true"></property>
+	</bean>
+	<bean id="codeNeed1Service"
+		class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+		<property name="serviceUrl">
+			<value>http://baseinfoservice.hzfh.com:8080/service-baseInfo/codeNeed1</value>
+		</property>
+		<property name="serviceInterface">
+			<value>com.hzfh.api.baseInfo.service.CodeNeed1Service</value>
+		</property>
+
+		<property name="overloadEnabled" value="true"></property>
+	</bean>
+	<bean id="codeNeed2Service"
+		class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+		<property name="serviceUrl">
+			<value>http://baseinfoservice.hzfh.com:8080/service-baseInfo/codeNeed2</value>
+		</property>
+		<property name="serviceInterface">
+			<value>com.hzfh.api.baseInfo.service.CodeNeed2Service</value>
+		</property>
+
+		<property name="overloadEnabled" value="true"></property>
+	</bean>
+	<bean id="codePactService"
+		class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+		<property name="serviceUrl">
+			<value>http://baseinfoservice.hzfh.com:8080/service-baseInfo/codePact</value>
+		</property>
+		<property name="serviceInterface">
+			<value>com.hzfh.api.baseInfo.service.CodePactService</value>
+		</property>
+
+		<property name="overloadEnabled" value="true"></property>
+	</bean>
+	<bean id="codeProduct1Service"
+		class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+		<property name="serviceUrl">
+			<value>http://baseinfoservice.hzfh.com:8080/service-baseInfo/codeProduct1
+			</value>
+		</property>
+		<property name="serviceInterface">
+			<value>com.hzfh.api.baseInfo.service.CodeProduct1Service</value>
+		</property>
+
+		<property name="overloadEnabled" value="true"></property>
+	</bean>
+	<bean id="codeProduct2Service"
+		class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+		<property name="serviceUrl">
+			<value>http://baseinfoservice.hzfh.com:8080/service-baseInfo/codeProduct2
+			</value>
+		</property>
+		<property name="serviceInterface">
+			<value>com.hzfh.api.baseInfo.service.CodeProduct2Service</value>
+		</property>
+
+		<property name="overloadEnabled" value="true"></property>
+	</bean>
+	<bean id="codeProduct3Service"
+		class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+		<property name="serviceUrl">
+			<value>http://baseinfoservice.hzfh.com:8080/service-baseInfo/codeProduct3
+			</value>
+		</property>
+		<property name="serviceInterface">
+			<value>com.hzfh.api.baseInfo.service.CodeProduct3Service</value>
+		</property>
+
+		<property name="overloadEnabled" value="true"></property>
+	</bean>
+	<bean id="codeProduct4Service"
+		class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+		<property name="serviceUrl">
+			<value>http://baseinfoservice.hzfh.com:8080/service-baseInfo/codeProduct4
+			</value>
+		</property>
+		<property name="serviceInterface">
+			<value>com.hzfh.api.baseInfo.service.CodeProduct4Service</value>
+		</property>
+
+		<property name="overloadEnabled" value="true"></property>
+	</bean>
+	<bean id="codeSalesService"
+		class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+		<property name="serviceUrl">
+			<value>http://baseinfoservice.hzfh.com:8080/service-baseInfo/codeSales
+			</value>
+		</property>
+		<property name="serviceInterface">
+			<value>com.hzfh.api.baseInfo.service.CodeSalesService</value>
+		</property>
+		<property name="overloadEnabled" value="true"></property>
+	</bean>
+
+    <bean id="provinceService"
+          class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+        <property name="serviceUrl">
+            <value>http://baseinfoservice.hzfh.com:8080/service-baseInfo/province
+            </value>
+        </property>
+        <property name="serviceInterface">
+            <value>com.hzfh.api.baseInfo.service.ProvinceService</value>
+        </property>
+        <property name="overloadEnabled" value="true"></property>
+    </bean>
+
+    <bean id="cityService"
+          class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+        <property name="serviceUrl">
+            <value>http://baseinfoservice.hzfh.com:8080/service-baseInfo/city
+            </value>
+        </property>
+        <property name="serviceInterface">
+            <value>com.hzfh.api.baseInfo.service.CityService</value>
+        </property>
+        <property name="overloadEnabled" value="true"></property>
+    </bean>
+    <bean id="districtService"
+          class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+        <property name="serviceUrl">
+            <value>http://baseinfoservice.hzfh.com:8080/service-baseInfo/district
+            </value>
+        </property>
+        <property name="serviceInterface">
+            <value>com.hzfh.api.baseInfo.service.DistrictService</value>
+        </property>
+        <property name="overloadEnabled" value="true"></property>
+    </bean>
+    <bean id="letterService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+        <property name="serviceUrl">
+            <value>http://baseinfoservice.hzfh.com:8080/service-baseInfo/letter</value>
+        </property>
+        <property name="serviceInterface">
+            <value>com.hzfh.api.baseInfo.service.LetterService</value>
+        </property>
+
+        <property name="overloadEnabled" value="true"></property>
+    </bean>
+    <bean id="letterStepService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+        <property name="serviceUrl">
+            <value>http://baseinfoservice.hzfh.com:8080/service-baseInfo/letterStep</value>
+        </property>
+        <property name="serviceInterface">
+            <value>com.hzfh.api.baseInfo.service.LetterStepService</value>
+        </property>
+
+        <property name="overloadEnabled" value="true"></property>
+    </bean>
+    <bean id="bannerLocationService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+        <property name="serviceUrl">
+            <value>http://baseinfoservice.hzfh.com:8080/service-baseInfo/bannerLocation</value>
+        </property>
+        <property name="serviceInterface">
+            <value>com.hzfh.api.baseInfo.service.BannerLocationService</value>
+        </property>
+
+        <property name="overloadEnabled" value="true"></property>
+    </bean>
+    <bean id="bannerInfoService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+        <property name="serviceUrl">
+            <value>http://baseinfoservice.hzfh.com:8080/service-baseInfo/bannerInfo</value>
+        </property>
+        <property name="serviceInterface">
+            <value>com.hzfh.api.baseInfo.service.BannerInfoService</value>
+        </property>
+
+        <property name="overloadEnabled" value="true"></property>
+    </bean>
+    <bean id="emailService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+        <property name="serviceUrl">
+            <value>http://baseinfoservice.hzfh.com:8080/service-baseInfo/email</value>
+        </property>
+        <property name="serviceInterface">
+            <value>com.hzfh.api.baseInfo.service.EmailService</value>
+        </property>
+
+        <property name="overloadEnabled" value="true"></property>
+    </bean>
+    
+   	<bean id="emailFilesService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+        <property name="serviceUrl">
+            <value>http://baseinfoservice.hzfh.com:8080/service-baseInfo/emailFiles</value>
+        </property>
+        <property name="serviceInterface">
+            <value>com.hzfh.api.baseInfo.service.EmailFilesService</value>
+        </property>
+
+        <property name="overloadEnabled" value="true"></property>
+    </bean>
+    <bean id="snService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+        <property name="serviceUrl">
+            <value>http://baseinfoservice.hzfh.com:8080/service-baseInfo/sn</value>
+        </property>
+        <property name="serviceInterface">
+            <value>com.hzfh.api.baseInfo.service.SnService</value>
+        </property>
+
+        <property name="overloadEnabled" value="true"></property>
+    </bean>
+	<bean id="calendarService"
+		class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+		<property name="serviceUrl">
+			<value>http://baseinfoservice.hzfh.com:8080/service-baseInfo/calendar</value>
+		</property>
+		<property name="serviceInterface">
+			<value>com.hzfh.api.baseInfo.service.CalendarService</value>
+		</property>
+		<property name="overloadEnabled" value="true" />
+	</bean>
+</beans>

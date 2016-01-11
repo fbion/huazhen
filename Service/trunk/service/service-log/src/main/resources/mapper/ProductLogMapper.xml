@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hzfh.service.log.mapper.ProductLogMapper">
+    <resultMap type="com.hzfh.api.log.model.ProductLog" id="resultMapProductLog">
+        <result property="id" column="id"/>
+        <result property="productNo" column="product_no"/>
+        <result property="description" column="description"/>
+        <result property="action" column="action"/>
+        <result property="method" column="method"/>
+        <result property="afterData" column="after_data"/>
+        <result property="inTime" column="in_time" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
+        <result property="inUserNo" column="in_user_no"/>
+        <result property="exception" column="exception"/>
+    </resultMap>
+    <!--<select id="getList" resultMap="resultMapProductLog">-->
+        <!--SELECT id,product_no,description,action,method,after_data,in_time,in_user_no,exception-->
+        <!--FROM product_log-->
+    <!--</select>-->
+    <!--<select id="getPagingList" resultMap="resultMapProductLog" parameterType="com.hzfh.api.log.model.query.ProductLogCondition" statementType="STATEMENT">-->
+        <!--SELECT id,product_no,description,action,method,after_data,in_time,in_user_no,exception FROM product_log where 1=1-->
+        <!--ORDER BY-->
+        <!--<foreach item="item" collection="sortItemList" separator=",">-->
+            <!--${item.sortFeild} ${item.sortType}-->
+        <!--</foreach>-->
+        <!--LIMIT ${startIndex},${pageSize}-->
+    <!--</select>-->
+    <!--<select id="getTotalCount" resultType="int" parameterType="com.hzfh.api.log.model.query.ProductLogCondition" statementType="STATEMENT">-->
+        <!--SELECT count(1) FROM product_log where 1=1-->
+    <!--</select>-->
+    <!--<select id="getInfo" resultMap="resultMapProductLog" parameterType="int">-->
+        <!--SELECT id,product_no,description,action,method,after_data,in_time,in_user_no,exception FROM product_log where id=#{id}-->
+    <!--</select>-->
+    <insert id="add" parameterType="com.hzfh.api.log.model.ProductLog" useGeneratedKeys="true" keyProperty="id">
+        insert into product_log
+        (product_no,description,action,method,after_data,in_time,in_user_no,exception)
+        values
+        (#{productNo},#{description},#{action},#{method},#{afterData},current_timestamp(),#{inUserNo},#{exception})
+    </insert>
+    <!--<update id="update" parameterType="com.hzfh.api.log.model.ProductLog">-->
+        <!--update product_log set-->
+        <!--product_no=#{productNo},description=#{description},action=#{action},method=#{method},after_data=#{afterData},exception=#{exception}-->
+        <!--where id=#{id}-->
+    <!--</update>-->
+    <!--<delete id="delete" parameterType="int">-->
+        <!--delete from product_log where id = #{id}-->
+    <!--</delete>-->
+</mapper>

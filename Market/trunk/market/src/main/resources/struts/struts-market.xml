@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+        "http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+ 	<package name="AjaxMarket" extends="json-default,default" namespace="/lottery">
+	 	<action name="allLotteryMember" class="com.hzfh.market.controller.market.ajax.AjaxActivityUsersAction" method="getAllLotteryMember"></action>
+<!-- 	<action name="lotteryRun" class="com.hzfh.market.controller.market.ajax.AjaxActivityUsersAction" method="getWiners"></action> -->
+	 	<action name="getCurrentDrawSetingStatus" class="com.hzfh.market.controller.market.ajax.AjaxDrawSettingAction" method="getCurrentDrawSetingStatus"></action>
+	 	<action name="getLotteryWinners" class="com.hzfh.market.controller.market.ajax.AjaxActivityUsersAction" method="getLotteryWinners"></action>
+	 	<action name="minDrawSeting" class="com.hzfh.market.controller.market.ajax.AjaxDrawSettingAction" method="getMinDrawSeting"></action>
+	 	<action name="updateDrawSeting" class="com.hzfh.market.controller.market.ajax.AjaxDrawSettingAction" method="updateDrawSeting"></action>
+	 	<!-- <action name="nextDrawSeting" class="com.hzfh.market.controller.market.AjaxDrawSettingAction" method="getNextDrawSeting"></action> -->
+	 	<action name="endDrawSeting" class="com.hzfh.market.controller.market.ajax.AjaxDrawSettingAction" method="getEndDrawSeting"></action>
+	 	<action name="winnersByDraw" class="com.hzfh.market.controller.market.ajax.AjaxWinningRecordAction" method="getWinnersByDraw"></action>
+    </package>
+    <package name="activityUsers" extends="json-default,default" namespace="/activityUsers" >
+    	<action name="registrationLottery" class="com.hzfh.market.controller.market.ActivityUsersAction">
+    		<result>/lottery/registrationLottery.jsp</result>
+    	</action>
+    	<action name="ajaxActivityUsers" class="com.hzfh.market.controller.market.ajax.AjaxActivityUsersAction" method="addActivityUsers">
+            <result type="json">
+                <param name="includeProperties">
+                    res
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+    </package>
+    <package name="ajaxCheckCellphone" extends="json-default,default" namespace="/market/activityApply" >
+    	<action name="ajaxCheckCellphone" class="com.hzfh.market.controller.market.ajax.AjaxActivityApplyUserAction" method="checkCellphone">
+            <result type="json">
+                <param name="includeProperties">
+                    message.*
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+    </package>
+</struts>

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hzfh.service.market.mapper.WinningRecordMapper">
+	<resultMap type="com.hzfh.api.market.model.WinningRecord" id="resultMapWinningRecord">
+		<result property="id" column="id"/>
+		<result property="userId" column="user_id"/>
+		<result property="drawNo" column="draw_no"/>
+		<result property="isAward" column="is_award"/>
+		<result property="mark" column="mark"/>
+	</resultMap>
+	<select id="getList" resultMap="resultMapWinningRecord">
+		SELECT w.id,w.user_id,w.draw_no,w.is_award,w.mark FROM 
+		(winning_record as w INNER JOIN draw_setting as d on w.draw_no = d.id )
+		INNER JOIN activity_users as a on w.user_id = a.id
+		and d.status = 2
+	</select>
+	<select id="getPagingList" resultMap="resultMapWinningRecord" parameterType="com.hzfh.api.market.model.query.WinningRecordCondition" statementType="STATEMENT">
+		SELECT w.id,w.user_id,w.draw_no,w.is_award,w.mark FROM 
+		(winning_record as w INNER JOIN draw_setting as d on w.draw_no = d.id )
+		INNER JOIN activity_users as a on w.user_id = a.id
+		and d.status = 2
+		<if test="userName != null and userName !=''">and a.user_name LIKE CONCAT('%','${userName}','%')</if>
+		<if test="drawNo != 0">and w.draw_no = ${drawNo}</if>
+		ORDER BY
+		<foreach item="item" collection="sortItemList" separator=",">
+			${item.sortFeild} ${item.sortType}
+		</foreach>
+		LIMIT ${startIndex},${pageSize}
+	</select>
+	<select id="getTotalCount" resultType="int" parameterType="com.hzfh.api.market.model.query.WinningRecordCondition" statementType="STATEMENT">
+		SELECT count(1) FROM 
+		(winning_record as w INNER JOIN draw_setting as d on w.draw_no = d.id )
+		INNER JOIN activity_users as a on w.user_id = a.id
+		and d.status = 2
+		<if test="userName != null and userName !=''">and a.user_name LIKE CONCAT('%','${userName}','%')</if>
+		<if test="drawNo != 0">and w.draw_no = ${drawNo}</if>
+	</select>
+	<select id="getInfo" resultMap="resultMapWinningRecord" parameterType="int">
+		SELECT id,user_id,draw_no,is_award,mark FROM winning_record where id=#{id}
+	</select>
+	<insert id="add" parameterType="com.hzfh.api.market.model.WinningRecord" useGeneratedKeys="true" keyProperty="id">
+		insert into winning_record
+		(user_id,draw_no,is_award,mark)
+		values
+		(#{userId},#{drawNo},#{isAward},#{mark})
+	</insert>
+	<update id="update" parameterType="com.hzfh.api.market.model.WinningRecord">
+		update winning_record set 
+		user_id=#{userId},draw_no=#{drawNo},is_award=#{isAward},mark=#{mark}
+		where id=#{id}
+	</update>
+	<delete id="delete" parameterType="int">
+		delete from winning_record where id = #{id}
+	</delete>
+	<select id="getAllWinersByDrawNo" resultMap="resultMapWinningRecord">
+		SELECT id,user_id,draw_no,is_award,mark
+		FROM winning_record where draw_no = #{drawNo}
+	</select>
+</mapper>

@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <bean id="emailService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+        <property name="serviceUrl">
+            <value>http://baseinfoservice.hzfh.com:8080/service-baseInfo/email</value>
+        </property>
+        <property name="serviceInterface">
+            <value>com.hzfh.api.baseInfo.service.EmailService</value>
+        </property>
+
+        <property name="overloadEnabled" value="true"></property>
+    </bean>
+    <bean id="employeeService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+        <property name="serviceUrl">
+            <value>http://employeeservice.hzfh.com:8080/service-employee/employee</value>
+        </property>
+        <property name="serviceInterface">
+            <value>com.hzfh.api.employee.service.EmployeeService</value>
+        </property>
+
+        <property name="overloadEnabled" value="true"></property>
+    </bean>
+    <bean id="salesService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+        <property name="serviceUrl"><!-- salesservice.hzfh.com -->
+            <value>http://salesservice.hzfh.com:8080/service-sales/sales</value>
+        </property>
+        <property name="serviceInterface">
+            <value>com.hzfh.api.sales.service.SalesService</value>
+        </property>
+
+        <property name="overloadEnabled" value="true"></property>
+    </bean>
+    <bean id="customerPersonalService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+        <property name="serviceUrl">
+            <value>http://customerservice.hzfh.com:8080/service-customer/customerPersonal</value>
+        </property>
+        <property name="serviceInterface">
+            <value>com.hzfh.api.customer.service.CustomerPersonalService</value>
+        </property>
+
+        <property name="overloadEnabled" value="true"></property>
+    </bean>
+    <bean id="customerCompanyService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+        <property name="serviceUrl">
+            <value>http://customerservice.hzfh.com:8080/service-customer/customerCompany</value>
+        </property>
+        <property name="serviceInterface">
+            <value>com.hzfh.api.customer.service.CustomerCompanyService</value>
+        </property>
+
+        <property name="overloadEnabled" value="true"></property>
+    </bean>
+    <bean id="paymentRefundService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+        <property name="serviceUrl">
+            <value>http://paymentservice.hzfh.com:8080/service-payment/paymentRefund</value>
+        </property>
+        <property name="serviceInterface">
+            <value>com.hzfh.api.payment.service.PaymentRefundService</value>
+        </property>
+
+        <property name="overloadEnabled" value="true"></property>
+    </bean>
+    <bean id="productService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+        <property name="serviceUrl">
+            <value>http://productservice.hzfh.com:8080/service-product/product</value>
+        </property>
+        <property name="serviceInterface">
+            <value>com.hzfh.api.product.service.ProductService</value>
+        </property>
+
+        <property name="overloadEnabled" value="true"></property>
+    </bean>
+    <bean id="p2pProductService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+        <property name="serviceUrl">
+            <value>http://productservice.hzfh.com:8080/service-product/p2pProduct</value>
+        </property>
+        <property name="serviceInterface">
+            <value>com.hzfh.api.product.service.P2pProductService</value>
+        </property>
+        <property name="overloadEnabled" value="true"></property>
+    </bean>
+    <bean id="salesCreditorService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+        <property name="serviceUrl">
+            <value>http://salesservice.hzfh.com:8080/service-sales/salesCreditor</value>
+        </property>
+        <property name="serviceInterface">
+            <value>com.hzfh.api.sales.service.SalesCreditorService</value>
+        </property>
+
+        <property name="overloadEnabled" value="true"></property>
+    </bean>
+    <bean id="creditorService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+        <property name="serviceUrl">
+            <value>http://salesservice.hzfh.com:8080/service-sales/creditor</value>
+        </property>
+        <property name="serviceInterface">
+            <value>com.hzfh.api.sales.service.CreditorService</value>
+        </property>
+
+        <property name="overloadEnabled" value="true"></property>
+    </bean>
+    <bean id="letterService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+        <property name="serviceUrl">
+            <value>http://baseinfoservice.hzfh.com:8080/service-baseInfo/letter</value>
+        </property>
+        <property name="serviceInterface">
+            <value>com.hzfh.api.baseInfo.service.LetterService</value>
+        </property>
+
+        <property name="overloadEnabled" value="true"></property>
+    </bean>
+</beans>

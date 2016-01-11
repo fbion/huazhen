@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hzfh.service.employee.mapper.EmployeeMapper">
+	<resultMap type="com.hzfh.api.employee.model.Employee" id="resultMapEmployee">
+		<result property="id" column="id" />
+		<result property="code" column="code" />
+		<result property="name" column="name" />
+		<result property="sex" column="sex" />
+		<result property="email" column="email" />
+		<result property="weixin" column="weixin" />
+		<result property="qq" column="qq" />
+		<result property="telephone" column="telephone" />
+		<result property="cellphone1" column="cellphone1" />
+		<result property="cellphone2" column="cellphone2" />
+		<result property="address" column="address" />
+		<result property="userNo" column="user_no" />
+		<result property="marry" column="marry" />
+		<result property="deptNo" column="dept_no" />
+		<result property="companyNo" column="company_no" />
+		<result property="parentNo" column="parent_no" />
+		<result property="positionNo" column="position_no" />
+		<result property="positionTitle" column="position_title" />
+		<result property="positionLevelNo" column="position_level_no" />
+		
+		<result property="inUserNo" column="in_user_no" />
+		<result property="inTime" column="in_time" jdbcType="TIMESTAMP"
+			javaType="java.sql.Timestamp" />
+		<result property="editUserNo" column="edit_user_no" />
+		<result property="editTime" column="edit_time" jdbcType="TIMESTAMP"
+			javaType="java.sql.Timestamp" />
+		<result property="editComment" column="edit_comment" />
+		<result property="portraitPath" column="portrait_path" />
+		<result property="status" column="status" />
+		<result property="isTest" column="is_test" />
+        <result property="isSendEmail" column="is_send_email" />
+		<result property="verify" column="verify"/>
+	</resultMap>
+	
+	  <sql id="Base_Column_List" >
+	   id,code,name,sex,email,weixin,qq,telephone,cellphone1,cellphone2,address,user_no,marry,dept_no,company_no,parent_no,position_no,position_title,position_level_no,in_user_no,in_time,edit_user_no,edit_time,edit_comment,portrait_path,status,is_test,is_send_email,verify
+	  </sql>
+	<select id="getList" resultMap="resultMapEmployee">
+		SELECT
+		<include refid="Base_Column_List"/>
+		FROM employee
+	</select>
+    <select id="getEmpListNoTest" resultMap="resultMapEmployee">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM employee where is_test = 0
+    </select>
+
+	<select id="getPagingList" resultMap="resultMapEmployee"
+		parameterType="com.hzfh.api.employee.model.query.EmployeeCondition"
+		statementType="STATEMENT">
+		SELECT
+		<include refid="Base_Column_List"/>
+		FROM employee where 1=1
+		<if test="sex !=0">and sex =${sex}</if>
+		<if test="verify > -1">and verify=${verify}</if>
+		<if test="company !=0">and company_no= ${company}</if>
+        <if test="dept !='' and dept != null">and dept_no in(${dept})</if>
+		<if test="name !=null and name!=''">and name LIKE CONCAT("%",'${name}',"%")</if>
+        <if test="workMateString !=null"> and user_no in (${workMateString})</if>
+		<if test="isTest>-1">and is_test=${isTest}</if>
+        <if test="byStatus != ''">and status in (${byStatus})</if>
+        ORDER BY
+		<foreach item="item" collection="sortItemList" separator=",">
+			${item.sortFeild} ${item.sortType}
+		</foreach>
+		LIMIT ${startIndex},${pageSize}
+	</select>
+	<select id="getTotalCount" resultType="int"
+		parameterType="com.hzfh.api.employee.model.query.EmployeeCondition"
+		statementType="STATEMENT">
+		SELECT count(1) FROM employee where 1=1
+		<if test="sex !=0">and sex =${sex}</if>
+		<if test="verify > -1">and verify=${verify}</if>
+		<if test="company !=0">and company_no= ${company}</if>
+        <if test="dept !='' and dept != null">and dept_no in(${dept})</if>
+		<if test="name !=null and name!=''">and name LIKE CONCAT("%",'${name}',"%")</if>
+		<if test="isTest>-1">and is_test=${isTest}</if>
+        <if test="workMateString !=null"> and user_no in (${workMateString})</if>
+        <if test="byStatus != ''">and status in (${byStatus})</if>
+	</select>
+	<select id="getInfo" resultMap="resultMapEmployee"
+                 parameterType="int">
+    SELECT
+    <include refid="Base_Column_List"/>
+    FROM employee where id=#{id}
+    </select>
+    <select id="getInfoByCondition" resultMap="resultMapEmployee"
+            parameterType="com.hzfh.api.employee.model.query.EmployeeCondition">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM employee where 1 = 1
+        <if test="userNo !=0">and user_no =${userNo}</if>
+        <if test="cellPhone != null">and cellphone1 = ${cellPhone}</if>
+    </select>
+
+	<insert id="add" parameterType="com.hzfh.api.employee.model.Employee"
+		useGeneratedKeys="true" keyProperty="id">
+		insert into employee
+		(code,name,sex,email,weixin,qq,telephone,cellphone1,cellphone2,address,user_no,marry,dept_no,company_no,parent_no,position_no,position_title,position_level_no,in_user_no,in_time,edit_user_no,edit_time,edit_comment,portrait_path,status,is_test,is_send_email)
+		values
+		(#{code},#{name},#{sex},#{email},#{weixin},#{qq},#{telephone},#{cellphone1},#{cellphone2},#{address},#{userNo},#{marry},#{deptNo},#{companyNo},#{parentNo},#{positionNo},#{positionTitle},#{positionLevelNo},#{inUserNo},current_timestamp(),#{editUserNo},current_timestamp(),#{editComment},#{portraitPath},#{status},#{isTest},0)
+	</insert>
+	<update id="update" parameterType="com.hzfh.api.employee.model.Employee">
+		update employee set
+		code=#{code},name=#{name},sex=#{sex},email=#{email},weixin=#{weixin},qq=#{qq},telephone=#{telephone},cellphone1=#{cellphone1},cellphone2=#{cellphone2},address=#{address},user_no=#{userNo},marry=#{marry},dept_no=#{deptNo},company_no=#{companyNo},parent_no=#{parentNo},position_no=#{positionNo},position_title=#{positionTitle},position_level_no=#{positionLevelNo},edit_user_no=#{editUserNo},edit_time=current_timestamp(),edit_comment=#{editComment},portrait_path=#{portraitPath},status=#{status},is_test=#{isTest}
+		where id=#{id}
+	</update>
+	<delete id="delete" parameterType="int">
+		delete from employee where id
+		= #{id}
+	</delete>
+	<select id="getEmpByUserId" resultMap="resultMapEmployee" parameterType="int">
+		SELECT
+		<include refid="Base_Column_List"/>
+		FROM employee where user_no = #{userId}
+	</select>
+	
+	<select id="getEmpListByEmpId" resultMap="resultMapEmployee" parameterType="int">		
+		<![CDATA[
+		SELECT user_no,name
+		FROM employee where parent_no = #{empId}
+		]]>
+	</select>
+
+	<select id="getEmpListByDept" resultMap="resultMapEmployee"	parameterType="int">
+		SELECT
+		<include refid="Base_Column_List"/>
+		FROM employee where dept_no=#{deptNo}
+	</select>
+	
+	<!-- 新添 liyh -->
+	<select id="getEmpListByDeptAndStatus" resultMap="resultMapEmployee">
+		SELECT
+		<include refid="Base_Column_List"/>
+		FROM employee where dept_no=#{deptNo} 
+		<if test="statusString!=null">and status in (1,4,5)</if>
+	</select>
+	<!-- add method by MengChong 2015/09/15-->
+	<select id="getEmpListByDeptAndStatusList" resultMap="resultMapEmployee">
+		SELECT
+		<include refid="Base_Column_List"/>
+		FROM employee where dept_no=#{deptNo} and verify = 2
+		<if test="statusList!=null">and status in <foreach collection="statusList" item="status" index="index" 
+			open="(" separator="," close=")">#{status}</foreach>
+		</if>
+	</select>
+
+	<select id="getEmpListByParentNo" parameterType="int" resultMap="resultMapEmployee">
+		<![CDATA[
+		SELECT
+		id,code,name,sex,email,weixin,qq,telephone,cellphone1,cellphone2,address,user_no,marry,dept_no,company_no,parent_no,position_no,position_title,position_level_no,in_user_no,in_time,edit_user_no,edit_time,edit_comment,portrait_path,status,is_test
+		FROM employee where parent_no=#{id} and id != #{id}
+		]]>
+	</select>
+
+
+	<select id="getEmpByPositionNoAndStoreNo" resultMap="resultMapEmployee">
+		SELECT
+		id,name,user_no
+		FROM employee where 1=1
+		<if test="positionNo!=0">and position_no = ${positionNo}</if>
+		<if test="storeNo !=0">and dept_no =${storeNo}</if>
+	</select>
+	<select id="getEmpByPositionNoAndStoreNoIsUse" resultMap="resultMapEmployee">
+		SELECT
+		id,name,user_no
+		FROM employee where 1=1
+		<if test="positionNo!=0">and position_no = ${positionNo}</if>
+		<if test="storeNo !=0">and dept_no =${storeNo}</if>
+		<if test="status !=0">and status !=${status}</if>
+	</select>
+	<update id="addFilePath" parameterType="com.hzfh.api.employee.model.Employee">
+        update employee set portrait_path=#{portraitPath} where id = #{id}
+    </update>
+    
+    <select id="getEmpListByPositionNo" resultMap="resultMapEmployee">
+		SELECT
+		<include refid="Base_Column_List"/>
+		FROM employee where 1=1
+		<if test="positionNo!=0"> and position_no=#{positionNo}</if>
+	</select>
+     <select id="getNowEmpListByPositionNo" resultMap="resultMapEmployee">
+		SELECT
+		<include refid="Base_Column_List"/>
+		FROM employee where 1=1 and `status`=1
+		<if test="positionNo!=0"> and position_no=#{positionNo}</if>
+	</select>
+	<update id="updateEmpByEmpDetail" parameterType="com.hzfh.api.employee.model.Employee">
+		update employee set
+		code=#{code},name=#{name},sex=#{sex},email=#{email},weixin=#{weixin},qq=#{qq},telephone=#{telephone},cellphone1=#{cellphone1},address=#{address},marry=#{marry},edit_time=current_timestamp()
+		where id=#{id}
+	</update>
+
+	<select id="getEmpByEmpName" resultMap="resultMapEmployee">
+		SELECT
+		<include refid="Base_Column_List"/>
+		FROM employee where 1=1
+		<if test="byName!=null and byName!=''"> and name=#{byName}</if>
+	</select>
+    <update id="updateIsSendEmailById" parameterType="int">
+        update employee set
+        is_send_email = 1
+        where id=#{id}
+    </update>
+    
+    <select id="getEmpListByStatus" resultMap="resultMapEmployee">
+		SELECT
+		<include refid="Base_Column_List"/>
+		FROM employee where 1=1 and is_test=0
+		<if test="status!=0"> and status=#{status}</if>
+	</select>
+	
+	<select id="getEmpListIsTest" resultMap="resultMapEmployee">
+		SELECT
+		<include refid="Base_Column_List"/>
+		FROM employee where 1=1
+		<if test="isTest!=-1"> and is_test=#{isTest}</if>
+	</select>
+
+	<update id="updateCheckById">
+		UPDATE employee SET verify = #{status} WHERE id=#{id}
+	</update>
+	<update id="updateStatusByEmpNo">
+		UPDATE employee SET status = 1 WHERE id=#{empNo}
+	</update>
+	<!-- 导出微信通讯录 -->
+	<select id="getListForExcel" resultMap="resultMapEmployee" parameterType="com.hzfh.api.employee.model.Employee" statementType="STATEMENT">
+		select e.name,e.weixin,e.cellphone1,e.email,e.telephone,e.dept_no,
+		e.sex,e.position_no,e.qq QQ from employee e,position p  
+		where  e.position_no=p.id  and e.status='1' and e.is_test='0'
+        <if test="dept !='' and dept != null">and dept_no in(${dept})</if>
+		<!-- ORDER BY
+		<foreach item="item" collection="sortItemList" separator=",">
+			${item.sortFeild} ${item.sortType}
+		</foreach> -->
+	</select>
+</mapper>

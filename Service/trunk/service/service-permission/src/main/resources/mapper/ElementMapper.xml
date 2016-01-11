@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hzfh.service.permission.mapper.ElementMapper">
+    <resultMap type="com.hzfh.api.permission.model.Element" id="resultMapElement">
+        <result property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="value" column="value"/>
+        <result property="alias" column="alias"/>
+        <result property="level" column="level"/>
+        <result property="parentNo" column="parent_no"/>
+        <result property="priority" column="priority"/>
+        <result property="inUserNo" column="in_user_no"/>
+        <result property="inTime" column="in_time" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
+        <result property="editUserNo" column="edit_user_no"/>
+        <result property="editTime" column="edit_time" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
+        <result property="editComment" column="edit_comment"/>
+        <result property="isShow" column="is_show"/>
+    </resultMap>
+    <select id="getList" resultMap="resultMapElement">
+		SELECT id,name,value,alias,level,parent_no,priority,in_user_no,in_time,edit_user_no,edit_time,edit_comment,is_show
+		FROM element
+	</select>
+    <select id="getPagingList" resultMap="resultMapElement"
+            parameterType="com.hzfh.api.permission.model.query.ElementCondition" statementType="STATEMENT">
+        SELECT
+        id,name,value,alias,level,parent_no,priority,in_user_no,in_time,edit_user_no,edit_time,edit_comment,is_show FROM
+        element where 1=1
+        ORDER BY
+        <foreach item="item" collection="sortItemList" separator=",">
+            ${item.sortFeild} ${item.sortType}
+        </foreach>
+        LIMIT ${startIndex},${pageSize}
+    </select>
+    <select id="getTotalCount" resultType="int" parameterType="com.hzfh.api.permission.model.query.ElementCondition"
+            statementType="STATEMENT">
+		SELECT count(1) FROM element where 1=1
+	</select>
+    <select id="getInfo" resultMap="resultMapElement" parameterType="int">
+		SELECT id,name,value,alias,level,parent_no,priority,in_user_no,in_time,edit_user_no,edit_time,edit_comment,is_show FROM element where id=#{id}
+	</select>
+    <insert id="add" parameterType="com.hzfh.api.permission.model.Element" useGeneratedKeys="true" keyProperty="id">
+		insert into element
+		(name,value,alias,level,parent_no,priority,in_user_no,in_time,edit_user_no,edit_time,edit_comment,is_show)
+		values
+		(#{name},#{value},#{alias},#{level},#{parentNo},#{priority},#{inUserNo},current_timestamp(),#{editUserNo},current_timestamp(),#{editComment},#{isShow})
+	</insert>
+    <update id="update" parameterType="com.hzfh.api.permission.model.Element">
+		update element set 
+		name=#{name},value=#{value},alias=#{alias},level=#{level},parent_no=#{parentNo},priority=#{priority},edit_user_no=#{editUserNo},edit_time=current_timestamp(),edit_comment=#{editComment},is_show=#{isShow}
+		where id=#{id}
+	</update>
+    <delete id="delete" parameterType="int">
+		delete from element where id = #{id}
+	</delete>
+
+
+    <select id="getRoot" resultMap="resultMapElement">
+		SELECT id,name,value,alias,level,parent_no,priority,in_user_no,in_time,edit_user_no,edit_time,edit_comment,is_show FROM element where parent_no = 0;
+	</select>
+    <select id="getChildNodes" resultMap="resultMapElement" parameterType="int">
+		SELECT id,name,value,alias,level,parent_no,priority,in_user_no,in_time,edit_user_no,edit_time,edit_comment,is_show
+		FROM element 
+		WHERE parent_no=#{0} ORDER BY priority DESC
+	</select>
+    <select id="getElementByAlias" resultMap="resultMapElement">
+		SELECT id,name,value,alias,level,parent_no,priority,in_user_no,in_time,edit_user_no,edit_time,edit_comment,is_show
+
+		FROM element where alias = #{alias};
+	</select>
+
+    <select id="get1stLevelMenuList" resultMap="resultMapElement">
+        SELECT id,name,value,parent_no
+        FROM element
+        WHERE parent_no=1 and is_show = 1 order by priority desc;
+    </select>
+
+    <select id="getMenuListByLevel" resultMap="resultMapElement">
+		SELECT id,name,value,level,parent_no FROM element
+        WHERE level= #{level} AND parent_no=#{elementId} AND is_show = 1 order by priority desc;
+	</select>
+</mapper>

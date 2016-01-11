@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+        "http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+    <package name="paymentRefund" extends="struts-login" namespace="/payment/paymentRefund">
+        <action name="list" class="com.hzfh.fmp.controller.payment.PaymentRefundAction">
+            <result>/payment/paymentRefundList.jsp</result>
+        </action>
+        <action name="offLinelList" class="com.hzfh.fmp.controller.payment.PaymentRefundOffLineAction">
+            <result>/payment/paymentRefundList.jsp</result>
+        </action>
+		<action name="edit" class="com.hzfh.fmp.controller.payment.PaymentRefundAddAction">
+            <result>/payment/paymentRefundAdd.jsp</result>
+        </action>
+    </package>
+    <package name="ajaxPaymentRefund" extends="struts-error" namespace="/payment/paymentRefund">
+        <action name="ajaxListPaymentRefund" class="com.hzfh.fmp.controller.payment.ajax.AjaxPaymentRefundAction">
+            <result type="json">
+                <param name="includeProperties">
+                    resultList.*,
+                    pageSize, pageIndex, pageCount, recordCount
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+        <action name="getPayMoneyBySalesNo" class="com.hzfh.fmp.controller.payment.ajax.AjaxPaymentRefundAction" method="getPayMoneyBySalesNo">
+            <result type="json">
+                <param name="includeProperties">
+                    info.*,errCode,errDesc
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+        <action name="sendSms" class="com.hzfh.fmp.controller.payment.ajax.AjaxPaymentRefundAction" method="sendSms">
+            <result type="json">
+                <param name="includeProperties">
+                    errCode,errDesc
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+
+        <action name="getContent" class="com.hzfh.fmp.controller.payment.ajax.AjaxPaymentRefundAction" method="getContent">
+            <result type="json">
+                <param name="includeProperties">
+                    errCode,errDesc,smsContent,cellphone
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+        <action name="getListByDate" class="com.hzfh.fmp.controller.payment.ajax.AjaxPaymentRefundAction" method="getListByDate">
+            <result type="json">
+                <param name="includeProperties">
+                    errCode,errDesc
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+       <action name="ajaxExportExcel" class="com.hzfh.fmp.controller.payment.ajax.AjaxPaymentRefundAction" method="ajaxExportExcel">
+        </action>
+        <action name="ajaxEditPaymentRefund" class="com.hzfh.fmp.controller.payment.ajax.AjaxPaymentRefundAction" method="edit">
+            <result type="json">
+                <param name="includeProperties">
+                    errCode,errDesc
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+		<action name="ajaxGetPaymentRefund" class="com.hzfh.fmp.controller.payment.ajax.AjaxPaymentRefundAction" method="getInfoById">
+            <result type="json">
+                <param name="includeProperties">
+                    info.*,errCode,errDesc
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+        <action name="ajaxPaymentCheck" class="com.hzfh.fmp.controller.payment.ajax.AjaxPaymentRefundAction" method="checkPayment">
+            <result type="json">
+                <param name="includeProperties">
+                    errCode,errDesc
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+        <action name="ajaxPaymentRefund" class="com.hzfh.fmp.controller.payment.ajax.AjaxPaymentRefundAction" method="refundPayment">
+            <result type="json">
+                <param name="includeProperties">
+                    errCode,errDesc,paymentData.*
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+        <action name="ajaxCancelPaymentRefund" class="com.hzfh.fmp.controller.payment.ajax.AjaxPaymentRefundAction" method="cancelRefundPayment">
+            <result type="json">
+                <param name="includeProperties">
+                    errCode,errDesc
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+        <action name="repaymentNotify" class="com.hzfh.fmp.controller.payment.notify.RepaymentNotifyAction">
+
+        </action>
+        <action name="confirmTransactionNotify" class="com.hzfh.fmp.controller.payment.notify.RepaymentNotifyAction" method="confirmTransaction">
+
+        </action>
+        <action name="cancelTransactionNotify" class="com.hzfh.fmp.controller.payment.notify.RepaymentNotifyAction" method="cancelTransaction">
+
+        </action>
+        <action name="repaymentCallback" class="com.hzfh.fmp.controller.payment.callback.RepaymentCallbackAction">
+            <result>/payment/paymentRefundSuccess.jsp</result>
+        </action>
+    </package>
+</struts>

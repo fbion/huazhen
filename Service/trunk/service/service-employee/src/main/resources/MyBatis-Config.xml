@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <mappers>
+		<mapper resource="mapper/NeedReleaseMapper.xml"/>
+		<mapper resource="mapper/CompanyMapper.xml"/>
+		<mapper resource="mapper/DepartmentMapper.xml"/>
+		<mapper resource="mapper/DeptYearNeedMapper.xml"/>
+		<mapper resource="mapper/DeptYearNeedDetailMapper.xml"/>
+		<mapper resource="mapper/YearNeedMapper.xml"/>
+		<mapper resource="mapper/YearNeedDetailMapper.xml"/>
+		<mapper resource="mapper/EmpBrokerageLadderMapper.xml"/>
+		<mapper resource="mapper/ExtendProbationApplicationMapper.xml"/>
+		<mapper resource="mapper/EmployeeMapper.xml"/>
+		<mapper resource="mapper/EmployeeDetailMapper.xml"/>
+		<mapper resource="mapper/EmployeeEducationMapper.xml"/>
+		<mapper resource="mapper/FamilyMembersMapper.xml"/>
+		<mapper resource="mapper/EmployeeCredentialMapper.xml"/>
+		<mapper resource="mapper/OtherMapper.xml"/>
+		<mapper resource="mapper/OvertimeMapper.xml"/>
+		<mapper resource="mapper/PaymentMapper.xml"/>
+		<mapper resource="mapper/PositionMapper.xml"/>
+		<mapper resource="mapper/PositionLevelMapper.xml"/>
+		<mapper resource="mapper/WelfareMapper.xml"/>
+		<mapper resource="mapper/AchievementCommissionMapper.xml"/>
+        <mapper resource="mapper/SubsidyMapper.xml"/>
+		<mapper resource="mapper/SubsidyTotalMapper.xml"/>
+        <mapper resource="mapper/RecruitAskRecordMapper.xml"/>
+        <mapper resource="mapper/InterviewEvaluationRecordMapper.xml"/>
+        <mapper resource="mapper/EvaluationContentMapper.xml"/>
+		<mapper resource="mapper/EvaluationScoreMapper.xml"/>
+        <mapper resource="mapper/SubsidyMapper.xml"/>
+		<mapper resource="mapper/SubsidyTotalMapper.xml"/>
+		<mapper resource="mapper/WorkExperienceMapper.xml"/>
+		<mapper resource="mapper/KnowledgeBaseMapper.xml"/>
+        <mapper resource="mapper/EmpCompilePlanMapper.xml" />
+        <mapper resource="mapper/TempRecruitDetailMapper.xml"/>
+		<mapper resource="mapper/TempRecruitNeedMapper.xml"/>
+		<mapper resource="mapper/AttendanceApplicationMapper.xml"/>
+		<mapper resource="mapper/PersonalChangeMapper.xml"/>
+		<mapper resource="mapper/ResignApplicationMapper.xml"/>
+        <mapper resource="mapper/ProbationWorkSummaryMapper.xml"/>
+        <mapper resource="mapper/EmployeeInformationMapper.xml"/>
+        <mapper resource="mapper/ManagerEvaluationMapper.xml"/>
+        <mapper resource="mapper/ProbationEvaluationMapper.xml"/>
+		<mapper resource="mapper/ProbationEvaluationContentMapper.xml"/>
+		<mapper resource="mapper/ProbationEvaluationContentTemplateMapper.xml"/>
+		<mapper resource="mapper/ProbationEvaluationScoreMapper.xml"/>
+		<mapper resource="mapper/YearNeedTotalMapper.xml"/>
+        <mapper resource="mapper/CommissionWealthCenterMapper.xml"/>
+		<mapper resource="mapper/KnowledgeAttachmentMapper.xml"/>
+		<mapper resource="mapper/RecruitFollowMapper.xml"/>
+		<mapper resource="mapper/FixedAssetsMapper.xml"/>
+		<mapper resource="mapper/SuppliersMapper.xml"/>
+		<mapper resource="mapper/RegistrationMapper.xml"/>
+    </mappers>
+</configuration>

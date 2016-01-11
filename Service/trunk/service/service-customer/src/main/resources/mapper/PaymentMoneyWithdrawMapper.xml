@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hzfh.service.customer.mapper.PaymentMoneyWithdrawMapper">
+	<resultMap type="com.hzfh.api.customer.model.PaymentMoneyWithdraw" id="resultMapPaymentMoneyWithdraw">
+		<result property="sn" column="sn"/>
+		<result property="accountNo" column="account_no"/>
+		<result property="customerNo" column="customer_no"/>
+		<result property="accountType" column="account_type"/>
+		<result property="customerName" column="customer_name"/>
+		<result property="withdrawType" column="withdraw_type"/>
+		<result property="bankType" column="bank_type"/>
+		<result property="bankCode" column="bank_code"/>
+		<result property="bankName" column="bank_name"/>
+		<result property="bankAddressNo" column="bank_address_no"/>
+		<result property="bankCardNo" column="bank_card_no"/>
+		<result property="bankCardName" column="bank_card_name"/>
+		<result property="amount" column="amount"/>
+		<result property="note" column="note"/>
+		<result property="resultCode" column="result_code"/>
+		<result property="resultNote" column="result_note"/>
+		<result property="timeCreate" column="time_create" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
+		<result property="bankTime" column="bank_time" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
+		<result property="state" column="state"/>
+		<result property="channelNo" column="channel_no"/>
+		<result property="monitorBatched" column="monitor_batched"/>
+		<result property="checkState" column="check_state"/>
+		<result property="dateWork" column="date_work" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
+		<result property="dateSettle" column="date_settle" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
+		<result property="checkDate" column="check_date" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
+		<result property="refSnFreeze" column="ref_sn_freeze"/>
+		<result property="moneyFactorage" column="money_factorage"/>
+		<result property="customerMoneyFactorage" column="customer_money_factorage"/>
+		<result property="factorageState" column="factorage_state"/>
+	</resultMap>
+	<select id="getList" resultMap="resultMapPaymentMoneyWithdraw">
+		SELECT sn,account_no,customer_no,account_type,customer_name,withdraw_type,bank_type,bank_code,bank_name,bank_address_no,bank_card_no,bank_card_name,amount,note,result_code,result_note,time_create,bank_time,state,channel_no,monitor_batched,check_state,date_work,date_settle,check_date,ref_sn_freeze,money_factorage,customer_money_factorage,factorage_state
+		FROM payment_money_withdraw
+	</select>
+	<select id="getPagingList" resultMap="resultMapPaymentMoneyWithdraw" parameterType="com.hzfh.api.customer.model.query.PaymentMoneyWithdrawCondition" statementType="STATEMENT">
+		SELECT sn,account_no,customer_no,account_type,customer_name,withdraw_type,bank_type,bank_code,bank_name,bank_address_no,bank_card_no,bank_card_name,amount,note,result_code,result_note,time_create,bank_time,state,channel_no,monitor_batched,check_state,date_work,date_settle,check_date,ref_sn_freeze,money_factorage,customer_money_factorage,factorage_state FROM payment_money_withdraw where 1=1
+		<if test="customerNo !=0"> and customer_no = ${customerNo}</if>
+		<if test="sn !=null"> and sn = ${sn}</if>
+		<if test="state !=null"> and state in (${state})</if>
+		<if test="dateUp !=null and dateDown !=null"> and '${dateDown}' &lt;= time_create and time_create &lt; '${dateUp}'</if>
+		ORDER BY
+		<foreach item="item" collection="sortItemList" separator=",">
+			${item.sortFeild} ${item.sortType}
+		</foreach>
+		LIMIT ${startIndex},${pageSize}
+	</select>
+	<select id="getTotalCount" resultType="int" parameterType="com.hzfh.api.customer.model.query.PaymentMoneyWithdrawCondition" statementType="STATEMENT">
+		SELECT count(1) FROM payment_money_withdraw where 1=1
+		<if test="sn !=null"> and sn = ${sn}</if>
+		<if test="customerNo !=0"> and customer_no = ${customerNo}</if>
+		<if test="state !=null"> and state in (${state})</if>
+		<if test="dateUp !=null and dateDown !=null"> and '${dateDown}' &lt;= time_create and time_create &lt; '${dateUp}'</if>
+	</select>
+	<select id="getInfo" resultMap="resultMapPaymentMoneyWithdraw" parameterType="int">
+		SELECT sn,account_no,customer_no,account_type,customer_name,withdraw_type,bank_type,bank_code,bank_name,bank_address_no,bank_card_no,bank_card_name,amount,note,result_code,result_note,time_create,bank_time,state,channel_no,monitor_batched,check_state,date_work,date_settle,check_date,ref_sn_freeze,money_factorage,customer_money_factorage,factorage_state FROM payment_money_withdraw where sn=#{id}
+	</select>
+	<select id="getbySn" resultMap="resultMapPaymentMoneyWithdraw">
+		SELECT sn,account_no,customer_no,account_type,customer_name,withdraw_type,bank_type,bank_code,bank_name,bank_address_no,bank_card_no,bank_card_name,amount,note,result_code,result_note,time_create,bank_time,state,channel_no,monitor_batched,check_state,date_work,date_settle,check_date,ref_sn_freeze,money_factorage,customer_money_factorage,factorage_state FROM payment_money_withdraw where sn=#{sn}
+	</select>
+	<select id="getInfoBystateAndSn" resultMap="resultMapPaymentMoneyWithdraw">
+		SELECT sn,account_no,customer_no,account_type,customer_name,withdraw_type,bank_type,bank_code,bank_name,bank_address_no,bank_card_no,bank_card_name,amount,note,result_code,result_note,time_create,bank_time,state,channel_no,monitor_batched,check_state,date_work,date_settle,check_date,ref_sn_freeze,money_factorage,customer_money_factorage,factorage_state FROM payment_money_withdraw where sn=#{sn} and state=#{status}
+	</select>
+	<insert id="add" parameterType="com.hzfh.api.customer.model.PaymentMoneyWithdraw" useGeneratedKeys="true" keyProperty="id">
+		insert into payment_money_withdraw
+		(sn,account_no,customer_no,account_type,customer_name,withdraw_type,bank_type,bank_code,bank_name,bank_address_no,bank_card_no,bank_card_name,amount,note,result_code,result_note,time_create,bank_time,state,channel_no,monitor_batched,check_state,date_work,date_settle,check_date,ref_sn_freeze,money_factorage,customer_money_factorage,factorage_state)
+		values
+		(#{sn},#{accountNo},#{customerNo},#{accountType},#{customerName},#{withdrawType},#{bankType},#{bankCode},#{bankName},#{bankAddressNo},#{bankCardNo},#{bankCardName},#{amount},#{note},#{resultCode},#{resultNote},#{timeCreate},#{bankTime},#{state},#{channelNo},#{monitorBatched},#{checkState},#{dateWork},#{dateSettle},#{checkDate},#{refSnFreeze},#{moneyFactorage},#{customerMoneyFactorage},#{factorageState})
+	</insert>
+	<update id="update" parameterType="com.hzfh.api.customer.model.PaymentMoneyWithdraw">
+		update payment_money_withdraw set 
+		sn=#{sn},account_no=#{accountNo},customer_no=#{customerNo},account_type=#{accountType},customer_name=#{customerName},withdraw_type=#{withdrawType},bank_type=#{bankType},bank_code=#{bankCode},bank_name=#{bankName},bank_address_no=#{bankAddressNo},bank_card_no=#{bankCardNo},bank_card_name=#{bankCardName},amount=#{amount},note=#{note},result_code=#{resultCode},result_note=#{resultNote},time_create=#{timeCreate},bank_time=#{bankTime},state=#{state},channel_no=#{channelNo},monitor_batched=#{monitorBatched},check_state=#{checkState},date_work=#{dateWork},date_settle=#{dateSettle},check_date=#{checkDate},ref_sn_freeze=#{refSnFreeze},money_factorage=#{moneyFactorage},customer_money_factorage=#{customerMoneyFactorage},factorage_state=#{factorageState}
+		where sn=#{sn}
+	</update>
+	<update id="updateWithdraw" parameterType="com.hzfh.api.customer.model.PaymentMoneyWithdraw">
+		update payment_money_withdraw set 
+		bank_code=#{bankCode},amount=#{amount},result_code=#{resultCode},result_note=#{resultNote},state=#{state},money_factorage=#{moneyFactorage},customer_money_factorage=#{customerMoneyFactorage},bank_card_no=#{bankCardNo}
+		where sn=#{sn}
+	</update>
+	<delete id="delete" parameterType="int">
+		delete from payment_money_withdraw where id = #{id}
+	</delete>
+	
+	<update id="updateMoneyAmount">
+		update payment_money_withdraw set 
+		amount=#{amount}
+		where sn=#{sn}
+	</update>
+	
+	<update id="updateState">
+		update payment_money_withdraw set 
+		state=#{stateNo}
+		where sn=#{sn}
+	</update>	
+<!-- 	<update id="updateMoneyAmount">
+		update payment_money_withdraw set 
+		amount=#{amount}
+		where customer_no=#{customerNo}
+	</update>
+	
+	<update id="updateState">
+		update payment_money_withdraw set 
+		state=#{stateNo}
+		where customer_no=#{customerNo}
+	</update>	 -->
+	
+	
+	
+	
+</mapper>

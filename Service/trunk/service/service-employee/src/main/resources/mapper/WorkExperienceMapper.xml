@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hzfh.service.employee.mapper.WorkExperienceMapper">
+	<resultMap type="com.hzfh.api.employee.model.WorkExperience" id="resultMapWorkExperience">
+		<result property="id" column="id"/>
+		<result property="empNo" column="emp_no"/>
+		<result property="workStartTime" column="work_start_time"/>
+		<result property="workEndTime" column="work_end_time"/>
+		<result property="workDepartment" column="work_department"/>
+		<result property="contactPerson" column="contact_person"/>
+		<result property="contactCellphone" column="contact_cellphone"/>
+		<result property="position" column="position"/>
+		<result property="monthIncome" column="month_income"/>
+		<result property="inUserNo" column="in_user_no"/>
+		<result property="inTime" column="in_time" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
+		<result property="editUserNo" column="edit_user_no"/>
+		<result property="editTime" column="edit_time" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
+		<result property="editComment" column="edit_comment"/>
+	</resultMap>
+	<select id="getList" resultMap="resultMapWorkExperience">
+		SELECT id,emp_no,work_start_time,work_end_time,work_department,contact_person,contact_cellphone,position,month_income,in_user_no,in_time,edit_user_no,edit_time,edit_comment
+		FROM work_experience
+	</select>
+	<select id="getPagingList" resultMap="resultMapWorkExperience" parameterType="com.hzfh.api.employee.model.query.WorkExperienceCondition" statementType="STATEMENT">
+		SELECT id,emp_no,work_start_time,work_end_time,work_department,contact_person,contact_cellphone,position,month_income,in_user_no,in_time,edit_user_no,edit_time,edit_comment FROM work_experience where 1=1
+		ORDER BY
+		<foreach item="item" collection="sortItemList" separator=",">
+			${item.sortFeild} ${item.sortType}
+		</foreach>
+		LIMIT ${startIndex},${pageSize}
+	</select>
+	<select id="getTotalCount" resultType="int" parameterType="com.hzfh.api.employee.model.query.WorkExperienceCondition" statementType="STATEMENT">
+		SELECT count(1) FROM work_experience where 1=1
+	</select>
+	<select id="getInfo" resultMap="resultMapWorkExperience" parameterType="int">
+		SELECT id,emp_no,work_start_time,work_end_time,work_department,contact_person,contact_cellphone,position,month_income,in_user_no,in_time,edit_user_no,edit_time,edit_comment FROM work_experience where id=#{id}
+	</select>
+	<insert id="add" parameterType="com.hzfh.api.employee.model.WorkExperience" useGeneratedKeys="true" keyProperty="id">
+		insert into work_experience
+		(emp_no,work_start_time,work_end_time,work_department,contact_person,contact_cellphone,position,month_income,in_user_no,in_time,edit_user_no,edit_time,edit_comment)
+		values
+		(#{empNo},#{workStartTime},#{workEndTime},#{workDepartment},#{contactPerson},#{contactCellphone},#{position},#{monthIncome},#{inUserNo},current_timestamp(),#{editUserNo},current_timestamp(),#{editComment})
+	</insert>
+	<update id="update" parameterType="com.hzfh.api.employee.model.WorkExperience">
+		update work_experience set 
+		emp_no=#{empNo},work_start_time=#{workStartTime},work_end_time=#{workEndTime},work_department=#{workDepartment},contact_person=#{contactPerson},contact_cellphone=#{contactCellphone},position=#{position},month_income=#{monthIncome},edit_user_no=#{editUserNo},edit_time=current_timestamp(),edit_comment=#{editComment}
+		where id=#{id}
+	</update>
+	<delete id="delete" parameterType="int">
+		delete from work_experience where id = #{id}
+	</delete>
+	<select id="getWorkExperiencdByEmpNo" resultMap="resultMapWorkExperience">
+		SELECT id,emp_no,work_start_time,work_end_time,work_department,contact_person,contact_cellphone,position,month_income,in_user_no,in_time,edit_user_no,edit_time,edit_comment FROM work_experience
+		 where emp_no=#{empNo}
+	</select>
+
+</mapper>

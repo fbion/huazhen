@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hzfh.service.baseInfo.mapper.AnnouncementMapper">
+    <resultMap type="com.hzfh.api.baseInfo.model.Announcement" id="resultMapAnnouncement">
+        <result property="id" column="id"/>
+        <result property="subject" column="subject"/>
+        <result property="isTop" column="is_top"/>
+        <result property="isRed" column="is_red"/>
+        <result property="linkurl" column="linkurl"/>
+        <result property="content" column="content"/>
+        <result property="type" column="type"/>
+        <result property="startTime" column="start_time" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
+        <result property="endTime" column="end_time" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
+        <result property="status" column="status"/>
+        <result property="inUserNo" column="in_user_no"/>
+        <result property="inTime" column="in_time" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
+        <result property="editUserNo" column="edit_user_no"/>
+        <result property="editTime" column="edit_time" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
+    </resultMap>
+    <select id="getList" resultMap="resultMapAnnouncement">
+        SELECT id,subject,is_top,is_red,linkurl,content,type,start_time,end_time,status,in_user_no,in_time,edit_user_no,edit_time
+        FROM announcement
+    </select>
+    <select id="getPagingList" resultMap="resultMapAnnouncement" parameterType="com.hzfh.api.baseInfo.model.query.AnnouncementCondition" statementType="STATEMENT">
+        SELECT id,subject,is_top,is_red,linkurl,content,type,start_time,end_time,status,in_user_no,in_time,edit_user_no,edit_time FROM announcement where 1=1
+        <if test="byType !=0">and type = ${byType}</if>
+        <if test="byStatus !=0">and status =${byStatus}</if>
+        <if test="bySubject !=null and bySubject!=''">and subject LIKE CONCAT("%",'${bySubject}',"%")</if>
+        ORDER BY
+        <foreach item="item" collection="sortItemList" separator=",">
+            ${item.sortFeild} ${item.sortType}
+        </foreach>
+        LIMIT ${startIndex},${pageSize}
+    </select>
+    <select id="getTotalCount" resultType="int" parameterType="com.hzfh.api.baseInfo.model.query.AnnouncementCondition" statementType="STATEMENT">
+        SELECT count(1) FROM announcement where 1=1
+        <if test="byType !=0">and type = ${byType}</if>
+        <if test="byStatus !=0">and status =${byStatus}</if>
+        <if test="bySubject !=null and bySubject!=''">and subject LIKE CONCAT("%",'${bySubject}',"%")</if>
+    </select>
+    <select id="getInfo" resultMap="resultMapAnnouncement" parameterType="int">
+        SELECT id,subject,is_top,is_red,linkurl,content,type,start_time,end_time,status,in_user_no,in_time,edit_user_no,edit_time FROM announcement where id=#{id}
+    </select>
+    <insert id="add" parameterType="com.hzfh.api.baseInfo.model.Announcement" useGeneratedKeys="true" keyProperty="id">
+        insert into announcement
+        (subject,is_top,is_red,linkurl,content,type,start_time,end_time,status,in_user_no,in_time,edit_user_no,edit_time)
+        values
+        (#{subject},#{isTop},#{isRed},#{linkurl},#{content},#{type},#{startTime},#{endTime},#{status},#{inUserNo},current_timestamp(),#{editUserNo},current_timestamp())
+    </insert>
+    <update id="update" parameterType="com.hzfh.api.baseInfo.model.Announcement">
+        update announcement set
+        subject=#{subject},is_top=#{isTop},is_red=#{isRed},linkurl=#{linkurl},content=#{content},type=#{type},start_time=#{startTime},end_time=#{endTime},status=#{status},edit_user_no=#{editUserNo},edit_time=current_timestamp()
+        where id=#{id}
+    </update>
+    <delete id="delete" parameterType="int">
+        delete from announcement where id = #{id}
+    </delete>
+    
+    <select id="getAnnouncementTitleList" resultMap="resultMapAnnouncement" parameterType="com.hzfh.api.baseInfo.model.query.AnnouncementCondition" statementType="STATEMENT">
+        SELECT id,subject,is_top,is_red,linkurl,content,type,start_time,end_time,status,in_user_no,in_time,edit_user_no,edit_time
+        FROM announcement where 1=1 and status = 1 and type=1 and start_time &lt;= current_timestamp() and current_timestamp() &lt;= end_time
+        ORDER BY
+        <foreach item="item" collection="sortItemList" separator=",">
+            ${item.sortFeild} ${item.sortType}
+        </foreach>
+        LIMIT ${startIndex},${pageSize}
+    </select>
+</mapper>

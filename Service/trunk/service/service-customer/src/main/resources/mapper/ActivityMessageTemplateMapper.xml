@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hzfh.service.customer.mapper.ActivityMessageTemplateMapper">
+	<resultMap type="com.hzfh.api.customer.model.ActivityMessageTemplate" id="resultMapActivityMessageTemplate">
+		<result property="id" column="id"/>
+		<result property="subjectTemplate" column="subject_template"/>
+		<result property="contentTemplate" column="content_template"/>
+		<result property="description" column="description"/>
+		<result property="satus" column="satus"/>
+		<result property="inUserNo" column="in_user_no"/>
+		<result property="inTime" column="in_time" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
+		<result property="editUserNo" column="edit_user_no"/>
+		<result property="editTime" column="edit_time" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
+		<result property="editComment" column="edit_comment"/>
+	</resultMap>
+	<select id="getList" resultMap="resultMapActivityMessageTemplate">
+		SELECT id,subject_template,content_template,description,satus,in_user_no,in_time,edit_user_no,edit_time,edit_comment
+		FROM activity_message_template
+	</select>
+	<select id="getPagingList" resultMap="resultMapActivityMessageTemplate" parameterType="com.hzfh.api.customer.model.query.ActivityMessageTemplateCondition" statementType="STATEMENT">
+		SELECT id,subject_template,content_template,description,satus,in_user_no,in_time,edit_user_no,edit_time,edit_comment FROM activity_message_template where 1=1
+		ORDER BY
+		<foreach item="item" collection="sortItemList" separator=",">
+			${item.sortFeild} ${item.sortType}
+		</foreach>
+		LIMIT ${startIndex},${pageSize}
+	</select>
+	<select id="getTotalCount" resultType="int" parameterType="com.hzfh.api.customer.model.query.ActivityMessageTemplateCondition" statementType="STATEMENT">
+		SELECT count(1) FROM activity_message_template where 1=1
+	</select>
+	<select id="getInfo" resultMap="resultMapActivityMessageTemplate" parameterType="int">
+		SELECT id,subject_template,content_template,description,satus,in_user_no,in_time,edit_user_no,edit_time,edit_comment FROM activity_message_template where id=#{id}
+	</select>
+	<insert id="add" parameterType="com.hzfh.api.customer.model.ActivityMessageTemplate" useGeneratedKeys="true" keyProperty="id">
+		insert into activity_message_template
+		(subject_template,content_template,description,satus,in_user_no,in_time,edit_user_no,edit_time,edit_comment)
+		values
+		(#{subjectTemplate},#{contentTemplate},#{description},#{satus},#{inUserNo},current_timestamp(),#{editUserNo},current_timestamp(),#{editComment})
+	</insert>
+	<update id="update" parameterType="com.hzfh.api.customer.model.ActivityMessageTemplate">
+		update activity_message_template set 
+		subject_template=#{subjectTemplate},content_template=#{contentTemplate},description=#{description},satus=#{satus},edit_user_no=#{editUserNo},edit_time=current_timestamp(),edit_comment=#{editComment}
+		where id=#{id}
+	</update>
+	<delete id="delete" parameterType="int">
+		delete from activity_message_template where id = #{id}
+	</delete>
+</mapper>

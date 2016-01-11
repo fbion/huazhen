@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hzfh.service.customer.mapper.ActivityMessageStatusMapper">
+	<resultMap type="com.hzfh.api.customer.model.ActivityMessageStatus" id="resultMapActivityMessageStatus">
+		<result property="id" column="id"/>
+		<result property="p2pCustomerNo" column="p2p_customer_no"/>
+		<result property="smsStatus" column="sms_status"/>
+		<result property="emailStatus" column="email_status"/>
+		<result property="inTime" column="in_time" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
+		<result property="editUserNo" column="edit_user_no"/>
+		<result property="editTime" column="edit_time" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
+		<result property="editComment" column="edit_comment"/>
+	</resultMap>
+	<select id="getList" resultMap="resultMapActivityMessageStatus">
+		SELECT id,p2p_customer_no,sms_status,email_status,in_time,edit_user_no,edit_time,edit_comment
+		FROM activity_message_status
+	</select>
+	<select id="getPagingList" resultMap="resultMapActivityMessageStatus" parameterType="com.hzfh.api.customer.model.query.ActivityMessageStatusCondition" statementType="STATEMENT">
+		SELECT id,p2p_customer_no,sms_status,email_status,in_time,edit_user_no,edit_time,edit_comment FROM activity_message_status where 1=1
+		ORDER BY
+		<foreach item="item" collection="sortItemList" separator=",">
+			${item.sortFeild} ${item.sortType}
+		</foreach>
+		LIMIT ${startIndex},${pageSize}
+	</select>
+	<select id="getTotalCount" resultType="int" parameterType="com.hzfh.api.customer.model.query.ActivityMessageStatusCondition" statementType="STATEMENT">
+		SELECT count(1) FROM activity_message_status where 1=1
+	</select>
+	<select id="getInfo" resultMap="resultMapActivityMessageStatus" parameterType="int">
+		SELECT id,p2p_customer_no,sms_status,email_status,in_time,edit_user_no,edit_time,edit_comment FROM activity_message_status where id=#{id}
+	</select>
+	<insert id="add" parameterType="com.hzfh.api.customer.model.ActivityMessageStatus" useGeneratedKeys="true" keyProperty="id">
+		insert into activity_message_status
+		(p2p_customer_no,sms_status,email_status,in_time,edit_user_no,edit_time,edit_comment)
+		values
+		(#{p2pCustomerNo},#{smsStatus},#{emailStatus},current_timestamp(),#{editUserNo},current_timestamp(),#{editComment})
+	</insert>
+	<update id="update" parameterType="com.hzfh.api.customer.model.ActivityMessageStatus">
+		update activity_message_status set 
+		p2p_customer_no=#{p2pCustomerNo},sms_status=#{smsStatus},email_status=#{emailStatus},edit_user_no=#{editUserNo},edit_time=current_timestamp(),edit_comment=#{editComment}
+		where id=#{id}
+	</update>
+	<delete id="delete" parameterType="int">
+		delete from activity_message_status where id = #{id}
+	</delete>
+</mapper>

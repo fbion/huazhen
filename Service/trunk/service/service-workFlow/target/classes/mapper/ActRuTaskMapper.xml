@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hzfh.service.workFlow.mapper.ActRuTaskMapper">
+	<resultMap type="com.hzfh.api.workFlow.model.ActRuTask" id="resultMapActRuTask">
+		<result property="id" column="ID_"/>
+		<result property="rev" column="REV_"/>
+		<result property="executionId" column="EXECUTION_ID_"/>
+		<result property="procInstId" column="PROC_INST_ID_"/>
+		<result property="procDefId" column="PROC_DEF_ID_"/>
+		<result property="name" column="NAME_"/>
+		<result property="parentTaskId" column="PARENT_TASK_ID_"/>
+		<result property="description" column="DESCRIPTION_"/>
+		<result property="taskDefKey" column="TASK_DEF_KEY_"/>
+		<result property="owner" column="OWNER_"/>
+		<result property="assignee" column="ASSIGNEE_"/>
+		<result property="delegation" column="DELEGATION_"/>
+		<result property="priority" column="PRIORITY_"/>
+		<result property="createTime" column="CREATE_TIME_" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
+		<result property="dueDate" column="DUE_DATE_" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
+		<result property="category" column="CATEGORY_"/>
+		<result property="suspensionState" column="SUSPENSION_STATE_"/>
+		<result property="tenantId" column="TENANT_ID_"/>
+		<result property="formKey" column="FORM_KEY_"/>
+	</resultMap>
+	<select id="getList" resultMap="resultMapActRuTask">
+		SELECT ID_,REV_,EXECUTION_ID_,PROC_INST_ID_,PROC_DEF_ID_,NAME_,PARENT_TASK_ID_,DESCRIPTION_,TASK_DEF_KEY_,OWNER_,ASSIGNEE_,DELEGATION_,PRIORITY_,CREATE_TIME_,DUE_DATE_,CATEGORY_,SUSPENSION_STATE_,TENANT_ID_,FORM_KEY_
+		FROM ACT_RU_TASK
+	</select>
+	<select id="getPagingList" resultMap="resultMapActRuTask" parameterType="com.hzfh.api.workFlow.model.query.ActRuTaskCondition" statementType="STATEMENT">
+		SELECT ID_,REV_,EXECUTION_ID_,PROC_INST_ID_,PROC_DEF_ID_,NAME_,PARENT_TASK_ID_,DESCRIPTION_,TASK_DEF_KEY_,OWNER_,ASSIGNEE_,DELEGATION_,PRIORITY_,CREATE_TIME_,DUE_DATE_,CATEGORY_,SUSPENSION_STATE_,TENANT_ID_,FORM_KEY_ 
+		FROM ACT_RU_TASK where 1=1
+		<if test="assignee != 0">and ASSIGNEE_ = ${assignee}</if>
+		<if test="byRequestUser != null and byRequestUser!=''">and PROC_INST_ID_ in
+			(SELECT PROC_INST_ID_ FROM ACT_HI_PROCINST WHERE start_user_id_ = 
+			(SELECT ID_ FROM ACT_ID_USER WHERE last_ = '${byRequestUser}'))</if>
+		<if test="bySelectTitle != null and bySelectTitle!=''">and PROC_DEF_ID_ like CONCAT("%",'${bySelectTitle}',"%")</if>
+		<if test="byDate != null and byDate!=''">and CREATE_TIME_ like CONCAT('${byDate}',"%")</if>
+		ORDER BY
+		<foreach item="item" collection="sortItemList" separator=",">
+			${item.sortFeild} ${item.sortType}
+		</foreach>
+		LIMIT ${startIndex},${pageSize}
+	</select>
+	<select id="getTotalCount" resultType="int" parameterType="com.hzfh.api.workFlow.model.query.ActRuTaskCondition" statementType="STATEMENT">
+		SELECT count(1) FROM ACT_RU_TASK where 1=1
+		<if test="assignee != 0">and ASSIGNEE_ = ${assignee}</if>
+		<if test="byRequestUser != null and byRequestUser!=''">and PROC_INST_ID_ in
+			(SELECT PROC_INST_ID_ FROM ACT_HI_PROCINST WHERE start_user_id_ = 
+			(SELECT ID_ FROM ACT_ID_USER WHERE last_ = '${byRequestUser}'))</if>
+		<if test="bySelectTitle != null and bySelectTitle!=''">and PROC_DEF_ID_ like CONCAT("%",'${bySelectTitle}',"%")</if>
+		<if test="byDate != null and byDate!=''">and CREATE_TIME_ like CONCAT('${byDate}',"%")</if>
+	</select>
+	<select id="getInfo" resultMap="resultMapActRuTask" parameterType="int">
+		SELECT ID_,REV_,EXECUTION_ID_,PROC_INST_ID_,PROC_DEF_ID_,NAME_,PARENT_TASK_ID_,DESCRIPTION_,TASK_DEF_KEY_,OWNER_,ASSIGNEE_,DELEGATION_,PRIORITY_,CREATE_TIME_,DUE_DATE_,CATEGORY_,SUSPENSION_STATE_,TENANT_ID_,FORM_KEY_ FROM ACT_RU_TASK where id=#{id}
+	</select>
+	<insert id="add" parameterType="com.hzfh.api.workFlow.model.ActRuTask" useGeneratedKeys="true" keyProperty="id">
+		insert into ACT_RU_TASK
+		(ID_,REV_,EXECUTION_ID_,PROC_INST_ID_,PROC_DEF_ID_,NAME_,PARENT_TASK_ID_,DESCRIPTION_,TASK_DEF_KEY_,OWNER_,ASSIGNEE_,DELEGATION_,PRIORITY_,CREATE_TIME_,DUE_DATE_,CATEGORY_,SUSPENSION_STATE_,TENANT_ID_,FORM_KEY_)
+		values
+		(#{iD},#{rEV},#{eXECUTIONID},#{pROCINSTID},#{pROCDEFID},#{nAME},#{pARENTTASKID},#{dESCRIPTION},#{tASKDEFKEY},#{oWNER},#{aSSIGNEE},#{dELEGATION},#{pRIORITY},#{cREATETIME},#{dUEDATE},#{cATEGORY},#{sUSPENSIONSTATE},#{tENANTID},#{fORMKEY})
+	</insert>
+	<update id="update" parameterType="com.hzfh.api.workFlow.model.ActRuTask">
+		update ACT_RU_TASK set 
+		ID_=#{iD},REV_=#{rEV},EXECUTION_ID_=#{eXECUTIONID},PROC_INST_ID_=#{pROCINSTID},PROC_DEF_ID_=#{pROCDEFID},NAME_=#{nAME},PARENT_TASK_ID_=#{pARENTTASKID},DESCRIPTION_=#{dESCRIPTION},TASK_DEF_KEY_=#{tASKDEFKEY},OWNER_=#{oWNER},ASSIGNEE_=#{aSSIGNEE},DELEGATION_=#{dELEGATION},PRIORITY_=#{pRIORITY},CREATE_TIME_=#{cREATETIME},DUE_DATE_=#{dUEDATE},CATEGORY_=#{cATEGORY},SUSPENSION_STATE_=#{sUSPENSIONSTATE},TENANT_ID_=#{tENANTID},FORM_KEY_=#{fORMKEY}
+		where id=#{id}
+	</update>
+	<delete id="delete" parameterType="int">
+		delete from ACT_RU_TASK where id = #{id}
+	</delete>
+	<select id="getAcceptTaskTotalCountByUserNo" resultType="int" parameterType="String">
+		SELECT count(1) FROM ACT_RU_TASK where 1=1
+		<if test="userNo != 0">and ASSIGNEE_ = #{userNo}</if>
+	</select>
+
+	<select id="getInfoByAciIdAndUserId" resultMap="resultMapActRuTask">
+		SELECT ID_,REV_,EXECUTION_ID_,PROC_INST_ID_,PROC_DEF_ID_,NAME_,PARENT_TASK_ID_,DESCRIPTION_,TASK_DEF_KEY_,OWNER_,ASSIGNEE_,DELEGATION_,PRIORITY_,CREATE_TIME_,DUE_DATE_,CATEGORY_,SUSPENSION_STATE_,TENANT_ID_,FORM_KEY_
+		FROM ACT_RU_TASK where PROC_INST_ID_=#{activityNo} AND ASSIGNEE_=#{userId}
+	</select>
+    <select id="getListByActivitiNo" resultMap="resultMapActRuTask">
+        SELECT ID_,REV_,EXECUTION_ID_,PROC_INST_ID_,PROC_DEF_ID_,NAME_,PARENT_TASK_ID_,DESCRIPTION_,TASK_DEF_KEY_,OWNER_,ASSIGNEE_,DELEGATION_,PRIORITY_,CREATE_TIME_,DUE_DATE_,CATEGORY_,SUSPENSION_STATE_,TENANT_ID_,FORM_KEY_
+        FROM ACT_RU_TASK where PROC_INST_ID_=#{activitiNo}
+	</select>
+	<delete id="deleteByActivitiNo">
+		delete from ACT_RU_TASK where PROC_INST_ID_ = #{activitiNo}
+	</delete>
+	<update id="updateAssigneeByActivitiNo">
+		update ACT_RU_TASK set 
+		ASSIGNEE_=#{assignee}
+		where PROC_INST_ID_=#{activitiNo}
+	</update>
+</mapper>

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hzfh.service.employee.mapper.NeedReleaseMapper">
+	<resultMap type="com.hzfh.api.employee.model.NeedRelease" id="resultMapNeedRelease">
+		<result property="id" column="id"/>
+		<result property="companyNo" column="company_no"/>
+		<result property="deptNo" column="dept_no"/>
+		<result property="positionNo" column="position_no"/>
+		<result property="addEmp" column="add_emp"/>
+		<result property="workProperty" column="work_property"/>
+		<result property="empRequire" column="emp_require"/>
+		<result property="workTime" column="work_time" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
+		<result property="mark" column="mark"/>
+		<result property="inUserNo" column="in_user_no"/>
+		<result property="inTime" column="in_time" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
+		<result property="editUserNo" column="edit_user_no"/>
+		<result property="editTime" column="edit_time" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
+		<result property="editComment" column="edit_comment"/>
+	</resultMap>
+	<select id="getList" resultMap="resultMapNeedRelease">
+		SELECT id,company_no,dept_no,position_no,add_emp,work_property,emp_require,work_time,mark,in_user_no,in_time,edit_user_no,edit_time,edit_comment
+		FROM need_release  order by in_time desc limit 3;
+	</select>
+	<select id="getPagingList" resultMap="resultMapNeedRelease" parameterType="com.hzfh.api.employee.model.query.NeedReleaseCondition" statementType="STATEMENT">
+		SELECT id,company_no,dept_no,position_no,add_emp,work_property,emp_require,work_time,mark,in_user_no,in_time,edit_user_no,edit_time,edit_comment FROM need_release where 1=1
+		ORDER BY 
+		<foreach item="item" collection="sortItemList" separator=",">
+			${item.sortFeild} ${item.sortType}
+		</foreach>
+		LIMIT ${startIndex},${pageSize} 
+	</select>
+	<select id="getTotalCount" resultType="int" parameterType="com.hzfh.api.employee.model.query.NeedReleaseCondition" statementType="STATEMENT">
+		SELECT count(1) FROM need_release where 1=1
+	</select>
+	<select id="getInfo" resultMap="resultMapNeedRelease" parameterType="int">
+		SELECT id,company_no,dept_no,position_no,add_emp,work_property,emp_require,work_time,mark,in_user_no,in_time,edit_user_no,edit_time,edit_comment FROM need_release where id=#{id}
+	</select>
+	<insert id="add" parameterType="com.hzfh.api.employee.model.NeedRelease" useGeneratedKeys="true" keyProperty="id">
+		insert into need_release
+		(company_no,dept_no,position_no,add_emp,work_property,emp_require,work_time,mark,in_user_no,in_time,edit_user_no,edit_time,edit_comment)
+		values
+		(#{companyNo},#{deptNo},#{positionNo},#{addEmp},#{workProperty},#{empRequire},#{workTime},#{mark},#{inUserNo},current_timestamp(),#{editUserNo},current_timestamp(),#{editComment})
+	</insert>
+	<update id="update" parameterType="com.hzfh.api.employee.model.NeedRelease">
+		update need_release set 
+		company_no=#{companyNo},dept_no=#{deptNo},position_no=#{positionNo},add_emp=#{addEmp},work_property=#{workProperty},emp_require=#{empRequire},work_time=#{workTime},mark=#{mark},edit_user_no=#{editUserNo},edit_time=current_timestamp(),edit_comment=#{editComment}
+		where id=#{id}
+	</update>
+	<delete id="delete" parameterType="int">
+		delete from need_release where id = #{id}
+	</delete>
+</mapper>

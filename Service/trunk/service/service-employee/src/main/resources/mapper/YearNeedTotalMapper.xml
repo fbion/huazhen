@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hzfh.service.employee.mapper.YearNeedTotalMapper">
+	<resultMap type="com.hzfh.api.employee.model.YearNeedTotal" id="resultMapYearNeedTotal">
+		<result property="id" column="id"/>
+		<result property="code" column="code"/>
+		<result property="financialYear" column="financial_year"/>
+		<result property="total" column="total"/>
+		<result property="activitiNo" column="activiti_no"/>
+		<result property="workFlowStatus" column="activiti_status"/>
+		<result property="inUserNo" column="in_user_no"/>
+		<result property="inTime" column="in_time" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
+		<result property="editUserNo" column="edit_user_no"/>
+		<result property="editTime" column="edit_time" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
+		<result property="editComment" column="edit_comment"/>
+	</resultMap>
+	<select id="getList" resultMap="resultMapYearNeedTotal">
+		SELECT id,code,financial_year,total,activiti_no,activiti_status,in_user_no,in_time,edit_user_no,edit_time,edit_comment
+		FROM year_need_total
+	</select>
+	<select id="getPagingList" resultMap="resultMapYearNeedTotal" parameterType="com.hzfh.api.employee.model.query.YearNeedTotalCondition" statementType="STATEMENT">
+		SELECT id,code,financial_year,total,activiti_no,activiti_status,in_user_no,in_time,edit_user_no,edit_time,edit_comment FROM year_need_total where 1=1
+		ORDER BY
+		<foreach item="item" collection="sortItemList" separator=",">
+			${item.sortFeild} ${item.sortType}
+		</foreach>
+		LIMIT ${startIndex},${pageSize}
+	</select>
+	<select id="getTotalCount" resultType="int" parameterType="com.hzfh.api.employee.model.query.YearNeedTotalCondition" statementType="STATEMENT">
+		SELECT count(1) FROM year_need_total where 1=1
+	</select>
+	<select id="getInfo" resultMap="resultMapYearNeedTotal" parameterType="int">
+		SELECT id,code,financial_year,total,activiti_no,activiti_status,in_user_no,in_time,edit_user_no,edit_time,edit_comment FROM year_need_total where id=#{id}
+	</select>
+	<select id="getInfoByYear" resultMap="resultMapYearNeedTotal" parameterType="int">
+		SELECT id,code,financial_year,total,activiti_no,activiti_status,in_user_no,in_time,edit_user_no,edit_time,edit_comment FROM year_need_total where financial_year=#{financialYear}
+	</select>
+	<insert id="add" parameterType="com.hzfh.api.employee.model.YearNeedTotal" useGeneratedKeys="true" keyProperty="id">
+		insert into year_need_total
+		(code,financial_year,total,activiti_no,activiti_status,in_user_no,in_time,edit_user_no,edit_time,edit_comment)
+		values
+		(#{code},#{financialYear},#{total},#{activitiNo},#{workFlowStatus},#{inUserNo},current_timestamp(),#{editUserNo},current_timestamp(),#{editComment})
+	</insert>
+	<update id="update" parameterType="com.hzfh.api.employee.model.YearNeedTotal">
+		update year_need_total set 
+		code=#{code},financial_year=#{financialYear},total=#{total},activiti_no=#{activitiNo},activiti_status=#{workFlowStatus},edit_user_no=#{editUserNo},edit_time=current_timestamp(),edit_comment=#{editComment}
+		where id=#{id}
+	</update>
+	<delete id="delete" parameterType="int">
+		delete from year_need_total where id = #{id}
+	</delete>
+</mapper>

@@ -1,0 +1,291 @@
+<?xml version="1.0"?>
+<scriptConfig xmlns="http://www.hzfh.com/web"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://www.hzfh.com/web ../../schemas/resources/Script.xsd">
+
+    <scriptMappings>
+        <!--Common begin-->
+        <script name="jQuery" order="1" isDevelop="false">jquery-1.11.1.min.js?t=1203</script>
+        <script name="datePicker" order="20" isDevelop="false">datePicker/wdatePicker.js?t=1203</script>
+        <script name="jgGrid" order="20" isDevelop="false">grid/jquery.jqGrid.min.js?t=1203</script>
+        <script name="gridCN" order="20" isDevelop="false">grid/grid.locale-cn.js?t=1203</script>
+        <!--  -->
+
+        <script name="select2" order="12" isDevelop="false">select2.min.js?t=1203</script>
+        <script name="bootstrap-typeahead" order="12" isDevelop="false">bootstrap-typeahead.js?t=1203</script>
+        <script name="bootstrap" order="12" isDevelop="false">bootstrap.js?t=1203</script>
+        <script name="easyUi" order="12" isDevelop="false">jquery.easyui.min.js?t=1203</script>
+        <script name="autocomplete" order="14" isDevelop="false">jquery.autocomplete.min.js?t=1203</script>
+        <script name="echarts" order="15" isDevelop="false">echarts.js?t=1203</script>
+        <script name="style" order="10" isDevelop="false">style.js?t=1203</script>
+        <script name="global" order="10" isDevelop="false">global.js?t=1203</script>
+        <script name="environmentVariable" order="2" isDevelop="true" type="Inline"></script>
+        <script name="loginVariable" order="3" isDevelop="true" type="Inline"></script>
+        <script name="base" order="5" isDevelop="true">common/base.js?t=1203</script>
+        <script name="ckEditor" order="20" isDevelop="true">ckeditor/ckeditor.js?t=1203</script>
+        <script name="pagination" order="6" isDevelop="true">common/jquery.pagination.js?t=1203</script>
+        <script name="treeControl" order="14" isDevelop="true">common/treeControl.js?t=1203</script>
+        <script name="ztreeCore" order="14" isDevelop="true">common/jquery.ztree.core-3.5.js?t=1203</script>
+        <script name="ztreeExcheck" order="14" isDevelop="true">common/jquery.ztree.excheck-3.5.js?t=1203</script>
+        <script name="base64" order="6" isDevelop="true">common/base64.js?t=1203</script>
+        <script name="ajaxfileupload" order="10" isDevelop="true">common/ajaxfileupload.js?t=1203</script>
+        <script name="upload" order="11" isDevelop="true">common/upload.js?t=1203</script>
+        <script name="ajaxUpload" order="12" isDevelop="true">common/ajaxUpload.js?t=1203</script>
+        <script name="enumList" order="15" isDevelop="true">common/enumList.js?t=1203</script>
+        <script name="validform" order="15" isDevelop="true">common/Validform_v5.3.2_min.js?t=1203</script>
+        <script name="nLinkage" order="16" isDevelop="true">common/n-linkage.js?t=1203</script>
+        <script name="login" order="20" isDevelop="true">permission/login.js?t=1203</script>
+		<script name="updatePwd" order="20" isDevelop="true">permission/updatePwd.js?t=1203</script>
+        <script name="userList" order="20" isDevelop="true">permission/userList.js?t=1203</script>
+        <script name="dicDataList" order="20" isDevelop="true">baseInfo/dicDataList.js?t=1203</script>
+        <script name="dicTypeList" order="20" isDevelop="true">baseInfo/dicTypeList.js?t=1203</script>
+        <script name="letterAdd" order="20" isDevelop="true">baseInfo/letterAdd.js?t=1203</script>
+        <script name="letterList" order="20" isDevelop="true">baseInfo/letterList.js?t=1203</script>
+        <script name="remindList" order="20" isDevelop="true">baseInfo/remindList.js?t=1203</script>
+        <script name="announcementList" order="20" isDevelop="true">baseInfo/announcementList.js?t=1203</script>
+        <script name="announcementAdd" order="20" isDevelop="true">baseInfo/announcementAdd.js?t=1203</script>
+        <script name="bannerInfoList" order="20" isDevelop="true">baseInfo/bannerInfoList.js?t=1203</script>
+        <script name="bannerInfoAdd" order="20" isDevelop="true">baseInfo/bannerInfoAdd.js?t=1203</script>
+        <script name="mailList" order="20" isDevelop="true">baseInfo/mailList.js?t=1203</script>
+        <script name="importData" order="20" isDevelop="true">baseInfo/importData.js?t=1203</script>
+        <!--customer js all in here -->
+        <script name="agentAdviserDetail" order="20" isDevelop="true">customer/agentAdviserDetail.js?t=1203</script>
+        <script name="agentBusinessDetail" order="20" isDevelop="true">customer/agentBusinessDetail.js?t=1203</script>
+        <script name="financierBusinessDetail" order="20" isDevelop="true">product/financierBusinessDetail.js?t=1203</script>
+        <script name="financierPersonalDetail" order="20" isDevelop="true">product/financierPersonalDetail.js?t=1203</script>
+        <script name="partnerIssuerDetail" order="20" isDevelop="true">product/partnerIssuerDetail.js?t=1203</script>
+        <script name="activitiesList" order="20" isDevelop="true">customer/activitiesList.js?t=1203</script>
+        <script name="activitiesAdd" order="20" isDevelop="true">customer/activitiesAdd.js?t=1203</script>
+        <script name="activitiesAddDetail" order="20" isDevelop="true">customer/activitiesAddDetail.js?t=1203</script>
+        <script name="agentAdviserList" order="20" isDevelop="true">customer/agentAdviserList.js?t=1203</script>
+        <script name="agentAdviserListEffective" order="20" isDevelop="true">customer/agentAdviserListEffective.js?t=1203</script>
+        <script name="agentAdviserAdd" order="20" isDevelop="true">customer/agentAdviserAdd.js?t=1203</script>
+        <script name="agentBusinessList" order="20" isDevelop="true">customer/agentBusinessList.js?t=1203</script>
+        <script name="agentBusinessListEffective" order="20" isDevelop="true">customer/agentBusinessListEffective.js?t=1203</script>
+        <script name="customerActivityList" order="20" isDevelop="true">customer/customerActivityList.js?t=1203</script>
+        <script name="customerBrokerageLadderList" order="20" isDevelop="true">customer/customerBrokerageLadderList.js?t=1203</script>
+        <script name="customerCompanyList" order="20" isDevelop="true">customer/customerCompanyList.js?t=1203</script>
+        <script name="customerCompanyListEffective" order="20" isDevelop="true">customer/customerCompanyListEffective.js?t=1203</script>
+        <script name="customerCompanyDetail" order="20" isDevelop="true">customer/customerCompanyDetail.js?t=1203</script>
+        <script name="customerEmpList" order="20" isDevelop="true">customer/customerEmpList.js?t=1203</script>
+        <script name="customerFollowList" order="20" isDevelop="true">customer/customerFollowList.js?t=1203</script>
+        <script name="customerNoticeList" order="20" isDevelop="true">customer/customerNoticeList.js?t=1203</script>
+        <script name="customerPersonalList" order="20" isDevelop="true">customer/customerPersonalList.js?t=1203</script>
+        <script name="customerPersonalDetail" order="20" isDevelop="true">customer/customerPersonalDetail.js?t=1203</script>
+        <script name="customerVisitList" order="20" isDevelop="true">customer/customerVisitList.js?t=1203</script>
+        <script name="noticeList" order="20" isDevelop="true">customer/noticeList.js?t=1203</script>
+        <script name="p2pCustomerList" order="20" isDevelop="true">customer/p2pCustomerList.js?t=1203</script>
+        <script name="agentBusinessAdd" order="20" isDevelop="true">customer/agentBusinessAdd.js?t=1203</script>
+        <script name="customerCompanyAdd" order="20" isDevelop="true">customer/customerCompanyAdd.js?t=1203</script>
+		<script name="customerPersonalAdd" order="20" isDevelop="true">customer/customerPersonalAdd.js?t=1203</script>
+        <script name="customerPersonalListEffective" order="20" isDevelop="true">customer/customerPersonalListEffective.js?t=1203</script>
+
+		<script name="paymentMoneyRechargeAdd" order="20" isDevelop="true">customer/paymentMoneyRechargeAdd.js?t=1203</script>
+		<script name="paymentMoneyRechargeList" order="20" isDevelop="true">customer/paymentMoneyRechargeList.js?t=1203</script>
+		<script name="paymentMoneyWithdrawAdd" order="20" isDevelop="true">customer/paymentMoneyWithdrawAdd.js?t=1203</script>
+		<script name="paymentMoneyWithdrawList" order="20" isDevelop="true">customer/paymentMoneyWithdrawList.js?t=1203</script>
+        <script name="addCustomerReport" order="20" isDevelop="true">customer/addCustomerReport.js?t=1203</script>
+        <script name="addSalesReport" order="20" isDevelop="true">sales/addSalesReport.js?t=1203</script>
+        <script name="addCustomerReportWealth" order="20" isDevelop="true">customer/addCustomerReportWealth.js?t=1203</script>
+
+        <!-- permission js all in here -->
+        <script name="privilegeList" order="20" isDevelop="true">permission/privilegeList.js?t=1203</script>
+        <script name="roleList" order="20" isDevelop="true">permission/roleList.js?t=1203</script>
+        <script name="rolePrivilegeList" order="20" isDevelop="true">permission/rolePrivilegeList.js?t=1203</script>
+        <script name="userList" order="20" isDevelop="true">permission/userList.js?t=1203</script>
+        <script name="userRoleList" order="20" isDevelop="true">permission/userRoleList.js?t=1203</script>
+        <script name="elementList" order="20" isDevelop="true">permission/elementList.js?t=1203</script>
+        <script name="dataManage" order="20" isDevelop="true">permission/dataManage.js?t=1203</script>
+        
+        <!-- 权限树结构   mengchong 2015/02/14 -->
+        <script name="dhtmlxCommon" order="12" isDevelop="false">dhtmlxTree/dhtmlxcommon.js?t=1203</script>
+        <script name="dhtmlxTree" order="13" isDevelop="false">dhtmlxTree/dhtmlxtree.js?t=1203</script>
+        <!-- <script name="tree_display" order="24" isDevelop="true">permission/tree_display.js?t=1203</script> -->
+        <!-- <script name="dhtmlxtree_dragin" order="15" isDevelop="true">dhtmlxTree/ext/dhtmlxtree_dragin.js?t=1203</script>
+        <script name="dhtmlxtree_ed" order="16" isDevelop="true">dhtmlxTree/ext/dhtmlxtree_ed.js?t=1203</script>
+        <script name="dhtmlxtree_er" order="17" isDevelop="true">dhtmlxTree/ext/dhtmlxtree_er.js?t=1203</script>
+        <script name="dhtmlxtree_json" order="18" isDevelop="true">dhtmlxTree/ext/dhtmlxtree_json.js?t=1203</script>
+        <script name="dhtmlxtree_start" order="19" isDevelop="true">dhtmlxTree/ext/dhtmlxtree_start.js?t=1203</script> -->
+        
+        
+
+        <!-- employee js all in here -->
+        <script name="companyList" order="20" isDevelop="true">employee/companyList.js?t=1203</script>
+        <script name="departmentList" order="20" isDevelop="true">employee/departmentList.js?t=1203</script>
+        <script name="empBrokerageLadderList" order="20" isDevelop="true">employee/empBrokerageLadderList.js?t=1203</script>
+        <script name="employeeDetailAdd" order="20" isDevelop="true">employee/employeeDetailAdd.js?t=1203</script>
+        <script name="employeeEducationAdd" order="20" isDevelop="true">employee/employeeEducationAdd.js?t=1203</script>
+        <script name="familyMembersAdd" order="20" isDevelop="true">employee/familyMembersAdd.js?t=1203</script>
+        <script name="workExperienceAdd" order="20" isDevelop="true">employee/workExperienceAdd.js?t=1203</script>
+        <script name="employeeOtherInfoAdd" order="20" isDevelop="true">employee/employeeOtherInfoAdd.js?t=1203</script>
+        <script name="employeeList" order="20" isDevelop="true">employee/employeeList.js?t=1203</script>
+        <script name="otherList" order="20" isDevelop="true">employee/otherList.js?t=1203</script>
+        <script name="overtimeList" order="20" isDevelop="true">employee/overtimeList.js?t=1203</script>
+        <script name="paymentList" order="20" isDevelop="true">employee/paymentList.js?t=1203</script>
+        <script name="positionLevelList" order="20" isDevelop="true">employee/positionLevelList.js?t=1203</script>
+        <script name="positionList" order="20" isDevelop="true">employee/positionList.js?t=1203</script>
+        <script name="signList" order="20" isDevelop="true">employee/signList.js?t=1203</script>
+        <script name="welfareList" order="20" isDevelop="true">employee/welfareList.js?t=1203</script>
+		<script name="employeeAdd" order="20" isDevelop="true">employee/employeeAdd.js?t=1203</script>
+		<script name="departmentAdd" order="20" isDevelop="true">employee/departmentAdd.js?t=1203</script>
+		<script name="achievementCommissionList" order="20" isDevelop="true">employee/achievementCommissionList.js?t=1203</script>
+		<script name="deptYearNeedList" order="20" isDevelop="true">employee/deptYearNeedList.js?t=1203</script>
+		<script name="deptYearNeedAdd" order="20" isDevelop="true">employee/deptYearNeedAdd.js?t=1203</script>
+
+        <script name="yearNeedTotalAdd" order="20" isDevelop="true">employee/yearNeedTotalAdd.js?t=1203</script>
+		<script name="deptYearNeedDetailAdd" order="20" isDevelop="true">employee/deptYearNeedDetailAdd.js?t=1203</script>
+		<script name="deptYearNeedDetailList" order="20" isDevelop="true">employee/deptYearNeedDetailList.js?t=1203</script>
+		<script name="extendProbationApplicationAdd" order="20" isDevelop="true">employee/extendProbationApplicationAdd.js?t=1203</script>
+		<script name="extendProbationApplicationList" order="20" isDevelop="true">employee/extendProbationApplicationList.js?t=1203</script>
+		
+		<script name="needReleaseAdd" order="20" isDevelop="true">employee/needReleaseAdd.js?t=1203</script>
+		<script name="needReleaseList" order="20" isDevelop="true">employee/needReleaseList.js?t=1203</script>
+		<script name="knowledgeBaseAdd" order="20" isDevelop="true">employee/knowledgeBaseAdd.js?t=1203</script>
+		<script name="knowledgeBaseList" order="20" isDevelop="true">employee/knowledgeBaseList.js?t=1203</script>
+		<script name="knowledgeBaseInfo" order="20" isDevelop="true">employee/knowledgeBaseInfo.js?t=1203</script>
+		
+		
+		<script name="tempRecruitDetailAdd" order="20" isDevelop="true">employee/tempRecruitDetailAdd.js?t=1203</script>
+		<script name="tempRecruitDetailList" order="20" isDevelop="true">employee/tempRecruitDetailList.js?t=1203</script>
+		<script name="tempRecruitNeedAdd" order="20" isDevelop="true">employee/tempRecruitNeedAdd.js?t=1203</script>
+		<script name="tempRecruitNeedList" order="20" isDevelop="true">employee/tempRecruitNeedList.js?t=1203</script>
+		<script name="yearNeedList" order="20" isDevelop="true">employee/yearNeedList.js?t=1203</script>
+        <script name="yearNeedTotalList" order="20" isDevelop="true">employee/yearNeedTotalList.js?t=1203</script>
+		<script name="subsidyList" order="20" isDevelop="true">employee/subsidyList.js?t=1203</script>
+		<script name="subsidyTotalAdd" order="20" isDevelop="true">employee/subsidyTotalAdd.js?t=1203</script>
+		<script name="subsidyTotalList" order="20" isDevelop="true">employee/subsidyTotalList.js?t=1203</script>
+		<script name="recruitAskRecordAdd" order="20" isDevelop="true">employee/recruitAskRecordAdd.js?t=1203</script>
+		<script name="recruitAskRecordList" order="20" isDevelop="true">employee/recruitAskRecordList.js?t=1203</script>
+		
+        <script name="empCompilePlanList" order="20" isDevelop="true">employee/empCompilePlanList.js?t=1203</script>
+		<script name="interviewEvaluationRecordAdd" order="20" isDevelop="true">employee/interviewEvaluationRecordAdd.js?t=1203</script>
+		<script name="interviewEvaluationRecordList" order="20" isDevelop="true">employee/interviewEvaluationRecordList.js?t=1203</script>
+		
+		<script name="attendanceApplicationList" order="20" isDevelop="true">employee/attendanceApplicationList.js?t=1203</script>
+		<script name="attendanceApplicationAdd" order="20" isDevelop="true">employee/attendanceApplicationAdd.js?t=1203</script>
+		<script name="personalChangeList" order="20" isDevelop="true">employee/personalChangeList.js?t=1203</script>
+		<script name="personalChangeAdd" order="20" isDevelop="true">employee/personalChangeAdd.js?t=1203</script>
+		<script name="resignApplicationList" order="20" isDevelop="true">employee/resignApplicationList.js?t=1203</script>
+		<script name="resignApplicationAdd" order="20" isDevelop="true">employee/resignApplicationAdd.js?t=1203</script>
+		
+		<script name="probationWorkSummaryAdd" order="20" isDevelop="true">employee/probationWorkSummaryAdd.js?t=1203</script>
+		<script name="probationWorkSummaryList" order="20" isDevelop="true">employee/probationWorkSummaryList.js?t=1203</script>
+		<script name="managerEvaluationAdd" order="20" isDevelop="true">employee/managerEvaluationAdd.js?t=1203</script>
+		<script name="managerEvaluationList" order="20" isDevelop="true">employee/managerEvaluationList.js?t=1203</script>
+		
+		<script name="probationEvaluationAdd" order="20" isDevelop="true">employee/probationEvaluationAdd.js?t=1203</script>
+		<script name="probationEvaluationList" order="20" isDevelop="true">employee/probationEvaluationList.js?t=1203</script>
+
+        <script name="commissionWealthCenterList" order="20" isDevelop="true">employee/commissionWealthCenterList.js?t=1203</script>
+        
+        <script name="fixedAssetsList" order="20" isDevelop="true">employee/fixedAssetsList.js?t=1203</script>
+        <script name="fixedAssetsAdd" order="20" isDevelop="true">employee/fixedAssetsAdd.js?t=1203</script>
+        <script name="fixedAssetsDetail" order="20" isDevelop="true">employee/fixedAssetsDetail.js?t=1203</script>
+		<script name="suppliersList" order="20" isDevelop="true">employee/suppliersList.js?t=1203</script>
+        <script name="suppliersAdd" order="20" isDevelop="true">employee/suppliersAdd.js?t=1203</script>
+        <script name="suppliersDetail" order="20" isDevelop="true">employee/suppliersDetail.js?t=1203</script>
+        
+		
+        <!-- product js all in here -->
+        <script name="decisionList" order="20" isDevelop="true">product/decisionList.js?t=1203</script>
+        <script name="decisionLogList" order="20" isDevelop="true">product/decisionLogList.js?t=1203</script>
+        <script name="financierBusinessList" order="20" isDevelop="true">product/financierBusinessList.js?t=1203</script>
+        <script name="financierBusinessAdd" order="20" isDevelop="true">product/financierBusinessAdd.js?t=1203</script>
+        <script name="financierPersonalList" order="20" isDevelop="true">product/financierPersonalList.js?t=1203</script>
+        <script name="financierPersonalAdd" order="20" isDevelop="true">product/financierPersonalAdd.js?t=1203</script>
+        <script name="productDetailList" order="20" isDevelop="true">product/productDetailList.js?t=1203</script>
+        <script name="partnerIssuerList" order="20" isDevelop="true">product/partnerIssuerList.js?t=1203</script>
+        <script name="partnerIssuerAdd" order="20" isDevelop="true">product/partnerIssuerAdd.js?t=1203</script>
+        <script name="partnerRateList" order="20" isDevelop="true">product/partnerRateList.js?t=1203</script>
+        <script name="productList" order="20" isDevelop="true">product/productList.js?t=1203</script>
+        <script name="protocolList" order="20" isDevelop="true">product/protocolList.js?t=1203</script>
+        <script name="productAdd" order="20" isDevelop="true">product/productAdd.js?t=1203</script>
+        <script name="productDetail" order="20" isDevelop="true">product/productDetail.js?t=1203</script>
+		<script name="productStagesList" order="20" isDevelop="true">product/productStagesList.js?t=1203</script>
+        <script name="p2pProductList" order="20" isDevelop="true">product/p2pProductList.js?t=1203</script>
+        <script name="p2pProductAdd" order="20" isDevelop="true">product/p2pProductAdd.js?t=1203</script>
+        <script name="p2pProductExamine" order="20" isDevelop="true">product/p2pProductExamine.js?t=1203</script>
+        <script name="productExamine" order="20" isDevelop="true">product/productExamine.js?t=1203</script>
+        <script name="p2pProductDetail" order="20" isDevelop="true">product/p2pProductDetail.js?t=1203</script>
+        <script name="financeProductList" order="20" isDevelop="true">product/financeProductList.js?t=1203</script>
+
+        <!-- sales js all in here -->
+        <script name="agentExpenseList" order="20" isDevelop="true">sales/agentExpenseList.js?t=1203</script>
+        <script name="agentRateList" order="20" isDevelop="true">sales/agentRateList.js?t=1203</script>
+        <script name="brokerageCalculateList" order="20" isDevelop="true">sales/brokerageCalculateList.js?t=1203</script>
+        <script name="contractList" order="20" isDevelop="true">sales/contractList.js?t=1203</script>
+        <script name="incomeList" order="20" isDevelop="true">sales/incomeList.js?t=1203</script>
+        <script name="salesEmpCalculateList" order="20" isDevelop="true">sales/salesEmpCalculateList.js?t=1203</script>
+        <script name="salesList" order="20" isDevelop="true">sales/salesList.js?t=1203</script>
+        <script name="creditorList" order="20" isDevelop="true">sales/creditorList.js?t=1203</script>
+        <script name="salesListOnLine" order="20" isDevelop="true">sales/salesListOnLine.js?t=1203</script>
+		<script name="salesAdd" order="20" isDevelop="true">sales/salesAdd.js?t=1203</script>
+        <script name="salesAddForProduct" order="20" isDevelop="true">sales/salesAddForProduct.js?t=1203</script>
+        <script name="salesAddForP2pProduct" order="20" isDevelop="true">sales/salesAddForP2pProduct.js?t=1203</script>
+        <script name="salesDetailOnLine" order="20" isDevelop="true">sales/salesDetailOnLine.js?t=1203</script>
+        <script name="salesDetailForProduct" order="20" isDevelop="true">sales/salesDetailForProduct.js?t=1203</script>
+		<script name="salesDetailForP2pProduct" order="20" isDevelop="true">sales/salesDetailForP2pProduct.js?t=1203</script>
+        <script name="taskAdd" order="20" isDevelop="true">sales/taskAdd.js?t=1203</script>
+		<script name="productTaskList" order="20" isDevelop="true">sales/productTaskList.js?t=1203</script>
+		<script name="taskDecisionList" order="20" isDevelop="true">sales/taskDecisionList.js?t=1203</script>
+		<script name="taskDecisionLogList" order="20" isDevelop="true">sales/taskDecisionLogList.js?t=1203</script>
+        <script name="p2pSubscribeList" order="20" isDevelop="true">sales/p2pSubscribeList.js?t=1203</script>
+        <script name="p2pSubscribeAssign" order="40" isDevelop="true">sales/p2pSubscribeAssign.js?t=1203</script>
+        <script name="p2pNoSubscribeAssign" order="40" isDevelop="true">customer/p2pNoSubscribeAssign.js?t=1203</script>
+        <script name="p2pInvestmentList" order="20" isDevelop="true">sales/p2pInvestmentList.js?t=1203</script>
+      
+        
+        <script name="activityAdd" order="20" isDevelop="true">sales/activityAdd.js?t=1203</script>
+		<script name="activityAttachmentAdd" order="21" isDevelop="true">sales/activityAttachmentAdd.js?t=1203</script>
+		<script name="activityAttachmentList" order="22" isDevelop="true">sales/activityAttachmentList.js?t=1203</script>
+		<script name="applyCustomerAdd" order="23" isDevelop="true">sales/applyCustomerAdd.js?t=1203</script>
+		<script name="applyCustomerList" order="26" isDevelop="true">sales/applyCustomerList.js?t=1203</script>
+		<script name="applyEmployeeAdd" order="24" isDevelop="true">sales/applyEmployeeAdd.js?t=1203</script>
+		<script name="activityList" order="25" isDevelop="true">sales/activityList.js?t=1203</script>
+		<script name="applyEmployeeList" order="27" isDevelop="true">sales/applyEmployeeList.js?t=1203</script>
+  		<script name="myCustomerList" order="28" isDevelop="true">sales/myCustomerList.js?t=1203</script>
+  		
+        <script name="index" order="20" isDevelop="true">index.js?t=1203</script>
+        <script name="newIndex" order="20" isDevelop="true">newIndex.js?t=1203</script>
+        <script name="main" order="20" isDevelop="true">newIndex.js?t=1203</script>
+        <!-- sendLetterIndex all here -->
+        <script name="sendLetterIndex" order="20" isDevelop="true">sendLetterIndex.js?t=1203</script>
+        
+        <!-- work_flow -->
+        <script name="actIdGroupList" order="20" isDevelop="true">workFlow/actIdGroupList.js?t=1203</script>
+        <script name="actIdGroupAdd" order="20" isDevelop="true">workFlow/actIdGroupAdd.js?t=1203</script>
+        <script name="actIdUserList" order="20" isDevelop="true">workFlow/actIdUserList.js?t=1203</script>
+        <script name="actIdUserAdd" order="20" isDevelop="true">workFlow/actIdUserAdd.js?t=1203</script>
+        <script name="processingList" order="20" isDevelop="true">workFlow/processingList.js?t=1203</script>
+        <script name="auditTaskList" order="20" isDevelop="true">workFlow/auditTaskList.js?t=1203</script>
+        <script name="actReProcDefList" order="20" isDevelop="true">workFlow/actReProcDefList.js?t=1203</script>
+        <script name="approvalHistoriaList" order="20" isDevelop="true">workFlow/approvalHistoriaList.js?t=1203</script>
+
+        <!-- payment'js all here -->
+        <script name="paymentRefundAdd" order="20" isDevelop="true">payment/paymentRefundAdd.js?t=1203</script>
+        <script name="paymentRefundList" order="20" isDevelop="true">payment/paymentRefundList.js?t=1203</script>
+        <script name="paymentRefundOffLineList" order="20" isDevelop="true">payment/paymentRefundOffLineList.js?t=1203</script>
+
+        <script name="moment" order="30" isDevelop="true">common/moment.min.js?t=1203</script>
+        <!-- <script name="fullcalendar" order="20" isDevelop="true">common/fullcalendar.min.js?t=1203</script>
+         -->
+         <script name="calendarList" order="10" isDevelop="true">baseInfo/calendarList.js?t=1203</script>
+        <script name="dhtmlxscheduler" order="20" isDevelop="true">common/dhtmlxscheduler.js?t=1203</script>
+        <script name="loanSituation" order="20" isDevelop="true">sales/loanSituation.js?t=1203</script>
+        <script name="paymentReportList" order="20" isDevelop="true">report/paymentReportList.js?t=1203</script>
+        <script name="paymentReportDeatilList" order="20" isDevelop="true">report/paymentReportDeatilList.js?t=1203</script>
+
+        <!-- market`js  -->
+        <script name="activityUsersAdd" order="10" isDevelop="true">market/activityUsersAdd.js?t=1203</script>
+        <script name="activityUsersDetail" order="10" isDevelop="true">market/activityUsersDetail.js?t=1203</script>
+        <script name="activityUsersList" order="10" isDevelop="true">market/activityUsersList.js?t=1203</script>
+        <script name="drawSettingAdd" order="10" isDevelop="true">market/drawSettingAdd.js?t=1203</script>
+        <script name="drawSettingDetail" order="10" isDevelop="true">market/drawSettingDetail.js?t=1203</script>
+        <script name="drawSettingList" order="10" isDevelop="true">market/drawSettingList.js?t=1203</script>
+        <script name="winningRecordAdd" order="10" isDevelop="true">market/winningRecordAdd.js?t=1203</script>
+        <script name="winningRecordDetail" order="10" isDevelop="true">market/winningRecordDetail.js?t=1203</script>
+        <script name="winningRecordList" order="10" isDevelop="true">market/winningRecordList.js?t=1203</script>
+        
+        
+    </scriptMappings>
+</scriptConfig>	

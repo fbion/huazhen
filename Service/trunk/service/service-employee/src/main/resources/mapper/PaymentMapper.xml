@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hzfh.service.employee.mapper.PaymentMapper">
+	<resultMap type="com.hzfh.api.employee.model.Payment" id="resultMapPayment">
+		<result property="id" column="id" />
+		<result property="position" column="position" />
+		<result property="award" column="award" />
+		<result property="allowance" column="allowance" />
+		<result property="travel" column="travel" />
+		<result property="salary" column="salary" />
+		<result property="comment" column="comment" />
+		<result property="salarydate" column="salarydate" jdbcType="TIMESTAMP"
+			javaType="java.sql.Timestamp" />
+		<result property="empNo" column="emp_no" />
+		<result property="inUserNo" column="in_user_no" />
+		<result property="inTime" column="in_time" jdbcType="TIMESTAMP"
+			javaType="java.sql.Timestamp" />
+		<result property="editUserNo" column="edit_user_no" />
+		<result property="editTime" column="edit_time" jdbcType="TIMESTAMP"
+			javaType="java.sql.Timestamp" />
+		<result property="editComment" column="edit_comment" />
+	</resultMap>
+	<select id="getList" resultMap="resultMapPayment">
+		SELECT
+		id,position,award,allowance,travel,salary,comment,salarydate,emp_no,in_user_no,in_time,edit_user_no,edit_time,edit_comment
+		FROM payment
+	</select>
+	<select id="getPagingList" resultMap="resultMapPayment"
+		parameterType="com.hzfh.api.employee.model.query.PaymentCondition"
+		statementType="STATEMENT">
+		SELECT
+		id,position,award,allowance,travel,salary,comment,salarydate,emp_no,in_user_no,in_time,edit_user_no,edit_time,edit_comment
+		FROM payment where 1=1
+	
+		ORDER BY
+		<foreach item="item" collection="sortItemList" separator=",">
+			${item.sortFeild} ${item.sortType}
+		</foreach>
+		LIMIT ${startIndex},${pageSize}
+	</select>
+	<select id="getTotalCount" resultType="int"
+		parameterType="com.hzfh.api.employee.model.query.PaymentCondition"
+		statementType="STATEMENT">
+		SELECT count(1) FROM payment where 1=1
+	</select>
+	<select id="getInfo" resultMap="resultMapPayment" parameterType="int">
+		SELECT
+		id,position,award,allowance,travel,salary,comment,salarydate,emp_no,in_user_no,in_time,edit_user_no,edit_time,edit_comment
+		FROM payment where id=#{id}
+	</select>
+	<insert id="add" parameterType="com.hzfh.api.employee.model.Payment"
+		useGeneratedKeys="true" keyProperty="id">
+		insert into payment
+		(position,award,allowance,travel,salary,comment,salarydate,emp_no,in_user_no,in_time,edit_user_no,edit_time,edit_comment)
+		values
+		(#{position},#{award},#{allowance},#{travel},#{salary},#{comment},#{salarydate},#{empNo},#{inUserNo},current_timestamp(),#{editUserNo},current_timestamp(),#{editComment})
+	</insert>
+	<update id="update" parameterType="com.hzfh.api.employee.model.Payment">
+		update payment set
+		position=#{position},award=#{award},allowance=#{allowance},travel=#{travel},salary=#{salary},comment=#{comment},salarydate=#{salarydate},emp_no=#{empNo},edit_user_no=#{editUserNo},edit_time=current_timestamp(),edit_comment=#{editComment}
+		where id=#{id}
+	</update>
+	<delete id="delete" parameterType="int">
+		delete from payment where id =
+		#{id}
+	</delete>
+</mapper>

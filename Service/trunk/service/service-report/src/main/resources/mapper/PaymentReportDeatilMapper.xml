@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hzfh.service.report.mapper.PaymentReportDeatilMapper">
+    <resultMap type="com.hzfh.api.report.model.PaymentReportDeatil" id="resultMapPaymentReportDeatil">
+        <result property="id" column="id"/>
+        <result property="paymentReportNo" column="payment_report_no"/>
+        <result property="paymentNo" column="payment_no"/>
+        <result property="customerNo" column="customer_no"/>
+        <result property="productNo" column="product_no"/>
+        <result property="income" column="income"/>
+        <result property="purchaseDate" column="purchase_date" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
+        <result property="repaymentDate" column="repayment_date" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
+        <result property="salesMoney" column="sales_money"/>
+        <result property="interest" column="interest"/>
+        <result property="payMoney" column="pay_money"/>
+        <result property="payDate" column="pay_date" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
+        <result property="accountNumber" column="account_number"/>
+        <result property="bankAddress" column="bank_address"/>
+        <result property="deptNo" column="dept_no"/>
+        <result property="agentNo" column="agent_no"/>
+        <result property="cardNumber" column="card_number"/>
+        <result property="cellphone" column="cellphone"/>
+        <result property="editComment" column="edit_comment"/>
+        <result property="inTime" column="in_time" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
+        <result property="inUserNo" column="in_user_no"/>
+        <result property="payType" column="pay_type"/>
+
+    </resultMap>
+    <select id="getList" resultMap="resultMapPaymentReportDeatil">
+        SELECT id,payment_report_no,payment_no,pay_type,customer_no,product_no,income,purchase_date,repayment_date,sales_money,interest,pay_money,pay_date,account_number,bank_address,dept_no,agent_no,card_number,cellphone,edit_comment,in_time,in_user_no
+        FROM payment_report_deatil
+    </select>
+    <select id="getListByPaymentReportNo" resultMap="resultMapPaymentReportDeatil" parameterType="int">
+        SELECT id,payment_report_no,payment_no,pay_type,customer_no,product_no,income,purchase_date,repayment_date,sales_money,interest,pay_money,pay_date,account_number,bank_address,dept_no,agent_no,card_number,cellphone,edit_comment,in_time,in_user_no
+        FROM payment_report_deatil where payment_report_no = #{paymentReportNo}
+    </select>
+
+    <select id="getPagingList" resultMap="resultMapPaymentReportDeatil" parameterType="com.hzfh.api.report.model.query.PaymentReportDeatilCondition" statementType="STATEMENT">
+        SELECT id,payment_report_no,payment_no,pay_type,customer_no,product_no,income,purchase_date,repayment_date,sales_money,interest,pay_money,pay_date,account_number,bank_address,dept_no,agent_no,card_number,cellphone,edit_comment,in_time,in_user_no FROM payment_report_deatil where 1=1
+        ORDER BY
+        <foreach item="item" collection="sortItemList" separator=",">
+            ${item.sortFeild} ${item.sortType}
+        </foreach>
+        LIMIT ${startIndex},${pageSize}
+    </select>
+    <select id="getTotalCount" resultType="int" parameterType="com.hzfh.api.report.model.query.PaymentReportDeatilCondition" statementType="STATEMENT">
+        SELECT count(1) FROM payment_report_deatil where 1=1
+    </select>
+    <select id="getInfo" resultMap="resultMapPaymentReportDeatil" parameterType="int">
+        SELECT id,payment_report_no,pay_type,payment_no,customer_no,product_no,income,purchase_date,repayment_date,sales_money,interest,pay_money,pay_date,account_number,bank_address,dept_no,agent_no,card_number,cellphone,edit_comment,in_time,in_user_no FROM payment_report_deatil where id=#{id}
+    </select>
+    <insert id="add" parameterType="com.hzfh.api.report.model.PaymentReportDeatil" useGeneratedKeys="true" keyProperty="id">
+        insert into payment_report_deatil
+        (payment_report_no,payment_no,customer_no,pay_type,product_no,income,purchase_date,repayment_date,sales_money,interest,pay_money,pay_date,account_number,bank_address,dept_no,agent_no,card_number,cellphone,edit_comment,in_time,in_user_no)
+        values
+        (#{paymentReportNo},#{paymentNo},#{customerNo},#{payType},#{productNo},#{income},#{purchaseDate},#{repaymentDate},#{salesMoney},#{interest},#{payMoney},#{payDate},#{accountNumber},#{bankAddress},#{deptNo},#{agentNo},#{cardNumber},#{cellphone},#{editComment},current_timestamp(),#{inUserNo})
+    </insert>
+    <update id="update" parameterType="com.hzfh.api.report.model.PaymentReportDeatil">
+        update payment_report_deatil set
+        payment_report_no=#{paymentReportNo},pay_type=#{payType},payment_no=#{paymentNo},customer_no=#{customerNo},product_no=#{productNo},income=#{income},purchase_date=#{purchaseDate},repayment_date=#{repaymentDate},sales_money=#{salesMoney},interest=#{interest},pay_money=#{payMoney},pay_date=#{payDate},account_number=#{accountNumber},bank_address=#{bankAddress},dept_no=#{deptNo},agent_no=#{agentNo},card_number=#{cardNumber},cellphone=#{cellphone},edit_comment=#{editComment}
+        where id=#{id}
+    </update>
+    <delete id="delete" parameterType="int">
+        delete from payment_report_deatil where id = #{id}
+    </delete>
+    <select id="getListByReportNo" resultMap="resultMapPaymentReportDeatil" parameterType="int">
+        SELECT id,payment_report_no,payment_no,customer_no,pay_type,product_no,income,purchase_date,repayment_date,sales_money,interest,pay_money,pay_date,account_number,bank_address,dept_no,agent_no,card_number,cellphone,edit_comment,in_time,in_user_no
+        FROM payment_report_deatil
+        where payment_report_no = ${reportNo}
+    </select>
+    <select id="getTotalPayMoneyByPaymentReportNo" resultMap="resultMapPaymentReportDeatil" parameterType="int">
+        select sum(pay_money) as pay_money from payment_report_deatil where payment_report_no = #{paymentReportNo}
+    </select>
+
+</mapper>

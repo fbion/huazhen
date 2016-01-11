@@ -1,0 +1,428 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://www.springframework.org/schema/beans" xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+
+       http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context-4.0.xsd"
+	default-autowire="byName" default-lazy-init="false">
+	<context:component-scan base-package="com.hzfh.service" />
+	<context:annotation-config />
+	<bean id="hessianMapping"
+		class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+		<property name="mappings">
+			<props>
+				<prop key="/activities">activitiesService</prop>
+				<prop key="/activityAwardRelation">activityAwardRelationService</prop>
+				<prop key="/activityCashBonus">activityCashBonusService</prop>
+				<prop key="/activityCondition">activityConditionService</prop>
+				<prop key="/activityConditionRelation">activityConditionRelationService</prop>
+				<prop key="/activityCoupons">activityCouponsService</prop>
+				<prop key="/activityCouponsCode">activityCouponsCodeService</prop>
+				<prop key="/activityCouponsProduct">activityCouponsProductService</prop>
+				<prop key="/activityCustomerCashBonus">activityCustomerCashBonusService</prop>
+				<prop key="/activityCustomerCoupons">activityCustomerCouponsService</prop>
+				<prop key="/activityCustomerDetail">activityCustomerDetailService</prop>
+				<prop key="/activityCustomerExperienceGold">activityCustomerExperienceGoldService</prop>
+				<prop key="/activityCustomerInvitation">activityCustomerInvitationService</prop>
+				<prop key="/activityCustomerPresent">activityCustomerPresentService</prop>
+				<prop key="/activityCustomerTask">activityCustomerTaskService</prop>
+				<prop key="/activityExperienceGold">activityExperienceGoldService</prop>
+				<prop key="/activityFeedback">activityFeedbackService</prop>
+				<prop key="/activityIntegral">activityIntegralService</prop>
+				<prop key="/activityIntegralDetail">activityIntegralDetailService</prop>
+				<prop key="/activityMessage">activityMessageService</prop>
+				<prop key="/activityMessageStatus">activityMessageStatusService</prop>
+				<prop key="/activityMessageTemplate">activityMessageTemplateService</prop>
+				<prop key="/activityPresent">activityPresentService</prop>
+				<prop key="/activityRuleRelation">activityRuleRelationService</prop>
+				<prop key="/agentAdviser">agentAdviserService</prop>
+				<prop key="/agentBusiness">agentBusinessService</prop>
+				
+				
+				<prop key="/customerCompany">customerCompanyService</prop>
+				
+				<prop key="/customerFollow">customerFollowService</prop>
+				
+				<prop key="/customerPersonal">customerPersonalService</prop>
+				
+				
+				<prop key="/p2pCustomer">p2pCustomerService</prop>
+				<prop key="/agentFollow">agentFollowService</prop>
+				
+				<prop key="/changeManagerLog">changeManagerLogService</prop>
+				<prop key="/emailChange">emailChangeService</prop>
+				<prop key="/paymentAccountInformation">paymentAccountInformationService</prop>
+				<prop key="/paymentAccountOper">paymentAccountOperService</prop>
+				<prop key="/paymentBankCode">paymentBankCodeService</prop>
+				<prop key="/paymentBankInfo">paymentBankInfoService</prop>
+				<prop key="/paymentMoneyChange">paymentMoneyChangeService</prop>
+				<prop key="/paymentMoneyFreeze">paymentMoneyFreezeService</prop>
+				<prop key="/paymentMoneyRecharge">paymentMoneyRechargeService</prop>
+				<prop key="/paymentMoneyWithdraw">paymentMoneyWithdrawService</prop>
+				<prop key="/paymentPayType">paymentPayTypeService</prop>
+				<prop key="/paymentPlatform">paymentPlatformService</prop>
+
+                <prop key="/paymentCustomerBank">paymentCustomerBankService</prop>
+
+                <prop key="/tradeReqnoInfo">tradeReqnoInfoService</prop>
+			</props>
+		</property>
+	</bean>
+  <bean id="activitiesServiceImpl" class="com.hzfh.service.customer.serviceImpl.ActivitiesServiceImpl" />
+  <bean id="activitiesService"
+		class="org.springframework.remoting.caucho.HessianServiceExporter">
+    <property name="service" ref="activitiesServiceImpl" />
+    <property name="serviceInterface" value="com.hzfh.api.customer.service.ActivitiesService" />
+  </bean>
+
+  <bean id="activityAwardRelationServiceImpl" class="com.hzfh.service.customer.serviceImpl.ActivityAwardRelationServiceImpl" />
+  <bean id="activityAwardRelationService"
+		class="org.springframework.remoting.caucho.HessianServiceExporter">
+    <property name="service" ref="activityAwardRelationServiceImpl" />
+    <property name="serviceInterface" value="com.hzfh.api.customer.service.ActivityAwardRelationService" />
+  </bean>
+
+  <bean id="activityCashBonusServiceImpl" class="com.hzfh.service.customer.serviceImpl.ActivityCashBonusServiceImpl" />
+  <bean id="activityCashBonusService"
+		class="org.springframework.remoting.caucho.HessianServiceExporter">
+    <property name="service" ref="activityCashBonusServiceImpl" />
+    <property name="serviceInterface" value="com.hzfh.api.customer.service.ActivityCashBonusService" />
+  </bean>
+
+  <bean id="activityConditionServiceImpl" class="com.hzfh.service.customer.serviceImpl.ActivityConditionServiceImpl" />
+  <bean id="activityConditionService"
+		class="org.springframework.remoting.caucho.HessianServiceExporter">
+    <property name="service" ref="activityConditionServiceImpl" />
+    <property name="serviceInterface" value="com.hzfh.api.customer.service.ActivityConditionService" />
+  </bean>
+
+  <bean id="activityConditionRelationServiceImpl" class="com.hzfh.service.customer.serviceImpl.ActivityConditionRelationServiceImpl" />
+  <bean id="activityConditionRelationService"
+		class="org.springframework.remoting.caucho.HessianServiceExporter">
+    <property name="service" ref="activityConditionRelationServiceImpl" />
+    <property name="serviceInterface" value="com.hzfh.api.customer.service.ActivityConditionRelationService" />
+  </bean>
+
+  <bean id="activityCouponsServiceImpl" class="com.hzfh.service.customer.serviceImpl.ActivityCouponsServiceImpl" />
+  <bean id="activityCouponsService"
+		class="org.springframework.remoting.caucho.HessianServiceExporter">
+    <property name="service" ref="activityCouponsServiceImpl" />
+    <property name="serviceInterface" value="com.hzfh.api.customer.service.ActivityCouponsService" />
+  </bean>
+
+  <bean id="activityCouponsCodeServiceImpl" class="com.hzfh.service.customer.serviceImpl.ActivityCouponsCodeServiceImpl" />
+  <bean id="activityCouponsCodeService"
+		class="org.springframework.remoting.caucho.HessianServiceExporter">
+    <property name="service" ref="activityCouponsCodeServiceImpl" />
+    <property name="serviceInterface" value="com.hzfh.api.customer.service.ActivityCouponsCodeService" />
+  </bean>
+
+  <bean id="activityCouponsProductServiceImpl" class="com.hzfh.service.customer.serviceImpl.ActivityCouponsProductServiceImpl" />
+  <bean id="activityCouponsProductService"
+		class="org.springframework.remoting.caucho.HessianServiceExporter">
+    <property name="service" ref="activityCouponsProductServiceImpl" />
+    <property name="serviceInterface" value="com.hzfh.api.customer.service.ActivityCouponsProductService" />
+  </bean>
+
+  <bean id="activityCustomerCashBonusServiceImpl" class="com.hzfh.service.customer.serviceImpl.ActivityCustomerCashBonusServiceImpl" />
+  <bean id="activityCustomerCashBonusService"
+		class="org.springframework.remoting.caucho.HessianServiceExporter">
+    <property name="service" ref="activityCustomerCashBonusServiceImpl" />
+    <property name="serviceInterface" value="com.hzfh.api.customer.service.ActivityCustomerCashBonusService" />
+  </bean>
+
+  <bean id="activityCustomerCouponsServiceImpl" class="com.hzfh.service.customer.serviceImpl.ActivityCustomerCouponsServiceImpl" />
+  <bean id="activityCustomerCouponsService"
+		class="org.springframework.remoting.caucho.HessianServiceExporter">
+    <property name="service" ref="activityCustomerCouponsServiceImpl" />
+    <property name="serviceInterface" value="com.hzfh.api.customer.service.ActivityCustomerCouponsService" />
+  </bean>
+
+  <bean id="activityCustomerDetailServiceImpl" class="com.hzfh.service.customer.serviceImpl.ActivityCustomerDetailServiceImpl" />
+  <bean id="activityCustomerDetailService"
+		class="org.springframework.remoting.caucho.HessianServiceExporter">
+    <property name="service" ref="activityCustomerDetailServiceImpl" />
+    <property name="serviceInterface" value="com.hzfh.api.customer.service.ActivityCustomerDetailService" />
+  </bean>
+
+  <bean id="activityCustomerExperienceGoldServiceImpl" class="com.hzfh.service.customer.serviceImpl.ActivityCustomerExperienceGoldServiceImpl" />
+  <bean id="activityCustomerExperienceGoldService"
+		class="org.springframework.remoting.caucho.HessianServiceExporter">
+    <property name="service" ref="activityCustomerExperienceGoldServiceImpl" />
+    <property name="serviceInterface" value="com.hzfh.api.customer.service.ActivityCustomerExperienceGoldService" />
+  </bean>
+
+  <bean id="activityCustomerInvitationServiceImpl" class="com.hzfh.service.customer.serviceImpl.ActivityCustomerInvitationServiceImpl" />
+  <bean id="activityCustomerInvitationService"
+		class="org.springframework.remoting.caucho.HessianServiceExporter">
+    <property name="service" ref="activityCustomerInvitationServiceImpl" />
+    <property name="serviceInterface" value="com.hzfh.api.customer.service.ActivityCustomerInvitationService" />
+  </bean>
+
+  <bean id="activityCustomerPresentServiceImpl" class="com.hzfh.service.customer.serviceImpl.ActivityCustomerPresentServiceImpl" />
+  <bean id="activityCustomerPresentService"
+		class="org.springframework.remoting.caucho.HessianServiceExporter">
+    <property name="service" ref="activityCustomerPresentServiceImpl" />
+    <property name="serviceInterface" value="com.hzfh.api.customer.service.ActivityCustomerPresentService" />
+  </bean>
+
+  <bean id="activityCustomerTaskServiceImpl" class="com.hzfh.service.customer.serviceImpl.ActivityCustomerTaskServiceImpl" />
+  <bean id="activityCustomerTaskService"
+		class="org.springframework.remoting.caucho.HessianServiceExporter">
+    <property name="service" ref="activityCustomerTaskServiceImpl" />
+    <property name="serviceInterface" value="com.hzfh.api.customer.service.ActivityCustomerTaskService" />
+  </bean>
+
+  <bean id="activityExperienceGoldServiceImpl" class="com.hzfh.service.customer.serviceImpl.ActivityExperienceGoldServiceImpl" />
+  <bean id="activityExperienceGoldService"
+		class="org.springframework.remoting.caucho.HessianServiceExporter">
+    <property name="service" ref="activityExperienceGoldServiceImpl" />
+    <property name="serviceInterface" value="com.hzfh.api.customer.service.ActivityExperienceGoldService" />
+  </bean>
+
+  <bean id="activityFeedbackServiceImpl" class="com.hzfh.service.customer.serviceImpl.ActivityFeedbackServiceImpl" />
+  <bean id="activityFeedbackService"
+		class="org.springframework.remoting.caucho.HessianServiceExporter">
+    <property name="service" ref="activityFeedbackServiceImpl" />
+    <property name="serviceInterface" value="com.hzfh.api.customer.service.ActivityFeedbackService" />
+  </bean>
+
+  <bean id="activityIntegralServiceImpl" class="com.hzfh.service.customer.serviceImpl.ActivityIntegralServiceImpl" />
+  <bean id="activityIntegralService"
+		class="org.springframework.remoting.caucho.HessianServiceExporter">
+    <property name="service" ref="activityIntegralServiceImpl" />
+    <property name="serviceInterface" value="com.hzfh.api.customer.service.ActivityIntegralService" />
+  </bean>
+
+  <bean id="activityIntegralDetailServiceImpl" class="com.hzfh.service.customer.serviceImpl.ActivityIntegralDetailServiceImpl" />
+  <bean id="activityIntegralDetailService"
+		class="org.springframework.remoting.caucho.HessianServiceExporter">
+    <property name="service" ref="activityIntegralDetailServiceImpl" />
+    <property name="serviceInterface" value="com.hzfh.api.customer.service.ActivityIntegralDetailService" />
+  </bean>
+
+  <bean id="activityMessageServiceImpl" class="com.hzfh.service.customer.serviceImpl.ActivityMessageServiceImpl" />
+  <bean id="activityMessageService"
+		class="org.springframework.remoting.caucho.HessianServiceExporter">
+    <property name="service" ref="activityMessageServiceImpl" />
+    <property name="serviceInterface" value="com.hzfh.api.customer.service.ActivityMessageService" />
+  </bean>
+
+  <bean id="activityMessageStatusServiceImpl" class="com.hzfh.service.customer.serviceImpl.ActivityMessageStatusServiceImpl" />
+  <bean id="activityMessageStatusService"
+		class="org.springframework.remoting.caucho.HessianServiceExporter">
+    <property name="service" ref="activityMessageStatusServiceImpl" />
+    <property name="serviceInterface" value="com.hzfh.api.customer.service.ActivityMessageStatusService" />
+  </bean>
+
+  <bean id="activityMessageTemplateServiceImpl" class="com.hzfh.service.customer.serviceImpl.ActivityMessageTemplateServiceImpl" />
+  <bean id="activityMessageTemplateService"
+		class="org.springframework.remoting.caucho.HessianServiceExporter">
+    <property name="service" ref="activityMessageTemplateServiceImpl" />
+    <property name="serviceInterface" value="com.hzfh.api.customer.service.ActivityMessageTemplateService" />
+  </bean>
+
+  <bean id="activityPresentServiceImpl" class="com.hzfh.service.customer.serviceImpl.ActivityPresentServiceImpl" />
+  <bean id="activityPresentService"
+		class="org.springframework.remoting.caucho.HessianServiceExporter">
+    <property name="service" ref="activityPresentServiceImpl" />
+    <property name="serviceInterface" value="com.hzfh.api.customer.service.ActivityPresentService" />
+  </bean>
+
+  <bean id="activityRuleRelationServiceImpl" class="com.hzfh.service.customer.serviceImpl.ActivityRuleRelationServiceImpl" />
+  <bean id="activityRuleRelationService"
+		class="org.springframework.remoting.caucho.HessianServiceExporter">
+    <property name="service" ref="activityRuleRelationServiceImpl" />
+    <property name="serviceInterface" value="com.hzfh.api.customer.service.ActivityRuleRelationService" />
+  </bean>
+
+  <bean id="agentAdviserServiceImpl" class="com.hzfh.service.customer.serviceImpl.AgentAdviserServiceImpl" />
+  <bean id="agentAdviserService"
+		class="org.springframework.remoting.caucho.HessianServiceExporter">
+    <property name="service" ref="agentAdviserServiceImpl" />
+    <property name="serviceInterface" value="com.hzfh.api.customer.service.AgentAdviserService" />
+  </bean>
+
+  <bean id="agentBusinessServiceImpl" class="com.hzfh.service.customer.serviceImpl.AgentBusinessServiceImpl" />
+  <bean id="agentBusinessService"
+		class="org.springframework.remoting.caucho.HessianServiceExporter">
+    <property name="service" ref="agentBusinessServiceImpl" />
+    <property name="serviceInterface" value="com.hzfh.api.customer.service.AgentBusinessService" />
+  </bean>
+
+  <bean id="customerCompanyServiceImpl" class="com.hzfh.service.customer.serviceImpl.CustomerCompanyServiceImpl" />
+  <bean id="customerCompanyService"
+		class="org.springframework.remoting.caucho.HessianServiceExporter">
+    <property name="service" ref="customerCompanyServiceImpl" />
+    <property name="serviceInterface" value="com.hzfh.api.customer.service.CustomerCompanyService" />
+  </bean>
+
+  <bean id="emailChangeServiceImpl" class="com.hzfh.service.customer.serviceImpl.EmailChangeServiceImpl" />
+  <bean id="emailChangeService"
+		class="org.springframework.remoting.caucho.HessianServiceExporter">
+    <property name="service" ref="emailChangeServiceImpl" />
+    <property name="serviceInterface" value="com.hzfh.api.customer.service.EmailChangeService" />
+  </bean>
+  
+  <bean id="customerFollowServiceImpl" class="com.hzfh.service.customer.serviceImpl.CustomerFollowServiceImpl" />
+  <bean id="customerFollowService"
+		class="org.springframework.remoting.caucho.HessianServiceExporter">
+    <property name="service" ref="customerFollowServiceImpl" />
+    <property name="serviceInterface" value="com.hzfh.api.customer.service.CustomerFollowService" />
+  </bean>
+
+
+  <bean id="customerPersonalServiceImpl" class="com.hzfh.service.customer.serviceImpl.CustomerPersonalServiceImpl" />
+  <bean id="customerPersonalService"
+		class="org.springframework.remoting.caucho.HessianServiceExporter">
+    <property name="service" ref="customerPersonalServiceImpl" />
+    <property name="serviceInterface" value="com.hzfh.api.customer.service.CustomerPersonalService" />
+  </bean>
+
+  
+  <bean id="p2pCustomerServiceImpl" class="com.hzfh.service.customer.serviceImpl.P2pCustomerServiceImpl" />
+  <bean id="p2pCustomerService"
+		class="org.springframework.remoting.caucho.HessianServiceExporter">
+    <property name="service" ref="p2pCustomerServiceImpl" />
+    <property name="serviceInterface" value="com.hzfh.api.customer.service.P2pCustomerService" />
+  </bean>
+  
+  <bean id="agentFollowServiceImpl" class="com.hzfh.service.customer.serviceImpl.AgentFollowServiceImpl" />
+  <bean id="agentFollowService"
+		class="org.springframework.remoting.caucho.HessianServiceExporter">
+    <property name="service" ref="agentFollowServiceImpl" />
+    <property name="serviceInterface" value="com.hzfh.api.customer.service.AgentFollowService" />
+  </bean>
+
+  <bean id="changeManagerLogServiceImpl" class="com.hzfh.service.customer.serviceImpl.ChangeManagerLogServiceImpl" />
+  <bean id="changeManagerLogService"
+		class="org.springframework.remoting.caucho.HessianServiceExporter">
+    <property name="service" ref="changeManagerLogServiceImpl" />
+    <property name="serviceInterface" value="com.hzfh.api.customer.service.ChangeManagerLogService" />
+  </bean>
+  
+  <bean id="paymentAccountInformationServiceImpl" class="com.hzfh.service.customer.serviceImpl.PaymentAccountInformationServiceImpl" />
+  <bean id="paymentAccountInformationService"
+		class="org.springframework.remoting.caucho.HessianServiceExporter">
+    <property name="service" ref="paymentAccountInformationServiceImpl" />
+    <property name="serviceInterface" value="com.hzfh.api.customer.service.PaymentAccountInformationService" />
+  </bean>
+
+  <bean id="paymentAccountOperServiceImpl" class="com.hzfh.service.customer.serviceImpl.PaymentAccountOperServiceImpl" />
+  <bean id="paymentAccountOperService"
+		class="org.springframework.remoting.caucho.HessianServiceExporter">
+    <property name="service" ref="paymentAccountOperServiceImpl" />
+    <property name="serviceInterface" value="com.hzfh.api.customer.service.PaymentAccountOperService" />
+  </bean>
+
+  <bean id="paymentBankCodeServiceImpl" class="com.hzfh.service.customer.serviceImpl.PaymentBankCodeServiceImpl" />
+  <bean id="paymentBankCodeService"
+		class="org.springframework.remoting.caucho.HessianServiceExporter">
+    <property name="service" ref="paymentBankCodeServiceImpl" />
+    <property name="serviceInterface" value="com.hzfh.api.customer.service.PaymentBankCodeService" />
+  </bean>
+
+  <bean id="paymentBankInfoServiceImpl" class="com.hzfh.service.customer.serviceImpl.PaymentBankInfoServiceImpl" />
+  <bean id="paymentBankInfoService"
+		class="org.springframework.remoting.caucho.HessianServiceExporter">
+    <property name="service" ref="paymentBankInfoServiceImpl" />
+    <property name="serviceInterface" value="com.hzfh.api.customer.service.PaymentBankInfoService" />
+  </bean>
+
+  <bean id="paymentMoneyChangeServiceImpl" class="com.hzfh.service.customer.serviceImpl.PaymentMoneyChangeServiceImpl" />
+  <bean id="paymentMoneyChangeService"
+		class="org.springframework.remoting.caucho.HessianServiceExporter">
+    <property name="service" ref="paymentMoneyChangeServiceImpl" />
+    <property name="serviceInterface" value="com.hzfh.api.customer.service.PaymentMoneyChangeService" />
+  </bean>
+
+  <bean id="paymentMoneyFreezeServiceImpl" class="com.hzfh.service.customer.serviceImpl.PaymentMoneyFreezeServiceImpl" />
+  <bean id="paymentMoneyFreezeService"
+		class="org.springframework.remoting.caucho.HessianServiceExporter">
+    <property name="service" ref="paymentMoneyFreezeServiceImpl" />
+    <property name="serviceInterface" value="com.hzfh.api.customer.service.PaymentMoneyFreezeService" />
+  </bean>
+
+  <bean id="paymentMoneyRechargeServiceImpl" class="com.hzfh.service.customer.serviceImpl.PaymentMoneyRechargeServiceImpl" />
+  <bean id="paymentMoneyRechargeService"
+		class="org.springframework.remoting.caucho.HessianServiceExporter">
+    <property name="service" ref="paymentMoneyRechargeServiceImpl" />
+    <property name="serviceInterface" value="com.hzfh.api.customer.service.PaymentMoneyRechargeService" />
+  </bean>
+
+  <bean id="paymentMoneyWithdrawServiceImpl" class="com.hzfh.service.customer.serviceImpl.PaymentMoneyWithdrawServiceImpl" />
+  <bean id="paymentMoneyWithdrawService"
+		class="org.springframework.remoting.caucho.HessianServiceExporter">
+    <property name="service" ref="paymentMoneyWithdrawServiceImpl" />
+    <property name="serviceInterface" value="com.hzfh.api.customer.service.PaymentMoneyWithdrawService" />
+  </bean>
+
+  <bean id="paymentPayTypeServiceImpl" class="com.hzfh.service.customer.serviceImpl.PaymentPayTypeServiceImpl" />
+  <bean id="paymentPayTypeService"
+		class="org.springframework.remoting.caucho.HessianServiceExporter">
+    <property name="service" ref="paymentPayTypeServiceImpl" />
+    <property name="serviceInterface" value="com.hzfh.api.customer.service.PaymentPayTypeService" />
+  </bean>
+
+  <bean id="paymentPlatformServiceImpl" class="com.hzfh.service.customer.serviceImpl.PaymentPlatformServiceImpl" />
+  <bean id="paymentPlatformService"
+		class="org.springframework.remoting.caucho.HessianServiceExporter">
+    <property name="service" ref="paymentPlatformServiceImpl" />
+    <property name="serviceInterface" value="com.hzfh.api.customer.service.PaymentPlatformService" />
+  </bean>
+  
+  <bean class="org.mybatis.spring.mapper.MapperFactoryBean" id="paymentAccountInformationMapper">
+        <property name="mapperInterface" value="com.hzfh.service.customer.mapper.PaymentAccountInformationMapper"/>
+        <property name="sqlSessionFactory" ref="sqlSessionFactory"/>
+    </bean>
+    <bean class="org.mybatis.spring.mapper.MapperFactoryBean" id="paymentAccountOperMapper">
+        <property name="mapperInterface" value="com.hzfh.service.customer.mapper.PaymentAccountOperMapper"/>
+        <property name="sqlSessionFactory" ref="sqlSessionFactory"/>
+    </bean>
+    <bean class="org.mybatis.spring.mapper.MapperFactoryBean" id="paymentBankCodeMapper">
+        <property name="mapperInterface" value="com.hzfh.service.customer.mapper.PaymentBankCodeMapper"/>
+        <property name="sqlSessionFactory" ref="sqlSessionFactory"/>
+    </bean>
+    <bean class="org.mybatis.spring.mapper.MapperFactoryBean" id="paymentBankInfoMapper">
+        <property name="mapperInterface" value="com.hzfh.service.customer.mapper.PaymentBankInfoMapper"/>
+        <property name="sqlSessionFactory" ref="sqlSessionFactory"/>
+    </bean>
+    <bean class="org.mybatis.spring.mapper.MapperFactoryBean" id="paymentMoneyChangeMapper">
+        <property name="mapperInterface" value="com.hzfh.service.customer.mapper.PaymentMoneyChangeMapper"/>
+        <property name="sqlSessionFactory" ref="sqlSessionFactory"/>
+    </bean>
+    <bean class="org.mybatis.spring.mapper.MapperFactoryBean" id="paymentMoneyFreezeMapper">
+        <property name="mapperInterface" value="com.hzfh.service.customer.mapper.PaymentMoneyFreezeMapper"/>
+        <property name="sqlSessionFactory" ref="sqlSessionFactory"/>
+    </bean>
+    <bean class="org.mybatis.spring.mapper.MapperFactoryBean" id="paymentMoneyRechargeMapper">
+        <property name="mapperInterface" value="com.hzfh.service.customer.mapper.PaymentMoneyRechargeMapper"/>
+        <property name="sqlSessionFactory" ref="sqlSessionFactory"/>
+    </bean>
+    <bean class="org.mybatis.spring.mapper.MapperFactoryBean" id="paymentMoneyWithdrawMapper">
+        <property name="mapperInterface" value="com.hzfh.service.customer.mapper.PaymentMoneyWithdrawMapper"/>
+        <property name="sqlSessionFactory" ref="sqlSessionFactory"/>
+    </bean>
+    <bean class="org.mybatis.spring.mapper.MapperFactoryBean" id="paymentPayTypeMapper">
+        <property name="mapperInterface" value="com.hzfh.service.customer.mapper.PaymentPayTypeMapper"/>
+        <property name="sqlSessionFactory" ref="sqlSessionFactory"/>
+    </bean>
+    <bean class="org.mybatis.spring.mapper.MapperFactoryBean" id="paymentPlatformMapper">
+        <property name="mapperInterface" value="com.hzfh.service.customer.mapper.PaymentPlatformMapper"/>
+        <property name="sqlSessionFactory" ref="sqlSessionFactory"/>
+    </bean>
+    <bean id="paymentCustomerBankServiceImpl" class="com.hzfh.service.customer.serviceImpl.PaymentCustomerBankServiceImpl" />
+    <bean id="paymentCustomerBankService"
+          class="org.springframework.remoting.caucho.HessianServiceExporter">
+        <property name="service" ref="paymentCustomerBankServiceImpl" />
+        <property name="serviceInterface" value="com.hzfh.api.customer.service.PaymentCustomerBankService" />
+    </bean>
+    <bean id="tradeReqnoInfoServiceImpl" class="com.hzfh.service.customer.serviceImpl.TradeReqnoInfoServiceImpl" />
+    <bean id="tradeReqnoInfoService"
+          class="org.springframework.remoting.caucho.HessianServiceExporter">
+        <property name="service" ref="tradeReqnoInfoServiceImpl" />
+        <property name="serviceInterface" value="com.hzfh.api.customer.service.TradeReqnoInfoService" />
+    </bean>
+</beans>

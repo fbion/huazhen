@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hzfh.service.customer.mapper.PaymentCustomerBankMapper">
+    <resultMap type="com.hzfh.api.customer.model.PaymentCustomerBank" id="resultMapPaymentCustomerBank">
+        <result property="id" column="id"/>
+        <result property="bankName" column="bank_name"/>
+        <result property="bankType" column="bank_type"/>
+        <result property="bankCode" column="bank_code"/>
+        <result property="bankAddressCode" column="bank_address_code"/>
+        <result property="bankProvice" column="bank_provice"/>
+        <result property="bankCity" column="bank_city"/>
+        <result property="bankNameSon" column="bank_name_son"/>
+        <result property="bankCard" column="bank_card"/>
+        <result property="customerName" column="customer_name"/>
+        <result property="customerNo" column="customer_no"/>
+        <result property="tmieIn" column="tmie_in" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
+        <result property="timeUpdate" column="time_update" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
+        <result property="state" column="state"/>
+    </resultMap>
+    <select id="getList" resultMap="resultMapPaymentCustomerBank">
+        SELECT id,bank_name,bank_type,bank_code,bank_address_code,bank_provice,bank_city,bank_name_son,bank_card,customer_name,customer_no,tmie_in,time_update,state
+        FROM payment_customer_bank
+    </select>
+    <select id="getPagingList" resultMap="resultMapPaymentCustomerBank" parameterType="com.hzfh.api.customer.model.query.PaymentCustomerBankCondition" statementType="STATEMENT">
+        SELECT id,bank_name,bank_type,bank_code,bank_address_code,bank_provice,bank_city,bank_name_son,bank_card,customer_name,customer_no,tmie_in,time_update,state FROM payment_customer_bank where 1=1
+        ORDER BY
+        <foreach item="item" collection="sortItemList" separator=",">
+            ${item.sortFeild} ${item.sortType}
+        </foreach>
+        LIMIT ${startIndex},${pageSize}
+    </select>
+    <select id="getTotalCount" resultType="int" parameterType="com.hzfh.api.customer.model.query.PaymentCustomerBankCondition" statementType="STATEMENT">
+        SELECT count(1) FROM payment_customer_bank where 1=1
+    </select>
+    <select id="getInfo" resultMap="resultMapPaymentCustomerBank" parameterType="int">
+        SELECT id,bank_name,bank_type,bank_code,bank_address_code,bank_provice,bank_city,bank_name_son,bank_card,customer_name,customer_no,tmie_in,time_update,state FROM payment_customer_bank where id=#{id}
+    </select>
+    <insert id="add" parameterType="com.hzfh.api.customer.model.PaymentCustomerBank" useGeneratedKeys="true" keyProperty="id">
+        insert into payment_customer_bank
+        (bank_name,bank_type,bank_code,bank_address_code,bank_provice,bank_city,bank_name_son,bank_card,customer_name,customer_no,tmie_in,time_update,state)
+        values
+        (#{bankName},#{bankType},#{bankCode},#{bankAddressCode},#{bankProvice},#{bankCity},#{bankNameSon},#{bankCard},#{customerName},#{customerNo},#{tmieIn},#{timeUpdate},#{state})
+    </insert>
+    <update id="update" parameterType="com.hzfh.api.customer.model.PaymentCustomerBank">
+        update payment_customer_bank set
+        bank_name=#{bankName},bank_type=#{bankType},bank_code=#{bankCode},bank_address_code=#{bankAddressCode},bank_provice=#{bankProvice},bank_city=#{bankCity},bank_name_son=#{bankNameSon},bank_card=#{bankCard},customer_name=#{customerName},customer_no=#{customerNo},tmie_in=#{tmieIn},time_update=#{timeUpdate},state=#{state}
+        where id=#{id}
+    </update>
+    <delete id="delete" parameterType="int">
+        delete from payment_customer_bank where id = #{id}
+    </delete>
+    
+    <select id="getListByCustomerNo" resultMap="resultMapPaymentCustomerBank">
+        SELECT id,bank_name,bank_type,bank_code,bank_address_code,bank_provice,bank_city,bank_name_son,bank_card,customer_name,customer_no,tmie_in,time_update,state
+        FROM payment_customer_bank where customer_no = #{customerNo}
+    </select>
+    <select id="getBankByCustomerNoAndStatus" resultMap="resultMapPaymentCustomerBank">
+        SELECT id,bank_name,bank_type,bank_code,bank_address_code,bank_provice,bank_city,bank_name_son,bank_card,customer_name,customer_no,tmie_in,time_update,state
+        FROM payment_customer_bank where customer_no = #{customerNo} and state = #{status}
+    </select>
+
+    <update id="unBindCardBank" parameterType="int">
+        update payment_customer_bank set
+        state = 2
+        where customer_no=#{customerNo}
+    </update>
+
+</mapper>

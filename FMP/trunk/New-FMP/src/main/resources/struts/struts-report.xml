@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+        "http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+    <!--<package name="companySalesDaily" extends="struts-login" namespace="/report/companySalesDaily">-->
+        <!--<action name="list" class="com.hzfh.fmp.controller.report.CompanySalesDailyAction">-->
+            <!--<result>/report/companySalesDailyList.jsp</result>-->
+        <!--</action>-->
+    <!--</package>-->
+    <!--<package name="ajaxCompanySalesDaily" extends="struts-error" namespace="/report/companySalesDaily">-->
+        <!--<action name="ajaxListCompanySalesDaily" class="com.hzfh.fmp.controller.report.ajax.AjaxCompanySalesDailyAction">-->
+            <!--<result type="json">-->
+                <!--<param name="includeProperties">-->
+                    <!--resultList.*,-->
+                    <!--pageSize, pageIndex, pageCount, recordCount-->
+                <!--</param>-->
+                <!--<param name="noCache">true</param>-->
+                <!--<param name="ignoreHierarchy">false</param>-->
+            <!--</result>-->
+        <!--</action>-->
+        <!--<action name="ajaxEditCompanySalesDaily" class="com.hzfh.fmp.controller.report.ajax.AjaxCompanySalesDailyAction" method="edit">-->
+            <!--<result type="json">-->
+                <!--<param name="includeProperties">-->
+                    <!--errCode,errDesc-->
+                <!--</param>-->
+                <!--<param name="noCache">true</param>-->
+                <!--<param name="ignoreHierarchy">false</param>-->
+            <!--</result>-->
+        <!--</action>-->
+    <!--</package>-->
+    <!--<package name="companySalesTotal" extends="struts-login" namespace="/report/companySalesTotal">-->
+        <!--<action name="list" class="com.hzfh.fmp.controller.report.CompanySalesTotalAction">-->
+            <!--<result>/report/companySalesTotalList.jsp</result>-->
+        <!--</action>-->
+    <!--</package>-->
+    <!--<package name="ajaxCompanySalesTotal" extends="struts-error" namespace="/report/companySalesTotal">-->
+        <!--<action name="ajaxListCompanySalesTotal" class="com.hzfh.fmp.controller.report.ajax.AjaxCompanySalesTotalAction">-->
+            <!--<result type="json">-->
+                <!--<param name="includeProperties">-->
+                    <!--resultList.*,-->
+                    <!--pageSize, pageIndex, pageCount, recordCount-->
+                <!--</param>-->
+                <!--<param name="noCache">true</param>-->
+                <!--<param name="ignoreHierarchy">false</param>-->
+            <!--</result>-->
+        <!--</action>-->
+        <!--<action name="ajaxEditCompanySalesTotal" class="com.hzfh.fmp.controller.report.ajax.AjaxCompanySalesTotalAction" method="edit">-->
+            <!--<result type="json">-->
+                <!--<param name="includeProperties">-->
+                    <!--errCode,errDesc-->
+                <!--</param>-->
+                <!--<param name="noCache">true</param>-->
+                <!--<param name="ignoreHierarchy">false</param>-->
+            <!--</result>-->
+        <!--</action>-->
+    <!--</package>-->
+    <!--<package name="deptSalesDaily" extends="struts-login" namespace="/report/deptSalesDaily">-->
+        <!--<action name="list" class="com.hzfh.fmp.controller.report.DeptSalesDailyAction">-->
+            <!--<result>/report/deptSalesDailyList.jsp</result>-->
+        <!--</action>-->
+    <!--</package>-->
+    <!--<package name="ajaxDeptSalesDaily" extends="struts-error" namespace="/report/deptSalesDaily">-->
+        <!--<action name="ajaxListDeptSalesDaily" class="com.hzfh.fmp.controller.report.ajax.AjaxDeptSalesDailyAction">-->
+            <!--<result type="json">-->
+                <!--<param name="includeProperties">-->
+                    <!--resultList.*,-->
+                    <!--pageSize, pageIndex, pageCount, recordCount-->
+                <!--</param>-->
+                <!--<param name="noCache">true</param>-->
+                <!--<param name="ignoreHierarchy">false</param>-->
+            <!--</result>-->
+        <!--</action>-->
+        <!--<action name="ajaxEditDeptSalesDaily" class="com.hzfh.fmp.controller.report.ajax.AjaxDeptSalesDailyAction" method="edit">-->
+            <!--<result type="json">-->
+                <!--<param name="includeProperties">-->
+                    <!--errCode,errDesc-->
+                <!--</param>-->
+                <!--<param name="noCache">true</param>-->
+                <!--<param name="ignoreHierarchy">false</param>-->
+            <!--</result>-->
+        <!--</action>-->
+    <!--</package>-->
+    <!--<package name="deptSalesTotal" extends="struts-login" namespace="/report/deptSalesTotal">-->
+        <!--<action name="list" class="com.hzfh.fmp.controller.report.DeptSalesTotalAction">-->
+            <!--<result>/report/deptSalesTotalList.jsp</result>-->
+        <!--</action>-->
+    <!--</package>-->
+    <!--<package name="ajaxDeptSalesTotal" extends="struts-error" namespace="/report/deptSalesTotal">-->
+        <!--<action name="ajaxListDeptSalesTotal" class="com.hzfh.fmp.controller.report.ajax.AjaxDeptSalesTotalAction">-->
+            <!--<result type="json">-->
+                <!--<param name="includeProperties">-->
+                    <!--resultList.*,-->
+                    <!--pageSize, pageIndex, pageCount, recordCount-->
+                <!--</param>-->
+                <!--<param name="noCache">true</param>-->
+                <!--<param name="ignoreHierarchy">false</param>-->
+            <!--</result>-->
+        <!--</action>-->
+        <!--<action name="ajaxEditDeptSalesTotal" class="com.hzfh.fmp.controller.report.ajax.AjaxDeptSalesTotalAction" method="edit">-->
+            <!--<result type="json">-->
+                <!--<param name="includeProperties">-->
+                    <!--errCode,errDesc-->
+                <!--</param>-->
+                <!--<param name="noCache">true</param>-->
+                <!--<param name="ignoreHierarchy">false</param>-->
+            <!--</result>-->
+        <!--</action>-->
+    <!--</package>-->
+    <!--<package name="empSalesDaily" extends="struts-login" namespace="/report/empSalesDaily">-->
+        <!--<action name="list" class="com.hzfh.fmp.controller.report.EmpSalesDailyAction">-->
+            <!--<result>/report/empSalesDailyList.jsp</result>-->
+        <!--</action>-->
+    <!--</package>-->
+    <!--<package name="ajaxEmpSalesDaily" extends="struts-error" namespace="/report/empSalesDaily">-->
+        <!--<action name="ajaxListEmpSalesDaily" class="com.hzfh.fmp.controller.report.ajax.AjaxEmpSalesDailyAction">-->
+            <!--<result type="json">-->
+                <!--<param name="includeProperties">-->
+                    <!--resultList.*,-->
+                    <!--pageSize, pageIndex, pageCount, recordCount-->
+                <!--</param>-->
+                <!--<param name="noCache">true</param>-->
+                <!--<param name="ignoreHierarchy">false</param>-->
+            <!--</result>-->
+        <!--</action>-->
+        <!--<action name="ajaxEditEmpSalesDaily" class="com.hzfh.fmp.controller.report.ajax.AjaxEmpSalesDailyAction" method="edit">-->
+            <!--<result type="json">-->
+                <!--<param name="includeProperties">-->
+                    <!--errCode,errDesc-->
+                <!--</param>-->
+                <!--<param name="noCache">true</param>-->
+                <!--<param name="ignoreHierarchy">false</param>-->
+            <!--</result>-->
+        <!--</action>-->
+    <!--</package>-->
+    <!--<package name="empSalesTotal" extends="struts-login" namespace="/report/empSalesTotal">-->
+        <!--<action name="list" class="com.hzfh.fmp.controller.report.EmpSalesTotalAction">-->
+            <!--<result>/report/empSalesTotalList.jsp</result>-->
+        <!--</action>-->
+    <!--</package>-->
+    <!--<package name="ajaxEmpSalesTotal" extends="struts-error" namespace="/report/empSalesTotal">-->
+        <!--<action name="ajaxListEmpSalesTotal" class="com.hzfh.fmp.controller.report.ajax.AjaxEmpSalesTotalAction">-->
+            <!--<result type="json">-->
+                <!--<param name="includeProperties">-->
+                    <!--resultList.*,-->
+                    <!--pageSize, pageIndex, pageCount, recordCount-->
+                <!--</param>-->
+                <!--<param name="noCache">true</param>-->
+                <!--<param name="ignoreHierarchy">false</param>-->
+            <!--</result>-->
+        <!--</action>-->
+        <!--<action name="ajaxEditEmpSalesTotal" class="com.hzfh.fmp.controller.report.ajax.AjaxEmpSalesTotalAction" method="edit">-->
+            <!--<result type="json">-->
+                <!--<param name="includeProperties">-->
+                    <!--errCode,errDesc-->
+                <!--</param>-->
+                <!--<param name="noCache">true</param>-->
+                <!--<param name="ignoreHierarchy">false</param>-->
+            <!--</result>-->
+        <!--</action>-->
+    <!--</package>-->
+    <package name="paymentReportDeatil" extends="struts-login" namespace="/report/paymentReportDeatil">
+        <action name="list" class="com.hzfh.fmp.controller.report.PaymentReportDeatilAction">
+            <result>/report/paymentReportDeatilList.jsp</result>
+        </action>
+        <!--<action name="edit" class="com.hzfh.fmp.controller.report.PaymentReportDeatilAddAction">-->
+            <!--<result>/report/paymentReportDeatilAdd.jsp</result>-->
+        <!--</action>-->
+        <!--<action name="detail" class="com.hzfh.fmp.controller.report.PaymentReportDeatilAddAction" method="executeDetail">-->
+            <!--<result>/report/paymentReportDeatilDetail.jsp</result>-->
+        <!--</action>-->
+    </package>
+    <package name="paymentReport" extends="struts-login" namespace="/report/paymentReport">
+        <action name="list" class="com.hzfh.fmp.controller.report.PaymentReportAction">
+            <result>/report/paymentReportList.jsp</result>
+        </action>
+    </package>
+    <package name="ajaxPaymentReport" extends="struts-error" namespace="/report/paymentReport">
+        <action name="ajaxListPaymentReport" class="com.hzfh.fmp.controller.report.ajax.AjaxPaymentReportAction">
+            <result type="json">
+                <param name="includeProperties">
+                    resultList.*,
+                    pageSize, pageIndex, pageCount, recordCount
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+             </result>
+        </action>
+    </package>
+    <package name="ajaxPaymentReportDeatil" extends="struts-error" namespace="/report/paymentReportDeatil">
+        <action name="ajaxListPaymentReportByHonourDate" class="com.hzfh.fmp.controller.report.ajax.AjaxPaymentReportDeatilAction" method="ajaxListPaymentReportByHonourDate">
+            <result>
+                /report/paymentReportDeatilContent.jsp
+            </result>
+        </action>
+        <action name="ajaxListPaymentReportByPaymentReportId" class="com.hzfh.fmp.controller.report.ajax.AjaxPaymentReportDeatilAction" method="ajaxListPaymentReportByPaymentReportId">
+            <result>
+                /report/paymentReportDeatilContent.jsp
+            </result>
+        </action>
+        <action name="ajaxAddDetailAndUpdateReport" class="com.hzfh.fmp.controller.report.ajax.AjaxPaymentReportDeatilAction" method="addDetailAndUpdateReport">
+            <result type="json">
+                <param name="includeProperties">
+                    activitiNo
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+             </result>
+        </action>
+    <!--<action name="ajaxListPaymentReportDeatil" class="com.hzfh.fmp.controller.report.ajax.AjaxPaymentReportDeatilAction">-->
+        <!--<result type="json">-->
+            <!--<param name="includeProperties">-->
+                <!--resultList.*,-->
+                <!--pageSize, pageIndex, pageCount, recordCount-->
+            <!--</param>-->
+            <!--<param name="noCache">true</param>-->
+            <!--<param name="ignoreHierarchy">false</param>-->
+        <!--</result>-->
+    <!--</action>-->
+    <!--<action name="ajaxEditPaymentReportDeatil" class="com.hzfh.fmp.controller.report.ajax.AjaxPaymentReportDeatilAction" method="edit">-->
+        <!--<result type="json">-->
+            <!--<param name="includeProperties">-->
+                <!--errCode,errDesc-->
+            <!--</param>-->
+            <!--<param name="noCache">true</param>-->
+            <!--<param name="ignoreHierarchy">false</param>-->
+        <!--</result>-->
+    <!--</action>-->
+    <!--<action name="ajaxGetPaymentReportDeatil" class="com.hzfh.fmp.controller.report.ajax.AjaxPaymentReportDeatilAction" method="getInfoById">-->
+        <!--<result type="json">-->
+            <!--<param name="includeProperties">-->
+                <!--info.*,errCode,errDesc-->
+            <!--</param>-->
+            <!--<param name="noCache">true</param>-->
+            <!--<param name="ignoreHierarchy">false</param>-->
+        <!--</result>-->
+    <!--</action>-->
+    </package>
+</struts>

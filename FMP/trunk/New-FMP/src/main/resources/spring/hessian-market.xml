@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!-- 客户端Hessian代理工厂Bean -->
+    <bean id="activityApplyUserService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+        <property name="serviceUrl">
+            <value>http://marketservice.hzfh.com:8080/service-market/activityApplyUser</value>
+        </property>
+        <property name="serviceInterface">
+            <value>com.hzfh.api.market.service.ActivityApplyUserService</value>
+        </property>
+
+        <property name="overloadEnabled" value="true"></property>
+    </bean>
+	<bean id="activityUsersService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+        <property name="serviceUrl">
+            <value>http://marketservice.hzfh.com:8080/service-market/activityUsers</value>
+        </property>
+        <property name="serviceInterface">
+            <value>com.hzfh.api.market.service.ActivityUsersService</value>
+        </property>
+
+        <property name="overloadEnabled" value="true"></property>
+    </bean>
+	<bean id="drawSettingService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+        <property name="serviceUrl">
+            <value>http://marketservice.hzfh.com:8080/service-market/drawSetting</value>
+        </property>
+        <property name="serviceInterface">
+            <value>com.hzfh.api.market.service.DrawSettingService</value>
+        </property>
+
+        <property name="overloadEnabled" value="true"></property>
+    </bean>
+	<bean id="lotteriesService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+        <property name="serviceUrl">
+            <value>http://marketservice.hzfh.com:8080/service-market/lotteries</value>
+        </property>
+        <property name="serviceInterface">
+            <value>com.hzfh.api.market.service.LotteriesService</value>
+        </property>
+
+        <property name="overloadEnabled" value="true"></property>
+    </bean>
+	<bean id="winningRecordService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+        <property name="serviceUrl">
+            <value>http://marketservice.hzfh.com:8080/service-market/winningRecord</value>
+        </property>
+        <property name="serviceInterface">
+            <value>com.hzfh.api.market.service.WinningRecordService</value>
+        </property>
+
+        <property name="overloadEnabled" value="true"></property>
+    </bean>
+
+</beans>

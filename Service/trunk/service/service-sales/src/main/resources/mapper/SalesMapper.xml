@@ -1,0 +1,319 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hzfh.service.sales.mapper.SalesMapper">
+    <resultMap type="com.hzfh.api.sales.model.Sales" id="resultMapSales">
+        <result property="id" column="id"/>
+        <result property="code" column="code"/>
+        <result property="contractCode" column="contract_code"/>
+        <result property="productType" column="product_type"/>
+        <result property="productNo" column="product_no"/>
+        <result property="productStagesNo" column="product_stages_no"/>
+        <result property="customerType" column="customer_type"/>
+        <result property="customerNo" column="customer_no"/>
+        <result property="p2pCustomerNo" column="p2p_customer_no"/>
+        <result property="p2pProductNo" column="p2p_product_no"/>
+        <result property="p2pProductName" column="p2p_product_name"/>
+        <result property="status" column="status"/>
+        <result property="money" column="money"/>
+        <result property="deptNo" column="dept_no"/>
+        <result property="empNo" column="emp_no"/>
+        <result property="peopleType" column="people_type"/>
+        <result property="peopleNo" column="people_no"/>
+        <result property="protocolStatus" column="protocol_status"/>
+        <result property="purchaseDate" column="purchase_date" jdbcType="DATE" javaType="java.sql.Date"/>
+        <result property="incomeMoney" column="income_money"/>
+        <result property="floatingIncome" column="floating_income"/>
+        <result property="paymentTime" column="payment_time" jdbcType="DATE" javaType="java.sql.Date"/>
+        <result property="paymentType" column="payment_type"/>
+        <result property="incomeRate" column="income_rate"/>
+        <result property="incomeRateReal" column="income_rate_real"/>
+        <result property="agentRate" column="agent_rate"/>
+        <result property="agentRateReal" column="agent_rate_real"/>
+        <result property="bankAddress" column="bank_address"/>
+        <result property="bankName" column="bank_name"/>
+        <result property="accountNumber" column="account_number"/>
+        <result property="idcardPath" column="idcard_path"/>
+        <result property="bankcardPath" column="bankcard_path"/>
+        <result property="contractPath" column="contract_path"/>
+        <result property="voucherPath" column="voucher_path"/>
+        <result property="documentPath" column="document_path"/>
+        <result property="inUserNo" column="in_user_no"/>
+        <result property="inTime" column="in_time" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
+        <result property="editUserNo" column="edit_user_no"/>
+        <result property="editTime" column="edit_time" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
+        <result property="editComment" column="edit_comment"/>
+        <result property="isTest" column="is_test"/>
+        <result property="establishDate" column="establish_date"/>
+        <result property="isEstablish" column="is_establish"/>
+        <result property="repaymentDate" column="repayment_date" jdbcType="DATE" javaType="java.sql.Date"/>
+        <result property="baseNumber" column="base_number"/>
+        <result property="payType" column="pay_type"/>
+        <result property="customerName" column="customer_name"/>
+        <result property="empName" column="emp_name"/>
+        <result property="isSendSms" column="is_send_sms"/>
+        <result property="serviceRate" column="service_rate"/>
+        <result property="activitiNo" column="activiti_no"/>
+        <result property="income" column="income"/>
+        <result property="type" column="type"/>
+        <result property="relationSalesNo" column="relation_sales_no"/>
+    </resultMap>
+    <sql id="base_column" >
+        id,code,customer_name,service_rate,emp_name,relation_sales_no,type,is_send_sms,contract_code,income,product_type,product_no,p2p_product_name,customer_type,customer_no,p2p_customer_no,p2p_product_no,status,money,dept_no,emp_no,people_type,people_no,protocol_status,purchase_date,income_money,floating_income,payment_time,payment_type,income_rate,income_rate_real,agent_rate,agent_rate_real,bank_address,bank_name,account_number,idcard_path,bankcard_path,contract_path,voucher_path,document_path,in_user_no,in_time,edit_user_no,edit_time,edit_comment,is_test,pay_type,repayment_date,activiti_no
+    </sql>
+    <select id="getList" resultMap="resultMapSales">
+        SELECT id,code,customer_name,service_rate,emp_name,relation_sales_no,type,is_send_sms,contract_code,income,product_type,product_no,p2p_product_name,customer_type,customer_no,p2p_customer_no,p2p_product_no,status,money,dept_no,emp_no,people_type,people_no,protocol_status,purchase_date,income_money,floating_income,payment_time,payment_type,income_rate,income_rate_real,agent_rate,agent_rate_real,bank_address,bank_name,account_number,idcard_path,bankcard_path,contract_path,voucher_path,document_path,in_user_no,in_time,edit_user_no,edit_time,edit_comment,is_test,pay_type,repayment_date,activiti_no
+		FROM sales</select>
+    <select id="getPagingList" resultMap="resultMapSales" parameterType="com.hzfh.api.sales.model.query.SalesCondition"
+            statementType="STATEMENT">
+        SELECT id,code,customer_name,service_rate,emp_name,relation_sales_no,type,is_send_sms,contract_code,income,product_type,product_no,p2p_product_name,customer_type,customer_no,p2p_customer_no,p2p_product_no,status,money,dept_no,emp_no,people_type,people_no,protocol_status,purchase_date,income_money,floating_income,payment_time,payment_type,income_rate,income_rate_real,agent_rate,agent_rate_real,bank_address,bank_name,account_number,idcard_path,bankcard_path,contract_path,voucher_path,document_path,in_user_no,in_time,edit_user_no,edit_time,edit_comment,is_test,pay_type,repayment_date,activiti_no
+        FROM sales where 1=1
+        <if test="payType !=-1">and pay_type=${payType}</if>
+        <if test="status !=0">and status=${status}</if>
+        <if test="deptNo !=0">and dept_no=${deptNo}</if>
+        <if test="productType > 0">and product_type=${productType}</if>
+        <if test="productType == -1">and product_type != 5 </if>
+        <if test="byDeptNo !='' and byDeptNo != null">and dept_no in(${byDeptNo})</if>
+        <if test="byEmpNo !=0">and emp_no=${byEmpNo}</if>
+        <if test="product !=0">and product_no=${product}</if>
+        <if test="customerType !=0">and customer_type=${customerType}</if>
+        <if test="online!=0">
+        	<if test="customer !=0">and (p2p_customer_no=${p2pCustomerNo} or customer_no=${customer})</if>
+        </if>
+        <if test="online==0">
+        	<if test="p2pCustomerNo !=0">and p2p_customer_no=${p2pCustomerNo}</if>
+        	<if test="customer !=0">and customer_no=${customer}</if>
+        </if>
+        <if test="p2pProductNo !=0">and p2p_product_no=${p2pProductNo}</if>
+        <if test="agentType !=0">and people_type=${agentType}</if>
+        <if test="agent !=0">and people_no=${agent}</if>
+        <if test="workMateString !=null">and emp_no in (${workMateString})</if>
+        <if test="isTest>-1">and is_test=${isTest}</if>
+        <if test="startTime!=null and startTime!=''"> and repayment_date &gt;= '${startTime}'</if>
+        <if test="endTime!=null and endTime!=''"> and repayment_date &lt;= '${endTime}'</if>
+        <if test="statusStr!=null and statusStr!=''"> and status in (${statusStr})</if>
+        <if test="repaymentDate!=null">
+                            and TO_DAYS(repayment_date) - TO_DAYS(now()) &lt;= 10
+                            and TO_DAYS(repayment_date) - TO_DAYS(now()) &gt;= 0</if>
+
+        <if test="customerName!=null and customerName!=''"> and customer_name LIKE CONCAT("%",'${customerName}',"%")</if>
+        ORDER BY
+        <foreach item="item" collection="sortItemList" separator=",">${item.sortFeild} ${item.sortType}</foreach>
+        LIMIT ${startIndex},${pageSize}
+    </select>
+    <select id="getTotalCount" resultType="int" parameterType="com.hzfh.api.sales.model.query.SalesCondition"
+            statementType="STATEMENT">
+        SELECT count(1) FROM sales where 1=1
+        <if test="payType !=-1">and pay_type=${payType}</if>
+        <if test="status !=0">and status=${status}</if>
+        <if test="deptNo !=0">and dept_no=${deptNo}</if>
+        <if test="productType > 0">and product_type=${productType}</if>
+        <if test="productType == -1">and product_type != 5 </if>
+        <if test="byDeptNo !='' and byDeptNo != null">and dept_no in(${byDeptNo})</if>
+        <if test="byEmpNo !=0">and emp_no=${byEmpNo}</if>
+        <if test="product !=0">and product_no=${product}</if>
+        <if test="customerType !=0">and customer_type=${customerType}</if>
+        <if test="online!=0">
+            <if test="customer !=0">and (p2p_customer_no=${p2pCustomerNo} or customer_no=${customer})</if>
+        </if>
+        <if test="online==0">
+            <if test="p2pCustomerNo !=0">and p2p_customer_no=${p2pCustomerNo}</if>
+            <if test="customer !=0">and customer_no=${customer}</if>
+        </if>
+        <if test="p2pProductNo !=0">and p2p_product_no=${p2pProductNo}</if>
+        <if test="agentType !=0">and people_type=${agentType}</if>
+        <if test="agent !=0">and people_no=${agent}</if>
+        <if test="workMateString !=null">and emp_no in (${workMateString})</if>
+        <if test="isTest>-1">and is_test=${isTest}</if>
+        <if test="startTime!=null and startTime!=''"> and repayment_date &gt;= '${startTime}'</if>
+        <if test="endTime!=null and endTime!=''"> and repayment_date &lt;= '${endTime}'</if>
+        <if test="statusStr!=null and statusStr!=''"> and status in (${statusStr})</if>
+        <if test="repaymentDate!=null">
+            and TO_DAYS(repayment_date) - TO_DAYS(now()) &lt;= 10
+            and TO_DAYS(repayment_date) - TO_DAYS(now()) &gt;= 0</if>
+        <if test="customerName!=null and customerName!=''"> and customer_name LIKE CONCAT("%",'${customerName}',"%")</if>
+    </select>
+    <select id="getInfo" resultMap="resultMapSales" parameterType="int">
+        SELECT id,code,customer_name,emp_name,relation_sales_no,type,income,service_rate,is_send_sms,contract_code,product_type,product_no,p2p_product_name,customer_type,customer_no,p2p_product_no,p2p_customer_no,status,money,dept_no,emp_no,people_type,people_no,protocol_status,purchase_date,income_money,floating_income,payment_time,payment_type,income_rate,income_rate_real,agent_rate,agent_rate_real,bank_address,bank_name,account_number,idcard_path,bankcard_path,contract_path,voucher_path,document_path,in_user_no,in_time,edit_user_no,edit_time,edit_comment,is_test,establish_date,repayment_date,base_number,pay_type,customer_name,activiti_no
+        FROM sales where id=#{id}</select>
+    <select id="getInfoByActivitiNo" resultMap="resultMapSales" parameterType="String">
+        SELECT id,code,customer_name,emp_name,relation_sales_no,type,income,service_rate,is_send_sms,contract_code,product_type,product_no,p2p_product_name,customer_type,customer_no,p2p_product_no,p2p_customer_no,status,money,dept_no,emp_no,people_type,people_no,protocol_status,purchase_date,income_money,floating_income,payment_time,payment_type,income_rate,income_rate_real,agent_rate,agent_rate_real,bank_address,bank_name,account_number,idcard_path,bankcard_path,contract_path,voucher_path,document_path,in_user_no,in_time,edit_user_no,edit_time,edit_comment,is_test,establish_date,repayment_date,base_number,pay_type,customer_name,activiti_no
+        FROM sales where activiti_no = #{activitiNo}</select>
+
+    <insert id="add" parameterType="com.hzfh.api.sales.model.Sales" useGeneratedKeys="true" keyProperty="id">
+        insert into sales
+		(code,contract_code,income,is_send_sms,relation_sales_no,type,service_rate,customer_name,emp_name,product_type,product_no,p2p_product_name,customer_type,customer_no,p2p_product_no,p2p_customer_no,status,money,dept_no,emp_no,people_type,people_no,protocol_status,purchase_date,income_money,floating_income,payment_time,payment_type,income_rate,income_rate_real,agent_rate,agent_rate_real,bank_address,bank_name,account_number,idcard_path,bankcard_path,contract_path,voucher_path,document_path,in_user_no,in_time,edit_user_no,edit_time,edit_comment,is_test,is_establish,repayment_date,base_number,establish_date,pay_type,activiti_no)
+		values
+		(#{code},#{contractCode},#{income},0,#{relationSalesNo},#{type},#{serviceRate},#{customerName},#{empName},#{productType},#{productNo},#{p2pProductName},#{customerType},#{customerNo},#{p2pProductNo},#{p2pCustomerNo},#{status},#{money},#{deptNo},#{empNo},#{peopleType},#{peopleNo},#{protocolStatus},#{purchaseDate},#{incomeMoney},#{floatingIncome},#{paymentTime},#{paymentType},#{incomeRate},#{incomeRateReal},#{agentRate},#{agentRateReal},#{bankAddress},#{bankName},#{accountNumber},#{idcardPath},#{bankcardPath},#{contractPath},#{voucherPath},#{documentPath},#{inUserNo},current_timestamp(),#{editUserNo},current_timestamp(),#{editComment},#{isTest},0,#{repaymentDate},#{baseNumber},#{establishDate},#{payType},#{activitiNo})</insert>
+    <update id="update" parameterType="com.hzfh.api.sales.model.Sales">
+        update sales set
+		code=#{code},contract_code=#{contractCode},relation_sales_no=#{relationSalesNo},type=#{type},service_rate=#{serviceRate},p2p_product_name=#{p2pProductName},product_type=#{productType},product_no=#{productNo},customer_type=#{customerType},customer_no=#{customerNo},p2p_customer_no=#{p2pCustomerNo},p2p_product_no=#{p2pProductNo},status=#{status},money=#{money},dept_no=#{deptNo},emp_no=#{empNo},emp_name=#{empName},people_type=#{peopleType},people_no=#{peopleNo},protocol_status=#{protocolStatus},purchase_date=#{purchaseDate},income_money=#{incomeMoney},income_rate=#{incomeRate},income_rate_real=#{incomeRateReal},agent_rate=#{agentRate},agent_rate_real=#{agentRateReal},bank_address=#{bankAddress},bank_name=#{bankName},account_number=#{accountNumber},idcard_path=#{idcardPath},bankcard_path=#{bankcardPath},contract_path=#{contractPath},voucher_path=#{voucherPath},document_path=#{documentPath},edit_user_no=#{editUserNo},edit_time=current_timestamp(),edit_comment=#{editComment},is_test=#{isTest},
+		base_number=#{baseNumber},repayment_date=#{repaymentDate},establish_date=#{establishDate},pay_type=#{payType},customer_name=#{customerName},activiti_no=#{activitiNo},income=#{income}
+		where id=#{id}</update>
+    <delete id="delete" parameterType="int">delete from sales where id = #{id}</delete>
+    <update id="updateStatus">
+        update sales set
+		status=#{1}
+		where id=#{0}
+	</update>
+    <update id="addFilePath" parameterType="com.hzfh.api.sales.model.Sales">
+        update sales set document_path=#{documentPath} where id = #{id}
+    </update>
+    <select id="getListByEmps" parameterType="String" resultMap="resultMapSales">
+        SELECT id,code,customer_name,emp_name,relation_sales_no,type,income,service_rate,is_send_sms,contract_code,product_type,product_no,p2p_product_name,customer_type,customer_no,p2p_product_no,p2p_customer_no,status,money,dept_no,emp_no,people_type,people_no,protocol_status,purchase_date,income_money,floating_income,payment_time,payment_type,income_rate,income_rate_real,agent_rate,agent_rate_real,bank_address,bank_name,account_number,idcard_path,bankcard_path,contract_path,voucher_path,document_path,in_user_no,in_time,edit_user_no,edit_time,edit_comment,is_test,establish_date,repayment_date,base_number,pay_type,customer_name,activiti_no
+        FROM sales where emp_no in(${empNos})
+    </select>
+
+    <select id="getSumMoneyList" parameterType="int" resultMap="resultMapSales">
+		SELECT sales.dept_no,SUM(sales.money) as money
+		FROM sales
+		WHERE product_no = #{productNo}
+		GROUP BY sales.dept_no
+	</select>
+    <select id="getSalesListByProductAndStates" resultMap="resultMapSales">
+        SELECT id,code,contract_code,customer_name,relation_sales_no,type,income,service_rate,product_type,product_no,customer_type,customer_no,p2p_customer_no,p2p_product_no,p2p_product_name,status,money,dept_no,emp_no,people_type,people_no,protocol_status,purchase_date,income_money,floating_income,payment_time,payment_type,income_rate,income_rate_real,agent_rate,agent_rate_real,bank_address,bank_name,account_number,idcard_path,bankcard_path,contract_path,voucher_path,document_path,in_user_no,in_time,edit_user_no,edit_time,edit_comment,is_test,activiti_no
+        FROM sales
+        where product_no=#{productNo} and status in(${status})
+    </select>
+    <select id="getListByCustomerNo" resultMap="resultMapSales">
+        SELECT id,code,contract_code,customer_name,relation_sales_no,type,income,service_rate,product_type,product_no,customer_type,customer_no,p2p_customer_no,p2p_product_no,p2p_product_name,status,money,dept_no,emp_no,people_type,people_no,protocol_status,purchase_date,income_money,floating_income,payment_time,payment_type,income_rate,income_rate_real,agent_rate,agent_rate_real,bank_address,bank_name,account_number,idcard_path,bankcard_path,contract_path,voucher_path,document_path,in_user_no,in_time,edit_user_no,edit_time,edit_comment,is_test,activiti_no
+        FROM sales
+        where customer_no = #{customerNo}
+    </select>
+    <update id="updateCustomerNameByCustomerNo">
+        update sales set
+        customer_name=#{customerName}
+        where customer_no = #{customerNo}
+    </update>
+	<select id="getSalesListByProductAndStatus" resultMap="resultMapSales">
+        SELECT id,code,contract_code,customer_name,relation_sales_no,type,income,service_rate,product_type,product_no,customer_type,customer_no,p2p_customer_no,p2p_product_no,p2p_product_name,status,money,dept_no,emp_no,people_type,people_no,protocol_status,purchase_date,income_money,floating_income,payment_time,payment_type,income_rate,income_rate_real,agent_rate,agent_rate_real,bank_address,bank_name,account_number,idcard_path,bankcard_path,contract_path,voucher_path,document_path,in_user_no,in_time,edit_user_no,edit_time,edit_comment,is_test,activiti_no
+		FROM sales 
+		where product_no=#{0} and status=1
+	</select>
+	
+	<update id="updateStatusByProductionNoAndStatus">
+        update sales set
+		status=3
+		where product_no=#{productNo} and status=#{status}
+	</update>
+	<update id="updateStagesByProductionNoAndStatus">
+        update sales set
+		product_stages_no=#{productStagesNo}
+		where product_no=#{productNo} and status=#{status}
+	</update>
+    <update id="updateEstablishDateByProductNoAndisEstablish">
+        update sales set
+        is_establish = 1,establish_date = #{establishDate}
+        where product_no=#{productNo} and ISNULL(establish_date)
+    </update>
+
+
+	<select id="getAllAccountMoney" resultType="java.lang.Long">
+
+		SELECT SUM(sales.money) as money
+		FROM sales
+		WHERE product_no = #{productNo}
+		AND status=#{status}
+	</select>
+    <select id="getSumMoneyGroupByEmp" resultMap="resultMapSales" parameterType="com.hzfh.api.sales.model.query.SalesCondition">
+        select id,sum(money) money,emp_no from sales where  emp_no !=0 and is_test = 0
+        <if test="empNos !=null and empNos != '' ">and emp_no in (${empNos})</if>
+        <if test="startTime !=null and startTime != '' ">and purchase_date &gt;= '${startTime}'</if>
+        <if test="endTime !=null and endTime != '' ">and purchase_date &lt;= '${endTime}'</if>
+        <if test="status !=0">and status=${status}</if>
+        group by emp_no
+    </select>
+
+    <select id="getP2pSumMoney" resultType="java.lang.Long" parameterType="com.hzfh.api.sales.model.query.SalesCondition">
+        select sum(money) money from sales where  emp_no != 0 and is_test = 0
+        <if test="empNos !=null and empNos != '' ">and emp_no in (${empNos})</if>
+        <if test="empNos == '-1' ">and emp_no = -1</if>
+        <if test="productType !=0 ">and product_type = ${productType}</if>
+        <if test="productType ==0 ">and product_type not in (5)</if>
+        <if test="deptNo !=0 ">and dept_no = ${deptNo}</if>
+        <if test="startTime !=null and startTime != '' ">and purchase_date &gt;= '${startTime}'</if>
+        <if test="endTime !=null and endTime != '' ">and purchase_date &lt;= '${endTime}'</if>
+        <if test="status !=0">and status=${status}</if>
+    </select>
+	<!-- getNoPagingList create By Zorro 2015/4/30 -->
+	<select id="getNoPagingList" resultMap="resultMapSales" parameterType="com.hzfh.api.sales.model.query.SalesCondition"
+            statementType="STATEMENT">
+        SELECT
+        id,code,contract_code,product_type,relation_sales_no,type,service_rate,income,customer_name,emp_name,product_no,customer_type,customer_no,p2p_customer_no,p2p_product_no,p2p_product_name,status,money,dept_no,emp_no,people_type,people_no,protocol_status,purchase_date,income_money,floating_income,payment_time,payment_type,income_rate,income_rate_real,agent_rate,agent_rate_real,bank_address,bank_name,account_number,idcard_path,bankcard_path,contract_path,voucher_path,document_path,in_user_no,in_time,edit_user_no,edit_time,edit_comment,is_test,activiti_no
+        FROM sales where 1=1
+        <if test="status !=0">and status=${status}</if>
+        <if test="deptNo !=0">and dept_no=${deptNo}</if>
+        <if test="productType !=0">and product_type=${productType}</if>
+        <if test="product !=0">and product_no=${product}</if>
+        <if test="p2pCustomerNo !=0">and p2p_customer_no=${p2pCustomerNo}</if>
+        <if test="customerType !=0">and customer_type=${customerType}</if>
+        <if test="customer !=0">and customer_no=${customer}</if>
+        <if test="agentType !=0">and people_type=${agentType}</if>
+        <if test="agent !=0">and people_no=${agent}</if>
+        <if test="workMateString !=null">and emp_no in (${workMateString})</if>
+        <if test="isTest>-1">and is_test=${isTest}</if>
+        ORDER BY
+        <foreach item="item" collection="sortItemList" separator=",">${item.sortFeild} ${item.sortType}</foreach>
+    </select>
+    
+    <select id="getSalesListByProductNoAndCount" resultMap="resultMapSales">
+    	 SELECT 
+    	 id,code,product_type,product_no,money,purchase_date,relation_sales_no,type,customer_name,emp_name,income
+    	 FROM `sales` where product_no=${productNo}
+		 ORDER BY purchase_date DESC LIMIT 0,${count};
+    </select>
+    <select id="getListByP2pCustomerNoAndProductType" resultMap="resultMapSales">
+    	 SELECT id,code,service_rate,customer_name,income,emp_name,relation_sales_no,type,contract_code,product_type,product_no,p2p_product_name,customer_type,customer_no,p2p_product_no,p2p_customer_no,status,money,dept_no,emp_no,people_type,people_no,protocol_status,purchase_date,income_money,floating_income,payment_time,payment_type,income_rate,income_rate_real,agent_rate,agent_rate_real,bank_address,bank_name,account_number,idcard_path,bankcard_path,contract_path,voucher_path,document_path,in_user_no,in_time,edit_user_no,edit_time,edit_comment,is_test,establish_date,repayment_date,base_number,pay_type,customer_name,activiti_no
+        FROM sales where 1=1
+        <if test="p2pCustomerNo!=0"> and p2p_customer_no=#{p2pCustomerNo}</if>
+        <if test="productType!=0"> and product_type = #{productType}</if>
+    </select>
+    <select id="getWillHavingPrincipal" resultType="Long">
+    	SELECT SUM(money)  FROM sales where p2p_customer_no=${customerNo} and status=${status}
+    </select>
+	
+    <update id="updateP2pCustomerNoByCustomerNo">
+        update sales set
+        p2p_customer_no = #{p2pCustomerNo}
+        where customer_no=#{customerNo}
+    </update>
+
+    <select id="getListForExacl" resultMap="resultMapSales" parameterType="com.hzfh.api.sales.model.query.SalesCondition"
+            statementType="STATEMENT">
+        SELECT id,code,customer_name,service_rate,emp_name,relation_sales_no,type,is_send_sms,contract_code,income,product_type,product_no,p2p_product_name,customer_type,customer_no,p2p_customer_no,p2p_product_no,status,money,dept_no,emp_no,people_type,people_no,protocol_status,purchase_date,income_money,floating_income,payment_time,payment_type,income_rate,income_rate_real,agent_rate,agent_rate_real,bank_address,bank_name,account_number,idcard_path,bankcard_path,contract_path,voucher_path,document_path,in_user_no,in_time,edit_user_no,edit_time,edit_comment,is_test,pay_type,repayment_date,activiti_no
+        FROM sales where 1=1
+        <if test="payType !=-1">and pay_type=${payType}</if>
+        <if test="status !=0">and status=${status}</if>
+        <if test="deptNo !=0">and dept_no=${deptNo}</if>
+        <if test="productType !=0">and product_type=${productType}</if>
+        <if test="byDeptNo !='' and byDeptNo != null">and dept_no in(${byDeptNo})</if>
+        <if test="byEmpNo !=0">and emp_no=${byEmpNo}</if>
+        <if test="product !=0">and product_no=${product}</if>
+        <if test="customerType !=0">and customer_type=${customerType}</if>
+        <if test="customer !=0">and customer_no=${customer}</if>
+        <if test="p2pCustomerNo !=0">and p2p_customer_no=${p2pCustomerNo}</if>
+        <if test="p2pProductNo !=0">and p2p_product_no=${p2pProductNo}</if>
+        <if test="agentType !=0">and people_type=${agentType}</if>
+        <if test="agent !=0">and people_no=${agent}</if>
+        <if test="workMateString !=null">and emp_no in (${workMateString})</if>
+        <if test="isTest>-1">and is_test=${isTest}</if>
+        <if test="startTime!=null and startTime!=''"> and repayment_date &gt;= '${startTime}'</if>
+        <if test="endTime!=null and endTime!=''"> and repayment_date &lt;= '${endTime}'</if>
+        <if test="statusStr!=null and statusStr!=''"> and status in (${statusStr})</if>
+        <if test="customerName!=null and customerName!=''"> and customer_name LIKE CONCAT("%",'${customerName}',"%")</if>
+        ORDER BY
+        <foreach item="item" collection="sortItemList" separator=",">${item.sortFeild} ${item.sortType}</foreach>
+    </select>
+    <update id="updateIncomeById">
+    UPDATE sales SET income=#{income} WHERE id=#{id}
+</update>
+    <update id="updateActivitiNoBySalesNo">
+        UPDATE sales SET activiti_no=#{activitiNo} WHERE id=#{salesNo}
+    </update>
+
+    <select id="getCurrentWeekSales" resultMap="resultMapSales" parameterType="com.hzfh.api.sales.model.query.SalesCondition" statementType="STATEMENT">
+        SELECT
+        <include refid="base_column"/>
+        FROM sales WHERE is_test=0 AND YEARWEEK(purchase_date) = YEARWEEK(NOW())
+        <if test="workMateString !=null">and emp_no in (${workMateString}) AND status IN (1,2,3,8)</if>
+    </select>
+</mapper>

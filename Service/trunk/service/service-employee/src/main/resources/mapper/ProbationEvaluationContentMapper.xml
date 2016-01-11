@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hzfh.service.employee.mapper.ProbationEvaluationContentMapper">
+	<resultMap type="com.hzfh.api.employee.model.ProbationEvaluationContent" id="resultMapProbationEvaluationContent">
+		<result property="id" column="id"/>
+		<result property="recordNo" column="record_no"/>
+		<result property="content" column="content"/>
+		<result property="scale" column="scale"/>
+		<result property="score" column="score"/>
+		<result property="inUserNo" column="in_user_no"/>
+		<result property="inTime" column="in_time" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
+		<result property="editUserNo" column="edit_user_no"/>
+		<result property="editTime" column="edit_time" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
+		<result property="editComment" column="edit_comment"/>
+	</resultMap>
+	<select id="getList" resultMap="resultMapProbationEvaluationContent">
+		SELECT id,record_no,content,scale,score,in_user_no,in_time,edit_user_no,edit_time,edit_comment
+		FROM probation_evaluation_content
+	</select>
+	<select id="getPagingList" resultMap="resultMapProbationEvaluationContent" parameterType="com.hzfh.api.employee.model.query.ProbationEvaluationContentCondition" statementType="STATEMENT">
+		SELECT id,record_no,content,scale,score,in_user_no,in_time,edit_user_no,edit_time,edit_comment FROM probation_evaluation_content where 1=1
+		ORDER BY
+		<foreach item="item" collection="sortItemList" separator=",">
+			${item.sortFeild} ${item.sortType}
+		</foreach>
+		LIMIT ${startIndex},${pageSize}
+	</select>
+	<select id="getTotalCount" resultType="int" parameterType="com.hzfh.api.employee.model.query.ProbationEvaluationContentCondition" statementType="STATEMENT">
+		SELECT count(1) FROM probation_evaluation_content where 1=1
+	</select>
+	<select id="getInfo" resultMap="resultMapProbationEvaluationContent" parameterType="int">
+		SELECT id,record_no,content,scale,score,in_user_no,in_time,edit_user_no,edit_time,edit_comment FROM probation_evaluation_content where id=#{id}
+	</select>
+	<insert id="add" parameterType="com.hzfh.api.employee.model.ProbationEvaluationContent" useGeneratedKeys="true" keyProperty="id">
+		insert into probation_evaluation_content
+		(record_no,content,scale,score,in_user_no,in_time,edit_user_no,edit_time,edit_comment)
+		values
+		(#{recordNo},#{content},#{scale},#{score},#{inUserNo},current_timestamp(),#{editUserNo},current_timestamp(),#{editComment})
+	</insert>
+	<update id="update" parameterType="com.hzfh.api.employee.model.ProbationEvaluationContent">
+		update probation_evaluation_content set 
+		record_no=#{recordNo},content=#{content},scale=#{scale},score=#{score},edit_user_no=#{editUserNo},edit_time=current_timestamp(),edit_comment=#{editComment}
+		where id=#{id}
+	</update>
+	<delete id="delete" parameterType="int">
+		delete from probation_evaluation_content where id = #{id}
+	</delete>
+	
+	<select id="getListByRecordNo" resultMap="resultMapProbationEvaluationContent" parameterType="int">
+		SELECT id,record_no,content,scale,score,in_user_no,in_time,edit_user_no,edit_time,edit_comment
+		FROM probation_evaluation_content where record_no=#{id}
+	</select>
+</mapper>

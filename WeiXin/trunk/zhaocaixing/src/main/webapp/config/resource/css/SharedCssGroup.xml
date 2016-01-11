@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<cssConfig xmlns="http://www.hzfh.com/web"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="/../Schemas/Resources/Css.xsd">
+
+	<sharedCssGroups default="Common">
+		<cssGroup name="Common">
+           		<cssName>common</cssName>
+           		<cssName>style</cssName>
+		</cssGroup>
+		<cssGroup name="Empty"></cssGroup>
+	</sharedCssGroups>
+</cssConfig>

@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hzfh.service.customer.mapper.ActivityConditionMapper">
+	<resultMap type="com.hzfh.api.customer.model.ActivityCondition" id="resultMapActivityCondition">
+		<result property="id" column="id"/>
+		<result property="conditionType" column="condition_type"/>
+		<result property="conditionDescription" column="condition_description"/>
+		<result property="conditionValue" column="condition_value"/>
+		<result property="conditionRelation" column="condition_relation"/>
+		<result property="productType" column="product_type"/>
+		<result property="productName" column="product_name"/>
+		<result property="inUserNo" column="in_user_no"/>
+		<result property="inTime" column="in_time" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
+		<result property="editUserNo" column="edit_user_no"/>
+		<result property="editTime" column="edit_time" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
+		<result property="editComment" column="edit_comment"/>
+		<result property="isTest" column="is_test"/>
+	</resultMap>
+	<select id="getList" resultMap="resultMapActivityCondition">
+		SELECT id,condition_type,condition_description,condition_value,condition_relation,product_type,product_name,in_user_no,in_time,edit_user_no,edit_time,edit_comment,is_test
+		FROM activity_condition
+	</select>
+	<select id="getPagingList" resultMap="resultMapActivityCondition" parameterType="com.hzfh.api.customer.model.query.ActivityConditionCondition" statementType="STATEMENT">
+		SELECT id,condition_type,condition_description,condition_value,condition_relation,product_type,product_name,in_user_no,in_time,edit_user_no,edit_time,edit_comment,is_test FROM activity_condition where 1=1
+		ORDER BY
+		<foreach item="item" collection="sortItemList" separator=",">
+			${item.sortFeild} ${item.sortType}
+		</foreach>
+		LIMIT ${startIndex},${pageSize}
+	</select>
+	<select id="getTotalCount" resultType="int" parameterType="com.hzfh.api.customer.model.query.ActivityConditionCondition" statementType="STATEMENT">
+		SELECT count(1) FROM activity_condition where 1=1
+	</select>
+	<select id="getInfo" resultMap="resultMapActivityCondition" parameterType="int">
+		SELECT id,condition_type,condition_description,condition_value,condition_relation,product_type,product_name,in_user_no,in_time,edit_user_no,edit_time,edit_comment,is_test FROM activity_condition where id=#{id}
+	</select>
+	<insert id="add" parameterType="com.hzfh.api.customer.model.ActivityCondition" useGeneratedKeys="true" keyProperty="id">
+		insert into activity_condition
+		(condition_type,condition_description,condition_value,condition_relation,product_type,product_name,in_user_no,in_time,edit_user_no,edit_time,edit_comment,is_test)
+		values
+		(#{conditionType},#{conditionDescription},#{conditionValue},#{conditionRelation},#{productType},#{productName},#{inUserNo},current_timestamp(),#{editUserNo},current_timestamp(),#{editComment},#{isTest})
+	</insert>
+	<update id="update" parameterType="com.hzfh.api.customer.model.ActivityCondition">
+		update activity_condition set 
+		condition_type=#{conditionType},condition_description=#{conditionDescription},condition_value=#{conditionValue},condition_relation=#{conditionRelation},product_type=#{productType},product_name=#{productName},edit_user_no=#{editUserNo},edit_time=current_timestamp(),edit_comment=#{editComment},is_test=#{isTest}
+		where id=#{id}
+	</update>
+	<delete id="delete" parameterType="int">
+		delete from activity_condition where id = #{id}
+	</delete>
+	<select id="getIds" resultMap="resultMapActivityCondition" >
+		SELECT id FROM activity_condition
+	</select>
+	<select id="getInfoByActId" resultMap="resultMapActivityCondition" parameterType="int">
+		SELECT a.id,a.condition_type,a.condition_description,a.condition_value,a.condition_relation,
+		a.product_type,a.product_name,a.in_user_no,a.in_time,a.edit_user_no,a.edit_time,a.edit_comment,a.is_test 
+		FROM activity_condition a
+		inner join activity_condition_relation b
+		inner join activity_rule_relation c
+		on    a.id = b.condition_no
+		and   b.id = c.rule_no
+		and   c.activity_no = #{id}
+	</select>
+	<!-- <select id="getInfoByActIds" resultMap="resultMapActivityCondition" parameterType="int">
+		SELECT id,condition_type,condition_description,condition_value,condition_relation,product_type,product_name,in_user_no,in_time,edit_user_no,edit_time,edit_comment,is_test 
+		FROM activity_condition a
+		inner join activity_condition_relation b
+		inner join activity_rule_relation c
+		inner join activity_award_relation d
+		on    a.id = b.condition_no
+		and   b.id = c.rule_no
+		and   d.condition_id = a.id
+		and   c.activity_no = #{id}
+	</select> -->
+	<select id="getActInfoByAcId" resultType="int" parameterType="int">
+		SELECT d.activity_type
+		FROM activity_condition a
+		inner join activity_condition_relation b
+		inner join activity_rule_relation c
+		INNER JOIN activities d
+		on    a.id = b.condition_no
+		and   b.id = c.rule_no
+		and   c.activity_no = d.id
+		and   a.id=#{id}
+	</select>
+</mapper>

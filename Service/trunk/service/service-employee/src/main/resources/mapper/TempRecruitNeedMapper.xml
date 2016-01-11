@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hzfh.service.employee.mapper.TempRecruitNeedMapper">
+	<resultMap type="com.hzfh.api.employee.model.TempRecruitNeed" id="resultMapTempRecruitNeed">
+		<result property="id" column="id"/>
+		<result property="code" column="code"/>
+		<result property="financialYear" column="financial_year"/>
+		<result property="companyNo" column="company_no"/>
+		<result property="activitiNo" column="activiti_no"/>
+		<result property="inUserNo" column="in_user_no"/>
+		<result property="inTime" column="in_time" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
+		<result property="editUserNo" column="edit_user_no"/>
+		<result property="editTime" column="edit_time" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
+		<result property="editComment" column="edit_comment"/>
+	</resultMap>
+	<select id="getList" resultMap="resultMapTempRecruitNeed">
+		SELECT id,code,financial_year,company_no,activiti_no,in_user_no,in_time,edit_user_no,edit_time,edit_comment
+		FROM temp_recruit_need
+	</select>
+	<select id="getPagingList" resultMap="resultMapTempRecruitNeed" parameterType="com.hzfh.api.employee.model.query.TempRecruitNeedCondition" statementType="STATEMENT">
+		SELECT id,code,financial_year,company_no,activiti_no,in_user_no,in_time,edit_user_no,edit_time,edit_comment FROM temp_recruit_need where 1=1
+		<if test="code!=null and code!=''"> and code LIKE CONCAT("%",'${code}',"%")</if>
+		<if test="deptNo!=0"> and dept_no=${deptNo}</if>
+		<if test="financialYear!=0"> and financial_year=${financialYear}</if>
+		ORDER BY
+		<foreach item="item" collection="sortItemList" separator=",">
+			${item.sortFeild} ${item.sortType}
+		</foreach>
+		LIMIT ${startIndex},${pageSize}
+	</select>
+	<select id="getTotalCount" resultType="int" parameterType="com.hzfh.api.employee.model.query.TempRecruitNeedCondition" statementType="STATEMENT">
+		SELECT count(1) FROM temp_recruit_need where 1=1
+		<if test="code!=null and code!=''"> and code LIKE CONCAT("%",'${code}',"%")</if>
+		<if test="deptNo!=0"> and dept_no=${deptNo}</if>
+		<if test="financialYear!=0"> and financial_year=${financialYear}</if>
+	</select>
+	<select id="getInfo" resultMap="resultMapTempRecruitNeed" parameterType="int">
+		SELECT id,code,financial_year,company_no,activiti_no,in_user_no,in_time,edit_user_no,edit_time,edit_comment FROM temp_recruit_need where id=#{id}
+	</select>
+	<insert id="add" parameterType="com.hzfh.api.employee.model.TempRecruitNeed" useGeneratedKeys="true" keyProperty="id">
+		insert into temp_recruit_need
+		(code,financial_year,company_no,activiti_no,in_user_no,in_time,edit_user_no,edit_time,edit_comment)
+		values
+		(#{code},#{financialYear},#{companyNo},#{activitiNo},#{inUserNo},current_timestamp(),#{editUserNo},current_timestamp(),#{editComment})
+	</insert>
+	<update id="update" parameterType="com.hzfh.api.employee.model.TempRecruitNeed">
+		update temp_recruit_need set 
+		code=#{code},financial_year=#{financialYear},company_no=#{companyNo},activiti_no=#{activitiNo},edit_user_no=#{editUserNo},edit_time=current_timestamp(),edit_comment=#{editComment}
+		where id=#{id}
+	</update>
+	<delete id="delete" parameterType="int">
+		delete from temp_recruit_need where id = #{id}
+	</delete>
+</mapper>

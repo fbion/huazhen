@@ -1,0 +1,319 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns="http://www.springframework.org/schema/beans" xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+
+       http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context-4.0.xsd"
+       default-autowire="byName" default-lazy-init="false">
+    <context:component-scan base-package="com.hzfh.service"/>
+    <context:annotation-config/>
+    <bean id="hessianMapping"
+          class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+        <property name="mappings">
+            <props>
+                <prop key="/codeAdviser">codeAdviserService</prop>
+                <prop key="/codeAgent">codeAgentService</prop>
+                <prop key="/codeCompany">codeCompanyService</prop>
+                <prop key="/codeCus1">codeCus1Service</prop>
+                <prop key="/codeCus2">codeCus2Service</prop>
+                <prop key="/codeDept">codeDeptService</prop>
+                <prop key="/codeEmp">codeEmpService</prop>
+                <prop key="/codeExpense">codeExpenseService</prop>
+                <prop key="/codeIncome">codeIncomeService</prop>
+                <prop key="/codeIssue">codeIssueService</prop>
+                <prop key="/codeNeed1">codeNeed1Service</prop>
+                <prop key="/codeNeed2">codeNeed2Service</prop>
+                <prop key="/codePact">codePactService</prop>
+                <prop key="/codeProduct1">codeProduct1Service</prop>
+                <prop key="/codeProduct2">codeProduct2Service</prop>
+                <prop key="/codeProduct3">codeProduct3Service</prop>
+                <prop key="/codeProduct4">codeProduct4Service</prop>
+                <prop key="/codeSales">codeSalesService</prop>
+                <prop key="/dicData">dicDataService</prop>
+                <prop key="/dicType">dicTypeService</prop>
+
+                <prop key="/district">districtService</prop>
+                <prop key="/email">emailService</prop>
+                <prop key="/loginFailed">loginFailedService</prop>
+                <prop key="/province">provinceService</prop>
+                <prop key="/captcha">captchaService</prop>
+                <prop key="/city">cityService</prop>
+                <prop key="/letter">letterService</prop>
+                <prop key="/letterStep">letterStepService</prop>
+                <prop key="/sms">smsService</prop>
+                <prop key="/emailFiles">emailFilesService</prop>
+                <prop key="/smstemplete">smstempleteService</prop>
+                <prop key="/smsCaptcha">smsCaptchaService</prop>
+                <prop key="/sn">snService</prop>
+                <prop key="/announcement">announcementService</prop>
+                <prop key="/bannerInfo">bannerInfoService</prop>
+                <prop key="/bannerLocation">bannerLocationService</prop>
+                <prop key="/des">desService</prop>
+                <prop key="/calendar">calendarService</prop>
+            </props>
+        </property>
+    </bean>
+    <bean id="bannerInfoServiceImpl" class="com.hzfh.service.baseInfo.serviceImpl.BannerInfoServiceImpl" />
+    <bean id="bannerInfoService"
+          class="org.springframework.remoting.caucho.HessianServiceExporter">
+        <property name="service" ref="bannerInfoServiceImpl" />
+        <property name="serviceInterface" value="com.hzfh.api.baseInfo.service.BannerInfoService" />
+    </bean>
+    <bean id="bannerLocationServiceImpl" class="com.hzfh.service.baseInfo.serviceImpl.BannerLocationServiceImpl" />
+    <bean id="bannerLocationService"
+          class="org.springframework.remoting.caucho.HessianServiceExporter">
+        <property name="service" ref="bannerLocationServiceImpl" />
+        <property name="serviceInterface" value="com.hzfh.api.baseInfo.service.BannerLocationService" />
+    </bean>
+
+    <bean id="codeAdviserServiceImpl" class="com.hzfh.service.baseInfo.serviceImpl.CodeAdviserServiceImpl"/>
+    <bean id="codeAdviserService"
+          class="org.springframework.remoting.caucho.HessianServiceExporter">
+        <property name="service" ref="codeAdviserServiceImpl"/>
+        <property name="serviceInterface" value="com.hzfh.api.baseInfo.service.CodeAdviserService"/>
+    </bean>
+
+    <bean id="codeAgentServiceImpl" class="com.hzfh.service.baseInfo.serviceImpl.CodeAgentServiceImpl"/>
+    <bean id="codeAgentService"
+          class="org.springframework.remoting.caucho.HessianServiceExporter">
+        <property name="service" ref="codeAgentServiceImpl"/>
+        <property name="serviceInterface" value="com.hzfh.api.baseInfo.service.CodeAgentService"/>
+    </bean>
+
+    <bean id="codeCompanyServiceImpl" class="com.hzfh.service.baseInfo.serviceImpl.CodeCompanyServiceImpl"/>
+    <bean id="codeCompanyService"
+          class="org.springframework.remoting.caucho.HessianServiceExporter">
+        <property name="service" ref="codeCompanyServiceImpl"/>
+        <property name="serviceInterface" value="com.hzfh.api.baseInfo.service.CodeCompanyService"/>
+    </bean>
+
+    <bean id="codeCus1ServiceImpl" class="com.hzfh.service.baseInfo.serviceImpl.CodeCus1ServiceImpl"/>
+    <bean id="codeCus1Service"
+          class="org.springframework.remoting.caucho.HessianServiceExporter">
+        <property name="service" ref="codeCus1ServiceImpl"/>
+        <property name="serviceInterface" value="com.hzfh.api.baseInfo.service.CodeCus1Service"/>
+    </bean>
+
+    <bean id="codeCus2ServiceImpl" class="com.hzfh.service.baseInfo.serviceImpl.CodeCus2ServiceImpl"/>
+    <bean id="codeCus2Service"
+          class="org.springframework.remoting.caucho.HessianServiceExporter">
+        <property name="service" ref="codeCus2ServiceImpl"/>
+        <property name="serviceInterface" value="com.hzfh.api.baseInfo.service.CodeCus2Service"/>
+    </bean>
+
+    <bean id="codeDeptServiceImpl" class="com.hzfh.service.baseInfo.serviceImpl.CodeDeptServiceImpl"/>
+    <bean id="codeDeptService"
+          class="org.springframework.remoting.caucho.HessianServiceExporter">
+        <property name="service" ref="codeDeptServiceImpl"/>
+        <property name="serviceInterface" value="com.hzfh.api.baseInfo.service.CodeDeptService"/>
+    </bean>
+
+    <bean id="codeEmpServiceImpl" class="com.hzfh.service.baseInfo.serviceImpl.CodeEmpServiceImpl"/>
+    <bean id="codeEmpService"
+          class="org.springframework.remoting.caucho.HessianServiceExporter">
+        <property name="service" ref="codeEmpServiceImpl"/>
+        <property name="serviceInterface" value="com.hzfh.api.baseInfo.service.CodeEmpService"/>
+    </bean>
+
+    <bean id="codeExpenseServiceImpl" class="com.hzfh.service.baseInfo.serviceImpl.CodeExpenseServiceImpl"/>
+    <bean id="codeExpenseService"
+          class="org.springframework.remoting.caucho.HessianServiceExporter">
+        <property name="service" ref="codeExpenseServiceImpl"/>
+        <property name="serviceInterface" value="com.hzfh.api.baseInfo.service.CodeExpenseService"/>
+    </bean>
+
+    <bean id="codeIncomeServiceImpl" class="com.hzfh.service.baseInfo.serviceImpl.CodeIncomeServiceImpl"/>
+    <bean id="codeIncomeService"
+          class="org.springframework.remoting.caucho.HessianServiceExporter">
+        <property name="service" ref="codeIncomeServiceImpl"/>
+        <property name="serviceInterface" value="com.hzfh.api.baseInfo.service.CodeIncomeService"/>
+    </bean>
+
+    <bean id="codeIssueServiceImpl" class="com.hzfh.service.baseInfo.serviceImpl.CodeIssueServiceImpl"/>
+    <bean id="codeIssueService"
+          class="org.springframework.remoting.caucho.HessianServiceExporter">
+        <property name="service" ref="codeIssueServiceImpl"/>
+        <property name="serviceInterface" value="com.hzfh.api.baseInfo.service.CodeIssueService"/>
+    </bean>
+
+    <bean id="codeNeed1ServiceImpl" class="com.hzfh.service.baseInfo.serviceImpl.CodeNeed1ServiceImpl"/>
+    <bean id="codeNeed1Service"
+          class="org.springframework.remoting.caucho.HessianServiceExporter">
+        <property name="service" ref="codeNeed1ServiceImpl"/>
+        <property name="serviceInterface" value="com.hzfh.api.baseInfo.service.CodeNeed1Service"/>
+    </bean>
+
+    <bean id="codeNeed2ServiceImpl" class="com.hzfh.service.baseInfo.serviceImpl.CodeNeed2ServiceImpl"/>
+    <bean id="codeNeed2Service"
+          class="org.springframework.remoting.caucho.HessianServiceExporter">
+        <property name="service" ref="codeNeed2ServiceImpl"/>
+        <property name="serviceInterface" value="com.hzfh.api.baseInfo.service.CodeNeed2Service"/>
+    </bean>
+
+    <bean id="codePactServiceImpl" class="com.hzfh.service.baseInfo.serviceImpl.CodePactServiceImpl"/>
+    <bean id="codePactService"
+          class="org.springframework.remoting.caucho.HessianServiceExporter">
+        <property name="service" ref="codePactServiceImpl"/>
+        <property name="serviceInterface" value="com.hzfh.api.baseInfo.service.CodePactService"/>
+    </bean>
+
+    <bean id="codeProduct1ServiceImpl" class="com.hzfh.service.baseInfo.serviceImpl.CodeProduct1ServiceImpl"/>
+    <bean id="codeProduct1Service"
+          class="org.springframework.remoting.caucho.HessianServiceExporter">
+        <property name="service" ref="codeProduct1ServiceImpl"/>
+        <property name="serviceInterface" value="com.hzfh.api.baseInfo.service.CodeProduct1Service"/>
+    </bean>
+
+    <bean id="codeProduct2ServiceImpl" class="com.hzfh.service.baseInfo.serviceImpl.CodeProduct2ServiceImpl"/>
+    <bean id="codeProduct2Service"
+          class="org.springframework.remoting.caucho.HessianServiceExporter">
+        <property name="service" ref="codeProduct2ServiceImpl"/>
+        <property name="serviceInterface" value="com.hzfh.api.baseInfo.service.CodeProduct2Service"/>
+    </bean>
+
+    <bean id="codeProduct3ServiceImpl" class="com.hzfh.service.baseInfo.serviceImpl.CodeProduct3ServiceImpl"/>
+    <bean id="codeProduct3Service"
+          class="org.springframework.remoting.caucho.HessianServiceExporter">
+        <property name="service" ref="codeProduct3ServiceImpl"/>
+        <property name="serviceInterface" value="com.hzfh.api.baseInfo.service.CodeProduct3Service"/>
+    </bean>
+
+    <bean id="codeProduct4ServiceImpl" class="com.hzfh.service.baseInfo.serviceImpl.CodeProduct4ServiceImpl"/>
+    <bean id="codeProduct4Service"
+          class="org.springframework.remoting.caucho.HessianServiceExporter">
+        <property name="service" ref="codeProduct4ServiceImpl"/>
+        <property name="serviceInterface" value="com.hzfh.api.baseInfo.service.CodeProduct4Service"/>
+    </bean>
+
+    <bean id="codeSalesServiceImpl" class="com.hzfh.service.baseInfo.serviceImpl.CodeSalesServiceImpl"/>
+    <bean id="codeSalesService"
+          class="org.springframework.remoting.caucho.HessianServiceExporter">
+        <property name="service" ref="codeSalesServiceImpl"/>
+        <property name="serviceInterface" value="com.hzfh.api.baseInfo.service.CodeSalesService"/>
+    </bean>
+
+    <bean id="dicDataServiceImpl" class="com.hzfh.service.baseInfo.serviceImpl.DicDataServiceImpl"/>
+    <bean id="dicDataService"
+          class="org.springframework.remoting.caucho.HessianServiceExporter">
+        <property name="service" ref="dicDataServiceImpl"/>
+        <property name="serviceInterface" value="com.hzfh.api.baseInfo.service.DicDataService"/>
+    </bean>
+
+    <bean id="dicTypeServiceImpl" class="com.hzfh.service.baseInfo.serviceImpl.DicTypeServiceImpl"/>
+    <bean id="dicTypeService"
+          class="org.springframework.remoting.caucho.HessianServiceExporter">
+        <property name="service" ref="dicTypeServiceImpl"/>
+        <property name="serviceInterface" value="com.hzfh.api.baseInfo.service.DicTypeService"/>
+    </bean>
+
+    <bean id="districtServiceImpl" class="com.hzfh.service.baseInfo.serviceImpl.DistrictServiceImpl"/>
+    <bean id="districtService"
+          class="org.springframework.remoting.caucho.HessianServiceExporter">
+        <property name="service" ref="districtServiceImpl"/>
+        <property name="serviceInterface" value="com.hzfh.api.baseInfo.service.DistrictService"/>
+    </bean>
+
+
+    <bean id="emailServiceImpl" class="com.hzfh.service.baseInfo.serviceImpl.EmailServiceImpl"/>
+    <bean id="emailService"
+          class="org.springframework.remoting.caucho.HessianServiceExporter">
+        <property name="service" ref="emailServiceImpl"/>
+        <property name="serviceInterface" value="com.hzfh.api.baseInfo.service.EmailService"/>
+    </bean>
+    <bean id="announcementServiceImpl" class="com.hzfh.service.baseInfo.serviceImpl.AnnouncementServiceImpl" />
+    <bean id="announcementService"
+          class="org.springframework.remoting.caucho.HessianServiceExporter">
+        <property name="service" ref="announcementServiceImpl" />
+        <property name="serviceInterface" value="com.hzfh.api.baseInfo.service.AnnouncementService" />
+    </bean>
+
+    <bean id="loginFailedServiceImpl" class="com.hzfh.service.baseInfo.serviceImpl.LoginFailedServiceImpl"/>
+    <bean id="loginFailedService"
+          class="org.springframework.remoting.caucho.HessianServiceExporter">
+        <property name="service" ref="loginFailedServiceImpl"/>
+        <property name="serviceInterface" value="com.hzfh.api.baseInfo.service.LoginFailedService"/>
+    </bean>
+
+
+    <bean id="provinceServiceImpl" class="com.hzfh.service.baseInfo.serviceImpl.ProvinceServiceImpl"/>
+    <bean id="provinceService"
+          class="org.springframework.remoting.caucho.HessianServiceExporter">
+        <property name="service" ref="provinceServiceImpl"/>
+        <property name="serviceInterface" value="com.hzfh.api.baseInfo.service.ProvinceService"/>
+    </bean>
+    <bean id="captchaServiceImpl" class="com.hzfh.service.baseInfo.serviceImpl.CaptchaServiceImpl"/>
+    <bean id="captchaService"
+          class="org.springframework.remoting.caucho.HessianServiceExporter">
+        <property name="service" ref="captchaServiceImpl"/>
+        <property name="serviceInterface" value="com.hzfh.api.baseInfo.service.CaptchaService"/>
+    </bean>
+
+
+    <bean id="cityServiceImpl" class="com.hzfh.service.baseInfo.serviceImpl.CityServiceImpl"/>
+    <bean id="cityService"
+          class="org.springframework.remoting.caucho.HessianServiceExporter">
+        <property name="service" ref="cityServiceImpl"/>
+        <property name="serviceInterface" value="com.hzfh.api.baseInfo.service.CityService"/>
+    </bean>
+
+    <bean id="letterServiceImpl" class="com.hzfh.service.baseInfo.serviceImpl.LetterServiceImpl"/>
+    <bean id="letterService"
+          class="org.springframework.remoting.caucho.HessianServiceExporter">
+        <property name="service" ref="letterServiceImpl"/>
+        <property name="serviceInterface" value="com.hzfh.api.baseInfo.service.LetterService"/>
+    </bean>
+
+    <bean id="letterStepServiceImpl" class="com.hzfh.service.baseInfo.serviceImpl.LetterStepServiceImpl"/>
+    <bean id="letterStepService"
+          class="org.springframework.remoting.caucho.HessianServiceExporter">
+        <property name="service" ref="letterStepServiceImpl"/>
+        <property name="serviceInterface" value="com.hzfh.api.baseInfo.service.LetterStepService"/>
+    </bean>
+    
+    <bean id="emailFilesServiceImpl" class="com.hzfh.service.baseInfo.serviceImpl.EmailFilesServiceImpl" />
+  	<bean id="emailFilesService"
+		class="org.springframework.remoting.caucho.HessianServiceExporter">
+    <property name="service" ref="emailFilesServiceImpl" />
+    <property name="serviceInterface" value="com.hzfh.api.baseInfo.service.EmailFilesService" />
+  	</bean>
+  	
+  <bean id="smsServiceImpl" class="com.hzfh.service.baseInfo.serviceImpl.SmsServiceImpl" />
+  <bean id="smsService"
+		class="org.springframework.remoting.caucho.HessianServiceExporter">
+    <property name="service" ref="smsServiceImpl" />
+    <property name="serviceInterface" value="com.hzfh.api.baseInfo.service.SmsService" />
+  </bean>
+
+    <bean id="smstempleteServiceImpl" class="com.hzfh.service.baseInfo.serviceImpl.SmstempleteServiceImpl" />
+    <bean id="smstempleteService"
+          class="org.springframework.remoting.caucho.HessianServiceExporter">
+        <property name="service" ref="smstempleteServiceImpl" />
+        <property name="serviceInterface" value="com.hzfh.api.baseInfo.service.SmstempleteService" />
+    </bean>
+    <bean id="smsCaptchaServiceImpl" class="com.hzfh.service.baseInfo.serviceImpl.SmsCaptchaServiceImpl" />
+    <bean id="smsCaptchaService"
+          class="org.springframework.remoting.caucho.HessianServiceExporter">
+        <property name="service" ref="smsCaptchaServiceImpl" />
+        <property name="serviceInterface" value="com.hzfh.api.baseInfo.service.SmsCaptchaService" />
+    </bean>
+
+	<bean id="snServiceImpl" class="com.hzfh.service.baseInfo.serviceImpl.SnServiceImpl" />
+	<bean id="snService"
+		class="org.springframework.remoting.caucho.HessianServiceExporter">
+    	<property name="service" ref="snServiceImpl" />
+    	<property name="serviceInterface" value="com.hzfh.api.baseInfo.service.SnService" />
+  	</bean>
+    <bean id="desServiceImpl" class="com.hzfh.service.baseInfo.serviceImpl.DesServiceImpl" />
+    <bean id="desService"
+          class="org.springframework.remoting.caucho.HessianServiceExporter">
+        <property name="service" ref="desServiceImpl" />
+        <property name="serviceInterface" value="com.hzfh.api.baseInfo.service.DesService" />
+    </bean>
+	<bean  id="calendarServiceImpl" class="com.hzfh.service.baseInfo.serviceImpl.CalendarServiceImpl"/> 
+	<bean  id="calendarService" class="org.springframework.remoting.caucho.HessianServiceExporter">
+		<property name="service" ref="calendarServiceImpl"/> 
+		<property name="serviceInterface" value="com.hzfh.api.baseInfo.service.CalendarService"/> 
+	</bean>
+</beans>

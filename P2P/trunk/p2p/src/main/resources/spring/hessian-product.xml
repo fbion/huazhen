@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!-- 客户端Hessian代理工厂Bean -->
+	<bean id="p2pProductService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+        <property name="serviceUrl"><!-- productservice.hzfh.com:8080 -->
+            <value>http://productservice.hzfh.com:8080/service-product/p2pProduct</value>
+        </property>
+        <property name="serviceInterface">
+            <value>com.hzfh.api.product.service.P2pProductService</value>
+        </property>
+
+        <property name="overloadEnabled" value="true"></property>
+    </bean>
+	<bean id="productService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+        <property name="serviceUrl">
+            <value>http://productservice.hzfh.com:8080/service-product/product</value>
+        </property>
+        <property name="serviceInterface">
+            <value>com.hzfh.api.product.service.ProductService</value>
+        </property>
+
+        <property name="overloadEnabled" value="true"></property>
+    </bean>
+    <bean id="financierBusinessService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+        <property name="serviceUrl">
+            <value>http://productservice.hzfh.com:8080/service-product/financierBusiness</value>
+        </property>
+        <property name="serviceInterface">
+            <value>com.hzfh.api.product.service.FinancierBusinessService</value>
+        </property>
+
+        <property name="overloadEnabled" value="true"></property>
+    </bean>
+	<bean id="financierPersonalService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+        <property name="serviceUrl">
+            <value>http://productservice.hzfh.com:8080/service-product/financierPersonal</value>
+        </property>
+        <property name="serviceInterface">
+            <value>com.hzfh.api.product.service.FinancierPersonalService</value>
+        </property>
+
+        <property name="overloadEnabled" value="true"></property>
+    </bean>
+</beans>

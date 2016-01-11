@@ -1,0 +1,1888 @@
+<?xml version="1.0"?>
+<scriptConfig xmlns="http://www.hzfh.com/web"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.hzfh.com/web ../../schemas/resources/Script.xsd">
+	<privateScriptGroups>
+        <scriptGroup name="test" sharedScriptGroup="CommonWithTree">
+            <scriptName>index</scriptName>
+            <scriptName>base</scriptName>
+            <scriptName>style</scriptName>
+            <scriptName>environmentVariable</scriptName>
+            <scriptName>treeControl</scriptName>
+            <scriptName>ztreeCore</scriptName>
+            <scriptName>ztreeExcheck</scriptName>
+            <pages>
+                <pageName>test</pageName>
+            </pages>
+        </scriptGroup>
+        <scriptGroup name="error" sharedScriptGroup="JQueryOnly">
+            <scriptName>index</scriptName>
+            <scriptName>base</scriptName>
+            <scriptName>style</scriptName>
+            <scriptName>environmentVariable</scriptName>
+            <pages>
+                <pageName>error</pageName>
+            </pages>
+        </scriptGroup>
+        <scriptGroup name="index" sharedScriptGroup="JQueryOnly">
+            <scriptName>index</scriptName>
+            <scriptName>base</scriptName>
+            <scriptName>style</scriptName>
+            <scriptName>environmentVariable</scriptName>
+            <pages>
+                <pageName>index</pageName>
+            </pages>
+        </scriptGroup>
+
+		<scriptGroup name="newIndex" sharedScriptGroup="NewCommon">
+			<scriptName>newIndex</scriptName>
+			<scriptName>echarts</scriptName>
+			<pages>
+				<pageName>newIndex</pageName>
+			</pages>
+		</scriptGroup>
+		<scriptGroup name="main" sharedScriptGroup="NewCommon">
+			<scriptName>main</scriptName>
+			<pages>
+				<pageName>main</pageName>
+			</pages>
+		</scriptGroup>
+
+		<scriptGroup name="login" sharedScriptGroup="JQueryOnly">
+			<scriptName>base</scriptName>
+			<scriptName>login</scriptName>
+			<scriptName>environmentVariable</scriptName>
+			<pages>
+				<pageName>login</pageName>
+			</pages>
+		</scriptGroup>
+		<scriptGroup name="updatePwd" sharedScriptGroup="JQueryOnly">
+			<scriptName>style</scriptName>
+			<scriptName>base</scriptName>
+			<scriptName>updatePwd</scriptName>
+			<scriptName>environmentVariable</scriptName>
+			<pages>
+				<pageName>updatePwd</pageName>
+			</pages>
+		</scriptGroup>
+
+		<scriptGroup name="paymentReportList" sharedScriptGroup="Common">
+			<scriptName>treeControl2</scriptName>
+            <scriptName>ztreeCore</scriptName>
+            <scriptName>ztreeExcheck</scriptName>
+			<scriptName>paymentReportList</scriptName>
+			<pages>
+				<pageName>paymentReportList</pageName>
+			</pages>
+		</scriptGroup>
+		<scriptGroup name="dicDataList" sharedScriptGroup="Common">
+			<scriptName>dicDataList</scriptName>
+			<pages>
+				<pageName>dicDataList</pageName>
+			</pages>
+		</scriptGroup>
+		<scriptGroup name="dicTypeList" sharedScriptGroup="Common">
+			<scriptName>dicTypeList</scriptName>
+			<pages>
+				<pageName>dicTypeList</pageName>
+			</pages>
+		</scriptGroup>
+
+        <scriptGroup name="letterList" sharedScriptGroup="Common">
+            <scriptName>letterList</scriptName>
+            <pages>
+                <pageName>letterList</pageName>
+            </pages>
+        </scriptGroup>
+		<scriptGroup name="paymentReportDeatilList" sharedScriptGroup="Common">
+			<scriptName>style</scriptName>
+			<scriptName>easyUi</scriptName>
+			<scriptName>treeControl2</scriptName>
+            <scriptName>ztreeCore</scriptName>
+            <scriptName>ztreeExcheck</scriptName>
+			<scriptName>paymentReportDeatilList</scriptName>
+			<pages>
+				<pageName>paymentReportDeatilList</pageName>
+			</pages>
+		</scriptGroup>
+		<scriptGroup name="remindList" sharedScriptGroup="Common">
+			<scriptName>remindList</scriptName>
+			<pages>
+				<pageName>remindList</pageName>
+			</pages>
+		</scriptGroup>
+        <scriptGroup name="letterAdd" sharedScriptGroup="Common">
+
+            <scriptName>datePicker</scriptName>
+            <scriptName>validform</scriptName>
+            <scriptName>letterAdd</scriptName>
+            <scriptName>treeControl</scriptName>
+            <scriptName>ztreeCore</scriptName>
+            <scriptName>ztreeExcheck</scriptName>
+            <pages>
+                <pageName>letterAdd</pageName>
+            </pages>
+        </scriptGroup>
+
+        <scriptGroup name="mailList" sharedScriptGroup="Common">
+            <scriptName>mailList</scriptName>
+            <scriptName>treeControl</scriptName>
+            <scriptName>ztreeCore</scriptName>
+            <scriptName>ztreeExcheck</scriptName>
+            <pages>
+                <pageName>mailList</pageName>
+            </pages>
+        </scriptGroup>
+        <scriptGroup name="bannerInfoList" sharedScriptGroup="Common">
+            <scriptName>bannerInfoList</scriptName>
+            <pages>
+                <pageName>bannerInfoList</pageName>
+            </pages>
+        </scriptGroup>
+        <scriptGroup name="bannerInfoAdd" sharedScriptGroup="Common">
+
+            <scriptName>datePicker</scriptName>
+            <scriptName>validform</scriptName>
+            <scriptName>bannerInfoAdd</scriptName>
+            <scriptName>upload</scriptName>
+            <scriptName>ajaxfileupload</scriptName>
+            <pages>
+                <pageName>bannerInfoAdd</pageName>
+            </pages>
+        </scriptGroup>
+        <scriptGroup name="announcementList" sharedScriptGroup="Common">
+            <scriptName>announcementList</scriptName>
+            <pages>
+                <pageName>announcementList</pageName>
+            </pages>
+        </scriptGroup>
+        <scriptGroup name="announcementAdd" sharedScriptGroup="Common">
+
+            <scriptName>datePicker</scriptName>
+            <scriptName>validform</scriptName>
+            <scriptName>announcementAdd</scriptName>
+            <pages>
+                <pageName>announcementAdd</pageName>
+            </pages>
+        </scriptGroup>
+        <scriptGroup name="addCustomerReport" sharedScriptGroup="Common">
+            <scriptName>datePicker</scriptName>
+            <scriptName>validform</scriptName>
+            <scriptName>easyUi</scriptName>
+            <scriptName>addCustomerReport</scriptName>
+            <pages>
+                <pageName>addCustomerReport</pageName>
+            </pages>
+        </scriptGroup>
+        <scriptGroup name="addSalesReport" sharedScriptGroup="Common">
+            <scriptName>datePicker</scriptName>
+            <scriptName>validform</scriptName>
+            <scriptName>easyUi</scriptName>
+            <scriptName>addSalesReport</scriptName>
+            <pages>
+                <pageName>addSalesReport</pageName>
+            </pages>
+        </scriptGroup>
+        <scriptGroup name="addCustomerReportWealth" sharedScriptGroup="Common">
+
+            <scriptName>datePicker</scriptName>
+            <scriptName>validform</scriptName>
+            <scriptName>addCustomerReportWealth</scriptName>
+            <pages>
+                <pageName>addCustomerReportWealth</pageName>
+            </pages>
+        </scriptGroup>
+		<!-- customer js 引用 all here -->
+		<scriptGroup name="activityList" sharedScriptGroup="CommonWithDate">
+			<scriptName>activityList</scriptName>
+			<scriptName>datePicker</scriptName>
+			<pages>
+				<pageName>activityList</pageName>
+			</pages>
+		</scriptGroup>
+		<scriptGroup name="agentAdviserList" sharedScriptGroup="CommonWithDate">
+			<scriptName>agentAdviserList</scriptName>
+			<pages>
+				<pageName>agentAdviserList</pageName>
+			</pages>
+		</scriptGroup>
+		<scriptGroup name="agentAdviserListEffective" sharedScriptGroup="CommonWithDate">
+			<scriptName>agentAdviserListEffective</scriptName>
+			<pages>
+				<pageName>agentAdviserListEffective</pageName>
+			</pages>
+		</scriptGroup>
+
+		<scriptGroup name="agentAdviserAdd" sharedScriptGroup="NCommon">
+			<scriptName>agentAdviserAdd</scriptName>
+			<scriptName>jgGrid</scriptName>
+			<scriptName>gridCN</scriptName>
+			<scriptName>validform</scriptName>
+			<scriptName>datePicker</scriptName>
+			<scriptName>nLinkage</scriptName>
+            <scriptName>treeControl</scriptName>
+            <scriptName>ztreeCore</scriptName>
+            <scriptName>ztreeExcheck</scriptName>
+			<pages>
+				<pageName>agentAdviserAdd</pageName>
+			</pages>
+		</scriptGroup>
+		<scriptGroup name="agentBusinessList" sharedScriptGroup="CommonWithDate">
+			<scriptName>agentBusinessList</scriptName>
+			<pages>
+				<pageName>agentBusinessList</pageName>
+			</pages>
+		</scriptGroup>
+		<scriptGroup name="agentBusinessListEffective" sharedScriptGroup="CommonWithDate">
+			<scriptName>agentBusinessListEffective</scriptName>
+			<pages>
+				<pageName>agentBusinessListEffective</pageName>
+			</pages>
+		</scriptGroup>
+		<scriptGroup name="customerActivityList"
+			sharedScriptGroup="CommonWithDate">
+			<scriptName>customerActivityList</scriptName>
+			<pages>
+				<pageName>customerActivityList</pageName>
+			</pages>
+		</scriptGroup>
+		<scriptGroup name="customerBrokerageLFerList"
+			sharedScriptGroup="CommonWithDate">
+			<scriptName>customerBrokerageLadderList</scriptName>
+			<pages>
+				<pageName>customerBrokerageLadderList</pageName>
+			</pages>
+		</scriptGroup>
+		<scriptGroup name="customerCompanyList" sharedScriptGroup="CommonWithLinkage">
+			<scriptName>easyUi</scriptName>
+			<scriptName>customerCompanyList</scriptName>
+			<scriptName>datePicker</scriptName>
+            <scriptName>treeControl</scriptName>
+            <scriptName>ztreeCore</scriptName>
+            <scriptName>ztreeExcheck</scriptName>
+
+			<pages>
+				<pageName>customerCompanyList</pageName>
+			</pages>
+		</scriptGroup>
+		<scriptGroup name="activitiesList" sharedScriptGroup="CommonWithLinkage">
+			<scriptName>easyUi</scriptName>
+			<scriptName>activitiesList</scriptName>
+			<scriptName>datePicker</scriptName>
+            <scriptName>treeControl</scriptName>
+            <scriptName>ztreeCore</scriptName>
+            <scriptName>ztreeExcheck</scriptName>
+
+			<pages>
+				<pageName>activitiesList</pageName>
+			</pages>
+		</scriptGroup>
+        <scriptGroup name="customerCompanyListEffective" sharedScriptGroup="CommonWithLinkage">
+            <scriptName>easyUi</scriptName>
+            <scriptName>customerCompanyListEffective</scriptName>
+            <scriptName>datePicker</scriptName>
+            <scriptName>treeControl</scriptName>
+            <scriptName>ztreeCore</scriptName>
+            <scriptName>ztreeExcheck</scriptName>
+
+            <pages>
+                <pageName>customerCompanyListEffective</pageName>
+            </pages>
+        </scriptGroup>
+		<scriptGroup name="customerCompanyAdd" sharedScriptGroup="NCommon">
+			<scriptName>customerCompanyAdd</scriptName>
+			<scriptName>jgGrid</scriptName>
+			<scriptName>gridCN</scriptName>
+			<scriptName>validform</scriptName>
+			<scriptName>datePicker</scriptName>
+			<scriptName>nLinkage</scriptName>
+            <scriptName>treeControl</scriptName>
+            <scriptName>ztreeCore</scriptName>
+            <scriptName>ztreeExcheck</scriptName>
+			<pages>
+				<pageName>customerCompanyAdd</pageName>
+			</pages>
+		</scriptGroup>
+		
+		
+			<scriptGroup name="customerPersonalAdd" sharedScriptGroup="NCommon">
+			    <scriptName>customerPersonalAdd</scriptName>
+			    <scriptName>jgGrid</scriptName>
+			    <scriptName>gridCN</scriptName>
+			    <scriptName>validform</scriptName>
+			    <scriptName>datePicker</scriptName>
+			    <scriptName>nLinkage</scriptName>
+                <scriptName>treeControl</scriptName>
+                <scriptName>ztreeCore</scriptName>
+                <scriptName>ztreeExcheck</scriptName>
+			<pages>
+				<pageName>customerPersonalAdd</pageName>
+			</pages>
+		</scriptGroup>
+
+       <scriptGroup name="extendProbationApplicationList" sharedScriptGroup="Common">
+			<scriptName>validform</scriptName>
+			<scriptName>extendProbationApplicationList</scriptName>
+			<scriptName>page</scriptName>
+			<scriptName>nLinkage</scriptName>
+			<scriptName>datePicker</scriptName>
+			<pages>
+				<pageName>extendProbationApplicationList</pageName>
+			</pages>
+		</scriptGroup>
+		<scriptGroup name="extendProbationApplicationAdd" sharedScriptGroup="Common">
+			<scriptName>validform</scriptName>
+			<scriptName>extendProbationApplicationAdd</scriptName>
+			<scriptName>page</scriptName>
+			<scriptName>nLinkage</scriptName>
+			<scriptName>datePicker</scriptName>
+			<scriptName>style</scriptName>
+			<scriptName>easyUi</scriptName>
+			<scriptName>treeControl2</scriptName>
+            <scriptName>ztreeCore</scriptName>
+            <scriptName>ztreeExcheck</scriptName>
+			<pages>
+				<pageName>extendProbationApplicationAdd</pageName>
+			</pages>
+		</scriptGroup>
+		<scriptGroup name="customerEmpList" sharedScriptGroup="CommonWithDate">
+			<scriptName>customerEmpList</scriptName>
+			<pages>
+				<pageName>customerEmpList</pageName>
+			</pages>
+		</scriptGroup>
+        <scriptGroup name="confirmactionLetter" sharedScriptGroup="Common">
+            <pages>
+                <pageName>confirmactionLetter</pageName>
+            </pages>
+        </scriptGroup>
+
+		<scriptGroup name="customerFollowList" sharedScriptGroup="CommonWithDate">
+			<scriptName>customerFollowList</scriptName>
+			<pages>
+				<pageName>customerFollowList</pageName>
+			</pages>
+		</scriptGroup>
+		<scriptGroup name="customerPersonalList" sharedScriptGroup="NewCommon">
+            <scriptName>treeControl</scriptName>
+            <scriptName>ztreeCore</scriptName>
+            <scriptName>ztreeExcheck</scriptName>
+			<scriptName>customerPersonalList</scriptName>
+            <scriptName>datePicker</scriptName>
+			<pages>
+				<pageName>customerPersonalList</pageName>
+			</pages>
+		</scriptGroup>
+        <scriptGroup name="customerPersonalListEffective" sharedScriptGroup="NewCommon">
+            <scriptName>treeControl</scriptName>
+            <scriptName>ztreeCore</scriptName>
+            <scriptName>ztreeExcheck</scriptName>
+            <scriptName>customerPersonalListEffective</scriptName>
+            <pages>
+                <pageName>customerPersonalListEffective</pageName>
+            </pages>
+        </scriptGroup>
+		<scriptGroup name="customerVisitList" sharedScriptGroup="CommonWithDate">
+			<scriptName>customerVisitList</scriptName>
+			<pages>
+				<pageName>customerVisitList</pageName>
+			</pages>
+		</scriptGroup>
+		<scriptGroup name="customerNoticeList" sharedScriptGroup="CommonWithDate">
+			<scriptName>customerNoticeList</scriptName>
+			<pages>
+				<pageName>customerNoticeList</pageName>
+			</pages>
+		</scriptGroup>
+
+		<scriptGroup name="noticeList" sharedScriptGroup="CommonWithDate">
+			<scriptName>noticeList</scriptName>
+			<pages>
+				<pageName>noticeList</pageName>
+			</pages>
+		</scriptGroup>
+		<scriptGroup name="p2pCustomerList" sharedScriptGroup="NewCommon">
+			<scriptName>p2pCustomerList</scriptName>
+			<scriptName>nLinkage</scriptName>
+            <scriptName>treeControl</scriptName>
+            <scriptName>ztreeCore</scriptName>
+            <scriptName>ztreeExcheck</scriptName>
+			<pages>
+				<pageName>p2pCustomerList</pageName>
+			</pages>
+		</scriptGroup>
+		<scriptGroup name="agentBusinessAdd" sharedScriptGroup="Common">
+			<scriptName>agentBusinessAdd</scriptName>
+			<scriptName>validform</scriptName>
+			<scriptName>jgGrid</scriptName>
+			<scriptName>gridCN</scriptName>
+			<scriptName>datePicker</scriptName>
+			<scriptName>nLinkage</scriptName>
+            <scriptName>treeControl</scriptName>
+            <scriptName>ztreeCore</scriptName>
+            <scriptName>ztreeExcheck</scriptName>
+            <pages>
+				<pageName>agentBusinessAdd</pageName>
+			</pages>
+		</scriptGroup>
+		<scriptGroup name="paymentMoneyRechargeAdd" sharedScriptGroup="CommonWithDate">
+			<scriptName>paymentMoneyRechargeAdd</scriptName>
+			<scriptName>validform</scriptName>
+			<scriptName>nLinkage</scriptName>
+			<pages>
+				<pageName>paymentMoneyRechargeAdd</pageName>
+			</pages>
+		</scriptGroup>
+		<scriptGroup name="paymentMoneyRechargeList" sharedScriptGroup="CommonWithDate">
+			<scriptName>paymentMoneyRechargeList</scriptName>
+			<scriptName>nLinkage</scriptName>
+			<pages>
+				<pageName>paymentMoneyRechargeList</pageName>
+			</pages>
+		</scriptGroup>
+		<scriptGroup name="paymentMoneyWithdrawAdd" sharedScriptGroup="CommonWithDate">
+			<scriptName>paymentMoneyWithdrawAdd</scriptName>
+			<scriptName>validform</scriptName>
+			<scriptName>nLinkage</scriptName>
+			<pages>
+				<pageName>paymentMoneyWithdrawAdd</pageName>
+			</pages>
+		</scriptGroup>
+		<scriptGroup name="paymentMoneyWithdrawList" sharedScriptGroup="CommonWithDate">
+			<scriptName>paymentMoneyWithdrawList</scriptName>
+			<scriptName>nLinkage</scriptName>
+			<pages>
+				<pageName>paymentMoneyWithdrawList</pageName>
+			</pages>
+		</scriptGroup>
+		
+		<scriptGroup name="knowledgeBaseAdd" sharedScriptGroup="CommonWithDate">
+			<scriptName>knowledgeBaseAdd</scriptName>
+			<scriptName>validform</scriptName>
+			<scriptName>nLinkage</scriptName>
+			<scriptName>gridCN</scriptName>
+			<!-- <scriptName>datePicker</scriptName> -->
+			<scriptName>ajaxfileupload</scriptName>
+			<scriptName>nLinkage</scriptName>
+			<scriptName>upload</scriptName>
+			<scriptName>easyUi</scriptName>
+			<scriptName>ckEditor</scriptName>
+			<scriptName>nLinkage</scriptName>
+			<pages>
+				<pageName>knowledgeBaseAdd</pageName>
+			</pages>
+		</scriptGroup>
+		<scriptGroup name="knowledgeBaseInfo" sharedScriptGroup="CommonWithDate">
+			<scriptName>knowledgeBaseInfo</scriptName>
+			<scriptName>validform</scriptName>
+			<scriptName>nLinkage</scriptName>
+			<scriptName>gridCN</scriptName>
+			<scriptName>datePicker</scriptName>
+			<scriptName>ajaxfileupload</scriptName>
+			<scriptName>nLinkage</scriptName>
+			<scriptName>upload</scriptName>
+			<scriptName>easyUi</scriptName>
+			<scriptName>ckEditor</scriptName>
+			<scriptName>nLinkage</scriptName>
+			<pages>
+				<pageName>knowledgeBaseInfo</pageName>
+			</pages>
+		</scriptGroup>
+		<scriptGroup name="knowledgeBaseList" sharedScriptGroup="CommonWithDate">
+			<scriptName>knowledgeBaseList</scriptName>
+			<scriptName>nLinkage</scriptName>
+			<scriptName>pagination</scriptName>
+			<pages>
+				<pageName>knowledgeBaseList</pageName>
+			</pages>
+		</scriptGroup>
+		
+		
+		<scriptGroup name="needReleaseAdd" sharedScriptGroup="CommonWithDate">
+			<scriptName>needReleaseAdd</scriptName>
+			<scriptName>validform</scriptName>
+			<scriptName>nLinkage</scriptName>
+            <scriptName>treeControl</scriptName>
+            <scriptName>ztreeCore</scriptName>
+            <scriptName>ztreeExcheck</scriptName>
+			<pages>
+				<pageName>needReleaseAdd</pageName>
+			</pages>
+		</scriptGroup>
+		<scriptGroup name="needReleaseList" sharedScriptGroup="CommonWithDate">
+			<scriptName>needReleaseList</scriptName>
+			<scriptName>nLinkage</scriptName>
+			<pages>
+				<pageName>needReleaseList</pageName>
+			</pages>
+		</scriptGroup>
+
+		<scriptGroup name="activityAdd" sharedScriptGroup="CommonWithTree">
+			<scriptName>activityAdd</scriptName>
+			<scriptName>applyCustomerList</scriptName>
+			<scriptName>validform</scriptName>
+			<scriptName>datePicker</scriptName>
+			<scriptName>pagination</scriptName>
+			<scriptName>ajaxfileupload</scriptName>
+			<scriptName>upload</scriptName>
+			<scriptName>ckEditor</scriptName>
+			<scriptName>qrcode</scriptName>
+			<pages>
+				<pageName>activityAdd</pageName>
+			</pages>
+		</scriptGroup>
+		<scriptGroup name="activitiesAdd" sharedScriptGroup="CommonWithTree">
+			<scriptName>activitiesAdd</scriptName>
+			<scriptName>validform</scriptName>
+			<scriptName>datePicker</scriptName>
+			<scriptName>pagination</scriptName>
+			<scriptName>ajaxfileupload</scriptName>
+			<scriptName>upload</scriptName>
+			<scriptName>jgGrid</scriptName>
+			<scriptName>gridCN</scriptName>
+			<scriptName>nLinkage</scriptName>
+			<scriptName>easyUi</scriptName>
+			<pages>
+				<pageName>activitiesAdd</pageName>
+			</pages>
+		</scriptGroup>
+		<scriptGroup name="activitiesAddDetail" sharedScriptGroup="CommonWithTree">
+			<scriptName>activitiesAddDetail</scriptName>
+			<scriptName>validform</scriptName>
+			<scriptName>datePicker</scriptName>
+			<scriptName>pagination</scriptName>
+			<scriptName>ajaxfileupload</scriptName>
+			<scriptName>upload</scriptName>
+			<scriptName>jgGrid</scriptName>
+			<scriptName>gridCN</scriptName>
+			<scriptName>nLinkage</scriptName>
+			<scriptName>easyUi</scriptName>
+			<pages>
+				<pageName>activitiesAddDetail</pageName>
+			</pages>
+		</scriptGroup>
+		<scriptGroup name="activityAttachmentAdd" sharedScriptGroup="CommonWithTree">
+			<scriptName>activityAttachmentAdd</scriptName>
+			<scriptName>validform</scriptName>
+			<pages>
+				<pageName>activityAttachmentAdd</pageName>
+			</pages>
+		</scriptGroup>
+		<scriptGroup name="activityAttachmentList" sharedScriptGroup="CommonWithTree">
+			<scriptName>activityAttachmentList</scriptName>
+			<scriptName>validform</scriptName>
+			<pages>
+				<pageName>activityAttachmentList</pageName>
+			</pages>
+		</scriptGroup>
+		<scriptGroup name="myCustomerList" sharedScriptGroup="CommonWithTree">
+			<scriptName>myCustomerList</scriptName>
+			<pages>
+				<pageName>myCustomerList</pageName>
+			</pages>
+		</scriptGroup>
+		<scriptGroup name="activityList" sharedScriptGroup="CommonWithTree">
+			<scriptName>activityList</scriptName>
+			<scriptName>datePicker</scriptName>
+			<scriptName>validform</scriptName>
+			<pages>
+				<pageName>activityList</pageName>
+			</pages>
+		</scriptGroup>
+		<scriptGroup name="applyCustomerAdd" sharedScriptGroup="CommonWithTree">
+			<scriptName>applyCustomerAdd</scriptName>
+			<scriptName>validform</scriptName>
+			<pages>
+				<pageName>applyCustomerAdd</pageName>
+			</pages>
+		</scriptGroup>
+		
+		<scriptGroup name="applyCustomerList" sharedScriptGroup="CommonWithTree">
+			<scriptName>applyCustomerList</scriptName>
+			<scriptName>validform</scriptName>
+			<pages>
+				<pageName>applyCustomerList</pageName>
+			</pages>
+		</scriptGroup>
+		<scriptGroup name="applyEmployeeAdd" sharedScriptGroup="CommonWithTree">
+			<scriptName>applyEmployeeAdd</scriptName>
+			<scriptName>validform</scriptName>
+			<pages>
+				<pageName>applyEmployeeAdd</pageName>
+			</pages>
+		</scriptGroup>
+		
+		<scriptGroup name="applyEmployeeList" sharedScriptGroup="CommonWithTree">
+			<scriptName>applyEmployeeList</scriptName>
+			<scriptName>validform</scriptName>
+			<pages>
+				<pageName>applyEmployeeList</pageName>
+			</pages>
+		</scriptGroup>
+
+
+
+		<!-- permission js 引用 all here -->
+		<scriptGroup name="privilegeList" sharedScriptGroup="CommonWithTree">
+			<scriptName>privilegeList</scriptName>
+			<pages>
+				<pageName>privilegeList</pageName>
+				<pageName>elementList</pageName>
+			</pages>
+		</scriptGroup>
+		<scriptGroup name="elementList" sharedScriptGroup="CommonWithTree">
+			<scriptName>elementList</scriptName>
+			<scriptName>validform</scriptName>
+			<pages>
+				<pageName>elementList</pageName>
+			</pages>
+		</scriptGroup>
+		<scriptGroup name="roleList" sharedScriptGroup="CommonWithTree">
+
+			<scriptName>roleList</scriptName>
+			<scriptName>datePicker</scriptName>
+			<scriptName>easyUi</scriptName>
+			<scriptName>validform</scriptName>
+			<pages>
+				<pageName>roleList</pageName>
+			</pages>
+		</scriptGroup>
+		<scriptGroup name="rolePrivilegeList" sharedScriptGroup="CommonWithDate">
+			<scriptName>rolePrivilegeList</scriptName>
+			<pages>
+				<pageName>rolePrivilegeList</pageName>
+			</pages>
+		</scriptGroup>
+
+		<scriptGroup name="userList" sharedScriptGroup="Common">
+
+			<scriptName>userList</scriptName>
+			<scriptName>easyUi</scriptName>
+			<pages>
+				<pageName>userList</pageName>
+			</pages>
+		</scriptGroup>
+
+
+		<scriptGroup name="userRoleList" sharedScriptGroup="CommonWithDate">
+			<scriptName>userRoleList</scriptName>
+			<pages>
+				<pageName>userRoleList</pageName>
+			</pages>
+		</scriptGroup>
+		<scriptGroup name="dataManage" sharedScriptGroup="Common">
+			<scriptName>dataManage</scriptName>
+			<pages>
+				<pageName>dataManage</pageName>
+			</pages>
+		</scriptGroup>
+
+
+		<!-- employee js 引用 all here -->
+		<scriptGroup name="companyList" sharedScriptGroup="NewCommon">
+			<scriptName>companyList</scriptName>
+			<pages>
+				<pageName>companyList</pageName>
+			</pages>
+		</scriptGroup>
+		<scriptGroup name="companyAdd" sharedScriptGroup="NewAddCommon">
+			<scriptName>companyAdd</scriptName>
+			<pages>
+				<pageName>companyAdd</pageName>
+			</pages>
+		</scriptGroup>
+		<scriptGroup name="companyAdd" sharedScriptGroup="NewAddCommon">
+			<scriptName>companyAdd</scriptName>
+			<pages>
+				<pageName>companyAdd</pageName>
+			</pages>
+		</scriptGroup>
+		<scriptGroup name="departmentList" sharedScriptGroup="NewCommon">
+			<scriptName>departmentList</scriptName>
+			<pages>
+				<pageName>departmentList</pageName>
+			</pages>
+		</scriptGroup>
+		<scriptGroup name="attendanceApplicationList" sharedScriptGroup="NewCommon">
+			<scriptName>nLinkage</scriptName>
+			<scriptName>attendanceApplicationList</scriptName>
+			<pages>
+				<pageName>attendanceApplicationList</pageName>
+			</pages>
+		</scriptGroup>
+		<scriptGroup name="departmentAdd" sharedScriptGroup="NewAddCommon">
+			<scriptName>departmentAdd</scriptName>
+			<pages>
+				<pageName>departmentAdd</pageName>
+			</pages>
+		</scriptGroup>
+		<scriptGroup name="empBrokerageLadderList"
+			sharedScriptGroup="Common">
+			<scriptName>empBrokerageLadderList</scriptName>
+			<pages>
+				<pageName>empBrokerageLadderList</pageName>
+			</pages>
+		</scriptGroup>
+		<scriptGroup name="employeeList" sharedScriptGroup="CommonWithLinkageAndData">
+			<scriptName>employeeList</scriptName>
+            <scriptName>easyUi</scriptName>
+            <scriptName>treeControl</scriptName>
+            <scriptName>ztreeCore</scriptName>
+            <scriptName>ztreeExcheck</scriptName>
+			<scriptName>bootstrap-typeahead</scriptName>
+			<scriptName>bootstrap</scriptName>
+			<scriptName>select2</scriptName>
+			<pages>
+				<pageName>employeeList</pageName>
+			</pages>
+		</scriptGroup>
+		<scriptGroup name="otherList" sharedScriptGroup="CommonWithDate">
+			<scriptName>otherList</scriptName>
+			<pages>
+				<pageName>otherList</pageName>
+			</pages>
+		</scriptGroup>
+		<scriptGroup name="overtimeList" sharedScriptGroup="CommonWithDate">
+			<scriptName>overtimeList</scriptName>
+			<pages>
+				<pageName>overtimeList</pageName>
+			</pages>
+		</scriptGroup>
+		<scriptGroup name="paymentList" sharedScriptGroup="CommonWithDate">
+			<scriptName>paymentList</scriptName>
+			<pages>
+				<pageName>paymentList</pageName>
+			</pages>
+		</scriptGroup>
+		<scriptGroup name="positionLevelList" sharedScriptGroup="CommonWithLinkage">
+			<scriptName>positionLevelList</scriptName>
+			<pages>
+				<pageName>positionLevelList</pageName>
+			</pages>
+		</scriptGroup>
+		<scriptGroup name="positionList" sharedScriptGroup="CommonWithLinkage">
+			<scriptName>positionList</scriptName>
+			<pages>
+				<pageName>positionList</pageName>
+			</pages>
+		</scriptGroup>
+		<scriptGroup name="signList" sharedScriptGroup="CommonWithDate">
+			<scriptName>signList</scriptName>
+			<pages>
+				<pageName>signList</pageName>
+			</pages>
+		</scriptGroup>
+		<scriptGroup name="welfareList" sharedScriptGroup="CommonWithDate">
+			<scriptName>welfareList</scriptName>
+			<pages>
+				<pageName>welfareList</pageName>
+			</pages>
+		</scriptGroup>
+		<scriptGroup name="employeeAdd" sharedScriptGroup="NCommon">
+			<scriptName>employeeAdd</scriptName>
+			<scriptName>employeeDetailAdd</scriptName>
+			<scriptName>employeeEducationAdd</scriptName>
+			<scriptName>familyMembersAdd</scriptName>
+			<scriptName>workExperienceAdd</scriptName>
+			<scriptName>employeeOtherInfoAdd</scriptName>
+			<scriptName>validform</scriptName>
+			<scriptName>gridCN</scriptName>
+			<scriptName>ajaxfileupload</scriptName>
+			<scriptName>nLinkage</scriptName>
+			<scriptName>upload</scriptName>
+			<scriptName>datePicker</scriptName>
+            <scriptName>treeControl</scriptName>
+            <scriptName>ztreeCore</scriptName>
+            <scriptName>ztreeExcheck</scriptName>
+			<pages>
+				<pageName>employeeAdd</pageName>
+			</pages>
+		</scriptGroup>
+		
+		<scriptGroup name="departmentAdd" sharedScriptGroup="NCommon">
+			<scriptName>departmentAdd</scriptName>
+			<scriptName>validform</scriptName>
+			<scriptName>nLinkage</scriptName>
+			<scriptName>ajaxfileupload</scriptName>
+			<scriptName>upload</scriptName>
+            <scriptName>treeControl</scriptName>
+            <scriptName>ztreeCore</scriptName>
+            <scriptName>ztreeExcheck</scriptName>
+			<pages>
+				<pageName>departmentAdd</pageName>
+			</pages>
+		</scriptGroup>
+		<scriptGroup name="yearNeedList" sharedScriptGroup="NCommon">
+			<scriptName>validform</scriptName>
+			<scriptName>yearNeedList</scriptName>
+			<scriptName>gridCN</scriptName>
+			<scriptName>page</scriptName>
+			<scriptName>nLinkage</scriptName>
+			<scriptName>datePicker</scriptName>
+			<scriptName>easyUi</scriptName>
+			<pages>
+				<pageName>yearNeedList</pageName>
+			</pages>
+		</scriptGroup>
+		<scriptGroup name="deptYearNeedDetailAdd" sharedScriptGroup="Common">
+			<scriptName>validform</scriptName>
+			<scriptName>treeControl2</scriptName>
+            <scriptName>ztreeCore</scriptName>
+            <scriptName>ztreeExcheck</scriptName>
+			<scriptName>deptYearNeedDetailAdd</scriptName>
+			<pages>
+				<pageName>deptYearNeedDetailAdd</pageName>
+			</pages>
+		</scriptGroup>
+			<scriptGroup name="deptYearNeedList" sharedScriptGroup="Common">
+			<scriptName>validform</scriptName>
+			<scriptName>deptYearNeedList</scriptName>
+			<pages>
+				<pageName>deptYearNeedList</pageName>
+			</pages>
+		</scriptGroup>
+		<scriptGroup name="deptYearNeedDetailList" sharedScriptGroup="Common">
+			<scriptName>deptYearNeedDetailList</scriptName>
+			<scriptName>validform</scriptName>
+			<pages>
+				<pageName>deptYearNeedDetailList</pageName>
+			</pages>
+		</scriptGroup>
+		<scriptGroup name="deptYearNeedAdd" sharedScriptGroup="Common">
+			<scriptName>validform</scriptName>
+			<scriptName>deptYearNeedAdd</scriptName>
+			<scriptName>easyUi</scriptName>
+			<scriptName>datePicker</scriptName>
+			<scriptName>treeControl2</scriptName>
+            <scriptName>ztreeCore</scriptName>
+            <scriptName>ztreeExcheck</scriptName>
+			<pages>
+				<pageName>deptYearNeedAdd</pageName>
+			</pages>
+		</scriptGroup>
+		<scriptGroup name="yearNeedTotalAdd" sharedScriptGroup="Common">
+			<scriptName>validform</scriptName>
+			<scriptName>easyUi</scriptName>
+			<scriptName>yearNeedTotalAdd</scriptName>
+			<pages>
+				<pageName>yearNeedTotalAdd</pageName>
+			</pages>
+		</scriptGroup>
+        <scriptGroup name="tempRecruitDetailAdd" sharedScriptGroup="Common">
+            <scriptName>validform</scriptName>
+            <scriptName>easyUi</scriptName>
+            <scriptName>tempRecruitDetailAdd</scriptName>
+            <pages>
+                <pageName>tempRecruitDetailAdd</pageName>
+            </pages>
+        </scriptGroup>
+			<scriptGroup name="tempRecruitDetailList" sharedScriptGroup="Common">
+			<scriptName>validform</scriptName>
+			<scriptName>tempRecruitDetailList</scriptName>
+			<pages>
+				<pageName>tempRecruitDetailList</pageName>
+			</pages>
+		</scriptGroup>
+		<scriptGroup name="tempRecruitNeedAdd" sharedScriptGroup="Common">
+			<scriptName>validform</scriptName>
+			<scriptName>easyUi</scriptName>
+			<scriptName>tempRecruitNeedAdd</scriptName>
+			<scriptName>datePicker</scriptName>
+			<scriptName>treeControl2</scriptName>
+            <scriptName>ztreeCore</scriptName>
+            <scriptName>ztreeExcheck</scriptName>
+			<pages>
+				<pageName>tempRecruitNeedAdd</pageName>
+			</pages>
+		</scriptGroup>
+			<scriptGroup name="tempRecruitNeedList" sharedScriptGroup="Common">
+			<scriptName>validform</scriptName>
+			<scriptName>tempRecruitNeedList</scriptName>
+			<scriptName>datePicker</scriptName>
+			<pages>
+				<pageName>tempRecruitNeedList</pageName>
+			</pages>
+		</scriptGroup>
+		<!-- <scriptGroup name="subsidyAdd" sharedScriptGroup="CommonWithDate">
+			<scriptName>subsidyAdd</scriptName>
+			<pages>
+				<pageName>subsidyAdd</pageName>
+			</pages>
+		</scriptGroup> -->
+		<scriptGroup name="subsidyList" sharedScriptGroup="CommonWithDate">
+			<scriptName>subsidyList</scriptName>
+			<scriptName>nLinkage</scriptName>
+
+			<pages>
+				<pageName>subsidyList</pageName>
+			</pages>
+		</scriptGroup>
+		<scriptGroup name="subsidyTotalAdd" sharedScriptGroup="CommonWithDate">
+			<scriptName>subsidyTotalAdd</scriptName>
+			<scriptName>validform</scriptName>
+			<scriptName>nLinkage</scriptName>
+            <scriptName>treeControl</scriptName>
+            <scriptName>ztreeCore</scriptName>
+            <scriptName>ztreeExcheck</scriptName>
+			<pages>
+				<pageName>subsidyTotalAdd</pageName>
+			</pages>
+		</scriptGroup>
+		<scriptGroup name="subsidyTotalList" sharedScriptGroup="CommonWithDate">
+			<scriptName>subsidyTotalList</scriptName>
+			<scriptName>nLinkage</scriptName>
+            <scriptName>treeControl</scriptName>
+            <scriptName>ztreeCore</scriptName>
+            <scriptName>ztreeExcheck</scriptName>
+			<pages>
+				<pageName>subsidyTotalList</pageName>
+			</pages>
+		</scriptGroup>
+		<scriptGroup name="recruitAskRecordAdd" sharedScriptGroup="CommonWithDate">
+			<scriptName>recruitAskRecordAdd</scriptName>
+			<scriptName>validform</scriptName>
+			<scriptName>jgGrid</scriptName>
+			<scriptName>gridCN</scriptName>
+			<scriptName>datePicker</scriptName>
+			<scriptName>ajaxfileupload</scriptName>
+			<scriptName>nLinkage</scriptName>
+			<scriptName>upload</scriptName>
+			<scriptName>easyUi</scriptName>
+			<scriptName>autocomplete</scriptName>
+			<scriptName>bootstrap-typeahead</scriptName>
+			<scriptName>bootstrap</scriptName>
+			<scriptName>select2</scriptName>
+			<pages>
+				<pageName>recruitAskRecordAdd</pageName>
+			</pages>
+		</scriptGroup>
+		<scriptGroup name="recruitAskRecordList" sharedScriptGroup="CommonWithDate">
+			<scriptName>recruitAskRecordList</scriptName>
+			<scriptName>nLinkage</scriptName>
+            <scriptName>easyUi</scriptName>
+            <scriptName>treeControl</scriptName>
+            <scriptName>ztreeCore</scriptName>
+            <scriptName>ztreeExcheck</scriptName>
+			<pages>
+				<pageName>recruitAskRecordList</pageName>
+			</pages>
+		</scriptGroup>
+		<scriptGroup name="interviewEvaluationRecordAdd" sharedScriptGroup="CommonWithDate">
+			<scriptName>interviewEvaluationRecordAdd</scriptName>
+			<scriptName>validform</scriptName>
+			<scriptName>jgGrid</scriptName>
+			<scriptName>nLinkage</scriptName>
+            <scriptName>easyUi</scriptName>
+            <scriptName>treeControl</scriptName>
+            <scriptName>ztreeCore</scriptName>
+            <scriptName>ztreeExcheck</scriptName>
+			<pages>
+				<pageName>interviewEvaluationRecordAdd</pageName>
+			</pages>
+		</scriptGroup>
+        <scriptGroup name="empCompilePlanList" sharedScriptGroup="CommonWithDate">
+            <scriptName>empCompilePlanList</scriptName>
+            <scriptName>nLinkage</scriptName>
+            <pages>
+                <pageName>empCompilePlanList</pageName>
+            </pages>
+        </scriptGroup>
+		<scriptGroup name="interviewEvaluationRecordList" sharedScriptGroup="CommonWithDate">
+			<scriptName>interviewEvaluationRecordList</scriptName>
+			<scriptName>nLinkage</scriptName>
+			<pages>
+				<pageName>interviewEvaluationRecordList</pageName>
+			</pages>
+		</scriptGroup>
+		
+		<scriptGroup name="attendanceApplicationAdd" sharedScriptGroup="NCommon">
+			<scriptName>attendanceApplicationAdd</scriptName>
+			<scriptName>jgGrid</scriptName>
+			<scriptName>gridCN</scriptName>
+			<scriptName>validform</scriptName>
+			<scriptName>datePicker</scriptName>
+			<scriptName>nLinkage</scriptName>
+			<scriptName>easyUi</scriptName>
+			<scriptName>treeControl2</scriptName>
+            <scriptName>ztreeCore</scriptName>
+            <scriptName>ztreeExcheck</scriptName>
+			<pages>
+				<pageName>attendanceApplicationAdd</pageName>
+			</pages>
+		</scriptGroup>
+		
+		
+		<scriptGroup name="personalChangeList" sharedScriptGroup="CommonWithLinkage">
+			<scriptName>personalChangeList</scriptName>
+			<pages>
+				<pageName>personalChangeList</pageName>
+			</pages>
+		</scriptGroup>
+        <scriptGroup name="yearNeedTotalList" sharedScriptGroup="Common">
+            <scriptName>yearNeedTotalList</scriptName>
+            <pages>
+                <pageName>yearNeedTotalList</pageName>
+            </pages>
+        </scriptGroup>
+
+		<scriptGroup name="personalChangeAdd" sharedScriptGroup="NCommon">
+			<scriptName>personalChangeAdd</scriptName>
+			<scriptName>jgGrid</scriptName>
+			<scriptName>gridCN</scriptName>
+			<scriptName>validform</scriptName>
+			<scriptName>datePicker</scriptName>
+			<scriptName>nLinkage</scriptName>
+			<scriptName>easyUi</scriptName>
+			<scriptName>treeControl2</scriptName>
+            <scriptName>ztreeCore</scriptName>
+            <scriptName>ztreeExcheck</scriptName>
+			<pages>
+				<pageName>personalChangeAdd</pageName>
+			</pages>
+		</scriptGroup>
+		
+		
+		<scriptGroup name="resignApplicationList" sharedScriptGroup="CommonWithLinkage">
+			<scriptName>resignApplicationList</scriptName>
+			<pages>
+				<pageName>resignApplicationList</pageName>
+			</pages>
+		</scriptGroup>
+
+		<scriptGroup name="resignApplicationAdd" sharedScriptGroup="NCommon">
+			<scriptName>resignApplicationAdd</scriptName>
+			<scriptName>jgGrid</scriptName>
+			<scriptName>gridCN</scriptName>
+			<scriptName>validform</scriptName>
+			<scriptName>datePicker</scriptName>
+			<scriptName>nLinkage</scriptName>
+			<scriptName>easyUi</scriptName>
+			<scriptName>treeControl2</scriptName>
+            <scriptName>ztreeCore</scriptName>
+            <scriptName>ztreeExcheck</scriptName>
+			<pages>
+				<pageName>resignApplicationAdd</pageName>
+			</pages>
+		</scriptGroup>
+		
+		<scriptGroup name="probationWorkSummaryAdd" sharedScriptGroup="CommonWithDate">
+			<scriptName>probationWorkSummaryAdd</scriptName>
+			<scriptName>validform</scriptName>
+			<scriptName>nLinkage</scriptName>
+			<scriptName>treeControl2</scriptName>
+            <scriptName>ztreeCore</scriptName>
+            <scriptName>ztreeExcheck</scriptName>
+			<pages>
+				<pageName>probationWorkSummaryAdd</pageName>
+			</pages>
+		</scriptGroup>
+		<scriptGroup name="probationWorkSummaryList" sharedScriptGroup="CommonWithDate">
+			<scriptName>probationWorkSummaryList</scriptName>
+			<scriptName>nLinkage</scriptName>
+			<pages>
+				<pageName>probationWorkSummaryList</pageName>
+			</pages>
+		</scriptGroup>
+		
+		<scriptGroup name="managerEvaluationAdd" sharedScriptGroup="CommonWithDate">
+			<scriptName>managerEvaluationAdd</scriptName>
+			<scriptName>validform</scriptName>
+			<scriptName>nLinkage</scriptName>
+			<scriptName>easyUi</scriptName>
+			<scriptName>treeControl2</scriptName>
+            <scriptName>ztreeCore</scriptName>
+            <scriptName>ztreeExcheck</scriptName>
+			<pages>
+				<pageName>managerEvaluationAdd</pageName>
+			</pages>
+		</scriptGroup>
+		<scriptGroup name="managerEvaluationList" sharedScriptGroup="CommonWithDate">
+			<scriptName>managerEvaluationList</scriptName>
+			<scriptName>nLinkage</scriptName>
+            <scriptName>treeControl</scriptName>
+            <scriptName>ztreeCore</scriptName>
+            <scriptName>ztreeExcheck</scriptName>
+			<pages>
+				<pageName>managerEvaluationList</pageName>
+			</pages>
+		</scriptGroup>
+		
+		<scriptGroup name="probationEvaluationAdd" sharedScriptGroup="CommonWithDate">
+			<scriptName>probationEvaluationAdd</scriptName>
+			<scriptName>validform</scriptName>
+			<scriptName>nLinkage</scriptName>
+			<scriptName>easyUi</scriptName>
+			<scriptName>treeControl2</scriptName>
+            <scriptName>ztreeCore</scriptName>
+            <scriptName>ztreeExcheck</scriptName>
+			<pages>
+				<pageName>probationEvaluationAdd</pageName>
+			</pages>
+		</scriptGroup>
+		<scriptGroup name="probationEvaluationList" sharedScriptGroup="CommonWithDate">
+			<scriptName>probationEvaluationList</scriptName>
+			<scriptName>nLinkage</scriptName>
+			<pages>
+				<pageName>probationEvaluationList</pageName>
+			</pages>
+		</scriptGroup>
+		
+
+
+		<!-- product js all in here -->
+		<scriptGroup name="productList" sharedScriptGroup="NewCommon">
+			<scriptName>productList</scriptName>
+			<pages>
+				<pageName>productList</pageName>
+			</pages>
+		</scriptGroup>
+
+		<scriptGroup name="protocolList" sharedScriptGroup="CommonWithDate">
+			<scriptName>protocolList</scriptName>
+			<pages>
+				<pageName>protocolList</pageName>
+			</pages>
+		</scriptGroup>
+
+		<scriptGroup name="productDetailList" sharedScriptGroup="CommonWithDate">
+			<scriptName>productDetailList</scriptName>
+			<pages>
+				<pageName>productDetailList</pageName>
+			</pages>
+		</scriptGroup>
+
+		<scriptGroup name="partnerRateList" sharedScriptGroup="CommonWithLinkage">
+			<scriptName>partnerRateList</scriptName>
+			<pages>
+				<pageName>partnerRateList</pageName>
+			</pages>
+		</scriptGroup>
+
+		<scriptGroup name="partnerIssuerList" sharedScriptGroup="CommonWithDate">
+			<scriptName>partnerIssuerList</scriptName>
+			<pages>
+				<pageName>partnerIssuerList</pageName>
+			</pages>
+		</scriptGroup>
+        <scriptGroup name="partnerIssuerAdd" sharedScriptGroup="CommonWithLinkageAndData">
+            <scriptName>validform</scriptName>
+            <scriptName>partnerIssuerAdd</scriptName>
+            <scriptName>treeControl</scriptName>
+            <scriptName>ztreeCore</scriptName>
+            <scriptName>ztreeExcheck</scriptName>
+            <pages>
+                <pageName>partnerIssuerAdd</pageName>
+            </pages>
+        </scriptGroup>
+        <scriptGroup name="financierPersonalAdd" sharedScriptGroup="NCommon">
+            <scriptName>financierPersonalAdd</scriptName>
+            <scriptName>validform</scriptName>
+            <scriptName>datePicker</scriptName>
+            <scriptName>ajaxfileupload</scriptName>
+            <scriptName>nLinkage</scriptName>
+            <scriptName>treeControl</scriptName>
+            <scriptName>ztreeCore</scriptName>
+            <scriptName>ztreeExcheck</scriptName>
+            <pages>
+                <pageName>financierPersonalAdd</pageName>
+            </pages>
+        </scriptGroup>
+        <scriptGroup name="financierBusinessAdd" sharedScriptGroup="NCommon">
+            <scriptName>financierBusinessAdd</scriptName>
+            <scriptName>validform</scriptName>
+            <scriptName>datePicker</scriptName>
+            <scriptName>ajaxfileupload</scriptName>
+            <scriptName>nLinkage</scriptName>
+            <scriptName>treeControl</scriptName>
+            <scriptName>ztreeCore</scriptName>
+            <scriptName>ztreeExcheck</scriptName>
+            <pages>
+                <pageName>financierBusinessAdd</pageName>
+            </pages>
+        </scriptGroup>
+		<scriptGroup name="financierPersonalList"
+			sharedScriptGroup="CommonWithDate">
+			<scriptName>financierPersonalList</scriptName>
+			<pages>
+				<pageName>financierPersonalList</pageName>
+			</pages>
+		</scriptGroup>
+
+		<scriptGroup name="financierBusinessList"
+			sharedScriptGroup="CommonWithLinkageAndData">
+			<scriptName>financierBusinessList</scriptName>
+			<pages>
+				<pageName>financierBusinessList</pageName>
+			</pages>
+		</scriptGroup>
+
+		<scriptGroup name="decisionLogList" sharedScriptGroup="CommonWithDate">
+			<scriptName>decisionLogList</scriptName>
+			<pages>
+				<pageName>decisionLogList</pageName>
+			</pages>
+		</scriptGroup>
+
+		<scriptGroup name="decisionList" sharedScriptGroup="CommonWithDate">
+			<scriptName>decisionList</scriptName>
+			<pages>
+				<pageName>decisionList</pageName>
+			</pages>
+		</scriptGroup>
+
+		<scriptGroup name="productStagesList" sharedScriptGroup="CommonWithDate">
+			<scriptName>productStagesList</scriptName>
+			<pages>
+				<pageName>productStagesList</pageName>
+			</pages>
+		</scriptGroup>
+
+		<scriptGroup name="p2pProductList" sharedScriptGroup="NewCommon">
+			<scriptName>p2pProductList</scriptName>
+            <scriptName>datePicker</scriptName>
+			<pages>
+				<pageName>p2pProductList</pageName>
+			</pages>
+		</scriptGroup>
+        <scriptGroup name="financeProductList" sharedScriptGroup="NewCommon">
+            <scriptName>financeProductList</scriptName>
+            <scriptName>datePicker</scriptName>
+            <pages>
+                <pageName>financeProductList</pageName>
+            </pages>
+        </scriptGroup>
+
+		<scriptGroup name="p2pProductAdd" sharedScriptGroup="NCommon">
+			<scriptName>p2pProductAdd</scriptName>
+			<scriptName>validform</scriptName>
+			<scriptName>jgGrid</scriptName>
+			<scriptName>gridCN</scriptName>
+			<scriptName>datePicker</scriptName>
+			<scriptName>ajaxfileupload</scriptName>
+			<scriptName>nLinkage</scriptName>
+			<scriptName>upload</scriptName>
+			<scriptName>easyUi</scriptName>
+			<scriptName>ckEditor</scriptName>
+			<scriptName>p2pProductExamine</scriptName>
+			<scriptName>treeControl</scriptName>
+            <scriptName>ztreeCore</scriptName>
+            <scriptName>ztreeExcheck</scriptName>
+			<pages>
+				<pageName>p2pProductAdd</pageName>
+			</pages>
+		</scriptGroup>
+
+
+
+
+		<!-- sales js all in here -->
+		<scriptGroup name="agentExpenseList" sharedScriptGroup="CommonWithLinkageAndData">
+			<scriptName>agentExpenseList</scriptName>
+			<pages>
+				<pageName>agentExpenseList</pageName>
+			</pages>
+		</scriptGroup>
+
+		<scriptGroup name="agentRateList" sharedScriptGroup="CommonWithLinkage">
+			<scriptName>agentRateList</scriptName>
+			<pages>
+				<pageName>agentRateList</pageName>
+			</pages>
+		</scriptGroup>
+
+		<scriptGroup name="brokerageCalculateList"
+			sharedScriptGroup="CommonWithDate">
+			<scriptName>brokerageCalculateList</scriptName>
+			<pages>
+				<pageName>brokerageCalculateList</pageName>
+			</pages>
+		</scriptGroup>
+
+		<scriptGroup name="contractList" sharedScriptGroup="CommonWithDate">
+			<scriptName>contractList</scriptName>
+			<pages>
+				<pageName>contractList</pageName>
+			</pages>
+		</scriptGroup>
+
+		<scriptGroup name="incomeList" sharedScriptGroup="CommonWithLinkageAndData">
+			<scriptName>incomeList</scriptName>
+			<pages>
+				<pageName>incomeList</pageName>
+			</pages>
+		</scriptGroup>
+
+		<scriptGroup name="salesEmpCalculateList"
+			sharedScriptGroup="CommonWithDate">
+			<scriptName>salesEmpCalculateList</scriptName>
+			<pages>
+				<pageName>salesEmpCalculateList</pageName>
+			</pages>
+		</scriptGroup>
+
+		<scriptGroup name="salesList" sharedScriptGroup="NewCommonCommonWithLinkageAndData">
+		    <scriptName>salesList</scriptName>
+            <scriptName>treeControl</scriptName>
+            <scriptName>ztreeCore</scriptName>
+            <scriptName>ztreeExcheck</scriptName>
+			<pages>
+				<pageName>salesList</pageName>
+			</pages>
+		</scriptGroup>
+        <scriptGroup name="salesListOnLine" sharedScriptGroup="CommonWithLinkageAndData">
+            <scriptName>salesListOnLine</scriptName>
+            <scriptName>treeControl</scriptName>
+            <scriptName>ztreeCore</scriptName>
+            <scriptName>ztreeExcheck</scriptName>
+            <pages>
+                <pageName>salesListOnLine</pageName>
+            </pages>
+        </scriptGroup>
+		<scriptGroup name="productAdd" sharedScriptGroup="NCommon">
+			<scriptName>productAdd</scriptName>
+			<scriptName>validform</scriptName>
+			<scriptName>jgGrid</scriptName>
+			<scriptName>gridCN</scriptName>
+			<scriptName>datePicker</scriptName>
+			<scriptName>ajaxfileupload</scriptName>
+			<scriptName>nLinkage</scriptName>
+			<scriptName>upload</scriptName>
+			<scriptName>easyUi</scriptName>
+            <scriptName>treeControl</scriptName>
+            <scriptName>ztreeCore</scriptName>
+            <scriptName>ztreeExcheck</scriptName>
+            <scriptName>productExamine</scriptName>
+			<pages>
+				<pageName>productAdd</pageName>
+			</pages>
+		</scriptGroup>
+
+		<scriptGroup name="taskAdd" sharedScriptGroup="NCommon">
+			<scriptName>taskAdd</scriptName>
+			<scriptName>validform</scriptName>
+			<scriptName>jgGrid</scriptName>
+			<scriptName>gridCN</scriptName>
+			<scriptName>nLinkage</scriptName>
+            <scriptName>ajaxfileupload</scriptName>
+            <scriptName>ajaxUpload</scriptName>
+			<pages>
+				<pageName>taskAdd</pageName>
+			</pages>
+		</scriptGroup>
+
+		<scriptGroup name="salesAddForProduct" sharedScriptGroup="NCommon">
+			<scriptName>salesAdd</scriptName>
+			<scriptName>salesAddForProduct</scriptName>
+			<scriptName>validform</scriptName>
+			<scriptName>datePicker</scriptName>
+			<scriptName>ajaxfileupload</scriptName>
+			<scriptName>upload</scriptName>
+			<scriptName>nLinkage</scriptName>
+			<scriptName>treeControl2</scriptName>
+			<scriptName>ztreeCore</scriptName>
+			<scriptName>ztreeExcheck</scriptName>
+			<scriptName>bootstrap-typeahead</scriptName>
+			<scriptName>bootstrap</scriptName>
+			<scriptName>select2</scriptName>
+			<pages>
+				<pageName>salesAddForProduct</pageName>
+			</pages>
+		</scriptGroup>
+		<scriptGroup name="salesAddForP2pProduct" sharedScriptGroup="CommonWithLinkageAndData">
+			<scriptName>salesAdd</scriptName>
+			<scriptName>salesAddForP2pProduct</scriptName>
+			<scriptName>easyUi</scriptName>
+			<scriptName>validform</scriptName>
+			<scriptName>ajaxfileupload</scriptName>
+			<scriptName>upload</scriptName>
+			<scriptName>treeControl2</scriptName>
+			<scriptName>ztreeCore</scriptName>
+			<scriptName>ztreeExcheck</scriptName>
+			<pages>
+				<pageName>salesAddForP2pProduct</pageName>
+			</pages>
+		</scriptGroup>
+		<scriptGroup name="salesDetail" sharedScriptGroup="Detail">
+			<scriptName>ajaxfileupload</scriptName>
+			<scriptName>upload</scriptName>
+			<scriptName>treeControl</scriptName>
+			<scriptName>ztreeCore</scriptName>
+			<scriptName>ztreeExcheck</scriptName>
+			<scriptName>salesDetail</scriptName>
+			<pages>
+				<pageName>salesDetail</pageName>
+			</pages>
+		</scriptGroup>
+        <scriptGroup name="salesDetailOnLine" sharedScriptGroup="Detail">
+            <scriptName>ajaxfileupload</scriptName>
+            <scriptName>upload</scriptName>
+            <scriptName>treeControl</scriptName>
+			<scriptName>ztreeCore</scriptName>
+			<scriptName>ztreeExcheck</scriptName>
+            <scriptName>salesDetailOnLine</scriptName>
+            <pages>
+                <pageName>salesDetailOnLine</pageName>
+            </pages>
+        </scriptGroup>
+        <scriptGroup name="salesDetailForProduct" sharedScriptGroup="Detail">
+            <scriptName>ajaxfileupload</scriptName>
+            <scriptName>upload</scriptName>
+            <scriptName>treeControl2</scriptName>
+			<scriptName>ztreeCore</scriptName>
+			<scriptName>ztreeExcheck</scriptName>
+            <scriptName>salesDetailForProduct</scriptName>
+            <scriptName>salesAdd</scriptName>
+            <pages>
+                <pageName>salesDetailForProduct</pageName>
+            </pages>
+        </scriptGroup>
+		<scriptGroup name="salesDetailForP2pProduct" sharedScriptGroup="Detail">
+			<scriptName>ajaxfileupload</scriptName>
+			<scriptName>upload</scriptName>
+			<scriptName>easyUi</scriptName>
+			<scriptName>jqGrid</scriptName>
+			<scriptName>treeControl2</scriptName>
+            <scriptName>ztreeCore</scriptName>
+            <scriptName>ztreeExcheck</scriptName>
+			<scriptName>salesDetailForP2pProduct</scriptName>
+			<scriptName>salesAdd</scriptName>
+			<pages>
+				<pageName>salesDetailForP2pProduct</pageName>
+			</pages>
+		</scriptGroup>
+		<scriptGroup name="customerCompanyDetail" sharedScriptGroup="Detail">
+			<scriptName>customerCompanyDetail</scriptName>
+			<pages>
+				<pageName>customerCompanyDetail</pageName>
+			</pages>
+		</scriptGroup>
+
+        <scriptGroup name="productDetail" sharedScriptGroup="Detail">
+            <scriptName>productDetail</scriptName>
+            <scriptName>validform</scriptName>
+			<scriptName>jgGrid</scriptName>
+			<scriptName>gridCN</scriptName>
+			<scriptName>datePicker</scriptName>
+			<scriptName>ajaxfileupload</scriptName>
+			<scriptName>nLinkage</scriptName>
+			<scriptName>upload</scriptName>
+			<scriptName>easyUi</scriptName>
+            <scriptName>treeControl</scriptName>
+            <scriptName>ztreeCore</scriptName>
+            <scriptName>ztreeExcheck</scriptName>
+            <scriptName>productExamine</scriptName>
+            <pages>
+                <pageName>productDetail</pageName>
+            </pages>
+        </scriptGroup>
+		<scriptGroup name="p2pProductDetail" sharedScriptGroup="Detail">
+			<scriptName>p2pProductDetail</scriptName>
+			<scriptName>p2pProductExamine</scriptName>
+			<scriptName>easyUi</scriptName>
+			<pages>
+				<pageName>p2pProductDetail</pageName>
+			</pages>
+		</scriptGroup>
+
+        <scriptGroup name="customerPersonalDetail" sharedScriptGroup="Detail">
+            <scriptName>customerPersonalDetail</scriptName>
+            <scriptName>nLinkage</scriptName>
+            <pages>
+                <pageName>customerPersonalDetail</pageName>
+            </pages>
+        </scriptGroup>
+        <scriptGroup name="financierBusinessDetail" sharedScriptGroup="Detail">
+			<scriptName>financierBusinessDetail</scriptName>
+			<pages>
+				<pageName>financierBusinessDetail</pageName>
+			</pages>
+		</scriptGroup>
+		<scriptGroup name="agentAdviserDetail" sharedScriptGroup="Detail">
+			<scriptName>agentAdviserDetail</scriptName>
+			<pages>
+				<pageName>agentAdviserDetail</pageName>
+			</pages>
+		</scriptGroup>
+		<scriptGroup name="agentBusinessDetail" sharedScriptGroup="Detail">
+			<scriptName>agentBusinessDetail</scriptName>
+			<pages>
+				<pageName>agentBusinessDetail</pageName>
+			</pages>
+		</scriptGroup>
+		<scriptGroup name="financierPersonalDetail" sharedScriptGroup="Detail">
+			<scriptName>financierPersonalDetail</scriptName>
+			<pages>
+				<pageName>financierPersonalDetail</pageName>
+			</pages>
+		</scriptGroup>
+		<scriptGroup name="partnerIssuerDetail" sharedScriptGroup="Detail">
+			<scriptName>partnerIssuerDetail</scriptName>
+			<pages>
+				<pageName>partnerIssuerDetail</pageName>
+			</pages>
+		</scriptGroup>
+		<scriptGroup name="productTaskList" sharedScriptGroup="CommonWithLinkageAndData">
+			<scriptName>productTaskList</scriptName>
+			<pages>
+				<pageName>productTaskList</pageName>
+			</pages>
+		</scriptGroup>
+
+        <scriptGroup name="creditorList" sharedScriptGroup="CommonWithLinkageAndData">
+            <scriptName>creditorList</scriptName>
+            <pages>
+                <pageName>creditorList</pageName>
+            </pages>
+        </scriptGroup>
+
+        <scriptGroup name="importData" sharedScriptGroup="Common">
+            <scriptName>importData</scriptName>
+            <scriptName>upload</scriptName>
+            <scriptName>ajaxfileupload</scriptName>
+            <scriptName>nLinkage</scriptName>
+            <pages>
+                <pageName>importData</pageName>
+            </pages>
+        </scriptGroup>
+		<scriptGroup name="taskDecisionList" sharedScriptGroup="CommonWithDate">
+			<scriptName>taskDecisionList</scriptName>
+			<pages>
+				<pageName>taskDecisionList</pageName>
+			</pages>
+		</scriptGroup>
+
+		<scriptGroup name="taskDecisionLogList" sharedScriptGroup="CommonWithDate">
+			<scriptName>taskDecisionLogList</scriptName>
+			<pages>
+				<pageName>taskDecisionLogList</pageName>
+			</pages>
+		</scriptGroup>
+
+		<scriptGroup name="p2pSubscribeList" sharedScriptGroup="NewCommon">
+			<scriptName>p2pSubscribeList</scriptName>
+			<scriptName>treeControl</scriptName>
+			<scriptName>ztreeCore</scriptName>
+			<scriptName>ztreeExcheck</scriptName>
+			<pages>
+				<pageName>p2pSubscribeList</pageName>
+			</pages>
+		</scriptGroup>
+		<scriptGroup name="p2pSubscribeAssign" sharedScriptGroup="NCommon">
+			<scriptName>p2pSubscribeAssign</scriptName>
+			<pages>
+				<pageName>p2pSubscribeAssign</pageName>
+			</pages>
+		</scriptGroup>
+		<scriptGroup name="p2pNoSubscribeAssign" sharedScriptGroup="NCommon">
+			<scriptName>p2pNoSubscribeAssign</scriptName>
+			<pages>
+				<pageName>p2pNoSubscribeAssign</pageName>
+			</pages>
+		</scriptGroup>
+
+		<scriptGroup name="p2pInvestmentList" sharedScriptGroup="CommonWithDate">
+			<scriptName>p2pInvestmentList</scriptName>
+			<scriptName>nLinkage</scriptName>
+			<pages>
+				<pageName>p2pInvestmentList</pageName>
+			</pages>
+		</scriptGroup>
+		
+		<scriptGroup name="achievementCommissionList" sharedScriptGroup="CommonWithDate">
+			<scriptName>achievementCommissionList</scriptName>
+            <scriptName>treeControl</scriptName>
+            <scriptName>ztreeCore</scriptName>
+            <scriptName>ztreeExcheck</scriptName>
+			<pages>
+				<pageName>achievementCommissionList</pageName>
+			</pages>
+		</scriptGroup>
+
+        <scriptGroup name="commissionWealthCenterList" sharedScriptGroup="CommonWithDate">
+            <scriptName>commissionWealthCenterList</scriptName>
+            <pages>
+                <pageName>commissionWealthCenterList</pageName>
+            </pages>
+        </scriptGroup>
+		
+		<scriptGroup name="sendLetterIndex" sharedScriptGroup="CommonWithLinkage">
+			<scriptName>sendLetterIndex</scriptName>
+			<pages>
+				<pageName>sendLetter</pageName>
+			</pages>
+		</scriptGroup>
+		
+		
+		<!-- work_flow -->
+		<scriptGroup name="actIdGroupAdd" sharedScriptGroup="Common">
+			<scriptName>actIdGroupAdd</scriptName>
+			<scriptName>validform</scriptName>
+			<pages>
+				<pageName>actIdGroupAdd</pageName>
+			</pages>
+		</scriptGroup>
+		<scriptGroup name="actIdGroupList" sharedScriptGroup="Common">
+			<scriptName>actIdGroupList</scriptName>
+			<pages>
+				<pageName>actIdGroupList</pageName>
+			</pages>
+		</scriptGroup>
+		<scriptGroup name="actIdUserAdd" sharedScriptGroup="Common">
+			<scriptName>actIdUserAdd</scriptName>
+			<scriptName>validform</scriptName>
+			<scriptName>nLinkage</scriptName>
+			<pages>
+				<pageName>actIdUserAdd</pageName>
+			</pages>
+		</scriptGroup>
+		<scriptGroup name="actIdUserList" sharedScriptGroup="Common">
+			<scriptName>actIdUserList</scriptName>
+			<scriptName>easyUi</scriptName>
+			<pages>
+				<pageName>actIdUserList</pageName>
+			</pages>
+		</scriptGroup>
+		<scriptGroup name="processingList" sharedScriptGroup="NewCommon">
+			<scriptName>treeControl2</scriptName>
+            <scriptName>ztreeCore</scriptName>
+            <scriptName>ztreeExcheck</scriptName>
+			<scriptName>processingList</scriptName>
+			<scriptName>datePicker</scriptName>
+			<scriptName>style</scriptName>
+			<pages>
+				<pageName>processingList</pageName>
+			</pages>
+		</scriptGroup>
+		<scriptGroup name="auditTaskList" sharedScriptGroup="NewCommon">
+			<scriptName>treeControl2</scriptName>
+            <scriptName>ztreeCore</scriptName>
+            <scriptName>ztreeExcheck</scriptName>
+			<scriptName>auditTaskList</scriptName>
+			<scriptName>datePicker</scriptName>
+			<scriptName>easyUi</scriptName>
+			<scriptName>datePicker</scriptName>
+			<scriptName>style</scriptName>
+			<pages>
+				<pageName>auditTaskList</pageName>
+			</pages>
+		</scriptGroup>
+		<scriptGroup name="actReProcDefList" sharedScriptGroup="Common">
+			<scriptName>treeControl2</scriptName>
+            <scriptName>ztreeCore</scriptName>
+            <scriptName>ztreeExcheck</scriptName>
+			<scriptName>actReProcDefList</scriptName>
+			<scriptName>style</scriptName>
+			<scriptName>jqGrid</scriptName>
+			<pages>
+				<pageName>actReProcDefList</pageName>
+			</pages>
+		</scriptGroup>
+		<scriptGroup name="approvalHistoriaList" sharedScriptGroup="NewCommon">
+			<scriptName>treeControl2</scriptName>
+            <scriptName>ztreeCore</scriptName>
+            <scriptName>ztreeExcheck</scriptName>
+			<scriptName>approvalHistoriaList</scriptName>
+			<scriptName>datePicker</scriptName>
+			<scriptName>style</scriptName>
+			<pages>
+				<pageName>approvalHistoriaList</pageName>
+			</pages>
+		</scriptGroup>
+
+		<!-- payment -->
+		<scriptGroup name="paymentRefundList" sharedScriptGroup="Common">
+			<scriptName>paymentRefundList</scriptName>
+			<scriptName>datePicker</scriptName>
+            <scriptName>easyUi</scriptName>
+			<pages>
+				<pageName>paymentRefundList</pageName>
+			</pages>
+		</scriptGroup>
+		<scriptGroup name="paymentRefundOffLineList" sharedScriptGroup="Common">
+			<scriptName>paymentRefundOffLineList</scriptName>
+			<scriptName>datePicker</scriptName>
+            <scriptName>easyUi</scriptName>
+			<pages>
+				<pageName>paymentRefundOffLineList</pageName>
+			</pages>
+		</scriptGroup>
+		<scriptGroup name="paymentRefundAdd" sharedScriptGroup="CommonWithLinkage">
+			<scriptName>validform</scriptName>
+			<scriptName>datePicker</scriptName>
+			<scriptName>paymentRefundAdd</scriptName>
+			<pages>
+				<pageName>paymentRefundAdd</pageName>
+			</pages>
+		</scriptGroup>
+		<scriptGroup name="calendar" sharedScriptGroup="Common">
+			<!-- <scriptName>moment</scriptName>
+			<scriptName>fullcalendar</scriptName>
+			<scriptName>datePicker</scriptName> -->
+			<scriptName>calendarList</scriptName>
+			<scriptName>dhtmlxscheduler</scriptName>
+			<pages>
+				<pageName>calendarList</pageName>
+			</pages>
+		</scriptGroup>
+		<scriptGroup name="loanSituation" sharedScriptGroup="Common">
+			<scriptName>loanSituation</scriptName>
+			<pages>
+				<pageName>loanSituation</pageName>
+			</pages>
+		</scriptGroup>
+
+		<!-- market -->
+		<scriptGroup name="activityUsersAdd" sharedScriptGroup="Common">
+			<scriptName>activityUsersAdd</scriptName>
+			<pages>
+				<pageName>activityUsersAdd</pageName>
+			</pages>
+		</scriptGroup>
+		<scriptGroup name="activityUsersDetail" sharedScriptGroup="Common">
+			<scriptName>activityUsersDetail</scriptName>
+			<pages>
+				<pageName>activityUsersDetail</pageName>
+			</pages>
+		</scriptGroup>
+		<scriptGroup name="activityUsersList" sharedScriptGroup="Common">
+			<scriptName>activityUsersList</scriptName>
+			<pages>
+				<pageName>activityUsersList</pageName>
+			</pages>
+		</scriptGroup>
+		<scriptGroup name="drawSettingAdd" sharedScriptGroup="NewCommon">
+			<scriptName>drawSettingAdd</scriptName>
+			<scriptName>validform</scriptName>
+			<pages>
+				<pageName>drawSettingAdd</pageName>
+			</pages>
+		</scriptGroup>
+		<scriptGroup name="drawUserList" sharedScriptGroup="NewCommon">
+			<scriptName>drawSettingAdd</scriptName>
+			<scriptName>validform</scriptName>
+			<pages>
+				<pageName>drawUserList</pageName>
+			</pages>
+		</scriptGroup>
+		<scriptGroup name="drawSettingDetail" sharedScriptGroup="Common">
+			<scriptName>drawSettingDetail</scriptName>
+			<pages>
+				<pageName>drawSettingDetail</pageName>
+			</pages>
+		</scriptGroup>
+		<scriptGroup name="drawSettingList" sharedScriptGroup="Common">
+			<scriptName>drawSettingList</scriptName>
+			<pages>
+				<pageName>drawSettingList</pageName>
+			</pages>
+		</scriptGroup>
+		<scriptGroup name="winningRecordAdd" sharedScriptGroup="Common">
+			<scriptName>winningRecordAdd</scriptName>
+			<pages>
+				<pageName>winningRecordAdd</pageName>
+			</pages>
+		</scriptGroup>
+		<scriptGroup name="winningRecordDetail" sharedScriptGroup="Common">
+			<scriptName>winningRecordDetail</scriptName>
+			<pages>
+				<pageName>winningRecordDetail</pageName>
+			</pages>
+		</scriptGroup>
+		<scriptGroup name="winningRecordList" sharedScriptGroup="Common">
+			<scriptName>winningRecordList</scriptName>
+			<pages>
+				<pageName>winningRecordList</pageName>
+			</pages>
+		</scriptGroup>
+
+		<scriptGroup name="fixedAssetsList" sharedScriptGroup="CommonWithLinkage">
+			<scriptName>easyUi</scriptName>
+			<scriptName>fixedAssetsList</scriptName>
+			<scriptName>datePicker</scriptName>
+			<scriptName>treeControl</scriptName>
+			<scriptName>ztreeCore</scriptName>
+			<scriptName>ztreeExcheck</scriptName>
+
+			<pages>
+				<pageName>fixedAssetsList</pageName>
+			</pages>
+		</scriptGroup>
+		<scriptGroup name="fixedAssetsAdd" sharedScriptGroup="NCommon">
+			<scriptName>fixedAssetsAdd</scriptName>
+			<scriptName>jgGrid</scriptName>
+			<scriptName>gridCN</scriptName>
+			<scriptName>validform</scriptName>
+			<scriptName>datePicker</scriptName>
+			<scriptName>nLinkage</scriptName>
+			<scriptName>treeControl</scriptName>
+			<scriptName>ztreeCore</scriptName>
+			<scriptName>ztreeExcheck</scriptName>
+			<pages>
+				<pageName>fixedAssetsAdd</pageName>
+			</pages>
+		</scriptGroup>
+		<scriptGroup name="fixedAssetsAddAll" sharedScriptGroup="NewAddCommon">
+			<scriptName>fixedAssetsAddAll</scriptName>
+			<scriptName>jgGrid</scriptName>
+			<scriptName>gridCN</scriptName>
+			<scriptName>validform</scriptName>
+			<scriptName>datePicker</scriptName>
+			<scriptName>nLinkage</scriptName>
+			<scriptName>treeControl</scriptName>
+			<scriptName>ztreeCore</scriptName>
+			<scriptName>ztreeExcheck</scriptName>
+			<scriptName>jQueryEditable</scriptName>
+			<scriptName>bootstrap-typeahead</scriptName>
+			<scriptName>bootstrap</scriptName>
+			<scriptName>select2</scriptName>
+			<pages>
+				<pageName>fixedAssetsAddAll</pageName>
+			</pages>
+		</scriptGroup>
+		<scriptGroup name="fixedAssetsDetail" sharedScriptGroup="Detail">
+			<scriptName>nLinkage</scriptName>
+			<scriptName>ajaxfileupload</scriptName>
+			<scriptName>upload</scriptName>
+			<scriptName>fixedAssetsDetail</scriptName>
+			<pages>
+				<pageName>fixedAssetsDetail</pageName>
+			</pages>
+		</scriptGroup>
+
+		<scriptGroup name="suppliersList" sharedScriptGroup="CommonWithLinkage">
+			<scriptName>easyUi</scriptName>
+			<scriptName>suppliersList</scriptName>
+			<scriptName>datePicker</scriptName>
+			<scriptName>treeControl</scriptName>
+			<scriptName>ztreeCore</scriptName>
+			<scriptName>ztreeExcheck</scriptName>
+
+			<pages>
+				<pageName>suppliersList</pageName>
+			</pages>
+		</scriptGroup>
+		<scriptGroup name="suppliersAdd" sharedScriptGroup="NCommon">
+			<scriptName>suppliersAdd</scriptName>
+			<scriptName>jgGrid</scriptName>
+			<scriptName>gridCN</scriptName>
+			<scriptName>validform</scriptName>
+			<scriptName>datePicker</scriptName>
+			<scriptName>nLinkage</scriptName>
+			<scriptName>treeControl</scriptName>
+			<scriptName>ztreeCore</scriptName>
+			<scriptName>ztreeExcheck</scriptName>
+			<pages>
+				<pageName>suppliersAdd</pageName>
+			</pages>
+		</scriptGroup>
+		<scriptGroup name="suppliersDetail" sharedScriptGroup="Detail">
+			<scriptName>ajaxfileupload</scriptName>
+			<scriptName>upload</scriptName>
+			<scriptName>suppliersDetail</scriptName>
+			<pages>
+				<pageName>suppliersDetail</pageName>
+			</pages>
+		</scriptGroup>
+	</privateScriptGroups>
+
+</scriptConfig>

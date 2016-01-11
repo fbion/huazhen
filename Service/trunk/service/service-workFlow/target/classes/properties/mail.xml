@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+    <comment>邮件配置</comment>
+    <entry key="mail.host"><![CDATA[mail.bestinvestor.com.cn]]></entry>
+    <entry key="mail.user"><![CDATA[administrator]]></entry>
+    <entry key="mail.pass"><![CDATA[huazhen@123]]></entry>
+    <entry key="mail.postfix"><![CDATA[bestinvestor.com.cn]]></entry>
+    <entry key="mail.sender.name1"><![CDATA[华镇金融]]></entry>
+    <entry key="mail.sender.name2"><![CDATA[系统管理员]]></entry>
+    <entry key="mail.sender.name"><![CDATA[华镇社区金融]]></entry>
+    <entry key="mail.sales.subject"><![CDATA[打款审核通知]]></entry>
+
+    <entry key="mail.salesAuditBack.body"><![CDATA[
+            <b>%s</b>的客户<b>%s</b>于<b>%s</b>打款<b>%s</b>元，该笔订单有误，具体问题请您查看审核内容，您修改订单后点击”审批“按钮，继续”下一步“审核流程。<br/>
+            请勿回复，本邮箱不接受邮件，如有疑问，请联系系统管理员
+    ]]></entry>
+
+    <entry key="mail.salesAuditNext.body"><![CDATA[
+            <b>%s</b>的客户<b>%s</b>于<b>%s</b>打款<b>%s</b>元，该笔打款需要您的审批，请点击链接或将链接复制到浏览器地址栏进行审批。<br/>
+            <b>%s</b></br>
+            注：请您审核打款产品、购买客户、销售经理是否选择正确，客户银行信息、打款金额、购买日期、到期日期、成立日期是否正确。请您务必认真审核，避免不必要的麻烦。<br/>
+            请勿回复，本邮箱不接受邮件，如有疑问，请联系系统管理员
+    ]]></entry>
+
+    <entry key="mail.salesAuditSuccess.body"><![CDATA[
+            <b>%s</b>的客户<b>%s</b>于<b>%s</b>打款<b>%s</b>元，该笔打款已审批通过。<br/>
+    ]]></entry>
+
+    <entry key="mail.productAuditNext.body"><![CDATA[
+            <b>%s</b>需要您的处理。<br/>
+            请勿回复，本邮箱不接受邮件，如有疑问，请联系系统管理员。
+    ]]></entry>
+
+</properties>

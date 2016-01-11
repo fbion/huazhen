@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hzfh.service.baseInfo.mapper.BannerInfoMapper">
+    <resultMap type="com.hzfh.api.baseInfo.model.BannerInfo" id="resultMapBannerInfo">
+        <result property="id" column="id"/>
+        <result property="locationNo" column="location_no"/>
+        <result property="pageNo" column="page_no"/>
+        <result property="exceptPageNo" column="except_page_no"/>
+        <result property="type" column="type"/>
+        <result property="description" column="description"/>
+        <result property="title" column="title"/>
+        <result property="text" column="text"/>
+        <result property="resrcurl" column="resrcurl"/>
+        <result property="linkUrl" column="link_url"/>
+        <result property="script" column="script"/>
+        <result property="priority" column="priority"/>
+        <result property="startTime" column="start_time" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
+        <result property="endTime" column="end_time" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
+        <result property="status" column="status"/>
+        <result property="inUserNo" column="in_user_no"/>
+        <result property="inTime" column="in_time" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
+        <result property="editUserNo" column="edit_user_no"/>
+        <result property="editTime" column="edit_time" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
+    </resultMap>
+    <select id="getList" resultMap="resultMapBannerInfo">
+        SELECT id,location_no,page_no,except_page_no,type,description,title,text,resrcurl,link_url,script,priority,start_time,end_time,status,in_user_no,in_time,edit_user_no,edit_time
+        FROM banner_info
+    </select>
+    <select id="getPagingList" resultMap="resultMapBannerInfo" parameterType="com.hzfh.api.baseInfo.model.query.BannerInfoCondition" statementType="STATEMENT">
+        SELECT id,location_no,page_no,except_page_no,type,description,title,text,resrcurl,link_url,script,priority,start_time,end_time,status,in_user_no,in_time,edit_user_no,edit_time FROM banner_info where 1=1
+        <if test="byLocation !=0">and location_no = ${byLocation}</if>
+        <if test="byType !=0">and type = ${byType}</if>
+        <if test="byStatus !=0">and status =${byStatus}</if>
+        <if test="byTitle !=null and byTitle!=''">and title LIKE CONCAT("%",'${byTitle}',"%")</if>
+        ORDER BY
+        <foreach item="item" collection="sortItemList" separator=",">
+            ${item.sortFeild} ${item.sortType}
+        </foreach>
+        LIMIT ${startIndex},${pageSize}
+    </select>
+    <select id="getTotalCount" resultType="int" parameterType="com.hzfh.api.baseInfo.model.query.BannerInfoCondition" statementType="STATEMENT">
+        SELECT count(1) FROM banner_info where 1=1
+    </select>
+    <select id="getInfo" resultMap="resultMapBannerInfo" parameterType="int">
+        SELECT id,location_no,page_no,except_page_no,type,description,title,text,resrcurl,link_url,script,priority,start_time,end_time,status,in_user_no,in_time,edit_user_no,edit_time FROM banner_info where id=#{id}
+    </select>
+    <insert id="add" parameterType="com.hzfh.api.baseInfo.model.BannerInfo" useGeneratedKeys="true" keyProperty="id">
+        insert into banner_info
+        (location_no,page_no,except_page_no,type,description,title,text,resrcurl,link_url,script,priority,start_time,end_time,status,in_user_no,in_time,edit_user_no,edit_time)
+        values
+        (#{locationNo},#{pageNo},#{exceptPageNo},#{type},#{description},#{title},#{text},#{resrcurl},#{linkUrl},#{script},#{priority},#{startTime},#{endTime},#{status},#{inUserNo},current_timestamp(),#{editUserNo},current_timestamp())
+    </insert>
+    <update id="update" parameterType="com.hzfh.api.baseInfo.model.BannerInfo">
+        update banner_info set
+        location_no=#{locationNo},page_no=#{pageNo},except_page_no=#{exceptPageNo},type=#{type},description=#{description},title=#{title},text=#{text},resrcurl=#{resrcurl},link_url=#{linkUrl},script=#{script},priority=#{priority},start_time=#{startTime},end_time=#{endTime},status=#{status},edit_user_no=#{editUserNo},edit_time=current_timestamp()
+        where id=#{id}
+    </update>
+    <delete id="delete" parameterType="int">
+        delete from banner_info where id = #{id}
+    </delete>
+    
+    <select id="getInfoListByCondition" resultMap="resultMapBannerInfo" parameterType="com.hzfh.api.baseInfo.model.query.BannerInfoCondition" statementType="STATEMENT">
+        SELECT id,location_no,page_no,except_page_no,type,description,title,text,resrcurl,link_url,script,priority,start_time,end_time,status,in_user_no,in_time,edit_user_no,edit_time
+        FROM banner_info where 1=1 and status = 1 and start_time &lt;= current_timestamp() and current_timestamp() &lt;= end_time
+        <if test="byLocation!=0"> and location_no=${byLocation}</if>
+        <if test="byPageNo!=0"> and page_no=${byPageNo}</if>
+        <if test="byType !=0">and type = ${byType}</if>
+        ORDER BY priority desc
+        LIMIT 0,${count}
+    </select>
+</mapper>

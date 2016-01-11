@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<cssConfig xmlns="http://www.hzfh.com/web"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.hzfh.com/web ../../Schemas/Resources/Css.xsd">
+
+	<sharedCssGroups default="Common">
+		<cssGroup name="Common">
+			<cssName>base</cssName>
+			<cssName>common</cssName>
+			<cssName>jquery-ui</cssName>
+            <cssName>jqgrid</cssName>
+		</cssGroup>
+		<cssGroup name="NewCommonWithEasyUI">
+			<cssName>easyUi</cssName>
+			<cssName>icon</cssName>
+			<cssName>global</cssName>
+		</cssGroup>
+        <cssGroup name="NCommon">
+            <cssName>base</cssName>
+            <cssName>common</cssName>
+            <cssName>page</cssName>
+        </cssGroup>
+		<cssGroup name="Empty"></cssGroup>
+	</sharedCssGroups>
+</cssConfig>

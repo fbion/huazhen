@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<scriptConfig xmlns="http://www.hzfh.com/web"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://www.hzfh.com/web ../../schemas/resources/Script.xsd">
+
+    <scriptMappings>
+        <!--Common begin-->
+        <script name="jQuery" order="1" isDevelop="false">jquery-1.11.1.min.js?t=0917</script>
+        <script name="datePicker" order="20" isDevelop="false">datePicker/wdatePicker.js?t=0917</script>
+        <script name="style" order="10" isDevelop="false">style.js?t=0917</script>
+        <script name="environmentVariable" order="2" isDevelop="true" type="Inline"></script>
+        <script name="loginVariable" order="3" isDevelop="true" type="Inline"></script>
+        <script name="base" order="5" isDevelop="true">common/base.js?t=0917</script>
+    </scriptMappings>
+</scriptConfig>	

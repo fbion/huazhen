@@ -1,0 +1,536 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+        "http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+	<package name="decision" extends="struts-login" namespace="/product/decision">
+		<action name="list" class="com.hzfh.fmp.controller.product.DecisionAction">
+			<result>/product/decisionList.jsp</result>
+		</action>
+	</package>
+	<package name="ajaxDecision" extends="struts-error"
+		namespace="/product/decision">
+		<action name="ajaxListDecision"
+			class="com.hzfh.fmp.controller.product.ajax.AjaxDecisionAction">
+			<result type="json">
+				<param name="includeProperties">
+					resultList.*,
+					pageSize, pageIndex, pageCount, recordCount
+				</param>
+				<param name="noCache">true</param>
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+		<action name="ajaxEditDecision"
+			class="com.hzfh.fmp.controller.product.ajax.AjaxDecisionAction"
+			method="edit">
+			<result type="json">
+				<param name="includeProperties">
+					errCode,errDesc
+				</param>
+				<param name="noCache">true</param>
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+        <action name="ajaxListDecisionByProduct" class="com.hzfh.fmp.controller.product.ajax.AjaxDecisionAction" method="getListByProductNo">
+            <result type="json">
+                <param name="includeProperties">
+                    resultList.*,
+                    errCode,errDesc
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+	</package>
+	<package name="decisionLog" extends="struts-login" namespace="/product/decisionLog">
+		<action name="list"
+			class="com.hzfh.fmp.controller.product.DecisionLogAction">
+			<result>/product/decisionLogList.jsp</result>
+		</action>
+	</package>
+	<package name="ajaxDecisionLog" extends="struts-error"
+		namespace="/product/decisionLog">
+		<action name="ajaxListDecisionLog"
+			class="com.hzfh.fmp.controller.product.ajax.AjaxDecisionLogAction">
+			<result type="json">
+				<param name="includeProperties">
+					resultList.*,
+					pageSize, pageIndex, pageCount, recordCount
+				</param>
+				<param name="noCache">true</param>
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+		<action name="ajaxEditDecisionLog"
+			class="com.hzfh.fmp.controller.product.ajax.AjaxDecisionLogAction"
+			method="edit">
+			<result type="json">
+				<param name="includeProperties">
+					errCode,errDesc
+				</param>
+				<param name="noCache">true</param>
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+	</package>
+	<package name="financierBusiness" extends="struts-login"
+		namespace="/product/financierBusiness">
+		<action name="list"
+			class="com.hzfh.fmp.controller.product.FinancierBusinessAction">
+			<result>/product/financierBusinessList.jsp</result>
+		</action>
+        <action name="edit"
+                class="com.hzfh.fmp.controller.product.FinancierBusinessAddAction">
+            <result>/product/financierBusinessAdd.jsp</result>
+        </action>
+        <action name="detail" method="executeDetail"
+                class="com.hzfh.fmp.controller.product.FinancierBusinessAddAction">
+            <result>/product/financierBusinessDetail.jsp</result>
+        </action>
+	</package>
+	<package name="ajaxFinancierBusiness" extends="struts-error"
+		namespace="/product/financierBusiness">
+		<action name="ajaxListFinancierBusiness"
+			class="com.hzfh.fmp.controller.product.ajax.AjaxFinancierBusinessAction">
+			<result type="json">
+				<param name="includeProperties">
+					resultList.*,
+					pageSize, pageIndex, pageCount, recordCount
+				</param>
+				<param name="noCache">true</param>
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+		<action name="ajaxEditFinancierBusiness"
+			class="com.hzfh.fmp.controller.product.ajax.AjaxFinancierBusinessAction"
+			method="edit">
+			<result type="json">
+				<param name="includeProperties">
+					errCode,errDesc
+				</param>
+				<param name="noCache">true</param>
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+        <action name="ajaxGetFinancierBusiness"
+                class="com.hzfh.fmp.controller.product.ajax.AjaxFinancierBusinessAction"
+                method="getInfoById">
+            <result type="json">
+                <param name="includeProperties">
+                    errCode,errDesc,info.*
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+	</package>
+	<package name="financierPersonal" extends="struts-login"
+		namespace="/product/financierPersonal">
+		<action name="list"
+			class="com.hzfh.fmp.controller.product.FinancierPersonalAction">
+			<result>/product/financierPersonalList.jsp</result>
+		</action>
+        <action name="edit"
+                class="com.hzfh.fmp.controller.product.FinancierPersonalAddAction">
+            <result>/product/financierPersonalAdd.jsp</result>
+        </action>
+        <action name="detail" method="executeDetail"
+                class="com.hzfh.fmp.controller.product.FinancierPersonalAddAction">
+            <result>/product/financierPersonalDetail.jsp</result>
+        </action>
+	</package>
+	<package name="ajaxFinancierPersonal" extends="struts-error"
+		namespace="/product/financierPersonal">
+		<action name="ajaxListFinancierPersonal"
+			class="com.hzfh.fmp.controller.product.ajax.AjaxFinancierPersonalAction">
+			<result type="json">
+				<param name="includeProperties">
+					resultList.*,
+					pageSize, pageIndex, pageCount, recordCount
+				</param>
+				<param name="noCache">true</param>
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+		<action name="ajaxEditFinancierPersonal"
+			class="com.hzfh.fmp.controller.product.ajax.AjaxFinancierPersonalAction"
+			method="edit">
+			<result type="json">
+				<param name="includeProperties">
+					errCode,errDesc
+				</param>
+				<param name="noCache">true</param>
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+        <action name="ajaxGetFinancierPersonal"
+                class="com.hzfh.fmp.controller.product.ajax.AjaxFinancierPersonalAction"
+                method="getInfoById">
+            <result type="json">
+                <param name="includeProperties">
+                    errCode,errDesc,info.*
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+	</package>
+	<package name="partnerIssuer" extends="struts-login" namespace="/product/partnerIssuer">
+		<action name="list"
+			class="com.hzfh.fmp.controller.product.PartnerIssuerAction">
+			<result>/product/partnerIssuerList.jsp</result>
+		</action>
+        <action name="edit"
+                class="com.hzfh.fmp.controller.product.PartnerIssuerAddAction">
+            <result>/product/partnerIssuerAdd.jsp</result>
+        </action>
+        <action name="detail"  method="executeDetail"
+                class="com.hzfh.fmp.controller.product.PartnerIssuerAddAction">
+            <result>/product/partnerIssuerDetail.jsp</result>
+        </action>
+	</package>
+	<package name="ajaxPartnerIssuer" extends="struts-error"
+		namespace="/product/partnerIssuer">
+		<action name="ajaxListPartnerIssuer"
+			class="com.hzfh.fmp.controller.product.ajax.AjaxPartnerIssuerAction">
+			<result type="json">
+				<param name="includeProperties">
+					resultList.*,
+					pageSize, pageIndex, pageCount, recordCount
+				</param>
+				<param name="noCache">true</param>
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+		<action name="ajaxEditPartnerIssuer"
+                         class="com.hzfh.fmp.controller.product.ajax.AjaxPartnerIssuerAction"
+                         method="edit">
+            <result type="json">
+                <param name="includeProperties">
+                errCode,errDesc
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+        <action name="ajaxGetPartnerIssuer"
+                class="com.hzfh.fmp.controller.product.ajax.AjaxPartnerIssuerAction"
+                method="getInfoById">
+            <result type="json">
+                <param name="includeProperties">
+                    errCode,errDesc,info.*
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+	</package>
+    <package name="ajaxPartnerRate" extends="struts-error" namespace="/product/partnerRate">
+        <action name="ajaxListPartnerRate" class="com.hzfh.fmp.controller.product.ajax.AjaxPartnerRateAction">
+            <result type="json">
+                <param name="includeProperties">
+                    resultList.*,
+                    pageSize, pageIndex, pageCount, recordCount
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+        <action name="ajaxEditPartnerRate" class="com.hzfh.fmp.controller.product.ajax.AjaxPartnerRateAction" method="edit">
+            <result type="json">
+                <param name="includeProperties">
+                    errCode,errDesc
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+        <action name="ajaxGetPartnerRate" class="com.hzfh.fmp.controller.product.ajax.AjaxPartnerRateAction" method="getPartnerRate">
+        	<result type="json">
+        		<param name="includeProperties">
+        			errCode,errDesc,rate
+        		</param>
+        		<param name="noCache">true</param>
+        		<param name="ignoreHierarchy">false</param>
+        	</result>
+        </action>
+        <action name="ajaxListPartnerRateByProduct" class="com.hzfh.fmp.controller.product.ajax.AjaxPartnerRateAction" method="getListByProductNo">
+        	<result type="json">
+        		<param name="includeProperties">
+        			resultList.*,
+        			errCode,errDesc
+        		</param>
+        		<param name="noCache">true</param>
+        		<param name="ignoreHierarchy">false</param>
+        	</result>
+        </action>
+    </package>
+    <package name="product" extends="struts-login" namespace="/product/product">
+        <action name="list" class="com.hzfh.fmp.controller.product.ProductAction">
+            <result>/product/productList.jsp</result>
+        </action>
+        <action name="edit" class="com.hzfh.fmp.controller.product.ProductAddAction">
+        	<result>/product/productAdd.jsp</result>
+        </action>
+        <action name="detail" class="com.hzfh.fmp.controller.product.ProductAddAction" method="executeDetail">
+            <result>/product/productDetail.jsp</result>
+        </action>
+    </package>
+    <package name="ajaxProduct" extends="struts-error" namespace="/product/product">
+        <action name="easyUIProductList" class="com.hzfh.fmp.controller.product.easyUI.EasyUIProductAction">
+            <result type="json">
+                <param name="includeProperties">
+                    rows.*,total
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+        <action name="ajaxBuildProduct" class="com.hzfh.fmp.controller.product.ajax.AjaxProductAction" method="build">
+            <result type="json">
+                <param name="includeProperties">
+                    errCode,errDesc
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+        <action name="ajaxEditProduct" class="com.hzfh.fmp.controller.product.ajax.AjaxProductAction" method="edit">
+            <result type="json">
+                <param name="includeProperties">
+                    errCode,errDesc
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+        <action name="ajaxGetProduct" class="com.hzfh.fmp.controller.product.ajax.AjaxProductAction" method="getInfoById">
+            <result type="json">
+                <param name="includeProperties">
+                    info.*,errCode,errDesc
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+        <action name="ajaxEditProductStatus" class="com.hzfh.fmp.controller.product.ajax.AjaxProductAction" method="modifyStatus">
+            <result type="json">
+                <param name="includeProperties">
+                    errCode,errDesc
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+        <action name="ajaxCancelProduct" class="com.hzfh.fmp.controller.product.ajax.AjaxProductAction" method="cancelProduct">
+            <result type="json">
+                <param name="includeProperties">
+                    errCode,errDesc
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+        <action name="ajaxEditProductStart" class="com.hzfh.fmp.controller.product.ajax.AjaxProductAction" method="modifyStart">
+            <result type="json">
+                <param name="includeProperties">
+                    errCode,errDesc
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+        <action name="ajaxCommitCheckProduct" class="com.hzfh.fmp.controller.product.ajax.AjaxProductAction" method="commitCheck">
+            <result type="json">
+                <param name="includeProperties">
+                    errCode,errDesc
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+    </package>
+    <package name="ajaxProductAttachment" extends="struts-error" namespace="/product/productAttachment">
+        <action name="ajaxListProductAttachment" class="com.hzfh.fmp.controller.product.ajax.AjaxProductAttachmentAction">
+            <result type="json">
+                <param name="includeProperties">
+                    resultList.*,
+                    pageSize, pageIndex, pageCount, recordCount
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+        <action name="ajaxSaveFilePath" class="com.hzfh.fmp.controller.product.ajax.AjaxProductAttachmentAction" method="uploadFile">
+            <result type="json">
+                <param name="includeProperties">
+                    errCode,errDesc
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+        <action name="ajaxDeleteFile" class="com.hzfh.fmp.controller.product.ajax.AjaxProductAttachmentAction" method="deleteFile">
+            <result type="json">
+                <param name="includeProperties">
+                    errCode,errDesc
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+        <action name="ajaxListFile" class="com.hzfh.fmp.controller.product.ajax.AjaxProductAttachmentAction" method="getFileList">
+            <result type="json">
+                <param name="includeProperties">
+                    resultList.*,errCode,errDesc
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+    </package>
+	<package name="ajaxProductStages" extends="struts-error"
+		namespace="/product/productStages">
+		<action name="ajaxListProductStages"
+			class="com.hzfh.fmp.controller.product.ajax.AjaxProductStagesAction">
+			<result type="json">
+				<param name="includeProperties">
+					resultList.*,
+					pageSize, pageIndex, pageCount, recordCount
+				</param>
+				<param name="noCache">true</param>
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+		<action name="ajaxEditProductStages"
+			class="com.hzfh.fmp.controller.product.ajax.AjaxProductStagesAction"
+			method="edit">
+			<result type="json">
+				<param name="includeProperties">
+					errCode,errDesc
+				</param>
+				<param name="noCache">true</param>
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+	</package>
+
+    <package name="p2pProduct" extends="struts-login" namespace="/product/p2pProduct">
+        <action name="list" class="com.hzfh.fmp.controller.product.P2pProductAction">
+            <result>/product/p2pProductList.jsp</result>
+        </action>
+        <action name="financelist" class="com.hzfh.fmp.controller.product.P2pProductAction" method="financeExecute">
+            <result>/product/financeProductList.jsp</result>
+        </action>
+        <action name="edit" class="com.hzfh.fmp.controller.product.P2pProductAddAction">
+            <result>/product/p2pProductAdd.jsp</result>
+        </action>
+        <action name="detail" class="com.hzfh.fmp.controller.product.P2pProductAddAction" method="executeDetail">
+            <result>/product/p2pProductDetail.jsp</result>
+        </action>
+    </package>
+    <package name="ajaxP2pProduct" extends="struts-error" namespace="/product/p2pProduct">
+        <action name="ajaxSaveFilePath" class="com.hzfh.fmp.controller.product.ajax.AjaxP2pProductAction" method="uploadFile">
+            <result>/common/video.jsp</result>
+        </action>
+        <action name="ajaxListFile" class="com.hzfh.fmp.controller.product.ajax.AjaxP2pProductAction" method="getFileList">
+            <result>/common/video.jsp</result>
+        </action>
+
+        <action name="ajaxEditAmont" class="com.hzfh.fmp.controller.product.ajax.AjaxP2pProductAction" method="ajaxEditAmont">
+            <result type="json">
+                <param name="includeProperties">
+                    errCode,errDesc
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+        <action name="easyUIP2pProductList" class="com.hzfh.fmp.controller.product.easyUI.EasyUIP2pProductAction">
+            <result type="json">
+                <param name="includeProperties">
+                    rows.*,total
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+        <action name="ajaxEditP2pProduct" class="com.hzfh.fmp.controller.product.ajax.AjaxP2pProductAction" method="edit">
+            <result type="json">
+                <param name="includeProperties">
+                    errCode,errDesc,id
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+        <action name="ajaxGetP2pProduct" class="com.hzfh.fmp.controller.product.ajax.AjaxP2pProductAction" method="getInfoById">
+            <result type="json">
+                <param name="includeProperties">
+                    info.*,errCode,errDesc
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+        <action name="ajaxUpdateP2pProductStatus" class="com.hzfh.fmp.controller.product.ajax.AjaxP2pProductAction" method="updateStatus">
+            <result type="json">
+                <param name="includeProperties">
+                    errCode,errDesc
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+        <action name="ajaxPutP2pProductLogpPath" class="com.hzfh.fmp.controller.product.ajax.AjaxP2pProductAction" method="updateLogpPathById">
+            <result type="json">
+                <param name="includeProperties">
+                    info.*,errCode,errDesc
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+        <action name="ckeditorUpload" class="com.hzfh.fmp.controller.common.CkeditorUpload">
+
+        </action>
+    </package>
+    
+    
+    <package name="ajaxPartnerIssuerFollow" extends="struts-error" namespace="/product/partnerIssuerFollow">
+        <action name="ajaxListPartnerIssuerFollow" class="com.hzfh.fmp.controller.product.ajax.AjaxPartnerIssuerFollowAction">
+            <result type="json">
+                <param name="includeProperties">
+                    resultList.*,
+                    pageSize, pageIndex, pageCount, recordCount
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+        <action name="ajaxEditPartnerIssuerFollow" class="com.hzfh.fmp.controller.product.ajax.AjaxPartnerIssuerFollowAction" method="edit">
+            <result type="json">
+                <param name="includeProperties">
+                    errCode,errDesc
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+		<action name="ajaxGetPartnerIssuerFollow" class="com.hzfh.fmp.controller.product.ajax.AjaxPartnerIssuerFollowAction" method="getInfoById">
+            <result type="json">
+                <param name="includeProperties">
+                    info.*,errCode,errDesc
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+    </package>
+    
+    
+    
+</struts>

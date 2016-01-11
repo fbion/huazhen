@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!-- 客户端Hessian代理工厂Bean -->
+    <bean id="departmentService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+        <property name="serviceUrl"><!-- employeeservice.hzfh.com -->
+            <value>http://employeeservice.hzfh.com:8080/service-employee/department</value>
+        </property>
+        <property name="serviceInterface">
+            <value>com.hzfh.api.employee.service.DepartmentService</value>
+        </property>
+
+        <property name="overloadEnabled" value="true"></property>
+    </bean>
+    <bean id="employeeService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+        <property name="serviceUrl"><!-- employeeservice.hzfh.com -->
+            <value>http://employeeservice.hzfh.com:8080/service-employee/employee</value>
+        </property>
+        <property name="serviceInterface">
+            <value>com.hzfh.api.employee.service.EmployeeService</value>
+        </property>
+
+        <property name="overloadEnabled" value="true"></property>
+    </bean>
+
+</beans>

@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hzfh.service.employee.mapper.AttendanceApplicationMapper">
+	<resultMap type="com.hzfh.api.employee.model.AttendanceApplication" id="resultMapAttendanceApplication">
+		<result property="id" column="id"/>
+		<result property="empNo" column="emp_no"/>
+		<result property="companyNo" column="company_no"/>
+		<result property="deptNo" column="dept_no"/>
+		<result property="positionNo" column="position_no"/>
+		<result property="type" column="type"/>
+		<result property="remark" column="remark"/>
+		<result property="startTime" column="start_time" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
+		<result property="endTime" column="end_time" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
+		<result property="totalDay" column="total_day"/>
+		<result property="totalHour" column="total_hour"/>
+		<result property="reason" column="reason"/>
+		<result property="activitiNo" column="activiti_no"/>
+        <result property="workFlowStatus" column="activiti_status"/>
+		<result property="inUserNo" column="in_user_no"/>
+		<result property="inTime" column="in_time" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
+		<result property="editUserNo" column="edit_user_no"/>
+		<result property="editTime" column="edit_time" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
+		<result property="editComment" column="edit_comment"/>
+	</resultMap>
+	<sql id="Base_Column_List" >
+	 id,emp_no,company_no,dept_no,position_no,type,remark,start_time,end_time,total_day,total_hour,reason,activiti_no,in_user_no,in_time,edit_user_no,edit_time,edit_comment,activiti_status
+    </sql>
+	<select id="getList" resultMap="resultMapAttendanceApplication">
+		SELECT <include refid="Base_Column_List"/>
+		FROM attendance_application
+	</select>
+	<select id="getPagingList" resultMap="resultMapAttendanceApplication" parameterType="com.hzfh.api.employee.model.query.AttendanceApplicationCondition" statementType="STATEMENT">
+		SELECT <include refid="Base_Column_List"/>
+        FROM attendance_application where 1=1
+        <if test="byYear !=0">and  YEAR(start_time)=${byYear} </if>
+        <if test="byMonth !=0">and  MONTH(start_time)=${byMonth} </if>
+        <if test="byName !=0">and emp_no = ${byName}</if>
+        <if test="byType != -1">and type= ${byType}</if>
+        <if test="byDept !=0">and dept_no =${byDept}</if>
+        <if test="byStatus != -1">and activiti_status = ${byStatus}</if>
+        <if test="workMateString !=null"> and emp_no in (${workMateString})</if>
+        ORDER BY
+		<foreach item="item" collection="sortItemList" separator=",">
+			${item.sortFeild} ${item.sortType}
+		</foreach>
+		LIMIT ${startIndex},${pageSize}
+	</select>
+	<select id="getTotalCount" resultType="int" parameterType="com.hzfh.api.employee.model.query.AttendanceApplicationCondition" statementType="STATEMENT">
+		SELECT count(1) FROM attendance_application where 1=1
+        <if test="byYear !=0">and  YEAR(start_time)=${byYear} </if>
+        <if test="byMonth !=0">and  MONTH(start_time)=${byMonth} </if>
+        <if test="byType != -1">and type= ${byType}</if>
+        <if test="byDept !=0">and dept_no =${byDept}</if>
+        <if test="byName !=0">and emp_no = ${byName}</if>
+        <if test="byStatus != -1">and activiti_status =${byStatus}</if>
+        <if test="workMateString !=null"> and emp_no in (${workMateString})</if>
+	</select>
+	<select id="getInfo" resultMap="resultMapAttendanceApplication" parameterType="int">
+		SELECT <include refid="Base_Column_List"/> FROM attendance_application where id=#{id}
+	</select>
+	<insert id="add" parameterType="com.hzfh.api.employee.model.AttendanceApplication" useGeneratedKeys="true" keyProperty="id">
+		insert into attendance_application
+		(emp_no,company_no,dept_no,position_no,type,remark,start_time,end_time,total_day,total_hour,reason,activiti_no,in_user_no,in_time,edit_user_no,edit_time,edit_comment,activiti_status)
+		values
+		(#{empNo},#{companyNo},#{deptNo},#{positionNo},#{type},#{remark},#{startTime},#{endTime},#{totalDay},#{totalHour},#{reason},#{activitiNo},#{inUserNo},current_timestamp(),#{editUserNo},current_timestamp(),#{editComment},0)
+	</insert>
+	<update id="update" parameterType="com.hzfh.api.employee.model.AttendanceApplication">
+		update attendance_application set 
+		emp_no=#{empNo},company_no=#{companyNo},dept_no=#{deptNo},position_no=#{positionNo},type=#{type},remark=#{remark},start_time=#{startTime},end_time=#{endTime},total_day=#{totalDay},total_hour=#{totalHour},reason=#{reason},activiti_no=#{activitiNo},edit_user_no=#{editUserNo},edit_time=current_timestamp(),edit_comment=#{editComment}
+		where id=#{id}
+	</update>
+    <update id="updateStatusByActivitiNo" parameterType="String">
+        update attendance_application set
+        activiti_status = 1
+        where activiti_no=#{activitiNo}
+    </update>
+	<delete id="delete" parameterType="int">
+		delete from attendance_application where id = #{id}
+	</delete>
+
+    <select id="getListForExcel" resultMap="resultMapAttendanceApplication" parameterType="com.hzfh.api.employee.model.query.AttendanceApplicationCondition" statementType="STATEMENT">
+        SELECT <include refid="Base_Column_List"/>
+        FROM attendance_application where 1=1
+        <if test="byYear !=0">and  YEAR(start_time)=${byYear} </if>
+        <if test="byMonth !=0">and  MONTH(start_time)=${byMonth} </if>
+        <if test="byType != -1">and type= ${byType}</if>
+        <if test="byDept !=0">and dept_no =${byDept}</if>
+        <if test="byName !=0">and emp_no = ${byName}</if>
+        <if test="byStatus != -1">and activiti_status =${byStatus}</if>
+        <if test="workMateString !=null"> and emp_no in (${workMateString})</if>
+        ORDER BY
+        <foreach item="item" collection="sortItemList" separator=",">
+            ${item.sortFeild} ${item.sortType}
+        </foreach>
+    </select>
+</mapper>

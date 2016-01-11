@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hzfh.service.report.mapper.PaymentReportMapper">
+    <resultMap type="com.hzfh.api.report.model.PaymentReport" id="resultMapPaymentReport">
+        <result property="id" column="id"/>
+        <result property="payDate" column="pay_date" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
+        <result property="submitTime" column="submit_time" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
+        <result property="activitiNo" column="activiti_no"/>
+        <result property="inTime" column="in_time" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
+        <result property="inUserNo" column="in_user_no"/>
+        <result property="activitiStatus" column="activiti_status"/>
+        <result property="type" column="type"/>
+    </resultMap>
+    <select id="getList" resultMap="resultMapPaymentReport">
+        SELECT id,pay_date,submit_time,activiti_no,in_time,in_user_no,activiti_status,type
+        FROM payment_report
+    </select>
+    <select id="getPagingList" resultMap="resultMapPaymentReport" parameterType="com.hzfh.api.report.model.query.PaymentReportCondition" statementType="STATEMENT">
+        SELECT id,pay_date,submit_time,activiti_no,in_time,in_user_no,activiti_status,type FROM payment_report where 1=1
+        ORDER BY
+        <foreach item="item" collection="sortItemList" separator=",">
+            ${item.sortFeild} ${item.sortType}
+        </foreach>
+        LIMIT ${startIndex},${pageSize}
+    </select>
+    <select id="getTotalCount" resultType="int" parameterType="com.hzfh.api.report.model.query.PaymentReportCondition" statementType="STATEMENT">
+        SELECT count(1) FROM payment_report where 1=1
+    </select>
+    <select id="getInfo" resultMap="resultMapPaymentReport" parameterType="int">
+        SELECT id,pay_date,submit_time,activiti_no,in_time,in_user_no,activiti_status,type FROM payment_report where id=#{id}
+    </select>
+    <insert id="add" parameterType="com.hzfh.api.report.model.PaymentReport" useGeneratedKeys="true" keyProperty="id">
+        insert into payment_report
+        (pay_date,submit_time,activiti_no,in_time,in_user_no,activiti_status,type)
+        values
+        (#{payDate},#{submitTime},#{activitiNo},current_timestamp(),#{inUserNo},#{activitiStatus},#{type})
+    </insert>
+    <update id="update" parameterType="com.hzfh.api.report.model.PaymentReport">
+        update payment_report set
+        pay_date=#{payDate},submit_time=#{submitTime},activiti_no=#{activitiNo},activiti_status=#{activitiStatus},type=#{type}
+        where id=#{id}
+    </update>
+    <delete id="delete" parameterType="int">
+        delete from payment_report where id = #{id}
+    </delete>
+    <select id="getInfoByActivitiNo" resultMap="resultMapPaymentReport" parameterType="String">
+        SELECT id,pay_date,submit_time,activiti_no,in_time,in_user_no,activiti_status,type FROM payment_report where activiti_no= ${activitiNo}
+    </select>
+</mapper>

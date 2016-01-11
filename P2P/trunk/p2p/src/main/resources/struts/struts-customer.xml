@@ -1,0 +1,845 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+        "http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+	<package name="customer" namespace="/customer" extends="default">
+		<action name="login" class="com.hzfh.p2p.controller.customer.LoginAction">
+			<result>/customer/login.jsp</result>
+		</action>
+		<action name="logout" class="com.hzfh.p2p.controller.customer.LogoutAction">
+
+		</action>
+		<action name="register" class="com.hzfh.p2p.controller.customer.RegisterAction">
+			<result>/customer/register.jsp</result>
+		</action>
+		<action name="registerSuccess"
+			class="com.hzfh.p2p.controller.customer.RegisterSuccessAction">
+			<result>/customer/registerSuccess.jsp</result>
+		</action>
+		<action name="emailValidation"
+			class="com.hzfh.p2p.controller.customer.EmailValidationAction">
+			<result>/customer/emailValidation.jsp</result>
+		</action>
+		<action name="myInvestment"
+			class="com.hzfh.p2p.controller.customer.InvestmentAction">
+			<result>/customer/myInvestment.jsp</result>
+			<interceptor-ref name="loginDefault" />
+		</action>
+		<action name="editPassword"
+			class="com.hzfh.p2p.controller.customer.EditPasswordAction">
+			<result>/customer/editPassword.jsp</result>
+		</action>
+		<action name="personalInfo"
+			class="com.hzfh.p2p.controller.customer.PersonalInfoAction">
+			<result>/customer/personalInfo.jsp</result>
+		</action>
+		<action name="myReservation"
+			class="com.hzfh.p2p.controller.customer.P2pSubscribeAction">
+			<result>/customer/myReservation.jsp</result>
+			<interceptor-ref name="loginDefault" />
+		</action>
+		<action name="forgetPassword"
+			class="com.hzfh.p2p.controller.customer.ForgetPasswordAction">
+			<result>/customer/forgetPassword.jsp</result>
+		</action>
+		<action name="chooseWayPassword"
+			class="com.hzfh.p2p.controller.customer.ForgetPassword1Action">
+			<result>/customer/forgetPassword1.jsp</result>
+			<result name="forgetPasswordError">/customer/forgetPasswordError.jsp</result>
+		</action>
+		<action name="byEmailPassword"
+			class="com.hzfh.p2p.controller.customer.ForgetPassword4Action">
+			<result>/customer/forgetPassword4.jsp</result>
+			<result name="forgetPasswordError">/customer/forgetPasswordError.jsp</result>
+		</action>
+		<action name="byCellphonePassword"
+			class="com.hzfh.p2p.controller.customer.ForgetPassword2Action">
+			<result>/customer/forgetPassword2.jsp</result>
+			<result name="forgetPasswordError">/customer/forgetPasswordError.jsp</result>
+		</action>
+		<action name="resetPassword"
+			class="com.hzfh.p2p.controller.customer.ForgetPassword3Action">
+			<result>/customer/forgetPassword3.jsp</result>
+			<result name="forgetPasswordError">/customer/forgetPasswordError.jsp</result>
+		</action>
+		<action name="resetSuccess"
+			class="com.hzfh.p2p.controller.customer.ForgetPassword5Action">
+			<result>/customer/forgetPassword5.jsp</result>
+		</action>
+		<action name="educationt"
+			class="com.hzfh.p2p.controller.customer.EducationtAction">
+			<result>/customer/investorEducationt.jsp</result>
+		</action>
+		<action name="account" class="com.hzfh.p2p.controller.customer.AccountAction">
+			<result>/customer/account.jsp</result>
+			<interceptor-ref name="loginDefault" />
+		</action>
+		<action name="paymentAccountSecurity"
+			class="com.hzfh.p2p.controller.customer.PaymentAccountSecurityAction">
+			<result>/customer/paymentAccountSecurity.jsp</result>
+			<interceptor-ref name="loginDefault" />
+		</action>
+		<action name="paymentMoneyRecharge"
+			class="com.hzfh.p2p.controller.customer.PaymentMoneyRechargeAction">
+			<result>/customer/myPaymentMoneyRechargeList.jsp</result>
+			<interceptor-ref name="loginDefault" />
+		</action>
+		<action name="paymentMoneyWithdraw"
+			class="com.hzfh.p2p.controller.customer.PaymentMoneyWithdrawAction">
+			<result>/customer/myPaymentMoneyWithdrawList.jsp</result>
+			<interceptor-ref name="loginDefault" />
+		</action>
+		<action name="moneyDetail"
+			class="com.hzfh.p2p.controller.customer.MoneyDetailAction">
+			<result>/customer/moneyDetail.jsp</result>
+			<interceptor-ref name="loginDefault" />
+		</action>
+		<action name="bankCard"
+			class="com.hzfh.p2p.controller.customer.BankCardAction">
+			<result>/customer/bankCard.jsp</result>
+			<interceptor-ref name="loginDefault" />
+		</action>
+		<action name="myCoupons"
+			class="com.hzfh.p2p.controller.customer.MyCouponsAction">
+			<result>/customer/myCoupons.jsp</result>
+			<interceptor-ref name="loginDefault" />
+		</action>
+		<action name="myIntegral"
+			class="com.hzfh.p2p.controller.customer.MyIntegralAction">
+			<result>/customer/myIntegral.jsp</result>
+			<interceptor-ref name="loginDefault" />
+		</action>
+		<action name="myReward"
+			class="com.hzfh.p2p.controller.customer.MyRewardAction">
+			<result>/customer/myReward.jsp</result>
+			<interceptor-ref name="loginDefault" />
+		</action>
+		<action name="myInfo"
+			class="com.hzfh.p2p.controller.customer.MyInfoAction">
+			<result>/customer/myInfo.jsp</result>
+			<interceptor-ref name="loginDefault" />
+		</action>
+		<action name="helpCenter"
+			class="com.hzfh.p2p.controller.customer.HelpCenterAction">
+			<result>/customer/helpCenter.jsp</result>
+		</action>
+		<action name="knowledgeForum"
+			class="com.hzfh.p2p.controller.customer.KnowledgeForumAction">
+			<result>/customer/knowledgeForum.jsp</result>
+		</action>
+		<action name="popularize"
+			class="com.hzfh.p2p.controller.customer.PopularizeAction">
+			<result>/customer/popularize.jsp</result>
+		</action>
+		<action name="reservationHelp"
+			class="com.hzfh.p2p.controller.customer.ReservationHelpAction">
+			<result>/customer/reservationHelp.jsp</result>
+		</action>
+		<action name="financing"
+			class="com.hzfh.p2p.controller.customer.FinancingAction">
+			<result>/customer/financing.jsp</result>
+		</action>
+		<action name="accountCentral"
+			class="com.hzfh.p2p.controller.customer.AccountCentralAction">
+			<result>/customer/accountCentral.jsp</result>
+		</action>
+		<action name="noviceArea"
+			class="com.hzfh.p2p.controller.customer.NoviceAreaAction">
+			<result>/customer/noviceArea.jsp</result>
+		</action>
+		<!-- aboutUs -->
+		<action name="enterpriseCulture" class="com.hzfh.p2p.controller.customer.EnterpriseCultureAction">
+			<result>/customer/enterpriseCulture.jsp</result>
+		</action>
+		<action name="joinUs" class="com.hzfh.p2p.controller.customer.JoinUsAction">
+			<result>/customer/joinUs.jsp</result>
+		</action>
+		<action name="joinUsContent" class="com.hzfh.p2p.controller.customer.JoinUsContentAction">
+			<result name="joinUsContent">/customer/joinUsContent.jsp</result>
+			<result name="joinUsContent1">/customer/joinUsContent1.jsp</result>
+			<result name="joinUsContent2">/customer/joinUsContent2.jsp</result>
+			<result name="joinUsContent3">/customer/joinUsContent3.jsp</result>
+			<result name="joinUsContent4">/customer/joinUsContent4.jsp</result>
+			<result name="joinUsContent5">/customer/joinUsContent5.jsp</result>
+			<result name="joinUsContent6">/customer/joinUsContent6.jsp</result>
+			<result name="joinUsContent7">/customer/joinUsContent7.jsp</result>
+			<result name="joinUsContent8">/customer/joinUsContent8.jsp</result>
+			<result name="joinUsContent9">/customer/joinUsContent9.jsp</result>
+			<result name="joinUsContent10">/customer/joinUsContent10.jsp</result>
+			<result name="joinUsContent11">/customer/joinUsContent11.jsp</result>
+		</action>
+		<action name="knowledgeForumContent" class="com.hzfh.p2p.controller.customer.KnowledgeForumContentAction">
+			<result name="knowForum_cont1">/customer/knowForum_cont1.jsp</result>
+			<result name="knowForum_cont2">/customer/knowForum_cont2.jsp</result>
+			<result name="knowForum_cont3">/customer/knowForum_cont3.jsp</result>
+			<result name="knowForum_cont4">/customer/knowForum_cont4.jsp</result>
+			<result name="knowForum_cont5">/customer/knowForum_cont5.jsp</result>
+			<result name="knowForum_cont6">/customer/knowForum_cont6.jsp</result>
+			<result name="knowForum_cont7">/customer/knowForum_cont7.jsp</result>
+			<result name="knowForum_cont8">/customer/knowForum_cont8.jsp</result>
+			<result name="knowForum_cont9">/customer/knowForum_cont9.jsp</result>
+			<result name="knowForum_cont10">/customer/knowForum_cont10.jsp</result>
+			<result name="knowForum_cont11">/customer/knowForum_cont11.jsp</result>
+		</action>
+		<action name="mediaReports" class="com.hzfh.p2p.controller.customer.MediaReportsAction">
+			<result>/customer/mediaReports.jsp</result>
+		</action>
+		<action name="aboutCompany" class="com.hzfh.p2p.controller.customer.AboutCompanyAction">
+			<result>/customer/aboutCompany.jsp</result>
+		</action>
+		<action name="contactUs" class="com.hzfh.p2p.controller.customer.ContactUsAction">
+			<result>/customer/contactUs.jsp</result>
+		</action>
+	</package>
+	<package name="ajaxCustomerRegister" extends="json-default,default" namespace="/customer/register">
+		<action name="ajaxRegister" class="com.hzfh.p2p.controller.customer.ajax.AjaxRegisterAction">
+			<result type="json">
+				<param name="includeProperties">
+					message.*
+				</param>
+				<param name="noCache">true</param>
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+		<action name="ajaxRegEmail"
+			class="com.hzfh.p2p.controller.customer.ajax.AjaxRegisterAction"
+			method="regEmail">
+			<result type="json">
+				<param name="includeProperties">
+					message.*,msgType.*,msgDescribe.*
+				</param>
+				<param name="noCache">true</param>
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+		<action name="ajaxRemindEmail"
+			class="com.hzfh.p2p.controller.customer.ajax.AjaxRegisterAction"
+			method="remindEmail">
+			<result type="json">
+				<param name="includeProperties">
+					message.*,msgType.*,msgDescribe.*
+				</param>
+				<param name="noCache">true</param>
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+		<!-- <action name="ajaxReSendEmail"
+			class="com.hzfh.p2p.controller.customer.ajax.AjaxRegisterAction"
+			method="reSendEmail">
+			<result type="json">
+				<param name="includeProperties">
+					message.*,msgType.*,msgDescribe.*
+				</param>
+				<param name="noCache">true</param>
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action> -->
+		<action name="ajaxCheckUserExist"
+			class="com.hzfh.p2p.controller.customer.ajax.AjaxRegisterAction"
+			method="checkUserName">
+			<result type="json">
+				<param name="includeProperties">
+					message.*,msgType.*,msgDescribe.*
+				</param>
+				<param name="noCache">true</param>
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+		<action name="ajaxCheckEmailExist"
+			class="com.hzfh.p2p.controller.customer.ajax.AjaxRegisterAction"
+			method="checkEmail">
+			<result type="json">
+				<param name="includeProperties">
+					message.*
+				</param>
+				<param name="noCache">true</param>
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+		<action name="ajaxChecktelephoneExist"
+			class="com.hzfh.p2p.controller.customer.ajax.AjaxRegisterAction"
+			method="checkCellphone">
+			<result type="json">
+				<param name="includeProperties">
+					message.*
+				</param>
+				<param name="noCache">true</param>
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+		<action name="ajaxCheckteinvitelephoneExist"
+			class="com.hzfh.p2p.controller.customer.ajax.AjaxRegisterAction"
+			method="checkInviteCellphone">
+			<result type="json">
+				<param name="includeProperties">
+					message.*
+				</param>
+				<param name="noCache">true</param>
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+	</package>
+
+	<package name="ajaxCustomerLogin" extends="json-default,default"
+		namespace="/customer/login">
+		<action name="ajaxLogin"
+			class="com.hzfh.p2p.controller.customer.ajax.AjaxLoginAction">
+			<result type="json">
+				<param name="includeProperties">
+					message.*
+				</param>
+				<param name="noCache">true</param>
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+		<action name="loginWithCellphone" class="com.hzfh.p2p.controller.customer.ajax.AjaxLoginAction" method="loginWithCellphone">
+			<result type="json">
+				<param name="includeProperties">
+					message.*
+				</param>
+				<param name="noCache">true</param>
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+		<action name="qqAuthorizattion" class="com.hzfh.p2p.controller.customer.ajax.AjaxLoginAction" method="qqAuthorizattion">
+			<!-- QQ联合登录 -->
+			<result type="json">
+				<param name="includeProperties">
+					qqLoginUrl
+				</param>
+				<param name="noCache">true</param>
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+		<action name="qqLoginCallBack" class="com.hzfh.p2p.controller.customer.ajax.AjaxLoginAction" method="qqLoginCallBack">
+			<!-- QQ联合登录callback -->
+			<result type="redirect">/index</result>
+		</action>
+		<action name="wbLoginCallBack" class="com.hzfh.p2p.controller.customer.ajax.AjaxLoginAction" method="wbLoginCallBack">
+			<!-- 微博联合登录callback -->
+			<result type="redirect">/index</result>
+		</action>
+	</package>
+
+	<package name="ajaxEditPassword" extends="json-default,default"
+		namespace="/customer/editPwd">
+		<action name="ajaxSetPwd"
+			class="com.hzfh.p2p.controller.customer.ajax.AjaxEditPwdAction"
+			method="setPassword">
+			<result type="json">
+				<param name="includeProperties">
+					message.*
+				</param>
+				<param name="noCache">true</param>
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+		
+		<action name="ajaxEditPwd"
+			class="com.hzfh.p2p.controller.customer.ajax.AjaxEditPwdAction">
+			<result type="json">
+				<param name="includeProperties">
+					message.*
+				</param>
+				<param name="noCache">true</param>
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+
+		<action name="ajaxCheckOldPwd"
+			class="com.hzfh.p2p.controller.customer.ajax.AjaxEditPwdAction"
+			method="checkOldPwd">
+			<result type="json">
+				<param name="includeProperties">
+					message.*
+				</param>
+				<param name="noCache">true</param>
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+	</package>
+
+
+	<package name="ajaxReservation" extends="json-default,default"
+		namespace="/customer/reservation">
+		<action name="reservation"
+			class="com.hzfh.p2p.controller.customer.ajax.AjaxReservationAction">
+			<result>/customer/reservation.jsp</result>
+		</action>
+	</package>
+	<package name="ajaxP2pSubscribe" extends="json-default,default"
+		namespace="/customer/p2pSubscribe">
+		<action name="ajaxp2pSubscribe"
+			class="com.hzfh.p2p.controller.customer.ajax.AjaxP2pSubscribeAction">
+			<result type="json">
+				<param name="includeProperties">
+					message.*
+				</param>
+				<param name="noCache">true</param>
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+		<action name="ajaxp2pSubscribeWithoutLogin"
+			class="com.hzfh.p2p.controller.customer.ajax.AjaxP2pSubscribeAction"
+			method="subscribeWithoutLogin">
+			<result type="json">
+				<param name="includeProperties">
+					message.*
+				</param>
+				<param name="noCache">true</param>
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+	</package>
+	<package name="ajaxInvestment" extends="json-default,default"
+		namespace="/customer/investment">
+		<action name="investment"
+			class="com.hzfh.p2p.controller.customer.ajax.AjaxInvestmentAction">
+			<result>/customer/investment.jsp</result>
+		</action>
+	</package>
+	<package name="ajaxTransactionRecord" extends="json-default,default"
+		namespace="/customer/account">
+		<action name="ajaxTransactionRecord"
+			class="com.hzfh.p2p.controller.customer.ajax.AjaxTransactionRecordAction">
+			<result>/customer/transactionRecord.jsp</result>
+		</action>
+	</package>
+	<package name="ajaxPersonalInfo" extends="json-default,default"
+		namespace="/customer/personalInfo">
+		<action name="ajaxPersonalInfo"
+			class="com.hzfh.p2p.controller.customer.ajax.AjaxP2pPersonalInfoAction">
+			<result type="json">
+				<param name="includeProperties">
+					paymentData.*,message.*
+				</param>
+				<param name="noCache">true</param>
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+		<action name="ajaxUpdatePwd"
+			class="com.hzfh.p2p.controller.customer.ajax.AjaxP2pPersonalInfoAction"
+			method="updatePwd">
+			<result type="json">
+				<param name="includeProperties">
+					paymentData.*, message.*
+				</param>
+				<param name="noCache">true</param>
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+		<action name="ajaxUpdateMoblie"
+			class="com.hzfh.p2p.controller.customer.ajax.AjaxP2pPersonalInfoAction"
+			method="updateCellphone">
+			<result type="json">
+				<param name="includeProperties">
+					paymentData.*, message.*
+				</param>
+				<param name="noCache">true</param>
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+		<action name="ajaxUpdateTelephone"
+			class="com.hzfh.p2p.controller.customer.ajax.AjaxP2pPersonalInfoAction"
+			method="updateTelephone">
+			<result type="json">
+				<param name="includeProperties">
+					message.*
+				</param>
+				<param name="noCache">true</param>
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+		<action name="ajaxUpdateInfo"
+			class="com.hzfh.p2p.controller.customer.ajax.AjaxP2pPersonalInfoAction"
+			method="updateInfo">
+			<result type="json">
+				<param name="includeProperties">
+					paymentData.*, message.*
+				</param>
+				<param name="noCache">true</param>
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+		<action name="ajaxGetP2pCustomerInfo"
+			class="com.hzfh.p2p.controller.customer.ajax.AjaxP2pPersonalInfoAction"
+			method="getP2pCustomerInfo">
+			<result type="json">
+				<param name="includeProperties">
+					p2pCustomer.*
+				</param>
+				<param name="noCache">true</param>
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+
+	</package>
+	<package name="ajaxSendFindPwdEmail" extends="json-default,default" namespace="/customer/forgetPassword">
+		<action name="ajaxSendFindPwdEmail" class="com.hzfh.p2p.controller.customer.ajax.AjaxForgetPasswordAction" method="sendMail">
+			<result type="json">
+				<param name="includeProperties">
+					message.*
+				</param>
+				<param name="noCache">true</param>
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+		<action name="ajaxCheckEmail" class="com.hzfh.p2p.controller.customer.ajax.AjaxForgetPasswordAction" method="checkEmail">
+			<result type="json">
+				<param name="includeProperties">
+					message.*,cipherTextUrl,cn,ci,t
+				</param>
+				<param name="noCache">true</param>
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+		<action name="ajaxResetPassword"
+			class="com.hzfh.p2p.controller.customer.ajax.AjaxForgetPasswordAction"
+			method="resetPassword">
+			<result type="json">
+				<param name="includeProperties">
+					message.*
+				</param>
+				<param name="noCache">true</param>
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+		<action name="ajaxCheckCustomerInfoExist"
+			class="com.hzfh.p2p.controller.customer.ajax.AjaxForgetPasswordAction"
+			method="checkCustomerInfoExist">
+			<result type="json">
+				<param name="includeProperties">
+					message.*,cn,ci,t
+				</param>
+				<param name="noCache">true</param>
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+		<action name="AjaxGetResetPasswordUrl"
+			class="com.hzfh.p2p.controller.customer.ajax.AjaxForgetPasswordAction"
+			method="getResetPasswordUrl">
+			<result type="json">
+				<param name="includeProperties">
+					message.*,cipherTextUrl
+				</param>
+				<param name="noCache">true</param>
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+		<action name="AjaxchooseWayPassword"
+			class="com.hzfh.p2p.controller.customer.ajax.AjaxForgetPasswordAction"
+			method="chooseWayPassword">
+			<result type="json">
+				<param name="includeProperties">
+					message.*,cipherTextUrl
+				</param>
+				<param name="noCache">true</param>
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+	</package>
+
+	<package name="ajaxAccount" extends="json-default,default" namespace="/customer/account">
+		<!-- <action name="account"class="com.hzfh.p2p.controller.customer.ajax.AjaxAccountAction">
+			<result>/customer/account.jsp</result>
+		</action> -->
+		<action name="ajaxInvestmentIncome" class="com.hzfh.p2p.controller.customer.ajax.AjaxAccountAction" method="getInvestmentIncome">
+			<result type="json">
+				<param name="includeProperties">
+					income,unIncome
+				</param>
+				<param name="noCache">true</param>
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+		
+		<action name="ajaxGetBalanceInfo" class="com.hzfh.p2p.controller.customer.ajax.AjaxAccountAction" method="getBalanceInfo">
+			<result type="json">
+				<param name="includeProperties">
+					balance,availableAmount,freezeAmount
+				</param>
+				<param name="noCache">true</param>
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+	</package>
+    
+	
+
+	<package name="ajaxPaymentMoneyRecharge" extends="json-default,default"
+		namespace="/customer/paymentMoneyRecharge">
+		<action name="ajaxListPaymentMoneyRecharge"
+			class="com.hzfh.p2p.controller.customer.ajax.AjaxPaymentMoneyRechargeAction">
+			<result>/customer/paymentMoneyRechargeList.jsp</result>
+		</action>
+		<action name="ajaxGetPaymentMoneyRecharge"
+			class="com.hzfh.p2p.controller.customer.ajax.AjaxPaymentMoneyRechargeAction"
+			method="getInfoById">
+			<result type="json">
+				<param name="includeProperties">
+					info.*,errCode,errDesc
+				</param>
+				<param name="noCache">true</param>
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+		<action name="ajaxPaymentRecharge"
+			class="com.hzfh.p2p.controller.customer.ajax.AjaxPaymentMoneyRechargeAction"
+			method="paymentMoneyRecharge">
+			<result type="json">
+				<param name="includeProperties">
+					paymentData.*,errCode,errDesc
+				</param>
+				<param name="noCache">true</param>
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+	</package>
+
+	<package name="ajaxPaymentMoneyWithdraw" extends="json-default,default"
+		namespace="/customer/paymentMoneyWithdraw">
+		<action name="ajaxListPaymentMoneyWithdraw"
+			class="com.hzfh.p2p.controller.customer.ajax.AjaxPaymentMoneyWithdrawAction">
+			<result>/customer/paymentMoneyWithdrawList.jsp</result>
+		</action>
+		<action name="ajaxGetPaymentMoneyWithdraw"
+			class="com.hzfh.p2p.controller.customer.ajax.AjaxPaymentMoneyWithdrawAction"
+			method="getInfoById">
+			<result type="json">
+				<param name="includeProperties">
+					info.*,errCode,errDesc
+				</param>
+				<param name="noCache">true</param>
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+		<action name="ajaxPaymentWithdraw"
+			class="com.hzfh.p2p.controller.customer.ajax.AjaxPaymentMoneyWithdrawAction"
+			method="paymentMoneyWithdraw">
+			<result type="json">
+				<param name="includeProperties">
+					paymentData.*,errCode,errDesc
+				</param>
+				<param name="noCache">true</param>
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+	</package>
+
+	<package name="ajaxMoneyDetail" extends="json-default,default"
+		namespace="/customer/moneyDetail">
+		<action name="ajaxMoneyDetail"
+			class="com.hzfh.p2p.controller.customer.ajax.AjaxMoneyDetailAction" method="getMoneyDetailCondition">
+			<result>/customer/moneyDetailCondition.jsp</result>
+		</action>
+		<action name="ajaxMoneyDetailInner"
+			class="com.hzfh.p2p.controller.customer.ajax.AjaxMoneyDetailAction">
+			<result>/customer/moneyDetailInner.jsp</result>
+		</action>
+	</package>
+
+	<package name="ajaxBindBankCard" extends="json-default,default"
+		namespace="/customer/cancel">
+		<action name="ajaxBindBankCard"
+			class="com.hzfh.p2p.controller.payment.ajax.AjaxPaymentRindBankCard">
+			<result type="json">
+				<param name="includeProperties">
+					paymentData.*,message.*,realnameStatus
+				</param>
+				<param name="noCache">true</param>
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+		<!-- <action name="ajaxCheckRealnameAuthentication" class="com.hzfh.p2p.controller.payment.ajax.AjaxPaymentRindBankCard" method="checkRealnameAuthentication">
+			<result type="json">
+				<param name="includeProperties">
+					realnameStatus
+				</param>
+				<param name="noCache">true</param>
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action> -->
+	</package>
+	<package name="ajaxUnBindBankCard" extends="json-default,default"
+		namespace="/customer/cancel">
+		<action name="ajaxUnBindBankCard"
+			class="com.hzfh.p2p.controller.payment.ajax.AjaxPaymentUnRindBankCard">
+			<result type="json">
+				<param name="includeProperties">
+					paymentData.*,message.*
+				</param>
+				<param name="noCache">true</param>
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+	</package>
+
+
+	<package name="paymentRegister" extends="default" namespace="/customer">
+		<action name="registerCallback"
+			class="com.hzfh.p2p.controller.payment.callback.RegisterCallbackAction">
+			<result type="redirectAction">
+			<param name="actionName">paymentAccountSecurity</param>
+			<param name="rns">${rns}</param>
+			</result>
+		</action>
+		<action name="registerNotify" class="com.hzfh.p2p.controller.payment.notify.RegisterNotifyAction"></action>
+	</package>
+
+	<package name="bindBankCard" extends="json-default,default"
+		namespace="/customer">
+		<action name="bindBankCardCallback"
+			class="com.hzfh.p2p.controller.payment.callback.BindBankCardCallbackAction">
+			<result type="redirectAction">paymentAccountSecurity</result>
+		</action>
+		<action name="bindBankCardNotify" class="com.hzfh.p2p.controller.payment.notify.BindBankCardNotifyAction"></action>
+	</package>
+	<package name="tender" extends="json-default,default"
+		namespace="/product">
+		<action name="tenderCallback"
+			class="com.hzfh.p2p.controller.payment.callback.TenderCallBackAction">
+			<result>/product/paymentComplete.jsp</result>
+		</action>
+		<action name="tenderNotify" class="com.hzfh.p2p.controller.payment.notify.TenderNotifyAction"></action>
+	</package>
+	<package name="unBindBankCard" extends="json-default,default"
+		namespace="/customer">
+		<action name="unBindBankCardCallback"
+			class="com.hzfh.p2p.controller.payment.callback.UnbindBankCardCallbackAction">
+			<result type="redirectAction">paymentAccountSecurity</result>
+		</action>
+	</package>
+	<package name="paymentResetPwd" extends="json-default,default"
+		namespace="/customer">
+		<action name="resetPwdCallback"
+			class="com.hzfh.p2p.controller.payment.callback.ResetPwdCallbackAction">
+			<result type="redirectAction">
+			<param name="actionName">paymentAccountSecurity</param>
+			<param name="rps">${rps}</param>
+			</result>
+		</action>
+		<action name="resetPwdNotify" class="com.hzfh.p2p.controller.payment.notify.ResetPwdNotifyAction"></action>
+	</package>
+	<package name="paymentResetMobile" extends="json-default,default" namespace="/customer">
+		<action name="resetMobileCallback" class="com.hzfh.p2p.controller.payment.callback.ResetMobileCallbackAction">
+			<result type="redirectAction">
+			<param name="actionName">paymentAccountSecurity</param>
+			<param name="status">${status}</param>
+			</result>
+			<!-- <interceptor-ref name="loginDefault" /> /paymentResetMobile -->
+		</action>
+		<action name="resetMobileNotify" class="com.hzfh.p2p.controller.payment.notify.ResetMobileNotifyAction"></action>
+	</package>
+	<package name="paymentRecharge" extends="json-default,default"
+		namespace="/customer/paymentRecharge">
+		<action name="rechargeCallback"
+			class="com.hzfh.p2p.controller.payment.callback.RechargeCallbackAction">
+			<result>/customer/rechargeSuccess.jsp</result>
+		</action>
+		<action name="rechargeNotify" class="com.hzfh.p2p.controller.payment.notify.RechargeNotifyAction"></action>
+	</package>
+	<package name="paymentWithdraw" extends="json-default,default"
+		namespace="/customer/paymentWithdraw">
+		<action name="withdrawCallback"
+			class="com.hzfh.p2p.controller.payment.callback.WithdrawCallbackAction">
+			<result>/customer/withdrawSuccess.jsp</result>
+		</action>
+		<action name="withdrawNotify" class="com.hzfh.p2p.controller.payment.notify.WithdrawNotifyAction"></action>
+	</package>
+	
+	<!-- aboutUs -->
+	<!-- <package name="aboutUs" extends="json-default,default" namespace="/customer/aboutUs">
+		<action name="loadAboutUs" class="com.hzfh.p2p.controller.customer.AboutUsAction">
+			<result>/customer/aboutUs.jsp</result>
+		</action>
+	</package> -->
+	
+	<package name="ajaxPaymentAccountSecurity" namespace="/customer/paymentAccountSecurity" extends="json-default,default">
+		<action name="ajaxCheckOldEmailExist" class="com.hzfh.p2p.controller.customer.ajax.AjaxPaymentAccountSecurityAction" method="checkOldEmail">
+			<result type="json">
+				<param name="includeProperties">
+					message.*
+				</param>
+				<param name="noCache">true</param>
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+		<action name="ajaxCheckNewEmailExist" class="com.hzfh.p2p.controller.customer.ajax.AjaxPaymentAccountSecurityAction" method="checkNewEmail">
+			<result type="json">
+				<param name="includeProperties">
+					message.*
+				</param>
+				<param name="noCache">true</param>
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+		<action name="ajaxEditEmail" class="com.hzfh.p2p.controller.customer.ajax.AjaxPaymentAccountSecurityAction">
+			<result type="json">
+				<param name="includeProperties">
+					message.*,showEmail
+				</param>
+				<param name="noCache">true</param>
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+		<!-- <action name="ajaxCancleEmailExamine" class="com.hzfh.p2p.controller.customer.ajax.AjaxPaymentAccountSecurityAction" method="cancleEmailExamine">
+			<result type="json">
+				<param name="includeProperties">
+					message.*
+				</param>
+				<param name="noCache">true</param>
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+		<action name="ajaxupdateExamineEmail" class="com.hzfh.p2p.controller.customer.ajax.AjaxPaymentAccountSecurityAction" method="updateExamineEmail">
+			<result type="json">
+				<param name="includeProperties">
+					message.*
+				</param>
+				<param name="noCache">true</param>
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action> -->
+		
+	</package>
+	<package name="Store" extends="default" namespace="/customer/store">
+		<action name="ajaxGetStore" class="com.hzfh.p2p.controller.customer.ajax.AjaxStoreAction" method="getInfoById">
+			<result>/customer/storeDetail.jsp</result>
+		</action>
+		<action name="storeList" class="com.hzfh.p2p.controller.customer.StoreAction">
+			<result>/customer/storeList.jsp</result>
+		</action>
+	</package>
+	
+	<package name="p2pActivities" extends="default" namespace="/customer">
+		<action name="myInvite" class="com.hzfh.p2p.controller.customer.InviteAction" method="getInviteById">
+			<result>/customer/myInvite.jsp</result>
+			<interceptor-ref name="loginDefault" />
+		</action>
+	</package>
+	
+	<package name="ajaxP2pActivities" extends="json-default,default" namespace="/customer">
+		<action name="getInviteInfo"	class="com.hzfh.p2p.controller.customer.ajax.AjaxInviteAction" method="getInviteInfo">
+			<result>/customer/invite.jsp</result>
+		</action>
+	
+		<action name="addSahreActivity" class="com.hzfh.p2p.controller.customer.ajax.AjaxInviteAction" method="addSahreActivity">
+		<result type="json">
+			<param name="includeProperties">
+				message.*
+			</param>
+			<param name="noCache">true</param>
+			<param name="ignoreHierarchy">false</param>
+		</result>
+	   </action>
+	   
+	   
+	</package>
+
+	
+
+	
+</struts>

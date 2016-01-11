@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+    <comment>邮件配置</comment>
+    <entry key="mail.host"><![CDATA[mail.bestinvestor.com.cn]]></entry>
+    <entry key="mail.subscribe.receiver"><![CDATA[huj@bestinvestor.com.cn]]></entry>
+    <entry key="mail.user"><![CDATA[administrator]]></entry>
+    <entry key="mail.pass"><![CDATA[huazhen@123]]></entry>
+    <!-- <entry key="mail.postfix"><![CDATA[hzjkjt.cn]]></entry> -->
+    <entry key="mail.postfix"><![CDATA[bestinvestor.com.cn]]></entry>
+    <entry key="mail.sender.name"><![CDATA[华镇社区金融]]></entry>
+    <entry key="mail.activate.subject"><![CDATA[邮箱认证]]></entry>
+    <entry key="mail.activate.body"><![CDATA[感谢您进入邮箱激活认证！
+
+<p style="text-indent:30px">请点击此链接激活并绑定：
+	
+	<b>%s</b><br />
+	
+	此链接%s天内有效
+	请妥善保留这封电子邮件.
+	注意：<br />
+	
+	<p style="text-indent:30px">1、点击链接激活成功后，邮箱认证成功！您的安全等级提高，账户更安全，投资更放心！</p>
+	<p style="text-indent:30px">2、修改邮箱需要用户发送彩色手持身份证照【身份证要求清晰】和用户彩色半身照到邮箱：ying.gao@yeepay.com中，审核通过后变更！
+</p>
+	
+	<p style="margin-top:30px">华镇社区金融和您一同成长，感谢您的认证！</p>
+	
+	
+	<p style="text-align:center">华镇社区金融网站管理员</p>
+ ]]></entry>
+    <entry key="mail.reset.subject"><![CDATA[重置密码]]></entry>
+    <entry key="mail.reset.body">
+        <![CDATA[<b>%s</b>，您好！
+
+
+<p style="text-indent:30px">您收到这封电子邮件是因为您 (也可能是某人冒充您的名义) 申请设置新的密码。假如这不是您本人所申请，请不用理会这封电子邮件, 但是如果您持续收到这类的信件骚扰，请您尽快联络管理员。</p>
+
+<p style="margin-top:30px">请使用以下链接设置密码：<b>%s</b></p>
+
+<p style="margin-top:30px">如果您还有任何的疑问，请拨打400-0340-668。</p>
+
+<p style="margin-top:30px">华镇社区金融和您一同成长！</p>
+
+<p style="text-align:center">华镇社区金融网站管理员</p>
+                ]]>
+    </entry>
+    <entry key="mail.subscribe.subject"><![CDATA[新的预约]]></entry>
+    <entry key="mail.subscribe.body">
+        <![CDATA[<b>%s</b>先生/女士于<b>%s</b>预约了产品<b>%s</b>，请您尽快与他取得联系，电话：<b>%s</b>
+
+
+<p style="margin-top:30px">华镇社区金融和您一同成长！</p>
+
+<p style="text-align:center">华镇社区金融网站管理员</p>
+                ]]>
+    </entry>
+    <entry key="mail.auditor"><![CDATA[804058795@qq.com]]></entry>
+    <entry key="mail.audit.subject"><![CDATA[审核修改邮箱]]></entry>
+    <entry key="mail.audit.body">
+        <![CDATA[p2p网站平台用户申请修改邮箱：
+<p style="text-indent:30px">用户名为：%s 的用户正在申请修改认证邮箱，请1-2个工作日内进行审核处理，谢谢！
+
+<p style="margin-top:30px">华镇社区金融和您一同成长！</p>
+
+<p style="text-align:center">华镇社区金融网站管理员</p>
+                ]]>
+    </entry>
+</properties>

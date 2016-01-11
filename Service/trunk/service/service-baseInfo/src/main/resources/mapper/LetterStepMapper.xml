@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hzfh.service.baseInfo.mapper.LetterStepMapper">
+    <resultMap type="com.hzfh.api.baseInfo.model.LetterStep" id="resultMapLetterStep">
+        <result property="id" column="id"/>
+        <result property="editNo" column="edit_no"/>
+        <result property="letterNo" column="letter_no"/>
+        <result property="editTime" column="edit_time"/>
+        <result property="operate" column="operate"/>
+        <result property="comment" column="comment"/>
+    </resultMap>
+    <insert id="add" parameterType="com.hzfh.api.baseInfo.model.LetterStep" useGeneratedKeys="true" keyProperty="id">
+        insert into letter_step
+        (edit_no,letter_no,edit_time,operate,comment)
+        values
+        (#{editNo},#{letterNo}, current_timestamp(),#{operate},#{comment})
+    </insert>
+
+    <select id="getListByLetterNo" resultMap="resultMapLetterStep" parameterType="int">
+        SELECT id,edit_no,letter_no,edit_time,operate,comment
+        FROM letter_step where letter_no=#{letterNo}
+    </select>
+</mapper>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hzfh.service.customer.mapper.TradeReqnoInfoMapper">
+    <resultMap type="com.hzfh.api.customer.model.TradeReqnoInfo" id="resultMapTradeReqnoInfo">
+        <result property="sn" column="sn"/>
+        <result property="customerNo" column="customer_no"/>
+        <result property="inTime" column="in_time" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
+        <result property="status" column="status"/>
+        <result property="isOk" column="is_ok"/>
+        <result property="businessNo" column="business_no"/>
+    </resultMap>
+    <select id="getList" resultMap="resultMapTradeReqnoInfo">
+        SELECT sn,customer_no,in_time,status,is_ok,business_no
+        FROM trade_reqno_info
+    </select>
+    <select id="getPagingList" resultMap="resultMapTradeReqnoInfo" parameterType="com.hzfh.api.customer.model.query.TradeReqnoInfoCondition" statementType="STATEMENT">
+        SELECT sn,customer_no,in_time,status,is_ok,business_no FROM trade_reqno_info where 1=1
+        ORDER BY
+        <foreach item="item" collection="sortItemList" separator=",">
+            ${item.sortFeild} ${item.sortType}
+        </foreach>
+        LIMIT ${startIndex},${pageSize}
+    </select>
+    <select id="getTotalCount" resultType="int" parameterType="com.hzfh.api.customer.model.query.TradeReqnoInfoCondition" statementType="STATEMENT">
+        SELECT count(1) FROM trade_reqno_info where 1=1
+    </select>
+    <select id="getInfo" resultMap="resultMapTradeReqnoInfo" parameterType="int">
+        SELECT sn,customer_no,in_time,status,is_ok,business_no FROM trade_reqno_info where sn=#{sn}
+    </select>
+    <select id="getInfoBySnAndIsOk" resultMap="resultMapTradeReqnoInfo">
+        SELECT sn,customer_no,in_time,status,is_ok,business_no FROM trade_reqno_info where sn=#{sn} and is_ok=#{isOk}
+    </select>
+    <insert id="add" parameterType="com.hzfh.api.customer.model.TradeReqnoInfo" >
+        insert into trade_reqno_info
+        (sn,customer_no,in_time,status,is_ok,business_no)
+        values
+        (#{sn},#{customerNo},current_timestamp(),#{status},#{isOk},#{businessNo})
+    </insert>
+    <update id="update" parameterType="com.hzfh.api.customer.model.TradeReqnoInfo">
+        update trade_reqno_info set
+        customer_no=#{customerNo},status=#{status},is_ok=#{isOk},business_no=#{businessNo}
+        where sn=#{sn}
+    </update>
+    <delete id="delete" parameterType="int">
+        delete from trade_reqno_info where sn = #{sn}
+    </delete>
+</mapper>

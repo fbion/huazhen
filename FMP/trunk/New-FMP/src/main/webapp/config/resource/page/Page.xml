@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<pageConfig xmlns="http://www.hzfh.com/web"
+            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xsi:schemaLocation="http://www.hzfh.com/web ../../Schemas/Resources/Page.xsd">
+
+    <pages>
+        <page name="dicDataList" action="/baseInfo/dicData/list" rootPath="web.fmp.baseInfo"/>
+        <page name="dicTypeList" action="/baseInfo/dicType/list" rootPath="web.fmp.baseInfo"/>
+        <page name="letterList" action="/baseInfo/letter/list" rootPath="web.fmp.baseInfo"/>
+        <page name="letterAdd" action="/baseInfo/letter/edit" rootPath="web.fmp.baseInfo"/>
+    </pages>
+</pageConfig>

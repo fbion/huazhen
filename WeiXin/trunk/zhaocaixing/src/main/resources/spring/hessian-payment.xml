@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!-- 客户端Hessian代理工厂Bean -->
+	<bean id="gatewayService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+        <property name="serviceUrl"><!-- http://paymentservice.hzfh.com:8080 -->
+            <value>http://paymentservice.hzfh.com:8080/service-payment/gateway</value>
+        </property>
+        <property name="serviceInterface">
+            <value>com.hzfh.api.payment.service.GatewayService</value>
+        </property>
+     </bean>
+	<bean id="controllerService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+        <property name="serviceUrl"><!-- http://customerservice.hzfh.com:8080 -->
+            <value>http://paymentservice.hzfh.com:8080/service-payment/controller</value>
+        </property>
+        <property name="serviceInterface">
+            <value>com.hzfh.api.payment.service.ControllerService</value>
+        </property>
+
+        <property name="overloadEnabled" value="true"></property>
+     </bean>
+     
+	<bean id="signService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+        <property name="serviceUrl"><!-- http://customerservice.hzfh.com:8080 -->
+            <value>http://paymentservice.hzfh.com:8080/service-payment/sign</value>
+        </property>
+        <property name="serviceInterface">
+            <value>com.hzfh.api.payment.service.SignService</value>
+        </property>
+        <property name="overloadEnabled" value="true"></property>
+     </bean>
+     
+     <bean id="paymentConnectionRequestService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+        <property name="serviceUrl">
+            <value>http://paymentservice.hzfh.com:8080/service-payment/paymentConnectionRequest</value>
+        </property>
+        <property name="serviceInterface">
+            <value>com.hzfh.api.payment.service.PaymentConnectionRequestService</value>
+        </property>
+
+        <property name="overloadEnabled" value="true"></property>
+    </bean>
+	<bean id="paymentGatewayRequestService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+        <property name="serviceUrl">
+            <value>http://paymentservice.hzfh.com:8080/service-payment/paymentGatewayRequest</value>
+        </property>
+        <property name="serviceInterface">
+            <value>com.hzfh.api.payment.service.PaymentGatewayRequestService</value>
+        </property>
+
+        <property name="overloadEnabled" value="true"></property>
+    </bean>
+	<bean id="paymentyCallbackNotifyService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+        <property name="serviceUrl">
+            <value>http://paymentservice.hzfh.com:8080/service-payment/paymentyCallbackNotify</value>
+        </property>
+        <property name="serviceInterface">
+            <value>com.hzfh.api.payment.service.PaymentyCallbackNotifyService</value>
+        </property>
+
+        <property name="overloadEnabled" value="true"></property>
+    </bean>
+    <bean id="paymentRefundService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+        <property name="serviceUrl">
+            <value>http://paymentservice.hzfh.com:8080/service-payment/paymentRefund</value>
+        </property>
+        <property name="serviceInterface">
+            <value>com.hzfh.api.payment.service.PaymentRefundService</value>
+        </property>
+
+        <property name="overloadEnabled" value="true"></property>
+    </bean> 
+     <bean id="examineCallbackRecordService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+        <property name="serviceUrl">
+            <value>http://paymentservice.hzfh.com:8080/service-payment/examineCallbackRecord</value>
+        </property>
+        <property name="serviceInterface">
+            <value>com.hzfh.api.payment.service.ExamineCallbackRecordService</value>
+        </property>
+
+        <property name="overloadEnabled" value="true"></property>
+    </bean>
+</beans>

@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hzfh.service.employee.mapper.SubsidyTotalMapper">
+	<resultMap type="com.hzfh.api.employee.model.SubsidyTotal" id="resultMapSubsidyTotal">
+		<result property="id" column="id"/>
+		<result property="empName" column="emp_name"/>
+		<result property="deptNo" column="dept_no"/>
+		<result property="positionNo" column="position_no"/>
+		<result property="subsidyScale" column="subsidy_scale"/>
+		<result property="salesMoney" column="sales_money"/>
+		<result property="subsidy" column="subsidy"/>
+		<result property="achieveTime" column="achieve_time" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
+		<result property="isExamine" column="is_examine"/>
+		<result property="empNo" column="emp_no"/>
+		<result property="inTime" column="in_time" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
+		<result property="editTime" column="edit_time" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
+		<result property="inUserNo" column="in_user_no" />
+		<result property="editUserNo" column="edit_user_no" />
+	</resultMap>
+	<select id="getList" resultMap="resultMapSubsidyTotal">
+		SELECT id,emp_name,dept_no,position_no,subsidy_scale,sales_money,subsidy,achieve_time,is_examine,emp_no,in_time,edit_time,in_user_no,edit_user_no
+		FROM subsidy_total
+	</select>
+	<select id="getPagingList" resultMap="resultMapSubsidyTotal" parameterType="com.hzfh.api.employee.model.query.SubsidyTotalCondition" statementType="STATEMENT">
+		SELECT id,emp_name,dept_no,position_no,subsidy_scale,sales_money,subsidy,achieve_time,is_examine,emp_no,in_time,edit_time,in_user_no,edit_user_no FROM subsidy_total where 1=1
+		<if test="empName!=null and empName!=''"> and emp_name='${empName}'</if>
+		<if test="deptNo!=0"> and dept_no=${deptNo}</if>
+		<if test="positionNo!=0"> and position_no=${positionNo}</if>
+		<if test="workMateString !=null"> and emp_no in (${workMateString})</if>
+		<if test="achieveTime !=null "> and achieve_time = '${achieveTime}'</if>
+		ORDER BY
+		<foreach item="item" collection="sortItemList" separator=",">
+			${item.sortFeild} ${item.sortType}
+		</foreach>
+		LIMIT ${startIndex},${pageSize}
+	</select>
+	<select id="getTotalCount" resultType="int" parameterType="com.hzfh.api.employee.model.query.SubsidyTotalCondition" statementType="STATEMENT">
+		SELECT count(1) FROM subsidy_total where 1=1
+		<if test="empName!=null and empName!=''"> and emp_name='${empName}'</if>
+		<if test="deptNo!=0"> and dept_no=${deptNo}</if>
+		<if test="positionNo!=0"> and position_no=${positionNo}</if>
+		<if test="workMateString !=null"> and emp_no in (${workMateString})</if>
+		<if test="achieveTime !=null "> and achieve_time = '${achieveTime}'</if>
+	</select>
+	<select id="getInfo" resultMap="resultMapSubsidyTotal" parameterType="int">
+		SELECT id,emp_name,dept_no,position_no,subsidy_scale,sales_money,subsidy,achieve_time,is_examine,emp_no,in_time,edit_time,in_user_no,edit_user_no FROM subsidy_total where id=#{id}
+	</select>
+	<insert id="add" parameterType="com.hzfh.api.employee.model.SubsidyTotal" useGeneratedKeys="true" keyProperty="id">
+		insert into subsidy_total
+		(emp_name,dept_no,position_no,subsidy_scale,sales_money,subsidy,achieve_time,is_examine,emp_no,in_time,edit_time,in_user_no,edit_user_no)
+		values
+		(#{empName},#{deptNo},#{positionNo},#{subsidyScale},#{salesMoney},#{subsidy},#{achieveTime},#{isExamine},#{empNo},current_timestamp(),current_timestamp(),#{inUserNo},#{editUserNo})
+	</insert>
+	<update id="update" parameterType="com.hzfh.api.employee.model.SubsidyTotal">
+		update subsidy_total set 
+		emp_name=#{empName},dept_no=#{deptNo},position_no=#{positionNo},subsidy_scale=#{subsidyScale},sales_money=#{salesMoney},subsidy=#{subsidy},achieve_time=#{achieveTime},is_examine=#{isExamine},emp_no=#{empNo},edit_time=current_timestamp(),edit_user_no=#{editUserNo}
+		where id=#{id}
+	</update>
+	<delete id="delete" parameterType="int">
+		delete from subsidy_total where id = #{id}
+	</delete>
+
+    <update id="updateIsExamineById" parameterType="int">
+        update subsidy_total set
+        is_examine = 2
+        where id=#{id} and is_examine = 1
+    </update>
+    
+    <select id="getListForExcel" resultMap="resultMapSubsidyTotal" parameterType="com.hzfh.api.employee.model.query.SubsidyTotalCondition" statementType="STATEMENT">
+		SELECT id,emp_name,dept_no,position_no,subsidy_scale,sales_money,subsidy,achieve_time,is_examine,emp_no,in_time,edit_time,in_user_no,edit_user_no FROM subsidy_total where 1=1
+		<if test="empName!=null and empName!=''"> and emp_name='${empName}'</if>
+		<if test="deptNo!=0"> and dept_no=${deptNo}</if>
+		<if test="positionNo!=0"> and position_no=${positionNo}</if>
+		<if test="workMateString !=null"> and emp_no in (${workMateString})</if>
+		<if test="achieveTime !=null "> and achieve_time = '${achieveTime}'</if>
+		ORDER BY
+		<foreach item="item" collection="sortItemList" separator=",">
+			${item.sortFeild} ${item.sortType}
+		</foreach>
+		 
+	</select>
+</mapper>

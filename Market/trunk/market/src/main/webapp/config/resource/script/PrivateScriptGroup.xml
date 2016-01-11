@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<scriptConfig xmlns="http://www.hzfh.com/web"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.hzfh.com/web ../../schemas/resources/Script.xsd">
+
+	<privateScriptGroups>
+
+        <scriptGroup name="index" sharedScriptGroup="Common">
+            <scriptName>validform</scriptName>
+            <scriptName>base64</scriptName>
+            <pages>
+				<pageName>index</pageName>
+            </pages>
+        </scriptGroup>
+        <scriptGroup name="activityDetails" sharedScriptGroup="Common">
+           	<scriptName>validform</scriptName>
+            <scriptName>activityDetails</scriptName>
+            <pages>
+				<pageName>activityDetails</pageName>
+            </pages>
+        </scriptGroup>
+        <scriptGroup name="registrationLottery" sharedScriptGroup="Common">
+           	<scriptName>validform</scriptName>
+            <scriptName>registrationLottery</scriptName>
+            <pages>
+				<pageName>registrationLottery</pageName>
+            </pages>
+        </scriptGroup>
+	</privateScriptGroups>
+
+</scriptConfig>

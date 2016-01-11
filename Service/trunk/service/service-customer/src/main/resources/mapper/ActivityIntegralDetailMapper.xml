@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hzfh.service.customer.mapper.ActivityIntegralDetailMapper">
+	<resultMap type="com.hzfh.api.customer.model.ActivityIntegralDetail" id="resultMapActivityIntegralDetail">
+		<result property="id" column="id"/>
+		<result property="p2pCustomerNo" column="p2p_customer_no"/>
+		<result property="changeType" column="change_type"/>
+		<result property="changeIntegral" column="change_integral"/>
+		<result property="changeIntegralAvailable" column="change_integral_available"/>
+		<result property="startTime" column="start_time" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
+		<result property="endTime" column="end_time" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
+		<result property="integralSatus" column="integral_satus"/>
+		<result property="comment" column="comment"/>
+		<result property="relatedNo" column="related_no"/>
+		<result property="integraNo" column="integra_no"/>
+		<result property="gainTime" column="gain_time" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
+		<result property="myActivityNo" column="my_activity_no"/>
+	</resultMap>
+	<select id="getList" resultMap="resultMapActivityIntegralDetail">
+		SELECT id,p2p_customer_no,change_type,change_integral,change_integral_available,start_time,end_time,integral_satus,comment,related_no,integra_no,gain_time,my_activity_no
+		FROM activity_integral_detail
+	</select>
+	<select id="getPagingList" resultMap="resultMapActivityIntegralDetail" parameterType="com.hzfh.api.customer.model.query.ActivityIntegralDetailCondition" statementType="STATEMENT">
+		SELECT id,p2p_customer_no,change_type,change_integral,change_integral_available,start_time,end_time,integral_satus,comment,related_no,integra_no,gain_time,my_activity_no FROM activity_integral_detail where 1=1
+		ORDER BY
+		<foreach item="item" collection="sortItemList" separator=",">
+			${item.sortFeild} ${item.sortType}
+		</foreach>
+		LIMIT ${startIndex},${pageSize}
+	</select>
+	<select id="getTotalCount" resultType="int" parameterType="com.hzfh.api.customer.model.query.ActivityIntegralDetailCondition" statementType="STATEMENT">
+		SELECT count(1) FROM activity_integral_detail where 1=1
+	</select>
+	<select id="getInfo" resultMap="resultMapActivityIntegralDetail" parameterType="int">
+		SELECT id,p2p_customer_no,change_type,change_integral,change_integral_available,start_time,end_time,integral_satus,comment,related_no,integra_no,gain_time,my_activity_no FROM activity_integral_detail where id=#{id}
+	</select>
+	<insert id="add" parameterType="com.hzfh.api.customer.model.ActivityIntegralDetail" useGeneratedKeys="true" keyProperty="id">
+		insert into activity_integral_detail
+		(p2p_customer_no,change_type,change_integral,change_integral_available,start_time,end_time,integral_satus,comment,related_no,integra_no,gain_time,my_activity_no)
+		values
+		(#{p2pCustomerNo},#{changeType},#{changeIntegral},#{changeIntegralAvailable},#{startTime},#{endTime},#{integralSatus},#{comment},#{relatedNo},#{integraNo},#{gainTime},#{myActivityNo})
+	</insert>
+	<update id="update" parameterType="com.hzfh.api.customer.model.ActivityIntegralDetail">
+		update activity_integral_detail set 
+		p2p_customer_no=#{p2pCustomerNo},change_type=#{changeType},change_integral=#{changeIntegral},change_integral_available=#{changeIntegralAvailable},start_time=#{startTime},end_time=#{endTime},integral_satus=#{integralSatus},comment=#{comment},related_no=#{relatedNo},integra_no=#{integraNo},gain_time=#{gainTime},my_activity_no=#{myActivityNo}
+		where id=#{id}
+	</update>
+	<delete id="delete" parameterType="int">
+		delete from activity_integral_detail where id = #{id}
+	</delete>
+</mapper>

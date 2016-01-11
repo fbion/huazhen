@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<mappers>
+		<mapper resource="mapper/DicDataMapper.xml" />
+		<mapper resource="mapper/DicTypeMapper.xml" />
+		<mapper resource="mapper/CodeAdviserMapper.xml" />
+		<mapper resource="mapper/CodeAgentMapper.xml" />
+		<mapper resource="mapper/CodeCompanyMapper.xml" />
+		<mapper resource="mapper/CodeCus1Mapper.xml" />
+		<mapper resource="mapper/CodeCus2Mapper.xml" />
+		<mapper resource="mapper/CodeDeptMapper.xml" />
+		<mapper resource="mapper/CodeEmpMapper.xml" />
+		<mapper resource="mapper/CodeExpenseMapper.xml" />
+		<mapper resource="mapper/CodeIncomeMapper.xml" />
+		<mapper resource="mapper/CodeIssueMapper.xml" />
+		<mapper resource="mapper/CodeNeed1Mapper.xml" />
+		<mapper resource="mapper/CodeNeed2Mapper.xml" />
+		<mapper resource="mapper/CodePactMapper.xml" />
+		<mapper resource="mapper/CodeProduct1Mapper.xml" />
+		<mapper resource="mapper/CodeProduct2Mapper.xml" />
+		<mapper resource="mapper/CodeProduct3Mapper.xml" />
+		<mapper resource="mapper/CodeProduct4Mapper.xml" />
+		<mapper resource="mapper/CodeSalesMapper.xml" />
+		
+		<mapper resource="mapper/DistrictMapper.xml"/>
+		<mapper resource="mapper/EmailMapper.xml"/>
+		<mapper resource="mapper/LoginFailedMapper.xml"/>
+		<mapper resource="mapper/ProvinceMapper.xml"/>
+		<mapper resource="mapper/CaptchaMapper.xml"/>
+		<mapper resource="mapper/CityMapper.xml"/>
+        <mapper resource="mapper/LetterMapper.xml"/>
+        <mapper resource="mapper/LetterStepMapper.xml"/>
+        
+        <mapper resource="mapper/EmailFilesMapper.xml"/>
+	    <mapper resource="mapper/SmsMapper.xml"/>
+        <mapper resource="mapper/SmstempleteMapper.xml"/>
+        <mapper resource="mapper/SmsCaptchaMapper.xml"/>
+        
+       	<mapper resource="mapper/SnMapper.xml"/>
+
+        <mapper resource="mapper/AnnouncementMapper.xml"/>
+        <mapper resource="mapper/BannerInfoMapper.xml"/>
+        <mapper resource="mapper/BannerLocationMapper.xml"/>
+        
+        <mapper resource="mapper/CalendarMapper.xml"/>
+	</mappers>
+</configuration>

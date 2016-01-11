@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://www.springframework.org/schema/beans" xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+
+       http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context-4.0.xsd"
+	default-autowire="byName" default-lazy-init="false">
+	<context:component-scan base-package="com.hzfh.service" />
+	<context:annotation-config />
+	<bean id="hessianMapping"
+		class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+		<property name="mappings">
+			<props>
+				<prop key="/decision">decisionService</prop>
+				<prop key="/decisionLog">decisionLogService</prop>
+				<prop key="/financierBusiness">financierBusinessService</prop>
+				<prop key="/financierPersonal">financierPersonalService</prop>
+				<prop key="/partnerIssuer">partnerIssuerService</prop>
+				<prop key="/partnerRate">partnerRateService</prop>
+				<prop key="/product">productService</prop>
+				<prop key="/productAttachment">productAttachmentService</prop>
+				<prop key="/productStages">productStagesService</prop>
+				<prop key="/p2pProduct">p2pProductService</prop>
+				<prop key="/partnerIssuerFollow">partnerIssuerFollowService</prop>
+
+			</props>
+		</property>
+	</bean>
+  <bean id="decisionServiceImpl" class="com.hzfh.service.product.serviceImpl.DecisionServiceImpl" />
+  <bean id="decisionService"
+		class="org.springframework.remoting.caucho.HessianServiceExporter">
+    <property name="service" ref="decisionServiceImpl" />
+    <property name="serviceInterface" value="com.hzfh.api.product.service.DecisionService" />
+  </bean>
+
+  <bean id="decisionLogServiceImpl" class="com.hzfh.service.product.serviceImpl.DecisionLogServiceImpl" />
+  <bean id="decisionLogService"
+		class="org.springframework.remoting.caucho.HessianServiceExporter">
+    <property name="service" ref="decisionLogServiceImpl" />
+    <property name="serviceInterface" value="com.hzfh.api.product.service.DecisionLogService" />
+  </bean>
+
+  <bean id="financierBusinessServiceImpl" class="com.hzfh.service.product.serviceImpl.FinancierBusinessServiceImpl" />
+  <bean id="financierBusinessService"
+		class="org.springframework.remoting.caucho.HessianServiceExporter">
+    <property name="service" ref="financierBusinessServiceImpl" />
+    <property name="serviceInterface" value="com.hzfh.api.product.service.FinancierBusinessService" />
+  </bean>
+
+  <bean id="financierPersonalServiceImpl" class="com.hzfh.service.product.serviceImpl.FinancierPersonalServiceImpl" />
+  <bean id="financierPersonalService"
+		class="org.springframework.remoting.caucho.HessianServiceExporter">
+    <property name="service" ref="financierPersonalServiceImpl" />
+    <property name="serviceInterface" value="com.hzfh.api.product.service.FinancierPersonalService" />
+  </bean>
+
+  <bean id="partnerIssuerServiceImpl" class="com.hzfh.service.product.serviceImpl.PartnerIssuerServiceImpl" />
+  <bean id="partnerIssuerService"
+		class="org.springframework.remoting.caucho.HessianServiceExporter">
+    <property name="service" ref="partnerIssuerServiceImpl" />
+    <property name="serviceInterface" value="com.hzfh.api.product.service.PartnerIssuerService" />
+  </bean>
+
+  <bean id="partnerRateServiceImpl" class="com.hzfh.service.product.serviceImpl.PartnerRateServiceImpl" />
+  <bean id="partnerRateService"
+		class="org.springframework.remoting.caucho.HessianServiceExporter">
+    <property name="service" ref="partnerRateServiceImpl" />
+    <property name="serviceInterface" value="com.hzfh.api.product.service.PartnerRateService" />
+  </bean>
+
+  <bean id="productServiceImpl" class="com.hzfh.service.product.serviceImpl.ProductServiceImpl" />
+  <bean id="productService"
+		class="org.springframework.remoting.caucho.HessianServiceExporter">
+    <property name="service" ref="productServiceImpl" />
+    <property name="serviceInterface" value="com.hzfh.api.product.service.ProductService" />
+  </bean>
+
+  <bean id="productAttachmentServiceImpl" class="com.hzfh.service.product.serviceImpl.ProductAttachmentServiceImpl" />
+  <bean id="productAttachmentService"
+		class="org.springframework.remoting.caucho.HessianServiceExporter">
+    <property name="service" ref="productAttachmentServiceImpl" />
+    <property name="serviceInterface" value="com.hzfh.api.product.service.ProductAttachmentService" />
+  </bean>
+
+  <bean id="productStagesServiceImpl" class="com.hzfh.service.product.serviceImpl.ProductStagesServiceImpl" />
+  <bean id="productStagesService"
+		class="org.springframework.remoting.caucho.HessianServiceExporter">
+    <property name="service" ref="productStagesServiceImpl" />
+    <property name="serviceInterface" value="com.hzfh.api.product.service.ProductStagesService" />
+  </bean>
+    
+  <bean id="p2pProductServiceImpl" class="com.hzfh.service.product.serviceImpl.P2pProductServiceImpl" />
+  <bean id="p2pProductService"
+		class="org.springframework.remoting.caucho.HessianServiceExporter">
+    <property name="service" ref="p2pProductServiceImpl" />
+    <property name="serviceInterface" value="com.hzfh.api.product.service.P2pProductService" />
+  </bean>
+
+  <bean id="partnerIssuerFollowServiceImpl" class="com.hzfh.service.product.serviceImpl.PartnerIssuerFollowServiceImpl" />
+  <bean id="partnerIssuerFollowService"
+		class="org.springframework.remoting.caucho.HessianServiceExporter">
+    <property name="service" ref="partnerIssuerFollowServiceImpl" />
+    <property name="serviceInterface" value="com.hzfh.api.product.service.PartnerIssuerFollowService" />
+  </bean>
+
+</beans>

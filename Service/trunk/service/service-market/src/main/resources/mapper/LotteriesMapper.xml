@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hzfh.service.market.mapper.LotteriesMapper">
+	<resultMap type="com.hzfh.api.market.model.Lotteries" id="resultMapLotteries">
+		<result property="id" column="id"/>
+		<result property="code" column="code"/>
+		<result property="openId" column="open_id"/>
+		<result property="sendTime" column="send_time" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
+	</resultMap>
+	<select id="getList" resultMap="resultMapLotteries">
+		SELECT id,code,open_id,send_time
+		FROM lotteries
+	</select>
+	<select id="getPagingList" resultMap="resultMapLotteries" parameterType="com.hzfh.api.market.model.query.LotteriesCondition" statementType="STATEMENT">
+		SELECT id,code,open_id,send_time FROM lotteries where 1=1
+		ORDER BY
+		<foreach item="item" collection="sortItemList" separator=",">
+			${item.sortFeild} ${item.sortType}
+		</foreach>
+		LIMIT ${startIndex},${pageSize}
+	</select>
+	<select id="getTotalCount" resultType="int" parameterType="com.hzfh.api.market.model.query.LotteriesCondition" statementType="STATEMENT">
+		SELECT count(1) FROM lotteries where 1=1
+	</select>
+	<select id="getInfo" resultMap="resultMapLotteries" parameterType="int">
+		SELECT id,code,open_id,send_time FROM lotteries where id=#{id}
+	</select>
+	<insert id="add" parameterType="com.hzfh.api.market.model.Lotteries" useGeneratedKeys="true" keyProperty="id">
+		insert into lotteries
+		(code,open_id,send_time)
+		values
+		(#{code},#{openId},#{sendTime})
+	</insert>
+	<update id="update" parameterType="com.hzfh.api.market.model.Lotteries">
+		update lotteries set 
+		code=#{code},open_id=#{openId},send_time=#{sendTime}
+		where id=#{id}
+	</update>
+	<delete id="delete" parameterType="int">
+		delete from lotteries where id = #{id}
+	</delete>
+	
+	
+	<update id="updateOpenIdById">
+		update lotteries set 
+		open_id=#{openId},send_time=current_timestamp()
+		where id=#{id}
+	</update>
+	<select id="getLotteriesByRand" resultMap="resultMapLotteries">
+		SELECT id,code,open_id,send_time FROM lotteries where open_id is null order by rand() limit 1
+	</select>
+	<select id="getLotteriesByOpenId" resultMap="resultMapLotteries" >
+		SELECT id,code,open_id,send_time FROM lotteries where open_id=#{openId}
+	</select>
+	<select id="getLotteriesListByHasOpenId" resultMap="resultMapLotteries">
+		SELECT id,code,open_id,send_time FROM lotteries where open_id is not null
+	</select>
+</mapper>

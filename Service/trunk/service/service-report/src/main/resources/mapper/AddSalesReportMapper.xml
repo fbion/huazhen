@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hzfh.service.report.mapper.AddSalesReportMapper">
+    <resultMap type="com.hzfh.api.report.model.AddSalesReport" id="resultMapAddSalesReport">
+        <result property="id" column="id"/>
+        <result property="elementName" column="element_name"/>
+        <result property="elementType" column="element_type"/>
+        <result property="elementNo" column="element_no"/>
+        <result property="_parentId" column="_parent_id"/>
+        <result property="p2pSalesMoney" column="p2p_sales_money"/>
+        <result property="otherSalesMoney" column="other_sales_money"/>
+        <result property="addTotalMoney" column="add_total_money"/>
+        <result property="totalMoney" column="total_money"/>
+        <result property="inTime" column="in_time" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
+        <result property="type" column="type"/>
+        <result property="empStatus" column="emp_status"/>
+        <result property="year" column="year"/>
+        <result property="month" column="month"/>
+        <result property="week" column="week"/>
+        <result property="day" column="day"/>
+    </resultMap>
+    <select id="getList" resultMap="resultMapAddSalesReport">
+        SELECT id,element_name,element_type,element_no,_parent_id,p2p_sales_money,other_sales_money,add_total_money,total_money,in_time,type,emp_status,year,month,week,day
+        FROM add_sales_report
+    </select>
+    <select id="getListSerch" resultMap="resultMapAddSalesReport">
+        SELECT id,element_name,element_type,element_no,_parent_id,p2p_sales_money,other_sales_money,add_total_money,total_money,in_time,type,emp_status,year,month,week,day
+        FROM add_sales_report where 1=1
+        <if test="year != 0">and year = ${year}</if>
+        <if test="month != 0">and month=${month}</if>
+        <if test="day != 0">and day= ${day}</if>
+        <if test="week != 0">and week= ${week}</if>
+        <if test="type != 0">and type= ${type}</if>
+        <if test="empStatus != 0">and emp_status= ${empStatus}</if>
+        <if test="empStatus == 0">and emp_status != 2</if>
+        <if test="depts != null and depts != '' ">
+            and
+            (
+            _parent_id in (
+            select id from add_customer_report where element_type = 1
+            and element_no in (${depts})
+            )
+            or element_no in (${depts})
+            )
+        </if>
+        order by id
+    </select>
+
+    <select id="getPagingList" resultMap="resultMapAddSalesReport" parameterType="com.hzfh.api.report.model.query.AddSalesReportCondition" statementType="STATEMENT">
+        SELECT id,element_name,element_type,element_no,_parent_id,p2p_sales_money,other_sales_money,add_total_money,total_money,in_time,type,emp_status,year,month,week,day FROM add_sales_report where 1=1
+        ORDER BY
+        <foreach item="item" collection="sortItemList" separator=",">
+            ${item.sortFeild} ${item.sortType}
+        </foreach>
+        LIMIT ${startIndex},${pageSize}
+    </select>
+    <select id="getTotalCount" resultType="int" parameterType="com.hzfh.api.report.model.query.AddSalesReportCondition" statementType="STATEMENT">
+        SELECT count(1) FROM add_sales_report where 1=1
+    </select>
+    <select id="getInfo" resultMap="resultMapAddSalesReport" parameterType="int">
+        SELECT id,element_name,element_type,element_no,_parent_id,p2p_sales_money,other_sales_money,add_total_money,total_money,in_time,type,emp_status,year,month,week,day FROM add_sales_report where id=#{id}
+    </select>
+    <insert id="add" parameterType="com.hzfh.api.report.model.AddSalesReport" useGeneratedKeys="true" keyProperty="id">
+        insert into add_sales_report
+        (element_name,element_type,element_no,_parent_id,p2p_sales_money,other_sales_money,add_total_money,total_money,in_time,type,emp_status,year,month,week,day)
+        values
+        (#{elementName},#{elementType},#{elementNo},#{_parentId},#{p2pSalesMoney},#{otherSalesMoney},#{addTotalMoney},#{totalMoney},current_timestamp(),#{type},#{empStatus},#{year},#{month},#{week},#{day})
+    </insert>
+    <update id="update" parameterType="com.hzfh.api.report.model.AddSalesReport">
+        update add_sales_report set
+        element_name=#{elementName},element_type=#{elementType},element_no=#{elementNo},_parent_id=#{_parentId},p2p_sales_money=#{p2pSalesMoney},other_sales_money=#{otherSalesMoney},add_total_money=#{addTotalMoney},total_money=#{totalMoney},type=#{type},emp_status=#{empStatus},year=#{year},month=#{month},week=#{week},day=#{day}
+        where id=#{id}
+    </update>
+    <delete id="delete" parameterType="int">
+        delete from add_sales_report where id = #{id}
+    </delete>
+</mapper>

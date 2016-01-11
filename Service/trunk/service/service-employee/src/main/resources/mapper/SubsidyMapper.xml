@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hzfh.service.employee.mapper.SubsidyMapper">
+	<resultMap type="com.hzfh.api.employee.model.Subsidy" id="resultMapSubsidy">
+		<result property="id" column="id"/>
+		<result property="empNo" column="emp_no"/>
+		<result property="empName" column="emp_name"/>
+		<result property="positionNo" column="position_no"/>
+		<result property="deptNo" column="dept_no"/>
+		<result property="money" column="money"/>
+		<result property="source" column="source"/>
+		<result property="sendTime" column="send_time" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
+		<result property="isSend" column="is_send"/>
+		<result property="inTime" column="in_time" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
+		<result property="editTime" column="edit_time" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
+	</resultMap>
+	<select id="getList" resultMap="resultMapSubsidy">
+		SELECT id,emp_no,emp_name,position_no,dept_no,money,source,send_time,is_send,in_time,edit_time
+		FROM subsidy
+	</select>
+	<select id="getPagingList" resultMap="resultMapSubsidy" parameterType="com.hzfh.api.employee.model.query.SubsidyCondition" statementType="STATEMENT">
+		SELECT id,emp_no,emp_name,position_no,dept_no,SUM(money) money,source,send_time,is_send FROM subsidy where 1=1
+		<if test="empName!=null and empName!=''"> and emp_name='${empName}'</if>
+		<if test="deptNo!=0"> and dept_no=${deptNo}</if>
+		<if test="positionNo!=0"> and position_no=${positionNo}</if>
+		<if test="workMateString !=null"> and emp_no in (${workMateString})</if>
+		<if test="dateUp !=null and dateDown !=null"> and '${dateDown}' &lt;= send_time and send_time &lt; '${dateUp}'</if>
+		GROUP BY emp_name,send_time
+		ORDER BY
+		<foreach item="item" collection="sortItemList" separator=",">
+			${item.sortFeild} ${item.sortType}
+		</foreach>
+		LIMIT ${startIndex},${pageSize}
+	</select>
+	<select id="getTotalCount" resultType="int" parameterType="com.hzfh.api.employee.model.query.SubsidyCondition" statementType="STATEMENT">
+		SELECT count(1) FROM subsidy where 1=1
+		<if test="empName!=null and empName!=''"> and emp_name='${empName}'</if>
+		<if test="deptNo!=0"> and dept_no=${deptNo}</if>
+		<if test="positionNo!=0"> and position_no=${positionNo}</if>
+		<if test="workMateString !=null"> and emp_no in (${workMateString})</if>
+		<if test="dateUp !=null and dateDown !=null"> and '${dateDown}' &lt;= send_time and send_time &lt; '${dateUp}' </if>
+		 
+	</select>
+	<select id="getInfo" resultMap="resultMapSubsidy" parameterType="int">
+		SELECT id,emp_no,emp_name,position_no,dept_no,money,source,send_time,is_send,in_time,edit_time FROM subsidy where id=#{id}
+	</select>
+	<insert id="add" parameterType="com.hzfh.api.employee.model.Subsidy" useGeneratedKeys="true" keyProperty="id">
+		insert into subsidy
+		(emp_no,emp_name,position_no,dept_no,money,source,send_time,is_send,in_time,edit_time)
+		values
+		(#{empNo},#{empName},#{positionNo},#{deptNo},#{money},#{source},#{sendTime},#{isSend},current_timestamp(),current_timestamp())
+	</insert>
+	<update id="update" parameterType="com.hzfh.api.employee.model.Subsidy">
+		update subsidy set 
+		emp_no=#{empNo},emp_name=#{empName},position_no=#{positionNo},dept_no=#{deptNo},money=#{money},source=#{source},send_time=#{sendTime},is_send=#{isSend},edit_time=current_timestamp()
+		where id=#{id}
+	</update>
+	<delete id="delete" parameterType="int">
+		delete from subsidy where id = #{id}
+	</delete>
+	<select id="getListForExcel" resultMap="resultMapSubsidy" parameterType="com.hzfh.api.employee.model.query.SubsidyCondition" statementType="STATEMENT">
+		SELECT id,emp_no,emp_name,position_no,dept_no,SUM(money) money,send_time,is_send FROM subsidy where 1=1
+		<if test="empName!=null and empName!=''"> and emp_name='${empName}'</if>
+		<if test="deptNo!=0"> and dept_no=${deptNo}</if>
+		<if test="positionNo!=0"> and position_no=${positionNo}</if>
+		<if test="workMateString !=null"> and emp_no in (${workMateString})</if>
+		<if test="dateUp !=null and dateDown !=null"> and '${dateDown}' &lt;= send_time and send_time &lt; '${dateUp}' </if>
+		GROUP BY emp_name,send_time
+		ORDER BY
+		<foreach item="item" collection="sortItemList" separator=",">
+			${item.sortFeild} ${item.sortType}
+		</foreach>
+		 
+	</select>
+	<select id="getInfoByEmpNoAndSendTime" resultMap="resultMapSubsidy" parameterType="com.hzfh.api.employee.model.query.SubsidyCondition" statementType="STATEMENT">
+		SELECT id,emp_no,emp_name,position_no,dept_no,money,send_time,is_send,source FROM subsidy where 1=1
+		<if test="empNo!=0"> and emp_no=${empNo}</if>
+		<if test="sendTime !=null"> and send_time = '${sendTime}' </if>
+	</select>
+	
+	<select id="getListByEmpNo" resultMap="resultMapSubsidy" parameterType="int">
+		SELECT id,emp_no,emp_name,position_no,dept_no,money,source,send_time,is_send,in_time,edit_time
+		FROM subsidy
+		WHERE emp_no=#{empNo}
+	</select>
+	
+</mapper>

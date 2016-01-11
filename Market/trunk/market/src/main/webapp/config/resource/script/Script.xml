@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<scriptConfig xmlns="http://www.hzfh.com/web"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://www.hzfh.com/web ../../schemas/resources/Script.xsd">
+
+    <scriptMappings>
+        <!--Common begin-->
+        <script name="jQuery" order="1" isDevelop="false">jquery-1.11.1.min.js</script>
+        <script name="echarts-plain" order="2" isDevelop="false">echarts-plain.js</script>
+        <script name="common" order="3" isDevelop="false">common.js</script>
+        <script name="pagination" order="6" isDevelop="false">jquery.pagination.js</script>
+        <script name="environmentVariable" order="8" isDevelop="true" type="Inline"></script>
+        <script name="base" order="10" isDevelop="true">common/base.js</script>
+        <script name="validform" order="16" isDevelop="true">common/Validform_v5.3.2_min.js</script>
+        <script name="activityDetails" order="17" isDevelop="true">baseInfo/activityDetails.js</script>
+        
+        
+        <script name="registrationLottery" order="26" isDevelop="true">market/registrationLottery.js</script>
+    </scriptMappings>
+</scriptConfig>

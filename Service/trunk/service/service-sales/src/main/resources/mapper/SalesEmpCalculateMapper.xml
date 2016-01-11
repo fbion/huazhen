@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hzfh.service.sales.mapper.SalesEmpCalculateMapper">
+	<resultMap type="com.hzfh.api.sales.model.SalesEmpCalculate" id="resultMapSalesEmpCalculate">
+		<result property="id" column="id"/>
+		<result property="salesCode" column="sales_code"/>
+		<result property="dealTime" column="deal_time" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
+		<result property="moneySale" column="money_sale"/>
+		<result property="moneyContribute" column="money_contribute"/>
+		<result property="calcTime" column="calc_time" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
+	</resultMap>
+	<select id="getList" resultMap="resultMapSalesEmpCalculate">
+		SELECT id,sales_code,deal_time,money_sale,money_contribute,calc_time
+		FROM sales_emp_calculate
+	</select>
+	<select id="getPagingList" resultMap="resultMapSalesEmpCalculate" parameterType="com.hzfh.api.sales.model.query.SalesEmpCalculateCondition" statementType="STATEMENT">
+		SELECT id,sales_code,deal_time,money_sale,money_contribute,calc_time FROM sales_emp_calculate where 1=1
+		
+		ORDER BY
+		<foreach item="item" collection="sortItemList" separator=",">
+			${item.sortFeild} ${item.sortType}
+		</foreach>
+		LIMIT ${startIndex},${pageSize}
+	</select>
+	<select id="getTotalCount" resultType="int" parameterType="com.hzfh.api.sales.model.query.SalesEmpCalculateCondition" statementType="STATEMENT">
+		SELECT count(1) FROM sales_emp_calculate where 1=1
+	</select>
+	<select id="getInfo" resultMap="resultMapSalesEmpCalculate" parameterType="int">
+		SELECT id,sales_code,deal_time,money_sale,money_contribute,calc_time FROM sales_emp_calculate where id=#{id}
+	</select>
+	<insert id="add" parameterType="com.hzfh.api.sales.model.SalesEmpCalculate" useGeneratedKeys="true" keyProperty="id">
+		insert into sales_emp_calculate
+		(sales_code,deal_time,money_sale,money_contribute,calc_time)
+		values
+		(#{salesCode},#{dealTime},#{moneySale},#{moneyContribute},#{calcTime})
+	</insert>
+	<update id="update" parameterType="com.hzfh.api.sales.model.SalesEmpCalculate">
+		update sales_emp_calculate set 
+		sales_code=#{salesCode},deal_time=#{dealTime},money_sale=#{moneySale},money_contribute=#{moneyContribute},calc_time=#{calcTime}
+		where id=#{id}
+	</update>
+	<delete id="delete" parameterType="int">
+		delete from sales_emp_calculate where id = #{id}
+	</delete>
+</mapper>

@@ -1,0 +1,268 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+        "http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+    <package name="customer" namespace="/customer" extends="default">
+        <action name="login" class="com.hzfh.weixin.controller.customer.LoginAction">
+            <result>/customer/login.jsp</result>
+        </action>
+        <action name="logout" class="com.hzfh.weixin.controller.customer.LogoutAction">
+
+        </action>
+        <action name="register" class="com.hzfh.weixin.controller.customer.RegisterAction">
+            <result>/customer/register.jsp</result>
+        </action>
+        <action name="newRegister" class="com.hzfh.weixin.controller.customer.RegisterAction" method="newRegister">
+            <result>/customer/newRegister.jsp</result>
+            <result name="INDEX" type="redirectAction">
+            	<param name="actionName">index</param>
+            </result>
+        </action>
+        <action name="registerSuccess" class="com.hzfh.weixin.controller.customer.RegisterSuccessAction">
+            <result>/customer/registerSuccess.jsp</result>
+        </action>
+        <action name="emailValidation" class="com.hzfh.weixin.controller.customer.EmailValidationAction">
+            <result>/customer/emailValidation.jsp</result>
+        </action>
+        <action name="myInvestment"
+                class="com.hzfh.weixin.controller.customer.InvestmentAction">
+            <result>/customer/myInvestment.jsp</result>
+            <interceptor-ref name="loginDefault"/>
+        </action>
+        <action name="editPassword"
+                class="com.hzfh.weixin.controller.customer.EditPasswordAction">
+            <result>/customer/editPassword.jsp</result>
+        </action>
+        <action name="personalInfo"
+                class="com.hzfh.weixin.controller.customer.PersonalInfoAction">
+            <result>/customer/personalInfo.jsp</result>
+        </action>
+        <action name="myReservation"
+                class="com.hzfh.weixin.controller.customer.P2pSubscribeAction">
+            <result>/customer/myReservation.jsp</result>
+            <interceptor-ref name="loginDefault"/>
+        </action>
+        
+        <action name="forgetPassword"
+                class="com.hzfh.weixin.controller.customer.ForgetPasswordAction">
+            <result>/customer/forgetPassword.jsp</result>
+        </action>
+        <action name="resetPassword"
+                class="com.hzfh.weixin.controller.customer.ForgetPassword1Action">
+            <result>/customer/forgetPassword1.jsp</result>
+        </action>
+        <action name="resetSuccess"
+                class="com.hzfh.weixin.controller.customer.ForgetPassword2Action">
+            <result>/customer/forgetPassword2.jsp</result>
+        </action>
+        <action name="educationt"
+                class="com.hzfh.weixin.controller.customer.EducationtAction">
+            <result>/customer/investorEducationt.jsp</result>
+        </action>
+    </package>
+    <package name="ajaxCustomerRegister" extends="json-default,default"
+             namespace="/customer/register">
+        <action name="ajaxRegister" class="com.hzfh.weixin.controller.customer.ajax.AjaxRegisterAction">
+            <result type="json">
+                <param name="includeProperties">
+                    message.*
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+        <action name="ajaxNewRegister" class="com.hzfh.weixin.controller.customer.ajax.AjaxNewRegisterAction">
+			<result type="json">
+				<param name="includeProperties">
+					message.*
+				</param>
+				<param name="noCache">true</param>
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+        <action name="ajaxCheckUserExist"
+                class="com.hzfh.weixin.controller.customer.ajax.AjaxRegisterAction" method="checkUserName">
+            <result type="json">
+                <param name="includeProperties">
+                    message.*
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+        <action name="ajaxCheckTelephoneExist"
+                class="com.hzfh.weixin.controller.customer.ajax.AjaxRegisterAction" method="checkTelephone">
+            <result type="json">
+                <param name="includeProperties">
+                    message.*
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+      <action name="ajaxCheckteinvitelephoneExist"
+			class="com.hzfh.weixin.controller.customer.ajax.AjaxRegisterAction"
+			method="checkInviteCellphone">
+			<result type="json">
+				<param name="includeProperties">
+					message.*
+				</param>
+				<param name="noCache">true</param>
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+        <!-- <action name="ajaxCheckEmailExist"
+                class="com.hzfh.weixin.controller.customer.ajax.AjaxRegisterAction" method="checkEmail">
+            <result type="json">
+                <param name="includeProperties">
+                    message.*
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action> -->
+    </package>
+
+    <package name="ajaxCustomerLogin" extends="json-default,default"
+             namespace="/customer/login">
+        <action name="ajaxLogin" class="com.hzfh.weixin.controller.customer.ajax.AjaxLoginAction">
+            <result type="json">
+                <param name="includeProperties">
+                    message.*
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+        <action name="loginWithCellphone" class="com.hzfh.weixin.controller.customer.ajax.AjaxLoginWithCellphoneAction" >
+			<result type="json">
+				<param name="includeProperties">
+					message.*
+				</param>
+				<param name="noCache">true</param>
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+    </package>
+
+    <package name="ajaxEditPassword" extends="json-default,default" namespace="/customer/editPwd">
+        <action name="ajaxEditPwd" class="com.hzfh.weixin.controller.customer.ajax.AjaxEditPwdAction">
+            <result type="json">
+                <param name="includeProperties">
+                    message.*
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+
+        <action name="ajaxCheckOldPwd" class="com.hzfh.weixin.controller.customer.ajax.AjaxEditPwdAction"
+                method="checkOldPwd">
+            <result type="json">
+                <param name="includeProperties">
+                    message.*
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+    </package>
+
+
+    <package name="ajaxReservation" extends="json-default,default" namespace="/customer/reservation">
+        <action name="reservation" class="com.hzfh.weixin.controller.customer.ReservationAction">
+            <result>/customer/reservation.jsp</result>
+        </action>
+    </package>
+    <package name="ajaxP2pSubscribe" extends="json-default,default" namespace="/customer/p2pSubscribe">
+        <action name="ajaxp2pSubscribe" class="com.hzfh.weixin.controller.customer.ajax.AjaxP2pSubscribeAction">
+            <result type="json">
+                <param name="includeProperties">
+                    message.*
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+        <action name="ajaxp2pSubscribeWithoutLogin" class="com.hzfh.weixin.controller.customer.ajax.AjaxP2pSubscribeAction" method="subscribeWithoutLogin">
+			<result type="json">
+				<param name="includeProperties">
+					message.*
+				</param>
+				<param name="noCache">true</param>
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+    </package>
+    <package name="ajaxInvestment" extends="json-default,default" namespace="/customer/investment">
+        <action name="investment" class="com.hzfh.weixin.controller.customer.InvestAction">
+            <result>/customer/investment.jsp</result>
+        </action>
+    </package>
+    <package name="ajaxPersonalInfo" extends="json-default,default" namespace="/customer/personalInfo">
+        <action name="ajaxPersonalInfo" class="com.hzfh.weixin.controller.customer.ajax.AjaxP2pPersonalInfoAction">
+            <result type="json">
+                <param name="includeProperties">
+                    message.*
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+    </package>
+    <package name="ajaxSendFindPwdEmail" extends="json-default,default" namespace="/customer/forgetPassword">
+        <action name="ajaxSendFindPwdEmail" class="com.hzfh.weixin.controller.customer.ajax.AjaxForgetPasswordAction"
+                method="sendMail">
+            <result type="json">
+                <param name="includeProperties">
+                    message.*
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+        <action name="ajaxResetPassword" class="com.hzfh.weixin.controller.customer.ajax.AjaxForgetPasswordAction"
+                method="resetPassword">
+            <result type="json">
+                <param name="includeProperties">
+                    message.*
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+	    </package>
+	    
+	   <package name="p2pActivities" extends="default" namespace="/customer">
+			<action name="myInvite" class="com.hzfh.weixin.controller.customer.InviteAction" method="getInviteById">
+				<result>/customer/myInvite.jsp</result>
+				<interceptor-ref name="loginDefault" />
+			</action>
+		</package>
+		<package name="ajaxP2pActivities" extends="json-default,default" namespace="/customer">
+			<action name="getInviteInfo"	class="com.hzfh.weixin.controller.customer.ajax.AjaxInviteAction" method="getInviteInfo">
+				<result>/customer/invite.jsp</result>
+			</action>
+			<action name="addSahreActivity" class="com.hzfh.weixin.controller.customer.ajax.AjaxInviteAction" method="addSahreActivity">
+			<result type="json">
+				<param name="includeProperties">
+					message.*
+				</param>
+				<param name="noCache">true</param>
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		   </action>
+		</package>
+    
+	    <package name="Store" extends="default" namespace="/customer/store">
+			<action name="ajaxGetStore" class="com.hzfh.weixin.controller.customer.ajax.AjaxStoreAction" method="getInfoById">
+				<result>/customer/storeDetail.jsp</result>
+			</action>
+			<action name="storeList" class="com.hzfh.weixin.controller.customer.StoreAction">
+				<result>/customer/storeList.jsp</result>
+			</action>
+		</package>
+</struts>

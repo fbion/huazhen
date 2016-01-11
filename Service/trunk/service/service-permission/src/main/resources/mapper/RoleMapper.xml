@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hzfh.service.permission.mapper.RoleMapper">
+	<resultMap type="com.hzfh.api.permission.model.Role" id="resultMapRole">
+		<result property="id" column="id"/>
+		<result property="name" column="name"/>
+		<result property="comment" column="comment"/>
+		<result property="inUserNo" column="in_user_no"/>
+		<result property="inTime" column="in_time" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
+		<result property="editUserNo" column="edit_user_no"/>
+		<result property="editTime" column="edit_time" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
+		<result property="editComment" column="edit_comment"/>
+	</resultMap>
+	<select id="getList" resultMap="resultMapRole">
+		SELECT id,name,comment,in_user_no,in_time,edit_user_no,edit_time,edit_comment
+		FROM role
+	</select>
+	<select id="getPagingList" resultMap="resultMapRole" parameterType="com.hzfh.api.permission.model.query.RoleCondition" statementType="STATEMENT">
+		SELECT id,name,comment,in_user_no,in_time,edit_user_no,edit_time,edit_comment FROM role where 1=1
+        <if test="name != null and name !=''">and name LIKE CONCAT('%','${name}','%')</if>
+		ORDER BY
+		<foreach item="item" collection="sortItemList" separator=",">
+			${item.sortFeild} ${item.sortType}
+		</foreach>
+		LIMIT ${startIndex},${pageSize}
+	</select>
+	<select id="getTotalCount" resultType="int" parameterType="com.hzfh.api.permission.model.query.RoleCondition" statementType="STATEMENT">
+		SELECT count(1) FROM role where 1=1
+		<if test="name != null and name !=''">and name LIKE CONCAT('%','${name}','%')</if>
+	</select>
+	<select id="getInfo" resultMap="resultMapRole" parameterType="int">
+		SELECT id,name,comment,in_user_no,in_time,edit_user_no,edit_time,edit_comment FROM role where id=#{id}
+	</select>
+	<insert id="add" parameterType="com.hzfh.api.permission.model.Role" useGeneratedKeys="true" keyProperty="id">
+		insert into role
+		(name,comment,in_user_no,in_time,edit_user_no,edit_time,edit_comment)
+		values
+		(#{name},#{comment},#{inUserNo},current_timestamp(),#{editUserNo},current_timestamp(),#{editComment})
+	</insert>
+	<update id="update" parameterType="com.hzfh.api.permission.model.Role">
+		update role set 
+		name=#{name},comment=#{comment},edit_user_no=#{editUserNo},edit_time=current_timestamp(),edit_comment=#{editComment}
+		where id=#{id}
+	</update>
+	<delete id="delete" parameterType="int">
+		delete from role where id = #{id}
+	</delete>
+	<select id="getRoleByUserId" resultMap="resultMapRole" parameterType="int">
+		SELECT r.id,r.name,r.comment,r.in_user_no,r.in_time,r.edit_user_no,r.edit_time,r.edit_comment FROM user_role u,role r where u.role_no=r.id and u.user_no=#{userId}
+	</select>
+	
+	<!-- 通过userId获取对应的roles mengchong 2015/2/10 -->
+	<select id="getRolesByUserId" resultMap="resultMapRole" parameterType="int">
+		SELECT r.id,r.name,r.comment,r.in_user_no,r.in_time,r.edit_user_no,r.edit_time,r.edit_comment FROM user_role u,role r where u.role_no=r.id and u.user_no=#{userId}
+	</select>
+	
+</mapper>

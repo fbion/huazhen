@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hzfh.service.employee.mapper.PersonalChangeMapper">
+	<resultMap type="com.hzfh.api.employee.model.PersonalChange" id="resultMapPersonalChange">
+		<result property="id" column="id"/>
+		<result property="code" column="code"/>
+		<result property="empNo" column="emp_no"/>
+		<result property="companyNo" column="company_no"/>
+		<result property="deptNo" column="dept_no"/>
+		<result property="positionNo" column="position_no"/>
+		<result property="startTime" column="start_time" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
+		<result property="applyTime" column="apply_time" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
+		<result property="forceTime" column="force_time" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
+		<result property="reason" column="reason"/>
+		<result property="property" column="property"/>
+		<result property="remark" column="remark"/>
+		<result property="activitiNo" column="activiti_no"/>
+		<result property="inUserNo" column="in_user_no"/>
+		<result property="inTime" column="in_time" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
+		<result property="editUserNo" column="edit_user_no"/>
+		<result property="editTime" column="edit_time" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
+		<result property="editComment" column="edit_comment"/>
+		<result property="afterDept" column="after_dept"/>
+		<result property="afterPosition" column="after_position"/>
+	</resultMap>
+	<select id="getList" resultMap="resultMapPersonalChange">
+		SELECT id,code,emp_no,company_no,dept_no,position_no,start_time,apply_time,force_time,reason,property,remark,activiti_no,in_user_no,in_time,edit_user_no,edit_time,edit_comment
+		FROM personal_change,after_dept,after_position
+	</select>
+	<select id="getPagingList" resultMap="resultMapPersonalChange" parameterType="com.hzfh.api.employee.model.query.PersonalChangeCondition" statementType="STATEMENT">
+		SELECT id,code,emp_no,company_no,dept_no,position_no,start_time,apply_time,force_time,reason,property,remark,activiti_no,in_user_no,in_time,edit_user_no,edit_time,edit_comment,after_dept,after_position FROM personal_change where 1=1
+		ORDER BY
+		<foreach item="item" collection="sortItemList" separator=",">
+			${item.sortFeild} ${item.sortType}
+		</foreach>
+		LIMIT ${startIndex},${pageSize}
+	</select>
+	<select id="getTotalCount" resultType="int" parameterType="com.hzfh.api.employee.model.query.PersonalChangeCondition" statementType="STATEMENT">
+		SELECT count(1) FROM personal_change where 1=1
+	</select>
+	<select id="getInfo" resultMap="resultMapPersonalChange" parameterType="int">
+		SELECT id,code,emp_no,company_no,dept_no,position_no,start_time,apply_time,force_time,reason,property,remark,activiti_no,in_user_no,in_time,edit_user_no,edit_time,edit_comment,after_dept,after_position FROM personal_change where id=#{id}
+	</select>
+	<select id="getByActivitiNo" resultMap="resultMapPersonalChange" parameterType="String">
+		SELECT id,code,emp_no,company_no,dept_no,position_no,start_time,apply_time,force_time,reason,property,remark,activiti_no,in_user_no,in_time,edit_user_no,edit_time,edit_comment,after_dept,after_position FROM personal_change where activiti_no=#{activitiNo}
+	</select>
+	
+	<insert id="add" parameterType="com.hzfh.api.employee.model.PersonalChange" useGeneratedKeys="true" keyProperty="id">
+		insert into personal_change
+		(code,emp_no,company_no,dept_no,position_no,start_time,apply_time,force_time,reason,property,remark,activiti_no,in_user_no,in_time,edit_user_no,edit_time,edit_comment,after_dept,after_position)
+		values
+		(#{code},#{empNo},#{companyNo},#{deptNo},#{positionNo},#{startTime},#{applyTime},#{forceTime},#{reason},#{property},#{remark},#{activitiNo},#{inUserNo},current_timestamp(),#{editUserNo},current_timestamp(),#{editComment},#{afterDept},#{afterPosition})
+	</insert>
+	<update id="update" parameterType="com.hzfh.api.employee.model.PersonalChange">
+		update personal_change set 
+		code=#{code},emp_no=#{empNo},company_no=#{companyNo},dept_no=#{deptNo},position_no=#{positionNo},start_time=#{startTime},apply_time=#{applyTime},force_time=#{forceTime},reason=#{reason},property=#{property},remark=#{remark},activiti_no=#{activitiNo},edit_user_no=#{editUserNo},
+		edit_time=current_timestamp(),edit_comment=#{editComment},after_dept=#{afterDept},after_position=#{afterPosition}
+		where id=#{id}
+	</update>
+	<delete id="delete" parameterType="int">
+		delete from personal_change where id = #{id}
+	</delete>
+</mapper>

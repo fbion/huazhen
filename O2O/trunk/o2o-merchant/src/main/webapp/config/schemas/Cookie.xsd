@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="cookieConfig" targetNamespace="http://www.hzfh.com/web" xmlns="http://www.hzfh.com/web" xmlns:xs="http://www.w3.org/2001/XMLSchema" attributeFormDefault="qualified" elementFormDefault="qualified">
+    <xs:element name="cookieConfig">
+        <xs:complexType>
+            <xs:choice minOccurs="0" maxOccurs="unbounded">
+                <xs:element name="cookie">
+                    <xs:complexType>
+                        <xs:attribute name="name" form="unqualified" type="xs:string" />
+                        <xs:attribute name="topLevelDomain" form="unqualified" type="xs:string" />
+                        <xs:attribute name="path" form="unqualified" type="xs:string" />
+                        <xs:attribute name="expiresAfter" form="unqualified" type="xs:string" />
+                        <xs:attribute name="secureOnly" form="unqualified" type="xs:string" />
+                        <xs:attribute name="renderInClient" form="unqualified" type="xs:string" />
+                    </xs:complexType>
+                </xs:element>
+            </xs:choice>
+        </xs:complexType>
+    </xs:element>
+</xs:schema>

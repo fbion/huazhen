@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+        "http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+    <!--     <constant name="struts.enable.DynamicMethodInvocation" value="true"/> -->
+    <constant name="struts.devMode" value="true"/>
+    <!-- 系统常量定义，定义上传文件字符集编码 -->
+    <constant name="struts.i18n.encoding" value="UTF-8"></constant>
+
+    <!--<constant name="struts.action.extension" value=","/>-->
+
+    <package name="default" namespace="/" extends="struts-default">
+        <interceptors>
+            <interceptor name="loginInterceptor" class="com.hzfh.weixin.controller.LoginInterceptor">
+            </interceptor>
+            <interceptor-stack name="loginDefault">
+                <interceptor-ref name="loginInterceptor"/>
+                <interceptor-ref name="defaultStack"/>
+            </interceptor-stack>
+        </interceptors>
+        <global-results>
+            <result name="login" type="redirectAction">
+                <param name="namespace">/customer</param>
+                <param name="actionName">login</param>
+            </result>
+            <result name="error">/error.jsp</result>
+        </global-results>
+        <global-exception-mappings>
+            <exception-mapping exception="java.lang.Exception" result="error"/>
+        </global-exception-mappings>
+
+
+		<action name="*" class="com.hzfh.weixin.controller.IndexAction" method="error">
+        	<result name="error">/errorPage.jsp</result>
+        </action>
+        <action name="error" class="com.hzfh.weixin.controller.IndexAction" method="error">
+        	<result name="error">/errorPage.jsp</result>
+        </action>
+        
+        <action name="index" class="com.hzfh.weixin.controller.IndexAction">
+            <result>/index.jsp</result>
+        </action>
+         
+        <action name="captcha" class="com.hzfh.weixin.controller.common.CaptchaImageAction">
+            <result name="success" type="stream">
+                <param name="contentType">image/jpeg</param>
+                <param name="inputName">imageStream</param>
+                <param name="bufferSize">2048</param>
+            </result>
+        </action>       
+    </package>
+    <package name="ajaxIndex" namespace="/index" extends="json-default,default">
+    	<action name="ajaxIndex" class="com.hzfh.weixin.controller.AjaxIndexAction">
+            <result>/common/ajaxIndex.jsp</result>
+        </action>
+    </package>
+    
+    <include file="struts/struts-customer.xml"/>
+    <include file="struts/struts-p2pProduct.xml"/>
+    <include file="struts/struts-baseInfo.xml"/>
+    <include file="struts/struts-common.xml"/>
+    
+</struts>

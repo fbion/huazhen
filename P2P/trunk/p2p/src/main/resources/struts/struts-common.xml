@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+        "http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+    <package name="common" extends="json-default,default" namespace="/common">
+        <action name="enumList" class="com.hzfh.p2p.controller.common.EnumListAction">
+            <result type="json">
+                <param name="includeProperties">
+                    listItems.*
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+    </package>
+    <package name="tools" namespace="/" extends="json-default,default">
+		<action name="upload" class="com.hzfh.p2p.controller.common.UploadFileAction">
+			<result type="json" name="success">
+				<param name="includeProperties">
+					fileFileName,message,relativePath
+				</param>
+				<param name="contentType">
+					text/html
+				</param>
+			</result>
+			<result type="json" name="error">
+				<param name="includeProperties">
+					fileFileName,message,relativePath
+				</param>
+				<param name="contentType">text/html</param>
+			</result>
+		</action>
+	</package>
+</struts>

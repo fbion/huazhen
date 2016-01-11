@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+        "http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+	
+    <package name="AjaxProvinceAction" extends="json-default,default"
+             namespace="/baseInfo">
+        <action name="ajaxProvince" class="com.hzfh.weixin.controller.baseInfo.ajax.AjaxProvinceAction">
+            <result type="json">
+                <param name="includeProperties">
+                    resultList.*
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+    </package>
+    
+    <package name="AjaxCityAction" extends="json-default,default"
+             namespace="/baseInfo">
+        <action name="ajaxCity" class="com.hzfh.weixin.controller.baseInfo.ajax.AjaxCityAction">
+            <result type="json">
+                <param name="includeProperties">
+                    resultList.*
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+    </package>
+    
+    <package name="AjaxDistrictAction" extends="json-default,default"
+             namespace="/baseInfo">
+        <action name="ajaxDistrict" class="com.hzfh.weixin.controller.baseInfo.ajax.AjaxDistrictAction">
+            <result type="json">
+                <param name="includeProperties">
+                    resultList.*
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+    </package>
+    
+    <package name="AjaxDepartmentAction" extends="json-default,default"
+             namespace="/baseInfo">
+        <action name="ajaxDepartment" class="com.hzfh.weixin.controller.baseInfo.ajax.AjaxDepartmentAction">
+            <result type="json">
+                <param name="includeProperties">
+                    resultList.*
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+    </package>
+    
+    <!-- <package name="AjaxEmlopyeeAction" extends="json-default,default"
+             namespace="/baseInfo">
+        <action name="ajaxEmlopyee" class="com.hzfh.weixin.controller.baseInfo.ajax.AjaxEmlopyeeAction">
+            <result type="json">
+                <param name="includeProperties">
+                    resultList.*
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+    </package> -->
+
+ 	<!-- <package name="emlopyeeAction" extends="json-default,default" namespace="/baseInfo">
+        <action name="emlopyee" class="com.hzfh.weixin.controller.baseInfo.EmployeeAction">
+            <result>/customer/headName.jsp</result>
+        </action>
+    </package> -->
+    <package name="AjaxEmlopyeeAction" extends="json-default,default" namespace="/baseInfo">
+        <action name="ajaxEmlopyee" class="com.hzfh.weixin.controller.baseInfo.ajax.AjaxEmlopyeeAction">
+            <result>/customer/employeePhoto.jsp</result>
+        </action>
+    </package>
+    
+    
+    
+    <package name="AjaxSmsCaptchaAction" extends="json-default,default" namespace="/baseInfo/sms">
+        <action name="ajaxAddSmsCaptcha" class="com.hzfh.weixin.controller.baseInfo.ajax.AjaxSmsCaptchaAction">
+            <result type="json">
+                <param name="includeProperties">
+                    errCode,time
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+        <action name="refreshJsp" class="com.hzfh.weixin.controller.baseInfo.ajax.AjaxSmsCaptchaAction" method="refreshJsp">
+            <result type="json">
+                <param name="includeProperties">
+                    errCode,time
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+        <action name="AjaxIdenty" class="com.hzfh.weixin.controller.baseInfo.ajax.AjaxSmsCaptchaAction" method="identy">
+            <result type="json">
+                <param name="includeProperties">
+                    errCode,paymentAccountSecurityUrl
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+        <action name="ajaxCheckTelephoneById" class="com.hzfh.weixin.controller.baseInfo.ajax.AjaxSmsCaptchaAction" method="checkTelephoneById">
+            <result type="json">
+                <param name="includeProperties">
+                    errCode
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+        <action name="ajaxCheckSmsCaptcha" class="com.hzfh.weixin.controller.baseInfo.ajax.AjaxSmsCaptchaAction" method="checkSmsCaptcha">
+            <result type="json">
+                <param name="includeProperties">
+                    errCode
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+    </package>
+    <package name="map" namespace="/baseInfo/map" extends="json-default,default">
+    	<action name="getStoreMap" class="com.hzfh.weixin.controller.baseInfo.BaiduMap">
+    		<result>/baseInfo/baiduMap.jsp</result>
+    	</action>
+    </package>
+    <package name="coreProcess" extends="default" namespace="/baseInfo">
+        <action name="coreProcess" class="weixin.core.CoreProcess" method="coreProcess"></action>
+    </package>
+</struts>

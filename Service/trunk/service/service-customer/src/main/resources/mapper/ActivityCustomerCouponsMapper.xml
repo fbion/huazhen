@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hzfh.service.customer.mapper.ActivityCustomerCouponsMapper">
+	<resultMap type="com.hzfh.api.customer.model.ActivityCustomerCoupons" id="resultMapActivityCustomerCoupons">
+		<result property="id" column="id"/>
+		<result property="code" column="code"/>
+		<result property="p2pCustomerNo" column="p2p_customer_no"/>
+		<result property="couponsNo" column="coupons_no"/>
+		<result property="useTime" column="use_time" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
+		<result property="gainTime" column="gain_time" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
+		<result property="sendTime" column="send_time" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
+		<result property="startTime" column="start_time" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
+		<result property="endTime" column="end_time" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
+		<result property="status" column="status"/>
+		<result property="cdkeyNo" column="cdkey_no"/>
+		<result property="couponsCdkeyStatus" column="coupons_cdkey_status"/>
+		<result property="myActivityNo" column="my_activity_no"/>
+	</resultMap>
+	<select id="getList" resultMap="resultMapActivityCustomerCoupons">
+		SELECT id,code,p2p_customer_no,coupons_no,use_time,gain_time,send_time,start_time,end_time,status,cdkey_no,my_activity_no,coupons_cdkey_status
+		FROM activity_customer_coupons
+	</select>
+	<select id="getPagingList" resultMap="resultMapActivityCustomerCoupons" parameterType="com.hzfh.api.customer.model.query.ActivityCustomerCouponsCondition" statementType="STATEMENT">
+		SELECT id,code,p2p_customer_no,coupons_no,use_time,gain_time,send_time,start_time,end_time,status,cdkey_no,my_activity_no,coupons_cdkey_status FROM activity_customer_coupons where 1=1
+		ORDER BY
+		<foreach item="item" collection="sortItemList" separator=",">
+			${item.sortFeild} ${item.sortType}
+		</foreach>
+		LIMIT ${startIndex},${pageSize}
+	</select>
+	<select id="getTotalCount" resultType="int" parameterType="com.hzfh.api.customer.model.query.ActivityCustomerCouponsCondition" statementType="STATEMENT">
+		SELECT count(1) FROM activity_customer_coupons where 1=1
+	</select>
+	<select id="getInfo" resultMap="resultMapActivityCustomerCoupons" parameterType="int">
+		SELECT id,code,p2p_customer_no,coupons_no,use_time,gain_time,send_time,start_time,end_time,status,cdkey_no,my_activity_no,coupons_cdkey_status FROM activity_customer_coupons where id=#{id}
+	</select>
+	<insert id="add" parameterType="com.hzfh.api.customer.model.ActivityCustomerCoupons" useGeneratedKeys="true" keyProperty="id">
+		insert into activity_customer_coupons
+		(code,p2p_customer_no,coupons_no,use_time,gain_time,send_time,start_time,end_time,status,cdkey_no,my_activity_no,coupons_cdkey_status)
+		values
+		(#{code},#{p2pCustomerNo},#{couponsNo},#{useTime},#{gainTime},#{sendTime},#{startTime},#{endTime},#{status},#{cdkeyNo},#{myActivityNo},#{couponsCdkeyStatus})
+	</insert>
+	<update id="update" parameterType="com.hzfh.api.customer.model.ActivityCustomerCoupons">
+		update activity_customer_coupons set 
+		code=#{code},p2p_customer_no=#{p2pCustomerNo},coupons_no=#{couponsNo},use_time=#{useTime},gain_time=#{gainTime},send_time=#{sendTime},start_time=#{startTime},end_time=#{endTime},status=#{status},cdkey_no=#{cdkeyNo},my_activity_no=#{myActivityNo},coupons_cdkey_status=#{couponsCdkeyStatus}
+		where id=#{id}
+	</update>
+	<delete id="delete" parameterType="int">
+		delete from activity_customer_coupons where id = #{id}
+	</delete>
+</mapper>

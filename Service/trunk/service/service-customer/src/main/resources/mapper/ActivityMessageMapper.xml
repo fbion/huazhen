@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hzfh.service.customer.mapper.ActivityMessageMapper">
+	<resultMap type="com.hzfh.api.customer.model.ActivityMessage" id="resultMapActivityMessage">
+		<result property="id" column="id"/>
+		<result property="p2pCustomerNo" column="p2p_customer_no"/>
+		<result property="smsNo" column="sms_no"/>
+		<result property="emailNo" column="email_no"/>
+		<result property="messageContent" column="message_content"/>
+		<result property="messageSubject" column="message_subject"/>
+		<result property="messageSendTime" column="message_send_time" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
+		<result property="messageType" column="message_type"/>
+		<result property="messageStatus" column="message_status"/>
+	</resultMap>
+	<select id="getList" resultMap="resultMapActivityMessage">
+		SELECT id,p2p_customer_no,sms_no,email_no,message_content,message_subject,message_send_time,message_type,message_status
+		FROM activity_message
+	</select>
+	<select id="getPagingList" resultMap="resultMapActivityMessage" parameterType="com.hzfh.api.customer.model.query.ActivityMessageCondition" statementType="STATEMENT">
+		SELECT id,p2p_customer_no,sms_no,email_no,message_content,message_subject,message_send_time,message_type,message_status FROM activity_message where 1=1
+		ORDER BY
+		<foreach item="item" collection="sortItemList" separator=",">
+			${item.sortFeild} ${item.sortType}
+		</foreach>
+		LIMIT ${startIndex},${pageSize}
+	</select>
+	<select id="getTotalCount" resultType="int" parameterType="com.hzfh.api.customer.model.query.ActivityMessageCondition" statementType="STATEMENT">
+		SELECT count(1) FROM activity_message where 1=1
+	</select>
+	<select id="getInfo" resultMap="resultMapActivityMessage" parameterType="int">
+		SELECT id,p2p_customer_no,sms_no,email_no,message_content,message_subject,message_send_time,message_type,message_status FROM activity_message where id=#{id}
+	</select>
+	<insert id="add" parameterType="com.hzfh.api.customer.model.ActivityMessage" useGeneratedKeys="true" keyProperty="id">
+		insert into activity_message
+		(p2p_customer_no,sms_no,email_no,message_content,message_subject,message_send_time,message_type,message_status)
+		values
+		(#{p2pCustomerNo},#{smsNo},#{emailNo},#{messageContent},#{messageSubject},#{messageSendTime},#{messageType},#{messageStatus})
+	</insert>
+	<update id="update" parameterType="com.hzfh.api.customer.model.ActivityMessage">
+		update activity_message set 
+		p2p_customer_no=#{p2pCustomerNo},sms_no=#{smsNo},email_no=#{emailNo},message_content=#{messageContent},message_subject=#{messageSubject},message_send_time=#{messageSendTime},message_type=#{messageType},message_status=#{messageStatus}
+		where id=#{id}
+	</update>
+	<delete id="delete" parameterType="int">
+		delete from activity_message where id = #{id}
+	</delete>
+</mapper>

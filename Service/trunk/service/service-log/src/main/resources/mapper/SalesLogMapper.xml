@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hzfh.service.log.mapper.SalesLogMapper">
+    <resultMap type="com.hzfh.api.log.model.SalesLog" id="resultMapSalesLog">
+        <result property="id" column="id"/>
+        <result property="salesNo" column="sales_no"/>
+        <result property="description" column="description"/>
+        <result property="action" column="action"/>
+        <result property="method" column="method"/>
+        <result property="afterData" column="after_data"/>
+        <result property="inTime" column="in_time" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
+        <result property="inUserNo" column="in_user_no"/>
+        <result property="exception" column="exception"/>
+    </resultMap>
+    <insert id="add" parameterType="com.hzfh.api.log.model.SalesLog" useGeneratedKeys="true" keyProperty="id">
+        insert into sales_log
+        (sales_no,description,action,method,after_data,in_time,in_user_no,exception)
+        values
+        (#{salesNo},#{description},#{action},#{method},#{afterData},current_timestamp(),#{inUserNo},#{exception})
+    </insert>
+</mapper>

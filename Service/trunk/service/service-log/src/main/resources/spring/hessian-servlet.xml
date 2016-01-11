@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://www.springframework.org/schema/beans" xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+
+       http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context-4.0.xsd"
+	default-autowire="byName" default-lazy-init="false">
+	<context:component-scan base-package="com.hzfh.service" />
+	<context:annotation-config />
+	<bean id="hessianMapping" class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+		<property name="mappings">
+			<props>
+				<prop key="/log">logService</prop>
+                <prop key="/salesLog">salesLogService</prop>
+                <prop key="/productLog">productLogService</prop>
+			</props>
+		</property>
+	</bean>
+  <bean id="logServiceImpl" class="com.hzfh.service.log.serviceImpl.LogServiceImpl" />
+  <bean id="logService" class="org.springframework.remoting.caucho.HessianServiceExporter">
+    <property name="service" ref="logServiceImpl" />
+    <property name="serviceInterface" value="com.hzfh.api.log.service.LogService" />
+  </bean>
+    <bean id="salesLogServiceImpl" class="com.hzfh.service.log.serviceImpl.SalesLogServiceImpl" />
+    <bean id="salesLogService"
+          class="org.springframework.remoting.caucho.HessianServiceExporter">
+        <property name="service" ref="salesLogServiceImpl" />
+        <property name="serviceInterface" value="com.hzfh.api.log.service.SalesLogService" />
+    </bean>
+    <bean id="productLogServiceImpl" class="com.hzfh.service.log.serviceImpl.ProductLogServiceImpl" />
+    <bean id="productLogService"
+          class="org.springframework.remoting.caucho.HessianServiceExporter">
+        <property name="service" ref="productLogServiceImpl" />
+        <property name="serviceInterface" value="com.hzfh.api.log.service.ProductLogService" />
+    </bean>
+</beans>

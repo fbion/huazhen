@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hzfh.service.employee.mapper.DepartmentMapper">
+	<resultMap type="com.hzfh.api.employee.model.Department" id="resultMapDepartment">
+		<result property="id" column="id" />
+		<result property="code" column="code" />
+		<result property="name" column="name" />
+		<result property="telephone" column="telephone" />
+		<result property="empNo" column="emp_no" />
+		<result property="fax" column="fax" />
+		<result property="comment" column="comment" />
+		<result property="deptType" column="dept_type" />
+		<result property="duty" column="duty" />
+		<result property="parentNo" column="parent_no" />
+		<result property="companyNo" column="company_no" />
+		<result property="inUserNo" column="in_user_no" />
+		<result property="inTime" column="in_time" jdbcType="TIMESTAMP"
+			javaType="java.sql.Timestamp" />
+		<result property="editUserNo" column="edit_user_no" />
+		<result property="editTime" column="edit_time" jdbcType="TIMESTAMP"
+			javaType="java.sql.Timestamp" />
+		<result property="editComment" column="edit_comment" />
+		<result property="districtNo" column="district_no" />
+		<result property="cityNo" column="city_no" />
+		<result property="provinceNo" column="province_no" />
+		<result property="directStatus" column="direct_status" />
+		<result property="isTest" column="is_test" />
+		<result property="departmentImagePath" column="department_image_path"/>
+		<result property="address" column="address"/>
+		<result property="locationImagePath" column="location_image_path"/>
+		<result property="longitude" column="longitude"/>
+		<result property="latitude" column="latitude"/>
+	</resultMap>
+	<sql id="Base_Column_List" >
+		id,code,name,telephone,emp_no,fax,comment,dept_type,duty,parent_no,company_no,in_user_no,in_time,edit_user_no,edit_time,edit_comment,province_no,city_no,district_no,direct_status,is_test,department_image_path,address,location_image_path,longitude,latitude
+	</sql>
+	<select id="getList" resultMap="resultMapDepartment">
+		SELECT <include refid="Base_Column_List"/>
+		FROM department
+	</select>
+	<select id="getListByDistrictNo" resultMap="resultMapDepartment">
+		SELECT <include refid="Base_Column_List"/> FROM department where district_no = #{districtNo} and dept_type = 1
+	</select>
+	<select id="getPagingList" resultMap="resultMapDepartment"
+		parameterType="com.hzfh.api.employee.model.query.DepartmentCondition"
+		statementType="STATEMENT">
+		SELECT
+		<include refid="Base_Column_List"/> FROM department where 1=1
+		<if test="companyNO != 0">and company_no = ${companyNO}</if>
+		<if test="name != null and name !=''">and name LIKE CONCAT('%','${name}','%')</if>
+		<if test="isTest>-1">and is_test=${isTest}</if>
+		<if test="byDeptType>0">and dept_type=${byDeptType}</if>
+		ORDER BY
+		<foreach item="item" collection="sortItemList" separator=",">
+			${item.sortFeild} ${item.sortType}
+		</foreach>
+		LIMIT ${startIndex},${pageSize}
+	</select>
+	<select id="getTotalCount" resultType="int"
+		parameterType="com.hzfh.api.employee.model.query.DepartmentCondition"
+		statementType="STATEMENT">
+		SELECT count(1) FROM department where 1=1
+		<if test="companyNO != 0">and company_no = ${companyNO}</if>
+		<if test="name != null and name !=''">and name LIKE CONCAT('%','${name}','%')</if>
+		<if test="isTest>-1">and is_test=${isTest}</if>
+		<if test="byDeptType>0">and dept_type=${byDeptType}</if>
+	</select>
+	<select id="getInfo" resultMap="resultMapDepartment"
+		parameterType="int">
+		SELECT
+		<include refid="Base_Column_List"/> FROM department where id=#{id}
+	</select>
+	<insert id="add" parameterType="com.hzfh.api.employee.model.Department"
+		useGeneratedKeys="true" keyProperty="id">
+		insert into department
+		(code,name,telephone,emp_no,fax,comment,dept_type,duty,parent_no,company_no,in_user_no,in_time,edit_user_no,edit_time,edit_comment,province_no,city_no,district_no,direct_status,is_test,department_image_path,address,location_image_path,longitude,latitude)
+		values
+		(#{code},#{name},#{telephone},#{empNo},#{fax},#{comment},#{deptType},#{duty},#{parentNo},#{companyNo},#{inUserNo},current_timestamp(),#{editUserNo},current_timestamp(),#{editComment},#{provinceNo},#{cityNo},#{districtNo},#{directStatus},#{isTest},#{departmentImagePath},#{address},#{locationImagePath},#{longitude},#{latitude})
+	</insert>
+	<update id="update" parameterType="com.hzfh.api.employee.model.Department">
+		update department set
+		code=#{code},name=#{name},telephone=#{telephone},emp_no=#{empNo},fax=#{fax},comment=#{comment},dept_type=#{deptType},duty=#{duty},parent_no=#{parentNo},company_no=#{companyNo},edit_user_no=#{editUserNo},edit_time=current_timestamp(),edit_comment=#{editComment},is_test=#{isTest}
+		,province_no=#{provinceNo},city_no=#{cityNo},district_no=#{districtNo},direct_status=#{directStatus},department_image_path=#{departmentImagePath},address=#{address},location_image_path=#{locationImagePath},longitude=#{longitude},latitude=#{latitude}
+		where id=#{id}
+	</update>
+	<delete id="delete" parameterType="int">
+		delete from department where
+		id = #{id}
+	</delete>
+	<!-- getDeptlist -->
+	<select id="getDeptlist" resultMap="resultMapDepartment">
+		SELECT id,name
+		FROM department
+	</select>
+	<select id="getDeptListByParentNo" resultMap="resultMapDepartment"
+		parameterType="int">
+		SELECT
+		 <include refid="Base_Column_List"/> FROM department where parent_no=#{parentNo}
+	</select>
+	<select id="getDeptListByCompanyNo" resultMap="resultMapDepartment"
+		parameterType="int">
+		SELECT
+		<include refid="Base_Column_List"/> FROM department
+		where company_no = #{companyNo}
+	</select>
+	<select id="getDeptListByType" resultMap="resultMapDepartment"
+		parameterType="int">
+		SELECT id,name,parent_no
+		FROM department
+		where dept_type = #{deptType}
+	</select>
+	<select id="getDeptListByTypeaAndStatus" resultMap="resultMapDepartment">
+		SELECT id,name,parent_no
+		FROM department
+		where dept_type = #{deptType} and is_test = #{status}
+	</select>
+	<select id="getParentDeptByDept" parameterType="int" resultType="Integer">
+		SELECT parent_no
+		FROM department where id=#{deptNo}
+	</select>
+	<select id="getDeptTypeBydeptNo" resultMap="resultMapDepartment"
+		parameterType="int">
+		SELECT 
+		<include refid="Base_Column_List"/> FROM department
+		where id =	#{deptNo}
+	</select>
+	<select id="getDepartmentByDeptNo" resultMap="resultMapDepartment"
+		parameterType="int">
+		SELECT 
+		<include refid="Base_Column_List"/> FROM department
+		where id =	#{deptNo}
+	</select>
+	
+</mapper>

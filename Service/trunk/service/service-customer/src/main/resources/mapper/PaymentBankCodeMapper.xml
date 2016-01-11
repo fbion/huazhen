@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hzfh.service.customer.mapper.PaymentBankCodeMapper">
+	<resultMap type="com.hzfh.api.customer.model.PaymentBankCode" id="resultMapPaymentBankCode">
+		<result property="id" column="id"/>
+		<result property="platform" column="platform"/>
+		<result property="bankNo" column="bank_no"/>
+		<result property="backCode" column="back_code"/>
+		<result property="enable" column="enable"/>
+	</resultMap>
+	<select id="getList" resultMap="resultMapPaymentBankCode">
+		SELECT id,platform,bank_no,back_code,enable
+		FROM payment_bank_code
+	</select>
+	<select id="getPagingList" resultMap="resultMapPaymentBankCode" parameterType="com.hzfh.api.customer.model.query.PaymentBankCodeCondition" statementType="STATEMENT">
+		SELECT id,platform,bank_no,back_code,enable FROM payment_bank_code where 1=1
+		ORDER BY
+		<foreach item="item" collection="sortItemList" separator=",">
+			${item.sortFeild} ${item.sortType}
+		</foreach>
+		LIMIT ${startIndex},${pageSize}
+	</select>
+	<select id="getTotalCount" resultType="int" parameterType="com.hzfh.api.customer.model.query.PaymentBankCodeCondition" statementType="STATEMENT">
+		SELECT count(1) FROM payment_bank_code where 1=1
+	</select>
+	<select id="getInfo" resultMap="resultMapPaymentBankCode" parameterType="int">
+		SELECT id,platform,bank_no,back_code,enable FROM payment_bank_code where id=#{id}
+	</select>
+	<insert id="add" parameterType="com.hzfh.api.customer.model.PaymentBankCode" useGeneratedKeys="true" keyProperty="id">
+		insert into payment_bank_code
+		(platform,bank_no,back_code,enable)
+		values
+		(#{platform},#{bankNo},#{backCode},#{enable})
+	</insert>
+	<update id="update" parameterType="com.hzfh.api.customer.model.PaymentBankCode">
+		update payment_bank_code set 
+		platform=#{platform},bank_no=#{bankNo},back_code=#{backCode},enable=#{enable}
+		where id=#{id}
+	</update>
+	<delete id="delete" parameterType="int">
+		delete from payment_bank_code where id = #{id}
+	</delete>
+</mapper>

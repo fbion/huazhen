@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hzfh.service.log.mapper.LogMapper">
+    <resultMap type="com.hzfh.api.log.model.Log" id="resultMapLog">
+        <result property="id" column="id"/>
+        <result property="businessNumber" column="business_number"/>
+        <result property="level" column="level"/>
+        <result property="operateName" column="operate_name"/>
+        <result property="supplement" column="supplement"/>
+        <result property="accessUrl" column="access_url"/>
+        <result property="forwardUrl" column="forward_url"/>
+        <result property="projectName" column="project_name"/>
+        <result property="className" column="class_name"/>
+        <result property="methodName" column="method_name"/>
+        <result property="userIdentifierCode" column="user_identifier_code"/>
+        <result property="userNo" column="user_no"/>
+        <result property="startTime" column="start_time"/>
+        <result property="endTime" column="end_time"/>
+        <result property="hostIp" column="host_ip"/>
+        <result property="requestType" column="request_type"/>
+        <result property="exceptionMsg" column="exception_msg"/>
+        <result property="paramIn" column="param_in"/>
+        <result property="paramOut" column="param_out"/>
+        <result property="status" column="status"/>
+        <result property="browser" column="browser"/>
+    </resultMap>
+    <insert id="add" parameterType="com.hzfh.api.log.model.Log" useGeneratedKeys="true" keyProperty="id">
+        insert into log
+        (business_number,level,operate_name,supplement,access_url,forward_url,project_name,class_name,method_name,user_identifier_code,user_no,start_time,end_time,host_ip,request_type,exception_msg,param_in,param_out,status,browser)
+        values
+        (#{businessNumber},#{level},#{operateName},#{supplement},#{accessUrl},#{forwardUrl},#{projectName},#{className},#{methodName},#{userIdentifierCode},#{userNo},#{startTime},#{endTime},#{hostIp},#{requestType},#{exceptionMsg},#{paramIn},#{paramOut},#{status},#{browser})
+    </insert>
+</mapper>

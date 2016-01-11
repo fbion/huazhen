@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<mappers>
+		<mapper resource="mapper/ActivityApplyUserMapper.xml"/>
+        <mapper resource="mapper/ActivityUsersMapper.xml"/>
+		<mapper resource="mapper/DrawSettingMapper.xml"/>
+		<mapper resource="mapper/LotteriesMapper.xml"/>
+		<mapper resource="mapper/WinningRecordMapper.xml"/>
+	</mappers>
+</configuration>

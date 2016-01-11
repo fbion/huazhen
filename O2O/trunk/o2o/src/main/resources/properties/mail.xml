@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+    <comment>邮件配置</comment>
+    <entry key="mail.host"><![CDATA[mail.bestinvestor.com.cn]]></entry>
+    <entry key="mail.user"><![CDATA[administrator]]></entry>
+    <entry key="mail.pass"><![CDATA[huazhen@123]]></entry>
+    <entry key="mail.postfix"><![CDATA[bestinvestor.com.cn]]></entry>
+    <entry key="mail.sender.name"><![CDATA[社区超市]]></entry>
+
+</properties>

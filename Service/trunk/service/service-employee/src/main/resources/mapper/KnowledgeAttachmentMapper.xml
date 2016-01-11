@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hzfh.service.employee.mapper.KnowledgeAttachmentMapper">
+	<resultMap type="com.hzfh.api.employee.model.KnowledgeAttachment" id="resultMapKnowledgeAttachment">
+		<result property="id" column="id"/>
+		<result property="knowledgeNo" column="knowledge_no"/>
+		<result property="name" column="name"/>
+		<result property="path" column="path"/>
+		<result property="type" column="type"/>
+		<result property="status" column="status"/>
+		<result property="inUserNo" column="in_user_no"/>
+		<result property="inTime" column="in_time" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
+	</resultMap>
+	<select id="getList" resultMap="resultMapKnowledgeAttachment">
+		SELECT id,knowledge_no,name,path,type,status,in_user_no,in_time
+		FROM knowledge_attachment
+	</select>
+	<select id="getPagingList" resultMap="resultMapKnowledgeAttachment" parameterType="com.hzfh.api.employee.model.query.KnowledgeAttachmentCondition" statementType="STATEMENT">
+		SELECT id,knowledge_no,name,path,type,status,in_user_no,in_time FROM knowledge_attachment where 1=1
+		ORDER BY
+		<foreach item="item" collection="sortItemList" separator=",">
+			${item.sortFeild} ${item.sortType}
+		</foreach>
+		LIMIT ${startIndex},${pageSize}
+	</select>
+	<select id="getTotalCount" resultType="int" parameterType="com.hzfh.api.employee.model.query.KnowledgeAttachmentCondition" statementType="STATEMENT">
+		SELECT count(1) FROM knowledge_attachment where 1=1
+	</select>
+	<select id="getInfo" resultMap="resultMapKnowledgeAttachment" parameterType="int">
+		SELECT id,knowledge_no,name,path,type,status,in_user_no,in_time FROM knowledge_attachment where id=#{id}
+	</select>
+	<insert id="add" parameterType="com.hzfh.api.employee.model.KnowledgeAttachment" useGeneratedKeys="true" keyProperty="id">
+		insert into knowledge_attachment
+		(knowledge_no,name,path,type,status,in_user_no,in_time)
+		values
+		(#{knowledgeNo},#{name},#{path},#{type},#{status},#{inUserNo},current_timestamp())
+	</insert>
+	<update id="update" parameterType="com.hzfh.api.employee.model.KnowledgeAttachment">
+		update knowledge_attachment set 
+		knowledge_no=#{knowledgeNo},name=#{name},path=#{path},type=#{type},status=#{status}
+		where id=#{id}
+	</update>
+	<select id="getListByKnowledgeNo" resultMap="resultMapKnowledgeAttachment">
+		SELECT id,knowledge_no,name,path,type,status,in_user_no,in_time
+		FROM knowledge_attachment 
+		where knowledge_no=#{knowledgeNo} and status=1
+	</select>
+	<delete id="delete" parameterType="int">
+		delete from knowledge_attachment where id = #{id}
+	</delete>
+	<update id="updateStatus">
+		update knowledge_attachment set 
+		status=#{1}
+		where id=#{0}
+	</update>
+</mapper>

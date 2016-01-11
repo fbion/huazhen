@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hzfh.service.customer.mapper.PaymentMoneyFreezeMapper">
+	<resultMap type="com.hzfh.api.customer.model.PaymentMoneyFreeze" id="resultMapPaymentMoneyFreeze">
+		<result property="id" column="id"/>
+		<result property="accountType" column="account_type"/>
+		<result property="p2pCustomerNo" column="p2p_customer_no"/>
+		<result property="p2pCustomerName" column="p2p_customer_name"/>
+		<result property="moneyFreeze" column="money_freeze"/>
+		<result property="changeType" column="change_type"/>
+		<result property="refSn" column="ref_sn"/>
+		<result property="orderNo" column="order_no"/>
+		<result property="refBatchedOrg" column="ref_batched_org"/>
+		<result property="timeCreate" column="time_create" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
+		<result property="state" column="state"/>
+		<result property="note" column="note"/>
+		<result property="dateWork" column="date_work" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
+	</resultMap>
+	<select id="getList" resultMap="resultMapPaymentMoneyFreeze">
+		SELECT id,account_type,p2p_customer_no,p2p_customer_name,money_freeze,change_type,ref_sn,order_no,ref_batched_org,time_create,state,note,date_work
+		FROM payment_money_freeze
+	</select>
+	<select id="getPagingList" resultMap="resultMapPaymentMoneyFreeze" parameterType="com.hzfh.api.customer.model.query.PaymentMoneyFreezeCondition" statementType="STATEMENT">
+		SELECT id,account_type,p2p_customer_no,p2p_customer_name,money_freeze,change_type,ref_sn,order_no,ref_batched_org,time_create,state,note,date_work FROM payment_money_freeze where 1=1
+		ORDER BY
+		<foreach item="item" collection="sortItemList" separator=",">
+			${item.sortFeild} ${item.sortType}
+		</foreach>
+		LIMIT ${startIndex},${pageSize}
+	</select>
+	<select id="getTotalCount" resultType="int" parameterType="com.hzfh.api.customer.model.query.PaymentMoneyFreezeCondition" statementType="STATEMENT">
+		SELECT count(1) FROM payment_money_freeze where 1=1
+	</select>
+	<select id="getInfo" resultMap="resultMapPaymentMoneyFreeze">
+		SELECT id,account_type,p2p_customer_no,p2p_customer_name,money_freeze,change_type,ref_sn,order_no,ref_batched_org,time_create,state,note,date_work FROM payment_money_freeze where id=#{id}
+	</select>
+	<select id="getInfoBySnAndType" resultMap="resultMapPaymentMoneyFreeze">
+		SELECT id,account_type,p2p_customer_no,p2p_customer_name,money_freeze,change_type,ref_sn,order_no,ref_batched_org,time_create,state,note,date_work FROM payment_money_freeze where ref_sn=#{refSn} AND  change_type=#{type}
+	</select>
+	<insert id="add" parameterType="com.hzfh.api.customer.model.PaymentMoneyFreeze" useGeneratedKeys="true" keyProperty="id">
+		insert into payment_money_freeze
+		(account_type,p2p_customer_no,p2p_customer_name,money_freeze,change_type,ref_sn,order_no,ref_batched_org,time_create,state,note,date_work)
+		values
+		(#{accountType},#{p2pCustomerNo},#{p2pCustomerName},#{moneyFreeze},#{changeType},#{refSn},#{orderNo},#{refBatchedOrg},#{timeCreate},#{state},#{note},#{dateWork})
+	</insert>
+	<update id="update" parameterType="com.hzfh.api.customer.model.PaymentMoneyFreeze">
+		update payment_money_freeze set 
+		account_type=#{accountType},p2p_customer_no=#{p2pCustomerNo},p2p_customer_name=#{p2pCustomerName},money_freeze=#{moneyFreeze},change_type=#{changeType},ref_sn=#{refSn},order_no=#{orderNo},ref_batched_org=#{refBatchedOrg},time_create=#{timeCreate},state=#{state},note=#{note},date_work=#{dateWork}
+		where id=#{id}
+	</update>
+	<delete id="delete" parameterType="int">
+		delete from payment_money_freeze where id = #{id}
+	</delete>
+</mapper>

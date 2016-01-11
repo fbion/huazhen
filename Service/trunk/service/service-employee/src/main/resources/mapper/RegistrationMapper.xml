@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hzfh.service.employee.mapper.RegistrationMapper">
+	<resultMap type="com.hzfh.api.employee.model.Registration" id="resultMapRegistration">
+		<result property="id" column="id"/>
+		<result property="registrationOrder" column="registration_order"/>
+		<result property="type" column="type"/>
+		<result property="suppliersId" column="suppliers_id"/>
+		<result property="operator" column="operator"/>
+		<result property="registrationDate" column="registration_date" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
+		<result property="inUserNo" column="in_user_no"/>
+		<result property="inTime" column="in_time" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
+		<result property="editUserNo" column="edit_user_no"/>
+		<result property="editTime" column="edit_time" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
+		<result property="editComment" column="edit_comment"/>
+	</resultMap>
+	<select id="getList" resultMap="resultMapRegistration">
+		SELECT id,registration_order,type,suppliers_id,operator,registration_date,in_user_no,in_time,edit_user_no,edit_time,edit_comment
+		FROM registration
+	</select>
+	<select id="getPagingList" resultMap="resultMapRegistration" parameterType="com.hzfh.api.employee.model.query.RegistrationCondition" statementType="STATEMENT">
+		SELECT id,registration_order,type,suppliers_id,operator,registration_date,in_user_no,in_time,edit_user_no,edit_time,edit_comment FROM registration where 1=1
+		ORDER BY
+		<foreach item="item" collection="sortItemList" separator=",">
+			${item.sortFeild} ${item.sortType}
+		</foreach>
+		LIMIT ${startIndex},${pageSize}
+	</select>
+	<select id="getTotalCount" resultType="int" parameterType="com.hzfh.api.employee.model.query.RegistrationCondition" statementType="STATEMENT">
+		SELECT count(1) FROM registration where 1=1
+	</select>
+	<select id="getInfo" resultMap="resultMapRegistration" parameterType="int">
+		SELECT id,registration_order,type,suppliers_id,operator,registration_date,in_user_no,in_time,edit_user_no,edit_time,edit_comment FROM registration where id=#{id}
+	</select>
+	<insert id="add" parameterType="com.hzfh.api.employee.model.Registration" useGeneratedKeys="true" keyProperty="id">
+		insert into registration
+		(registration_order,type,suppliers_id,operator,registration_date,in_user_no,in_time,edit_user_no,edit_time,edit_comment)
+		values
+		(#{registrationOrder},#{type},#{suppliersId},#{operator},#{registrationDate},#{inUserNo},current_timestamp(),#{editUserNo},current_timestamp(),#{editComment})
+	</insert>
+	<update id="update" parameterType="com.hzfh.api.employee.model.Registration">
+		update registration set 
+		registration_order=#{registrationOrder},type=#{type},suppliers_id=#{suppliersId},operator=#{operator},registration_date=#{registrationDate},edit_user_no=#{editUserNo},edit_time=current_timestamp(),edit_comment=#{editComment}
+		where id=#{id}
+	</update>
+	<delete id="delete" parameterType="int">
+		delete from registration where id = #{id}
+	</delete>
+</mapper>

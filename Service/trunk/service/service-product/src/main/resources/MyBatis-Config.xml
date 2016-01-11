@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+
+    <mappers>
+		<mapper resource="mapper/DecisionMapper.xml"/>
+		<mapper resource="mapper/DecisionLogMapper.xml"/>
+		<mapper resource="mapper/FinancierBusinessMapper.xml"/>
+		<mapper resource="mapper/FinancierPersonalMapper.xml"/>
+		<mapper resource="mapper/PartnerIssuerMapper.xml"/>
+		<mapper resource="mapper/PartnerRateMapper.xml"/>
+		<mapper resource="mapper/ProductMapper.xml"/>
+		<mapper resource="mapper/ProductAttachmentMapper.xml"/>
+		<mapper resource="mapper/ProductStagesMapper.xml"/>
+		<mapper resource="mapper/P2pProductMapper.xml"/>
+		<mapper resource="mapper/PartnerIssuerFollowMapper.xml"/>
+    </mappers>
+
+</configuration>

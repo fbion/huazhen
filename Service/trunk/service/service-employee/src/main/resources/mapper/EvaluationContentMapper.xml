@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hzfh.service.employee.mapper.EvaluationContentMapper">
+	<resultMap type="com.hzfh.api.employee.model.EvaluationContent" id="resultMapEvaluationContent">
+		<result property="id" column="id"/>
+		<result property="type" column="type"/>
+		<result property="item" column="item"/>
+		<result property="parentNo" column="parent_no"/>
+		<result property="grade" column="grade"/>
+		<result property="point" column="point"/>
+		<result property="standard" column="standard"/>
+		<result property="remark" column="remark"/>
+		<result property="inUserNo" column="in_user_no"/>
+		<result property="inTime" column="in_time" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
+		<result property="editUserNo" column="edit_user_no"/>
+		<result property="editTime" column="edit_time" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
+		<result property="editComment" column="edit_comment"/>
+	</resultMap>
+	<sql id="Base_Column_List" >
+	  id,type,item,parent_no,grade,point,standard,remark,in_user_no,in_time,edit_user_no,edit_time,edit_comment
+   </sql>
+	<select id="getList" resultMap="resultMapEvaluationContent">
+		SELECT <include refid="Base_Column_List"/> FROM evaluation_content ORDER BY id
+	</select>
+	<select id="getPagingList" resultMap="resultMapEvaluationContent" parameterType="com.hzfh.api.employee.model.query.EvaluationContentCondition" statementType="STATEMENT">
+		SELECT <include refid="Base_Column_List"/> FROM evaluation_content where 1=1
+		ORDER BY
+		<foreach item="item" collection="sortItemList" separator=",">
+			${item.sortFeild} ${item.sortType}
+		</foreach>
+		LIMIT ${startIndex},${pageSize}
+	</select>
+	<select id="getTotalCount" resultType="int" parameterType="com.hzfh.api.employee.model.query.EvaluationContentCondition" statementType="STATEMENT">
+		SELECT count(1) FROM evaluation_content where 1=1
+	</select>
+	<select id="getInfo" resultMap="resultMapEvaluationContent" parameterType="int">
+		SELECT c.*  FROM evaluation_content c 
+		where c.id=#{id}
+	</select>
+	<insert id="add" parameterType="com.hzfh.api.employee.model.EvaluationContent" useGeneratedKeys="true" keyProperty="id">
+		insert into evaluation_content
+		(type,item,parent_no,grade,point,standard,remark,in_user_no,in_time,edit_user_no,edit_time,edit_comment)
+		values
+		(#{type},#{item},#{parentNo},#{grade},#{point},#{standard},#{remark},#{inUserNo},current_timestamp(),#{editUserNo},current_timestamp(),#{editComment})
+	</insert>
+	<update id="update" parameterType="com.hzfh.api.employee.model.EvaluationContent">
+		update evaluation_content set 
+		type=#{type},item=#{item},parent_no=#{parentNo},grade=#{grade},point=#{point},standard=#{standard},remark=#{remark},edit_user_no=#{editUserNo},edit_time=current_timestamp(),edit_comment=#{editComment}
+		where id=#{id}
+	</update>
+	<delete id="delete" parameterType="int">
+		delete from evaluation_content where id = #{id}
+	</delete>
+	<select id="getInfoByIdAndEvaluationRecordNo" resultMap="resultMapEvaluationContent" parameterType="int">
+		SELECT c.*,s.score  FROM evaluation_content c left join evaluation_score s
+		on c.id = s.evaluation_content_no
+		where c.id=#{evaluationContentNo} and s.evaluation_record_no=#{evaluationRecordNo}
+	</select>
+	
+	<select id="getListByTypeAndParentNo" resultMap="resultMapEvaluationContent">
+		SELECT <include refid="Base_Column_List"/>
+		FROM evaluation_content where type=#{type} and parent_no=#{parentNo} ORDER BY id
+	</select>
+</mapper>

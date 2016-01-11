@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hzfh.service.workFlow.mapper.ActHiProcinstMapper">
+	<resultMap type="com.hzfh.api.workFlow.model.ActHiProcinst" id="resultMapActHiProcinst">
+		<result property="ID" column="id_"/>
+		<result property="procInstId" column="proc_inst_id_"/>
+		<result property="businessKey" column="business_key_"/>
+		<result property="procDefId" column="proc_def_id_"/>
+		<result property="startTime" column="start_time_" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
+		<result property="endTime" column="end_time_" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
+		<result property="duration" column="duration_"/>
+		<result property="startUserId" column="start_user_id_"/>
+		<result property="startActId" column="start_act_id_"/>
+		<result property="endActId" column="end_act_id_"/>
+		<result property="superProcessInstanceId" column="super_process_instance_id_"/>
+		<result property="deleteReason" column="delete_reason_"/>
+		<result property="tenantId" column="tenant_id_"/>
+		<result property="name" column="name_"/>
+	</resultMap>
+	<select id="getList" resultMap="resultMapActHiProcinst">
+		SELECT id_,proc_inst_id_,business_key_,proc_def_id_,start_time_,end_time_,duration_,start_user_id_,start_act_id_,end_act_id_,super_process_instance_id_,delete_reason_,tenant_id_,name_
+		FROM ACT_HI_PROCINST
+	</select>
+	<select id="getPagingList" resultMap="resultMapActHiProcinst" parameterType="com.hzfh.api.workFlow.model.query.ActHiProcinstCondition" statementType="STATEMENT">
+		SELECT id_,proc_inst_id_,business_key_,proc_def_id_,start_time_,end_time_,duration_,start_user_id_,start_act_id_,end_act_id_,super_process_instance_id_,delete_reason_,tenant_id_,name_ 
+		FROM ACT_HI_PROCINST where 1=1
+		<if test="startUserId != 0">and START_USER_ID_ = ${startUserId}</if>
+		<if test="bySelectTitle != null">and proc_def_id_ like CONCAT('${bySelectTitle}',"%")</if>
+		<if test="byStatus == 1">and end_time_ is not null</if>
+		<if test="byStatus == 2">and end_time_ is null</if>
+		<if test="byStatus == 3">and end_act_id_='deleteActiviti'</if>
+		<if test="byDate != null and byDate != ''">and start_time_ like  CONCAT('${byDate}',"%")</if>
+		ORDER BY 
+		<foreach item="item" collection="sortItemList" separator=",">
+			${item.sortFeild} ${item.sortType}
+		</foreach>
+		LIMIT ${startIndex},${pageSize}
+	</select>
+	<select id="getTotalCount" resultType="int" parameterType="com.hzfh.api.workFlow.model.query.ActHiProcinstCondition" statementType="STATEMENT">
+		SELECT count(1) FROM ACT_HI_PROCINST where 1=1
+		<if test="startUserId != 0">and START_USER_ID_ = ${startUserId}</if>
+		<if test="bySelectTitle != null">and proc_def_id_ like CONCAT('${bySelectTitle}',"%")</if>
+		<if test="byStatus == 1">and end_time_ is not null</if>
+		<if test="byStatus == 2">and end_time_ is null</if>
+		<if test="byStatus == 3">and end_act_id_='deleteActiviti'</if>
+		<if test="byDate != null and byDate != ''">and start_time_ like  CONCAT('${byDate}',"%")</if>
+	</select>
+	<select id="getInfo" resultMap="resultMapActHiProcinst" parameterType="int">
+		SELECT id_,proc_inst_id_,business_key_,proc_def_id_,start_time_,end_time_,duration_,start_user_id_,start_act_id_,end_act_id_,super_process_instance_id_,delete_reason_,tenant_id_,name_ FROM ACT_HI_PROCINST where id_=#{ID}
+	</select>
+	<insert id="add" parameterType="com.hzfh.api.workFlow.model.ActHiProcinst" useGeneratedKeys="true" keyProperty="id">
+		insert into ACT_HI_PROCINST
+		(id_,proc_inst_id_,business_key_,proc_def_id_,start_time_,end_time_,duration_,start_user_id_,start_act_id_,end_act_id_,super_process_instance_id_,delete_reason_,tenant_id_,name_)
+		values
+		(#{ID},#{procInstId},#{businessKey},#{procDefId},#{startTime},#{endTime},#{duration},#{startUserId},#{startActId},#{endActId},#{superProcessInstanceId},#{deleteReason},#{tenantId},#{name})
+	</insert>
+	<update id="update" parameterType="com.hzfh.api.workFlow.model.ActHiProcinst">
+		update ACT_HI_PROCINST set 
+		id_=#{ID},proc_inst_id_=#{procInstId},business_key_=#{businessKey},proc_def_id_=#{procDefId},start_time_=#{startTime},end_time_=#{endTime},duration_=#{duration},start_user_id_=#{startUserId},start_act_id_=#{startActId},end_act_id_=#{endActId},super_process_instance_id_=#{superProcessInstanceId},delete_reason_=#{deleteReason},tenant_id_=#{tenantId},name_=#{name}
+		where id_=#{ID} and proc_inst_id_=#{procInstId}
+	</update>
+	<delete id="delete" parameterType="int">
+		delete from ACT_HI_PROCINST where id = #{id}
+	</delete>
+	<select id="getInfoByProInsId" resultMap="resultMapActHiProcinst" parameterType="String">
+		SELECT id_,proc_inst_id_,business_key_,proc_def_id_,start_time_,end_time_,duration_,start_user_id_,start_act_id_,end_act_id_,super_process_instance_id_,delete_reason_,tenant_id_,name_ 
+		FROM ACT_HI_PROCINST where proc_inst_id_=#{processInstanceId}
+	</select>
+
+	<update id="completeHistoryTaskByActivitiNo">
+		UPDATE ACT_HI_PROCINST SET end_time_=CURRENT_TIMESTAMP(),end_act_id_='_cancelProcess' WHERE proc_inst_id_=#{activitiNo}
+	</update>
+	<select id="getInfoString" resultMap="resultMapActHiProcinst" parameterType="String">
+		SELECT id_,proc_inst_id_,business_key_,proc_def_id_,start_time_,end_time_,duration_,start_user_id_,start_act_id_,end_act_id_,super_process_instance_id_,delete_reason_,tenant_id_,name_ FROM ACT_HI_PROCINST where id_=#{id}
+	</select>
+	<update id="cancelHistoryTaskByActivitiNo">
+		UPDATE ACT_HI_PROCINST SET end_time_=CURRENT_TIMESTAMP(),end_act_id_='deleteActiviti' WHERE proc_inst_id_=#{activitiNo}
+	</update>
+</mapper>

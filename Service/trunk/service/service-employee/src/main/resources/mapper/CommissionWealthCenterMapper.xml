@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hzfh.service.employee.mapper.CommissionWealthCenterMapper">
+    <resultMap type="com.hzfh.api.employee.model.CommissionWealthCenter" id="resultMapCommissionWealthCenter">
+        <result property="id" column="id"/>
+        <result property="empNo" column="emp_no"/>
+        <result property="empName" column="emp_name"/>
+        <result property="deptNo" column="dept_no"/>
+        <result property="positionNo" column="position_no"/>
+        <result property="salesMoney" column="sales_money"/>
+        <result property="commissionScale" column="commission_scale"/>
+        <result property="establishMoney" column="establish_money"/>
+        <result property="commissionMoney" column="commission_money"/>
+        <result property="isExamine" column="is_examine"/>
+        <result property="year" column="year"/>
+        <result property="month" column="month"/>
+        <result property="inTime" column="in_time" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
+        <result property="productNo" column="product_no"/>
+        <result property="type" column="type"/>
+    </resultMap>
+    <select id="getList" resultMap="resultMapCommissionWealthCenter">
+        SELECT id,emp_no,emp_name,dept_no,position_no,sales_money,commission_scale,establish_money,commission_money,is_examine,year,month,in_time,product_no,type
+        FROM commission_wealthCenter
+    </select>
+    <select id="getPagingList" resultMap="resultMapCommissionWealthCenter" parameterType="com.hzfh.api.employee.model.query.CommissionWealthCenterCondition" statementType="STATEMENT">
+        SELECT id,emp_no,emp_name,dept_no,position_no,sales_money sales_money,commission_scale,establish_money,commission_money,is_examine,year,month,in_time,product_no,type FROM commission_wealthCenter where 1=1
+        <if test="empName!=null and empName!=''"> and emp_name='${empName}'</if>
+        <if test="deptNo!=0"> and dept_no=${deptNo}</if>
+        <if test="positionNo!=0"> and position_no=${positionNo}</if>
+        <if test="year !=0"> and year =${year}</if>
+        <if test="month !=0"> and month =${month}</if>
+        ORDER BY
+        <foreach item="item" collection="sortItemList" separator=",">
+            ${item.sortFeild} ${item.sortType}
+        </foreach>
+        LIMIT ${startIndex},${pageSize}
+    </select>
+    <select id="getTotalCount" resultType="int" parameterType="com.hzfh.api.employee.model.query.CommissionWealthCenterCondition" statementType="STATEMENT">
+        SELECT count(1) FROM commission_wealthCenter where 1=1
+        <if test="empName!=null and empName!=''"> and emp_name='${empName}'</if>
+        <if test="deptNo!=0"> and dept_no=${deptNo}</if>
+        <if test="positionNo!=0"> and position_no=${positionNo}</if>
+        <if test="year !=0"> and year =${year}</if>
+        <if test="month !=0"> and month =${month}</if>
+    </select>
+    <select id="getInfo" resultMap="resultMapCommissionWealthCenter" parameterType="int">
+        SELECT id,emp_no,emp_name,dept_no,position_no,sales_money,commission_scale,establish_money,commission_money,is_examine,year,month,in_time,product_no,type FROM commission_wealthCenter where id=#{id}
+    </select>
+    <insert id="add" parameterType="com.hzfh.api.employee.model.CommissionWealthCenter" useGeneratedKeys="true" keyProperty="id">
+        insert into commission_wealthCenter
+        (emp_no,emp_name,dept_no,position_no,sales_money,commission_scale,establish_money,commission_money,is_examine,year,month,in_time,product_no,type)
+        values
+        (#{empNo},#{empName},#{deptNo},#{positionNo},#{salesMoney},#{commissionScale},#{establishMoney},#{commissionMoney},#{isExamine},#{year},#{month},current_timestamp(),#{productNo},#{type})
+    </insert>
+    <update id="update" parameterType="com.hzfh.api.employee.model.CommissionWealthCenter">
+        update commission_wealthCenter set
+        emp_no=#{empNo},emp_name=#{empName},dept_no=#{deptNo},position_no=#{positionNo},sales_money=#{salesMoney},commission_scale=#{commissionScale},establish_money=#{establishMoney},commission_money=#{commissionMoney},is_examine=#{isExamine},year=#{year},month=#{month},product_no=#{productNo},type=#{type}
+        where id=#{id}
+    </update>
+    <delete id="delete" parameterType="int">
+        delete from commission_wealthCenter where id = #{id}
+    </delete>
+    <select id="getListForExcel" resultMap="resultMapCommissionWealthCenter" parameterType="com.hzfh.api.employee.model.query.CommissionWealthCenterCondition" statementType="STATEMENT">
+        SELECT id,emp_no,emp_name,dept_no,position_no,sales_money,commission_scale,establish_money,commission_money,is_examine,year,month,in_time,type FROM commission_wealthCenter where 1=1
+        <if test="empName!=null and empName!=''"> and emp_name='${empName}'</if>
+        <if test="deptNo!=0"> and dept_no=${deptNo}</if>
+        <if test="positionNo!=0"> and position_no=${positionNo}</if>
+        <if test="year !=0"> and year =${year}</if>
+        <if test="month !=0"> and month =${month}</if>
+        ORDER BY
+        <foreach item="item" collection="sortItemList" separator=",">
+            ${item.sortFeild} ${item.sortType}
+        </foreach>
+    </select>
+</mapper>

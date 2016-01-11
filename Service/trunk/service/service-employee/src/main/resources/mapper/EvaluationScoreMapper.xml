@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hzfh.service.employee.mapper.EvaluationScoreMapper">
+	<resultMap type="com.hzfh.api.employee.model.EvaluationScore" id="resultMapEvaluationScore">
+		<result property="id" column="id"/>
+		<result property="evaluationRecordNo" column="evaluation_record_no"/>
+		<result property="evaluationContentNo" column="evaluation_content_no"/>
+		<result property="score" column="score"/>
+		<!-- <association property="interviewEvaluationRecord" javaType="com.hzfh.api.employee.Model.InterviewEvaluationRecord">
+		    <result property="id" column="id"/>
+			<result property="name" column="name"/>
+			<result property="sex" column="sex"/>
+			<result property="desirePositionNo" column="desire_position_no"/>
+			<result property="firstTime" column="first_time" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
+			<result property="totalScore" column="total_score"/>
+			<result property="evaluation" column="evaluation"/>
+			<result property="conclusion" column="conclusion"/>
+			<result property="hirePositionNo" column="hire_position_no"/>
+			<result property="empNo" column="emp_no"/>
+			<result property="interviewDate" column="interview_date" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
+			<result property="firstEvaluation" column="first_evaluation"/>
+			<result property="secondEvaluation" column="second_evaluation"/>
+			<result property="inUserNo" column="in_user_no"/>
+			<result property="inTime" column="in_time" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
+			<result property="editUserNo" column="edit_user_no"/>
+			<result property="editTime" column="edit_time" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
+			<result property="editComment" column="edit_comment"/>
+		</association> -->
+	</resultMap>
+	<select id="getList" resultMap="resultMapEvaluationScore">
+		SELECT id,evaluation_record_no,evaluation_content_no,score
+		FROM evaluation_score
+	</select>
+	<select id="getPagingList" resultMap="resultMapEvaluationScore" parameterType="com.hzfh.api.employee.model.query.EvaluationScoreCondition" statementType="STATEMENT">
+		SELECT id,evaluation_record_no,evaluation_content_no,score FROM evaluation_score where 1=1
+		ORDER BY
+		<foreach item="item" collection="sortItemList" separator=",">
+			${item.sortFeild} ${item.sortType}
+		</foreach>
+		LIMIT ${startIndex},${pageSize}
+	</select>
+	<select id="getTotalCount" resultType="int" parameterType="com.hzfh.api.employee.model.query.EvaluationScoreCondition" statementType="STATEMENT">
+		SELECT count(1) FROM evaluation_score where 1=1
+	</select>
+	<select id="getInfo" resultMap="resultMapEvaluationScore" parameterType="int">
+		SELECT id,evaluation_record_no,evaluation_content_no,score FROM evaluation_score where id=#{id}
+	</select>
+	<insert id="add" parameterType="com.hzfh.api.employee.model.EvaluationScore" useGeneratedKeys="true" keyProperty="id">
+		insert into evaluation_score
+		(evaluation_record_no,evaluation_content_no,score)
+		values
+		(#{evaluationRecordNo},#{evaluationContentNo},#{score})
+	</insert>
+	<update id="update" parameterType="com.hzfh.api.employee.model.EvaluationScore">
+		update evaluation_score set 
+		evaluation_record_no=#{evaluationRecordNo},evaluation_content_no=#{evaluationContentNo},score=#{score}
+		where id=#{id}
+	</update>
+	<delete id="delete" parameterType="int">
+		delete from evaluation_score where id = #{id}
+	</delete>
+	
+	<select id="getListByEvaluationRecordNo" resultMap="resultMapEvaluationScore" parameterType="int">
+		SELECT id,evaluation_record_no,evaluation_content_no,score FROM evaluation_score where evaluation_record_no=#{id} order by id
+	</select>
+</mapper>

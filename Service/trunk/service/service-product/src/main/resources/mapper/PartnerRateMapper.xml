@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hzfh.service.product.mapper.PartnerRateMapper">
+	<resultMap type="com.hzfh.api.product.model.PartnerRate" id="resultMapPartnerRate">
+		<result property="id" column="id" />
+		<result property="productType" column="product_type" />
+		<result property="productNo" column="product_no" />
+		<result property="partnerType" column="partner_type" />
+		<result property="partnerNo" column="partner_no" />
+		<result property="upperLimit" column="upper_limit" />
+		<result property="lowerLimit" column="lower_limit" />
+		<result property="rate" column="rate" />
+		<result property="rateAdd" column="rate_add" />
+		<result property="inUserNo" column="in_user_no" />
+		<result property="inTime" column="in_time" jdbcType="TIMESTAMP"
+			javaType="java.sql.Timestamp" />
+		<result property="editUserNo" column="edit_user_no" />
+		<result property="editTime" column="edit_time" jdbcType="TIMESTAMP"
+			javaType="java.sql.Timestamp" />
+		<result property="editComment" column="edit_comment" />
+	</resultMap>
+	<select id="getList" resultMap="resultMapPartnerRate">
+		SELECT
+		id,product_type,product_no,partner_type,partner_no,upper_limit,lower_limit,rate,rate_add,in_user_no,in_time,edit_user_no,edit_time,edit_comment
+		FROM partner_rate
+	</select>
+	<select id="getPagingList" resultMap="resultMapPartnerRate"
+		parameterType="com.hzfh.api.product.model.query.PartnerRateCondition"
+		statementType="STATEMENT">
+		SELECT
+		id,product_type,product_no,partner_type,partner_no,upper_limit,lower_limit,rate,rate_add,in_user_no,in_time,edit_user_no,edit_time,edit_comment
+		FROM partner_rate where 1=1
+		<if test="productType != 0">and 	product_type = ${productType}</if>
+		<if test="product != 0">and 	product_no = ${product}</if>
+		<if test="partner != 0">and 	partner_no = ${partner}</if>			
+		ORDER BY
+		<foreach item="item" collection="sortItemList" separator=",">
+			${item.sortFeild} ${item.sortType}
+		</foreach>
+		LIMIT ${startIndex},${pageSize}
+	</select>
+	<select id="getTotalCount" resultType="int"
+		parameterType="com.hzfh.api.product.model.query.PartnerRateCondition"
+		statementType="STATEMENT">
+		SELECT count(1) FROM partner_rate where 1=1
+		<if test="productType != 0">and 	product_type = ${productType}</if>
+		<if test="product != 0">and 	product_no = ${product}</if>
+		<if test="partner != 0">and 	partner_no = ${partner}</if>	
+	</select>
+	<select id="getInfo" resultMap="resultMapPartnerRate"
+		parameterType="int">
+		SELECT
+		id,product_type,product_no,partner_type,partner_no,upper_limit,lower_limit,rate,rate_add,in_user_no,in_time,edit_user_no,edit_time,edit_comment
+		FROM partner_rate where id=#{id}
+	</select>
+	<insert id="add" parameterType="com.hzfh.api.product.model.PartnerRate"
+		useGeneratedKeys="true" keyProperty="id">
+		insert into partner_rate
+		(product_type,product_no,partner_type,partner_no,upper_limit,lower_limit,rate,rate_add,in_user_no,in_time,edit_user_no,edit_time,edit_comment)
+		values
+		(#{productType},#{productNo},#{partnerType},#{partnerNo},#{upperLimit},#{lowerLimit},#{rate},#{rateAdd},#{inUserNo},current_timestamp(),#{editUserNo},current_timestamp(),#{editComment})
+	</insert>
+	<update id="update" parameterType="com.hzfh.api.product.model.PartnerRate">
+		update partner_rate set
+		product_type=#{productType},product_no=#{productNo},partner_type=#{partnerType},partner_no=#{partnerNo},upper_limit=#{upperLimit},lower_limit=#{lowerLimit},rate=#{rate},rate_add=#{rateAdd},edit_user_no=#{editUserNo},edit_time=current_timestamp(),edit_comment=#{editComment}
+		where id=#{id}
+	</update>
+	<delete id="delete" parameterType="int">
+		delete from partner_rate where
+		id = #{id}
+	</delete>
+
+
+	<select id="getPartnerRate" resultMap="resultMapPartnerRate">
+		SELECT id,product_type,product_no,partner_type,partner_no,upper_limit,lower_limit,rate,rate_add,in_user_no,in_time,edit_user_no,edit_time,edit_comment
+		FROM partner_rate where product_no=#{productNo} and upper_limit &gt;= #{money} and lower_limit &lt; #{money}
+	</select>
+
+	<select id="getListByProductNo" parameterType="int" resultMap="resultMapPartnerRate">
+		SELECT
+		id,product_type,product_no,partner_type,partner_no,upper_limit,lower_limit,rate,rate_add,in_user_no,in_time,edit_user_no,edit_time,edit_comment
+		FROM partner_rate WHERE product_no=#{productNo}
+	</select>
+
+
+
+
+
+</mapper>

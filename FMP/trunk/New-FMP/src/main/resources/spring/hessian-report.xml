@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<bean id="companySalesDailyService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+        <property name="serviceUrl">
+            <value>http://reportservice.hzfh.com:8080/service-report/companySalesDaily</value>
+        </property>
+        <property name="serviceInterface">
+            <value>com.hzfh.api.report.service.CompanySalesDailyService</value>
+        </property>
+
+        <property name="overloadEnabled" value="true"></property>
+    </bean>
+	<bean id="companySalesTotalService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+        <property name="serviceUrl">
+            <value>http://reportservice.hzfh.com:8080/service-report/companySalesTotal</value>
+        </property>
+        <property name="serviceInterface">
+            <value>com.hzfh.api.report.service.CompanySalesTotalService</value>
+        </property>
+
+        <property name="overloadEnabled" value="true"></property>
+    </bean>
+	<bean id="deptSalesDailyService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+        <property name="serviceUrl">
+            <value>http://reportservice.hzfh.com:8080/service-report/deptSalesDaily</value>
+        </property>
+        <property name="serviceInterface">
+            <value>com.hzfh.api.report.service.DeptSalesDailyService</value>
+        </property>
+
+        <property name="overloadEnabled" value="true"></property>
+    </bean>
+	<bean id="deptSalesTotalService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+        <property name="serviceUrl">
+            <value>http://reportservice.hzfh.com:8080/service-report/deptSalesTotal</value>
+        </property>
+        <property name="serviceInterface">
+            <value>com.hzfh.api.report.service.DeptSalesTotalService</value>
+        </property>
+
+        <property name="overloadEnabled" value="true"></property>
+    </bean>
+	<bean id="empSalesDailyService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+        <property name="serviceUrl">
+            <value>http://reportservice.hzfh.com:8080/service-report/empSalesDaily</value>
+        </property>
+        <property name="serviceInterface">
+            <value>com.hzfh.api.report.service.EmpSalesDailyService</value>
+        </property>
+
+        <property name="overloadEnabled" value="true"></property>
+    </bean>
+	<bean id="empSalesTotalService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+        <property name="serviceUrl">
+            <value>http://reportservice.hzfh.com:8080/service-report/empSalesTotal</value>
+        </property>
+        <property name="serviceInterface">
+            <value>com.hzfh.api.report.service.EmpSalesTotalService</value>
+        </property>
+
+        <property name="overloadEnabled" value="true"></property>
+    </bean>
+    <bean id="addCustomerReportService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+        <property name="serviceUrl">
+            <value>http://reportservice.hzfh.com:8080/service-report/addCustomerReport</value>
+        </property>
+        <property name="serviceInterface">
+            <value>com.hzfh.api.report.service.AddCustomerReportService</value>
+        </property>
+
+        <property name="overloadEnabled" value="true"></property>
+    </bean>
+    <bean id="addSalesReportService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+        <property name="serviceUrl">
+            <value>http://reportservice.hzfh.com:8080/service-report/addSalesReport</value>
+        </property>
+        <property name="serviceInterface">
+            <value>com.hzfh.api.report.service.AddSalesReportService</value>
+        </property>
+
+        <property name="overloadEnabled" value="true"></property>
+    </bean>
+    <bean id="paymentReportService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+        <property name="serviceUrl">
+            <value>http://reportservice.hzfh.com:8080/service-report/paymentReport</value>
+        </property>
+        <property name="serviceInterface">
+            <value>com.hzfh.api.report.service.PaymentReportService</value>
+        </property>
+
+        <property name="overloadEnabled" value="true"></property>
+    </bean>
+    <bean id="paymentReportDeatilService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+        <property name="serviceUrl">
+            <value>http://reportservice.hzfh.com:8080/service-report/paymentReportDeatil</value>
+        </property>
+        <property name="serviceInterface">
+            <value>com.hzfh.api.report.service.PaymentReportDeatilService</value>
+        </property>
+
+        <property name="overloadEnabled" value="true"></property>
+    </bean>
+</beans>

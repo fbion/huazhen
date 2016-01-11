@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hzfh.service.sales.mapper.TaskDecisionLogMapper">
+	<resultMap type="com.hzfh.api.sales.model.TaskDecisionLog" id="resultMapTaskDecisionLog">
+		<result property="id" column="id"/>
+		<result property="depNo" column="dep_no"/>
+		<result property="userNo" column="user_no"/>
+		<result property="isOk" column="is_ok"/>
+		<result property="inTime" column="in_time" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
+		<result property="inUserNo" column="in_user_no"/>
+		<result property="editUserNo" column="edit_user_no"/>
+		<result property="editTime" column="edit_time" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
+		<result property="editComment" column="edit_comment"/>
+		<result property="checkTime" column="check_time" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
+	</resultMap>
+	<select id="getList" resultMap="resultMapTaskDecisionLog">
+		SELECT id,dep_no,user_no,is_ok,in_time,in_user_no,edit_user_no,edit_time,edit_comment,check_time
+		FROM task_decision_log
+	</select>
+	<select id="getPagingList" resultMap="resultMapTaskDecisionLog" parameterType="com.hzfh.api.sales.model.query.TaskDecisionLogCondition" statementType="STATEMENT">
+		SELECT id,dep_no,user_no,is_ok,in_time,in_user_no,edit_user_no,edit_time,edit_comment,check_time FROM task_decision_log where 1=1
+		
+		ORDER BY
+		<foreach item="item" collection="sortItemList" separator=",">
+			${item.sortFeild} ${item.sortType}
+		</foreach>
+		LIMIT ${startIndex},${pageSize}
+	</select>
+	<select id="getTotalCount" resultType="int" parameterType="com.hzfh.api.sales.model.query.TaskDecisionLogCondition" statementType="STATEMENT">
+		SELECT count(1) FROM task_decision_log where 1=1
+	</select>
+	<select id="getInfo" resultMap="resultMapTaskDecisionLog" parameterType="int">
+		SELECT id,dep_no,user_no,is_ok,in_time,in_user_no,edit_user_no,edit_time,edit_comment,check_time FROM task_decision_log where id=#{id}
+	</select>
+	<insert id="add" parameterType="com.hzfh.api.sales.model.TaskDecisionLog" useGeneratedKeys="true" keyProperty="id">
+		insert into task_decision_log
+		(dep_no,user_no,is_ok,in_time,in_user_no,edit_user_no,edit_time,edit_comment,check_time)
+		values
+		(#{depNo},#{userNo},#{isOk},current_timestamp(),#{inUserNo},#{editUserNo},current_timestamp(),#{editComment},current_timestamp())
+	</insert>
+	<update id="update" parameterType="com.hzfh.api.sales.model.TaskDecisionLog">
+		update task_decision_log set 
+		dep_no=#{depNo},user_no=#{userNo},is_ok=#{isOk},edit_user_no=#{editUserNo},edit_time=current_timestamp(),edit_comment=#{editComment},check_time=#{checkTime}
+		where id=#{id}
+	</update>
+	<delete id="delete" parameterType="int">
+		delete from task_decision_log where id = #{id}
+	</delete>
+	
+	<select id="getListByDept" parameterType="int" resultMap="resultMapTaskDecisionLog">
+		SELECT id,dep_no,user_no,is_ok,in_time,in_user_no,edit_user_no,edit_time,edit_comment,check_time
+		FROM task_decision_log
+		where dep_no=#{deptNo}
+	</select>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+</mapper>

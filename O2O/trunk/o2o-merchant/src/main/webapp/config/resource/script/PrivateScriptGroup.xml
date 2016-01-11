@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<scriptConfig xmlns="http://www.hzfh.com/web"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.hzfh.com/web ../../schemas/resources/Script.xsd">
+	<privateScriptGroups>
+        <scriptGroup name="index" sharedScriptGroup="Common">
+			<scriptName>datePicker</scriptName>
+            <pages>
+                <pageName>index</pageName>
+            </pages>
+        </scriptGroup>
+	</privateScriptGroups>
+
+</scriptConfig>

@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hzfh.service.customer.mapper.CustomerCompanyMapper">
+	<resultMap type="com.hzfh.api.customer.model.CustomerCompany"
+		id="resultMapCustomerCompany">
+		<result property="id" column="id" />
+		<result property="code" column="code" />
+		<result property="cardType" column="card_type" />
+		<result property="cardNumber" column="card_number" />	<!-- 组织机构代码 -->
+		<result property="cardLicense" column="card_license" />	<!-- 营业执照 -->
+		<result property="cardTax" column="card_tax" />			<!-- 税务证 -->
+		<result property="name" column="name" />
+		<result property="address" column="address" />
+		<result property="telephone" column="telephone" />
+		<result property="email" column="email" />
+		<result property="field" column="field" />
+		<result property="contactName" column="contact_name" />
+		<result property="contactTelephone" column="contact_telephone" />
+		<result property="contactCellphone1" column="contact_cellphone1" />
+		<result property="contactCellphone2" column="contact_cellphone2" />
+		<result property="relationLevel" column="relation_level" />
+		<result property="riskHobby" column="risk_hobby" />
+		<result property="sourceType" column="source_type" />
+		<result property="agentNo" column="agent_no" />
+		<result property="wealth" column="wealth" />
+		<result property="tradeTotal" column="trade_total" />
+		<result property="inUserNo" column="in_user_no" />
+		<result property="inTime" column="in_time" jdbcType="TIMESTAMP"
+			javaType="java.sql.Timestamp" />
+		<result property="editUserNo" column="edit_user_no" />
+		<result property="editTime" column="edit_time" jdbcType="TIMESTAMP"
+			javaType="java.sql.Timestamp" />
+		<result property="editComment" column="edit_comment" />
+		<result property="findTime" column="find_time"/>
+		<result property="isTest" column="is_test" />
+		<result property="p2pCustomerNo" column="p2p_customer_no"/>
+		<result property="legal" column="legal"/>
+		<result property="legalIdcard" column="legal_idcard"/>
+		<result property="memberClassType" column="member_class_type"/>
+		<result property="bankLicense" column="bank_license"/>
+	</resultMap>
+	<select id="getList" resultMap="resultMapCustomerCompany">
+		SELECT
+		id,code,card_type,card_number,card_license,card_tax,name,address,telephone,email,field,contact_name,contact_telephone,contact_cellphone1,contact_cellphone2,relation_level,risk_hobby,source_type,agent_no,wealth,trade_total,in_user_no,in_time,edit_user_no,edit_time,edit_comment,find_time,is_test,p2p_customer_no,legal,legal_idcard,member_class_type,bank_license
+		FROM customer_company
+	</select>
+	<select id="getListForExcel" resultMap="resultMapCustomerCompany"
+		parameterType="com.hzfh.api.customer.model.query.CustomerCompanyCondition"
+		statementType="STATEMENT">
+		SELECT
+		id,code,card_type,card_number,card_license,card_tax,name,address,telephone,email,field,contact_name,contact_telephone,contact_cellphone1,contact_cellphone2,relation_level,risk_hobby,source_type,agent_no,wealth,trade_total,in_user_no,in_time,edit_user_no,edit_time,edit_comment,find_time,is_test,p2p_customer_no,legal,legal_idcard,member_class_type,bank_license
+		FROM customer_company where 1=1
+		<if test="name !=null and name!=''">and name LIKE CONCAT('%','${name}','%')</if>
+        <if test="empNo != 0">and agent_no=${empNo}</if>
+		<if test="relationLevel !=0">and relation_level=${relationLevel}</if>
+		<if test="riskHobby !=0">and risk_hobby=${riskHobby}</if>
+		<if test="cardType !=0">and card_type=${cardType}</if>
+		<if test="workMateString !=null">and agent_no in (${workMateString})	</if>
+
+		<if test="findTimeUp!=null and findTimeUp!=''">and   find_time &lt;= '${findTimeUp}'</if>
+        <if test="findTimeDown!=null and findTimeDown!=''">and   find_time &gt;= '${findTimeDown}'</if>
+		<if test="isTest>-1">and is_test=${isTest}</if>
+
+        <if test="isSales > 0">AND trade_total &gt; 0</if>
+        <if test="isSales == 0 ">
+            <![CDATA[ AND (trade_total <= 0 OR trade_total IS NULL) ]]>
+        </if>
+		ORDER BY
+		<foreach item="item" collection="sortItemList" separator=",">
+			${item.sortFeild} ${item.sortType}
+		</foreach>
+	</select>
+
+    <select id="getPagingList" resultMap="resultMapCustomerCompany"
+            parameterType="com.hzfh.api.customer.model.query.CustomerCompanyCondition"
+            statementType="STATEMENT">
+        SELECT
+        id,code,card_type,card_number,card_license,card_tax,name,address,telephone,email,field,contact_name,contact_telephone,contact_cellphone1,contact_cellphone2,relation_level,risk_hobby,source_type,agent_no,wealth,trade_total,in_user_no,in_time,edit_user_no,edit_time,edit_comment,find_time,is_test,p2p_customer_no,legal,legal_idcard,member_class_type,bank_license
+        FROM customer_company where 1=1
+        <if test="name !=null and name!=''">and name LIKE CONCAT('%','${name}','%')</if>
+        <if test="empNo != 0">and agent_no=${empNo}</if>
+        <if test="relationLevel !=0">and relation_level=${relationLevel}</if>
+        <if test="riskHobby !=0">and risk_hobby=${riskHobby}</if>
+        <if test="cardType !=0">and card_type=${cardType}</if>
+        <if test="workMateString !=null">and agent_no in (${workMateString})	</if>
+
+        <if test="findTimeUp!=null and findTimeUp!=''">and   find_time &lt;= '${findTimeUp}'</if>
+        <if test="findTimeDown!=null and findTimeDown!=''">and   find_time &gt;= '${findTimeDown}'</if>
+        <if test="isTest>-1">and is_test=${isTest}</if>
+
+        <if test="isSales > 0">AND trade_total &gt; 0</if>
+        <if test="isSales == 0 ">
+            <![CDATA[ AND (trade_total <= 0 OR trade_total IS NULL) ]]>
+        </if>
+        ORDER BY
+        <foreach item="item" collection="sortItemList" separator=",">
+            ${item.sortFeild} ${item.sortType}
+        </foreach>
+        LIMIT ${startIndex},${pageSize}
+    </select>
+	<select id="getTotalCount" resultType="int"
+		parameterType="com.hzfh.api.customer.model.query.CustomerCompanyCondition"
+		statementType="STATEMENT">
+		SELECT count(1) FROM customer_company where 1=1
+		<if test="name !=null and name!=''">and name LIKE CONCAT('%','${name}','%')</if>
+        <if test="empNo != 0">and agent_no=${empNo}</if>
+		<if test="relationLevel !=0">and relation_level=${relationLevel}</if>
+		<if test="riskHobby !=0">and risk_hobby=${riskHobby}</if>
+		<if test="cardType !=0">and card_type=${cardType}</if>
+		<if test="workMateString !=null">and agent_no in (${workMateString})	</if>
+
+		<if test="findTimeUp!=null and findTimeUp!=''">and   find_time &lt;= '${findTimeUp}'</if>
+        <if test="findTimeDown!=null and findTimeDown!=''">and   find_time &gt;= '${findTimeDown}'</if>
+		<if test="isTest>-1">and is_test=${isTest}</if>
+	</select>
+	<select id="getInfo" resultMap="resultMapCustomerCompany"
+		parameterType="int">
+		SELECT
+		id,code,card_type,card_number,card_license,card_tax,name,address,telephone,email,field,contact_name,contact_telephone,contact_cellphone1,contact_cellphone2,relation_level,risk_hobby,source_type,agent_no,wealth,trade_total,in_user_no,in_time,edit_user_no,edit_time,edit_comment,find_time,is_test,p2p_customer_no,legal,legal_idcard,member_class_type,bank_license
+		FROM customer_company where id=#{id}
+	</select>
+	<insert id="add" parameterType="com.hzfh.api.customer.model.CustomerCompany"
+		useGeneratedKeys="true" keyProperty="id">
+		insert into customer_company
+		(code,card_type,card_number,card_license,card_tax,name,address,telephone,email,field,contact_name,contact_telephone,contact_cellphone1,contact_cellphone2,relation_level,risk_hobby,source_type,agent_no,wealth,trade_total,in_user_no,in_time,edit_user_no,edit_time,edit_comment,find_time,is_test,p2p_customer_no,legal,legal_idcard,member_class_type,bank_license)
+		values
+		(#{code},#{cardType},#{cardLicense},#{cardTax},#{cardNumber},#{name},#{address},#{telephone},#{email},#{field},#{contactName},#{contactTelephone},#{contactCellphone1},#{contactCellphone2},#{relationLevel},#{riskHobby},#{sourceType},#{agentNo},#{wealth},#{tradeTotal},#{inUserNo},current_timestamp(),#{editUserNo},current_timestamp(),#{editComment},#{findTime},#{isTest},#{p2pCustomerNo},#{legal},#{legalIdcard},#{memberClassType},#{bankLicense})
+	</insert>
+	<update id="update" parameterType="com.hzfh.api.customer.model.CustomerCompany">
+		update customer_company set
+		code=#{code},card_type=#{cardType},card_number=#{cardNumber},card_license=#{cardLicense},card_tax=#{cardTax},name=#{name},address=#{address},telephone=#{telephone},email=#{email},field=#{field},contact_name=#{contactName},contact_telephone=#{contactTelephone},contact_cellphone1=#{contactCellphone1},contact_cellphone2=#{contactCellphone2},relation_level=#{relationLevel},risk_hobby=#{riskHobby},source_type=#{sourceType},agent_no=#{agentNo},wealth=#{wealth},trade_total=#{tradeTotal},edit_user_no=#{editUserNo},edit_time=current_timestamp(),edit_comment=#{editComment},find_time=#{findTime},is_test=#{isTest},p2p_customer_no=#{p2pCustomerNo},legal=#{legal},legal_idcard=#{legalIdcard},member_class_type=#{memberClassType},bank_license=#{bankLicense}
+		where id=#{id}
+	</update>
+	<delete id="delete" parameterType="int">
+		delete from customer_company
+		where id = #{id}
+	</delete>
+    <select id="getMyCustomerCompanyList" parameterType="java.lang.String" resultMap="resultMapCustomerCompany">
+        SELECT
+        id,code,card_type,card_number,card_license,card_tax,name,address,telephone,email,field,contact_name,contact_telephone,contact_cellphone1,contact_cellphone2,relation_level,risk_hobby,source_type,agent_no,wealth,trade_total,in_user_no,in_time,edit_user_no,edit_time,edit_comment,find_time,is_test,p2p_customer_no,legal,legal_idcard,member_class_type,bank_license
+        FROM customer_company where 1=1
+        <if test="workMateString !=null">and agent_no in (${workMateString})	</if>
+    </select>
+    <select id="cardCheck" resultMap="resultMapCustomerCompany">
+		SELECT
+		id,code,card_type,card_number,card_license,card_tax,name,address,telephone,email,field,contact_name,contact_telephone,contact_cellphone1,contact_cellphone2,relation_level,risk_hobby,source_type,agent_no,wealth,trade_total,in_user_no,in_time,edit_user_no,edit_time,edit_comment,find_time,is_test,p2p_customer_no,legal,legal_idcard,member_class_type,bank_license
+		FROM customer_company
+		where card_number=#{0} and id !=#{1};
+	</select>
+
+    <!-- getNoPagingList create Zorro 2014/4/30 -->
+    <select id="getNoPagingList" resultMap="resultMapCustomerCompany"
+		parameterType="com.hzfh.api.customer.model.query.CustomerCompanyCondition"
+		statementType="STATEMENT">
+		SELECT
+		id,code,card_type,card_number,card_license,card_tax,name,address,telephone,email,field,contact_name,contact_telephone,contact_cellphone1,contact_cellphone2,relation_level,risk_hobby,source_type,agent_no,wealth,trade_total,in_user_no,in_time,edit_user_no,edit_time,edit_comment,find_time,is_test,p2p_customer_no,legal,legal_idcard,member_class_type,bank_license
+		FROM customer_company where 1=1
+		<if test="name !=null and name!=''">and name LIKE CONCAT('%','${name}','%')</if>
+        <if test="empNo != 0">and agent_no=${empNo}</if>
+		<if test="relationLevel !=0">and relation_level=${relationLevel}</if>
+		<if test="riskHobby !=0">and risk_hobby=${riskHobby}</if>
+		<if test="cardType !=0">and card_type=${cardType}</if>
+		<if test="workMateString !=null">and agent_no in (${workMateString})	</if>
+		
+		<if test="findTimeUp!=null and findTimeUp!=''">and   find_time &lt;= '${findTimeUp}'</if>
+        <if test="findTimeDown!=null and findTimeDown!=''">and   find_time &gt;= '${findTimeDown}'</if>
+		<if test="isTest>-1">and is_test=${isTest}</if>
+		ORDER BY
+		<foreach item="item" collection="sortItemList" separator=",">
+			${item.sortFeild} ${item.sortType}
+		</foreach>
+	</select>
+    
+    <update id="updateCustomerNoById">
+		update customer_company set
+		p2p_customer_no=#{customerNo}
+		where id=#{id}
+	</update>
+
+	<update id="updateTradeTotalById">
+		UPDATE customer_company SET trade_total=trade_total+#{tradeTotal} WHERE id=#{id}
+	</update>
+
+	<select id="getInfoByP2pCustomerNo" resultMap="resultMapCustomerCompany">
+		SELECT id,code,card_type,card_number,card_license,card_tax,name,address,telephone,email,field,contact_name,contact_telephone,contact_cellphone1,contact_cellphone2,relation_level,risk_hobby,source_type,agent_no,wealth,trade_total,in_user_no,in_time,edit_user_no,edit_time,edit_comment,find_time,is_test,p2p_customer_no,legal,legal_idcard,member_class_type,bank_license
+		FROM customer_company where p2p_customer_no=#{p2pCustomerNo}
+	</select>
+</mapper>

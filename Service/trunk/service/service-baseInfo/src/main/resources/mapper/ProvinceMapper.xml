@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hzfh.service.baseInfo.mapper.ProvinceMapper">
+	<resultMap type="com.hzfh.api.baseInfo.model.Province" id="resultMapProvince">
+		<result property="id" column="id"/>
+		<result property="code" column="code"/>
+		<result property="name" column="name"/>
+		<result property="enabled" column="enabled"/>
+		<result property="priority" column="priority"/>
+		<result property="inUserNo" column="in_user_no"/>
+		<result property="inTime" column="in_time" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
+		<result property="editUserNo" column="edit_user_no"/>
+		<result property="editTime" column="edit_time" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
+		<result property="editComment" column="edit_comment"/>
+	</resultMap>
+	<select id="getList" resultMap="resultMapProvince">
+		SELECT id,code,name,enabled,priority,in_user_no,in_time,edit_user_no,edit_time,edit_comment
+		FROM province
+	</select>
+	<select id="getPagingList" resultMap="resultMapProvince" parameterType="com.hzfh.api.baseInfo.model.query.ProvinceCondition" statementType="STATEMENT">
+		SELECT id,code,name,enabled,priority,in_user_no,in_time,edit_user_no,edit_time,edit_comment FROM province where 1=1
+		ORDER BY 
+		<foreach item="item" collection="sortItemList" separator=",">
+			${item.sortFeild} ${item.sortType}
+		</foreach>
+		LIMIT ${startIndex},${pageSize}
+	</select>
+	<select id="getTotalCount" resultType="int" parameterType="com.hzfh.api.baseInfo.model.query.ProvinceCondition" statementType="STATEMENT">
+		SELECT count(1) FROM province where 1=1
+	</select>
+	<select id="getInfo" resultMap="resultMapProvince" parameterType="int">
+		SELECT id,cod e,name,enabled,priority,in_user_no,in_time,edit_user_no,edit_time,edit_comment FROM province where id=#{id}
+	</select>
+	<insert id="add" parameterType="com.hzfh.api.baseInfo.model.Province" useGeneratedKeys="true" keyProperty="id">
+		insert into province
+		(code,name,enabled,priority,in_user_no,in_time,edit_user_no,edit_time,edit_comment)
+		values
+		(#{code},#{name},#{enabled},#{priority},#{inUserNo},current_timestamp(),#{editUserNo},current_timestamp(),#{editComment})
+	</insert>
+	<update id="update" parameterType="com.hzfh.api.baseInfo.model.Province">
+		update province set 
+		code=#{code},name=#{name},enabled=#{enabled},priority=#{priority},edit_user_no=#{editUserNo},edit_time=current_timestamp(),edit_comment=#{editComment}
+		where id=#{id}
+	</update>
+	<delete id="delete" parameterType="int">
+		delete from province where id = #{id}
+	</delete>
+	
+	<select id="getListByEnabled" resultMap="resultMapProvince">
+		SELECT id,code,name,enabled,priority,in_user_no,in_time,edit_user_no,edit_time,edit_comment
+		FROM province where enabled = #{enabled}
+	</select>
+</mapper>

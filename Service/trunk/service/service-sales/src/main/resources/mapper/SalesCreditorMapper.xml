@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hzfh.service.sales.mapper.SalesCreditorMapper">
+    <resultMap type="com.hzfh.api.sales.model.SalesCreditor" id="resultMapSalesCreditor">
+        <result property="id" column="id"/>
+        <result property="salesNo" column="sales_no"/>
+        <result property="creditorNo" column="creditor_no"/>
+        <result property="creditorName" column="creditor_name"/>
+        <result property="money" column="money"/>
+        <result property="inTime" column="in_time" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
+        <result property="inUserNo" column="in_user_no"/>
+        <result property="editTime" column="edit_time" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
+        <result property="editUserNo" column="edit_user_no"/>
+    </resultMap>
+    <select id="getList" resultMap="resultMapSalesCreditor">
+        SELECT id,sales_no,creditor_no,money,in_time,in_user_no,edit_time,edit_user_no,creditor_name
+        FROM sales_creditor
+    </select>
+    <select id="getListBySalesNo" resultMap="resultMapSalesCreditor" parameterType="int">
+    SELECT id,sales_no,creditor_no,money,in_time,in_user_no,edit_time,edit_user_no,creditor_name
+    FROM sales_creditor where sales_no = #{salesNo}
+    </select>
+    <select id="getListBySalesNoNotRepeat" resultMap="resultMapSalesCreditor" parameterType="int">
+       SELECT id,sales_no,creditor_no,sum(money),in_time,in_user_no,edit_time,edit_user_no,creditor_name
+        FROM sales_creditor where sales_no = #{salesNo}
+GROUP BY creditor_no
+    </select>
+
+    <select id="getPagingList" resultMap="resultMapSalesCreditor"
+            parameterType="com.hzfh.api.sales.model.query.SalesCreditorCondition" statementType="STATEMENT">
+        SELECT id,sales_no,creditor_no,money,in_time,in_user_no,edit_time,edit_user_no,creditor_name FROM sales_creditor where 1=1
+        ORDER BY
+        <foreach item="item" collection="sortItemList" separator=",">
+            ${item.sortFeild} ${item.sortType}
+        </foreach>
+        LIMIT ${startIndex},${pageSize}
+    </select>
+    <select id="getTotalCount" resultType="int" parameterType="com.hzfh.api.sales.model.query.SalesCreditorCondition"
+            statementType="STATEMENT">
+        SELECT count(1) FROM sales_creditor where 1=1
+    </select>
+    <select id="getInfo" resultMap="resultMapSalesCreditor" parameterType="int">
+        SELECT id,sales_no,creditor_no,money,in_time,in_user_no,edit_time,edit_user_no,creditor_name FROM sales_creditor where id=#{id}
+    </select>
+    <insert id="add" parameterType="com.hzfh.api.sales.model.SalesCreditor" useGeneratedKeys="true" keyProperty="id">
+        insert into sales_creditor
+        (sales_no,creditor_no,money,in_time,in_user_no,edit_time,edit_user_no,creditor_name)
+        values
+        (#{salesNo},#{creditorNo},#{money},current_timestamp(),#{inUserNo},current_timestamp(),#{editUserNo},#{creditorName})
+    </insert>
+    <update id="update" parameterType="com.hzfh.api.sales.model.SalesCreditor">
+        update sales_creditor set
+        sales_no=#{salesNo},creditor_no=#{creditorNo},money=#{money},edit_time=current_timestamp(),edit_user_no=#{editUserNo}
+        where id=#{id}
+    </update>
+    <delete id="delete" parameterType="int">
+        delete from sales_creditor where id = #{id}
+    </delete>
+
+    <delete id="deleteBySalesId" parameterType="int">
+        delete from sales_creditor where sales_no = #{salesNo}
+    </delete>
+
+
+</mapper>

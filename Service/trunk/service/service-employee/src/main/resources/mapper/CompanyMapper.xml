@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hzfh.service.employee.mapper.CompanyMapper">
+	<resultMap type="com.hzfh.api.employee.model.Company" id="resultMapCompany">
+		<result property="id" column="id"/>
+		<result property="code" column="code"/>
+		<result property="name" column="name"/>
+		<result property="telephone" column="telephone"/>
+		<result property="fax" column="fax"/>
+		<result property="postcode" column="postcode"/>
+		<result property="website" column="website"/>
+		<result property="email" column="email"/>
+		<result property="bankAddress" column="bank_address"/>
+		<result property="bankName" column="bank_name"/>
+		<result property="bankAccount" column="bank_account"/>
+		<result property="address" column="address"/>
+		<result property="comment" column="comment"/>
+		<result property="inUserNo" column="in_user_no"/>
+		<result property="inTime" column="in_time" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
+		<result property="editUserNo" column="edit_user_no"/>
+		<result property="editTime" column="edit_time" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
+		<result property="editComment" column="edit_comment"/>
+	</resultMap>
+	<sql id="Base_Column_List" >
+	 id,code,name,telephone,fax,postcode,website,email,bank_address,bank_name,bank_account,address,comment,in_user_no,in_time,edit_user_no,edit_time,edit_comment
+	</sql>
+	<select id="getList" resultMap="resultMapCompany">
+		SELECT <include refid="Base_Column_List"/> FROM company
+	</select>
+	<select id="getPagingList" resultMap="resultMapCompany" parameterType="com.hzfh.api.employee.model.query.CompanyCondition" statementType="STATEMENT">
+		SELECT <include refid="Base_Column_List"/> FROM company where 1=1
+		<if test="name != null and name !=''">and name LIKE CONCAT('%','${name}','%')</if>
+		
+		ORDER BY
+		<foreach item="item" collection="sortItemList" separator=",">
+			${item.sortFeild} ${item.sortType}
+		</foreach>
+		LIMIT ${startIndex},${pageSize}
+	</select>
+	<select id="getTotalCount" resultType="int" parameterType="com.hzfh.api.employee.model.query.CompanyCondition" statementType="STATEMENT">
+		SELECT count(1) FROM company where 1=1
+		<if test="name != null and name !=''">and name LIKE CONCAT('%','${name}','%')</if>
+	</select>
+	<select id="getInfo" resultMap="resultMapCompany" parameterType="int">
+		SELECT <include refid="Base_Column_List"/> FROM company where id=#{id}
+	</select>
+	<insert id="add" parameterType="com.hzfh.api.employee.model.Company" useGeneratedKeys="true" keyProperty="id">
+		insert into company
+		(code,name,telephone,fax,postcode,website,email,bank_address,bank_name,bank_account,address,comment,in_user_no,in_time,edit_user_no,edit_time,edit_comment)
+		values
+		(#{code},#{name},#{telephone},#{fax},#{postcode},#{website},#{email},#{bankAddress},#{bankName},#{bankAccount},#{address},#{comment},#{inUserNo},current_timestamp(),#{editUserNo},current_timestamp(),#{editComment})
+	</insert>
+	<update id="update" parameterType="com.hzfh.api.employee.model.Company">
+		update company set 
+		code=#{code},name=#{name},telephone=#{telephone},fax=#{fax},postcode=#{postcode},website=#{website},email=#{email},bank_address=#{bankAddress},bank_name=#{bankName},bank_account=#{bankAccount},address=#{address},comment=#{comment},edit_user_no=#{editUserNo},edit_time=current_timestamp(),edit_comment=#{editComment}
+		where id=#{id}
+	</update>
+	<delete id="delete" parameterType="int">
+		delete from company where id = #{id}
+	</delete>
+	<!-- getCompanylist -->
+	<select id="getCompanylist" resultMap="resultMapCompany">
+		select id,name
+		from company
+	</select>
+	<select id="getCompanyByCompanyId" resultMap="resultMapCompany" parameterType="int">
+		SELECT <include refid="Base_Column_List"/> FROM company where id=#{companyId}
+	</select>
+	
+</mapper>

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hzfh.service.customer.mapper.PaymentAccountOperMapper">
+	<resultMap type="com.hzfh.api.customer.model.PaymentAccountOper" id="resultMapPaymentAccountOper">
+		<result property="id" column="id"/>
+		<result property="customerNo" column="customer_no"/>
+		<result property="customerName" column="customer_name"/>
+		<result property="accountType" column="account_type"/>
+		<result property="operType" column="oper_type"/>
+		<result property="timeCreate" column="time_create" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
+		<result property="operator" column="operator"/>
+		<result property="remark" column="remark"/>
+	</resultMap>
+	<select id="getList" resultMap="resultMapPaymentAccountOper">
+		SELECT id,customer_no,customer_name,account_type,oper_type,time_create,operator,remark
+		FROM payment_account_oper
+	</select>
+	<select id="getPagingList" resultMap="resultMapPaymentAccountOper" parameterType="com.hzfh.api.customer.model.query.PaymentAccountOperCondition" statementType="STATEMENT">
+		SELECT id,customer_no,customer_name,account_type,oper_type,time_create,operator,remark FROM payment_account_oper where 1=1
+		ORDER BY
+		<foreach item="item" collection="sortItemList" separator=",">
+			${item.sortFeild} ${item.sortType}
+		</foreach>
+		LIMIT ${startIndex},${pageSize}
+	</select>
+	<select id="getTotalCount" resultType="int" parameterType="com.hzfh.api.customer.model.query.PaymentAccountOperCondition" statementType="STATEMENT">
+		SELECT count(1) FROM payment_account_oper where 1=1
+	</select>
+	<select id="getInfo" resultMap="resultMapPaymentAccountOper" parameterType="int">
+		SELECT id,customer_no,customer_name,account_type,oper_type,time_create,operator,remark FROM payment_account_oper where id=#{id}
+	</select>
+	<insert id="add" parameterType="com.hzfh.api.customer.model.PaymentAccountOper" useGeneratedKeys="true" keyProperty="id">
+		insert into payment_account_oper
+		(customer_no,customer_name,account_type,oper_type,time_create,operator,remark)
+		values
+		(#{customerNo},#{customerName},#{accountType},#{operType},#{timeCreate},#{operator},#{remark})
+	</insert>
+	<update id="update" parameterType="com.hzfh.api.customer.model.PaymentAccountOper">
+		update payment_account_oper set 
+		customer_no=#{customerNo},customer_name=#{customerName},account_type=#{accountType},oper_type=#{operType},time_create=#{timeCreate},operator=#{operator},remark=#{remark}
+		where id=#{id}
+	</update>
+	<delete id="delete" parameterType="int">
+		delete from payment_account_oper where id = #{id}
+	</delete>
+</mapper>

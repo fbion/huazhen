@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://www.springframework.org/schema/beans" xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+
+       http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context-4.0.xsd"
+	default-autowire="byName" default-lazy-init="false">
+	<context:component-scan base-package="com.hzfh.service" />
+	<context:annotation-config />
+	<bean id="hessianMapping"
+		class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+		<property name="mappings">
+			<props>
+				<prop key="/activity">activityService</prop>
+				<prop key="/activityAttachment">activityAttachmentService</prop>
+				<prop key="/applyCustomer">applyCustomerService</prop>
+				<prop key="/applyEmployee">applyEmployeeService</prop>
+				<prop key="/agentExpense">agentExpenseService</prop>
+				<prop key="/agentRate">agentRateService</prop>
+				<prop key="/brokerageCalculate">brokerageCalculateService</prop>
+				<prop key="/income">incomeService</prop>
+				<prop key="/productTask">productTaskService</prop>
+				<prop key="/sales">salesService</prop>
+				<prop key="/salesEmpCalculate">salesEmpCalculateService</prop>
+				<prop key="/taskDecision">taskDecisionService</prop>
+				<prop key="/taskDecisionLog">taskDecisionLogService</prop>
+				<prop key="/contract">contractService</prop>
+				<prop key="/p2pSubscribe">p2pSubscribeService</prop>
+				<prop key="/p2pInvestment">p2pInvestmentService</prop>
+                <prop key="/salesCreditor">salesCreditorService</prop>
+                <prop key="/creditor">creditorService</prop>
+			</props>
+		</property>
+	</bean>
+    <bean id="creditorServiceImpl" class="com.hzfh.service.sales.serviceImpl.CreditorServiceImpl" />
+    <bean id="creditorService"
+          class="org.springframework.remoting.caucho.HessianServiceExporter">
+        <property name="service" ref="creditorServiceImpl" />
+        <property name="serviceInterface" value="com.hzfh.api.sales.service.CreditorService" />
+    </bean>
+
+    <bean id="salesCreditorServiceImpl" class="com.hzfh.service.sales.serviceImpl.SalesCreditorServiceImpl" />
+    <bean id="salesCreditorService"
+          class="org.springframework.remoting.caucho.HessianServiceExporter">
+        <property name="service" ref="salesCreditorServiceImpl" />
+        <property name="serviceInterface" value="com.hzfh.api.sales.service.SalesCreditorService" />
+    </bean>
+  <bean id="activityServiceImpl" class="com.hzfh.service.sales.serviceImpl.ActivityServiceImpl" />
+  <bean id="activityService" class="org.springframework.remoting.caucho.HessianServiceExporter">
+    <property name="service" ref="activityServiceImpl" />
+    <property name="serviceInterface" value="com.hzfh.api.sales.service.ActivityService" />
+  </bean>
+
+  <bean id="activityAttachmentServiceImpl" class="com.hzfh.service.sales.serviceImpl.ActivityAttachmentServiceImpl" />
+  <bean id="activityAttachmentService"
+		class="org.springframework.remoting.caucho.HessianServiceExporter">
+    <property name="service" ref="activityAttachmentServiceImpl" />
+    <property name="serviceInterface" value="com.hzfh.api.sales.service.ActivityAttachmentService" />
+  </bean>
+    <bean id="applyCustomerServiceImpl" class="com.hzfh.service.sales.serviceImpl.ApplyCustomerServiceImpl" />
+  <bean id="applyCustomerService"
+		class="org.springframework.remoting.caucho.HessianServiceExporter">
+    <property name="service" ref="applyCustomerServiceImpl" />
+    <property name="serviceInterface" value="com.hzfh.api.sales.service.ApplyCustomerService" />
+  </bean>
+
+  <bean id="applyEmployeeServiceImpl" class="com.hzfh.service.sales.serviceImpl.ApplyEmployeeServiceImpl" />
+  <bean id="applyEmployeeService"
+		class="org.springframework.remoting.caucho.HessianServiceExporter">
+    <property name="service" ref="applyEmployeeServiceImpl" />
+    <property name="serviceInterface" value="com.hzfh.api.sales.service.ApplyEmployeeService" />
+  </bean>
+  <bean id="agentExpenseServiceImpl" class="com.hzfh.service.sales.serviceImpl.AgentExpenseServiceImpl" />
+  <bean id="agentExpenseService"
+		class="org.springframework.remoting.caucho.HessianServiceExporter">
+    <property name="service" ref="agentExpenseServiceImpl" />
+    <property name="serviceInterface" value="com.hzfh.api.sales.service.AgentExpenseService" />
+  </bean>
+
+  <bean id="agentRateServiceImpl" class="com.hzfh.service.sales.serviceImpl.AgentRateServiceImpl" />
+  <bean id="agentRateService"
+		class="org.springframework.remoting.caucho.HessianServiceExporter">
+    <property name="service" ref="agentRateServiceImpl" />
+    <property name="serviceInterface" value="com.hzfh.api.sales.service.AgentRateService" />
+  </bean>
+
+  <bean id="brokerageCalculateServiceImpl" class="com.hzfh.service.sales.serviceImpl.BrokerageCalculateServiceImpl" />
+  <bean id="brokerageCalculateService"
+		class="org.springframework.remoting.caucho.HessianServiceExporter">
+    <property name="service" ref="brokerageCalculateServiceImpl" />
+    <property name="serviceInterface" value="com.hzfh.api.sales.service.BrokerageCalculateService" />
+  </bean>
+
+  <bean id="incomeServiceImpl" class="com.hzfh.service.sales.serviceImpl.IncomeServiceImpl" />
+  <bean id="incomeService"
+		class="org.springframework.remoting.caucho.HessianServiceExporter">
+    <property name="service" ref="incomeServiceImpl" />
+    <property name="serviceInterface" value="com.hzfh.api.sales.service.IncomeService" />
+  </bean>
+
+  <bean id="productTaskServiceImpl" class="com.hzfh.service.sales.serviceImpl.ProductTaskServiceImpl" />
+  <bean id="productTaskService"
+		class="org.springframework.remoting.caucho.HessianServiceExporter">
+    <property name="service" ref="productTaskServiceImpl" />
+    <property name="serviceInterface" value="com.hzfh.api.sales.service.ProductTaskService" />
+  </bean>
+
+  <bean id="salesServiceImpl" class="com.hzfh.service.sales.serviceImpl.SalesServiceImpl" />
+  <bean id="salesService"
+		class="org.springframework.remoting.caucho.HessianServiceExporter">
+    <property name="service" ref="salesServiceImpl" />
+    <property name="serviceInterface" value="com.hzfh.api.sales.service.SalesService" />
+  </bean>
+
+  <bean id="salesEmpCalculateServiceImpl" class="com.hzfh.service.sales.serviceImpl.SalesEmpCalculateServiceImpl" />
+  <bean id="salesEmpCalculateService"
+		class="org.springframework.remoting.caucho.HessianServiceExporter">
+    <property name="service" ref="salesEmpCalculateServiceImpl" />
+    <property name="serviceInterface" value="com.hzfh.api.sales.service.SalesEmpCalculateService" />
+  </bean>
+  
+  <bean id="taskDecisionServiceImpl" class="com.hzfh.service.sales.serviceImpl.TaskDecisionServiceImpl" />
+  <bean id="taskDecisionService"
+		class="org.springframework.remoting.caucho.HessianServiceExporter">
+    <property name="service" ref="taskDecisionServiceImpl" />
+    <property name="serviceInterface" value="com.hzfh.api.sales.service.TaskDecisionService" />
+  </bean>
+
+  <bean id="taskDecisionLogServiceImpl" class="com.hzfh.service.sales.serviceImpl.TaskDecisionLogServiceImpl" />
+  <bean id="taskDecisionLogService"
+		class="org.springframework.remoting.caucho.HessianServiceExporter">
+    <property name="service" ref="taskDecisionLogServiceImpl" />
+    <property name="serviceInterface" value="com.hzfh.api.sales.service.TaskDecisionLogService" />
+  </bean>
+ <bean id="p2pSubscribeServiceImpl" class="com.hzfh.service.sales.serviceImpl.P2pSubscribeServiceImpl" />
+  <bean id="p2pSubscribeService"
+		class="org.springframework.remoting.caucho.HessianServiceExporter">
+    <property name="service" ref="p2pSubscribeServiceImpl" />
+    <property name="serviceInterface" value="com.hzfh.api.sales.service.P2pSubscribeService" />
+  </bean>
+  <bean id="p2pInvestmentServiceImpl" class="com.hzfh.service.sales.serviceImpl.P2pInvestmentServiceImpl" />
+  <bean id="p2pInvestmentService"
+		class="org.springframework.remoting.caucho.HessianServiceExporter">
+    <property name="service" ref="p2pInvestmentServiceImpl" />
+    <property name="serviceInterface" value="com.hzfh.api.sales.service.P2pInvestmentService" />
+  </bean>
+  <bean id="contractServiceImpl" class="com.hzfh.service.sales.serviceImpl.ContractServiceImpl" />
+  <bean id="contractService"
+		class="org.springframework.remoting.caucho.HessianServiceExporter">
+    <property name="service" ref="contractServiceImpl" />
+    <property name="serviceInterface" value="com.hzfh.api.sales.service.ContractService" />
+  </bean>
+  
+</beans>

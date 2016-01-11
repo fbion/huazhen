@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hzfh.service.market.mapper.ActivityUsersMapper">
+	<resultMap type="com.hzfh.api.market.model.ActivityUsers" id="resultMapActivityUsers">
+		<result property="id" column="id"/>
+		<result property="userOpenid" column="user_openid"/>
+		<result property="userName" column="user_name"/>
+		<result property="userImgPath" column="user_img_path"/>
+		<result property="drawNo" column="draw_no"/>
+		<result property="isWin" column="is_win"/>
+		<result property="name" column="name"/>
+		<result property="cellphone" column="cellphone"/>
+		<result property="inTime" column="in_time" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
+		<result property="mark" column="mark"/>
+	</resultMap>
+	<select id="getList" resultMap="resultMapActivityUsers" >
+		SELECT id,user_openid,user_name,user_img_path,draw_no,is_win,name,cellphone,in_time,mark
+		FROM activity_users 
+	</select>
+	<select id="getListByDrawNo" resultMap="resultMapActivityUsers" >
+		SELECT id,user_openid,user_name,user_img_path,draw_no,is_win,name,cellphone,in_time,mark
+		FROM activity_users where draw_no=#{drawNo} and mark="1" 
+	</select>
+	
+	<select id="getListByIds" resultMap="resultMapActivityUsers">
+		SELECT id,user_openid,user_name,user_img_path,draw_no,is_win,name,cellphone,in_time,mark
+		FROM activity_users where  1=1 
+		<if test="idList!=null"> and id  not IN <foreach collection="idList" item="id" index="index" 
+			open="(" separator="," close=")">#{id}</foreach>
+		</if>
+		<if test="drawNo!=null"> and draw_no=#{drawNo} </if>
+		and mark="1" 
+	</select>
+	<select id="getPagingList" resultMap="resultMapActivityUsers" parameterType="com.hzfh.api.market.model.query.ActivityUsersCondition" statementType="STATEMENT">
+		SELECT id,user_openid,user_name,user_img_path,draw_no,is_win,name,cellphone,in_time,mark FROM activity_users where 1=1
+		ORDER BY
+		<foreach item="item" collection="sortItemList" separator=",">
+			${item.sortFeild} ${item.sortType}
+		</foreach>
+		LIMIT ${startIndex},${pageSize}
+	</select>
+	<select id="getTotalCount" resultType="int" parameterType="com.hzfh.api.market.model.query.ActivityUsersCondition" statementType="STATEMENT">
+		SELECT count(1) FROM activity_users where 1=1
+	</select>
+	<select id="getInfo" resultMap="resultMapActivityUsers" >
+		SELECT id,user_openid,user_name,user_img_path,draw_no,is_win,name,cellphone,in_time,mark FROM activity_users where id=#{id}
+	</select>
+	<select id="getInfoByUsername" resultMap="resultMapActivityUsers" >
+		SELECT id,user_openid,user_name,user_img_path,draw_no,is_win,name,cellphone,in_time,mark FROM activity_users where   name LIKE CONCAT('%','${name}','%')  and mark="1" 
+		<if test="drawNo!=null"> and draw_no=#{drawNo} </if>
+		
+	</select>
+	<select id="getInfoByOpenId" resultMap="resultMapActivityUsers">
+		SELECT id,user_openid,user_name,user_img_path,draw_no,is_win,name,cellphone,in_time,mark FROM activity_users where user_openid = #{openid}  
+	</select>
+	<select id="getInfoByUsernameAndIds" resultMap="resultMapActivityUsers" >
+		SELECT id,user_openid,user_name,user_img_path,draw_no,is_win,name,cellphone,in_time,mark FROM activity_users where   name LIKE CONCAT('%','${name}','%') 
+		<if test="idList!=null"> and id  not IN <foreach collection="idList" item="id" index="index" 
+			open="(" separator="," close=")">#{id}</foreach>
+		</if>
+		<if test="drawNo!=null"> and draw_no=#{drawNo} </if>
+		and mark="1" 
+	</select>
+	<insert id="add" parameterType="com.hzfh.api.market.model.ActivityUsers" useGeneratedKeys="true" keyProperty="id">
+		insert into activity_users
+		(user_openid,user_name,user_img_path,draw_no,is_win,name,cellphone,in_time,mark)
+		values
+		(#{userOpenid},#{userName},#{userImgPath},#{drawNo},#{isWin},#{name},#{cellphone},current_timestamp(),#{mark})
+	</insert>
+	<update id="update" parameterType="com.hzfh.api.market.model.ActivityUsers">
+		update activity_users set 
+		user_openid=#{userOpenid},user_name=#{userName},user_img_path=#{userImgPath},draw_no=#{drawNo},is_win=#{isWin},name=#{name},cellphone=#{cellphone},mark=#{mark}
+		where id=#{id}
+	</update>
+	<delete id="delete" >
+		delete from activity_users where id = #{id}
+	</delete>
+	<select id="getListByIsWin" resultMap="resultMapActivityUsers">
+		SELECT id,user_openid,user_name,user_img_path,draw_no,is_win,name,cellphone,in_time,mark
+		FROM activity_users WHERE is_win = #{isWin} and mark = "1"
+	</select>
+	<select id="getIntrinsicUsersByDrawNo" resultMap="resultMapActivityUsers">
+		SELECT id,user_openid,user_name,user_img_path,draw_no,is_win,name,cellphone,in_time,mark
+		FROM activity_users WHERE  draw_no = #{drawNo}
+	</select>
+	<select id="getOtherWinersByIsWin" resultMap="resultMapActivityUsers">
+		SELECT id,user_openid,user_name,user_img_path,draw_no,is_win,name,cellphone,in_time,mark
+		FROM activity_users where is_win = #{isWin} and draw_no=0  and mark ="1" order by rand() limit  #{otherNum}
+	</select>
+</mapper>

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hzfh.service.employee.mapper.ResignApplicationMapper">
+	<resultMap type="com.hzfh.api.employee.model.ResignApplication" id="resultMapResignApplication">
+		<result property="id" column="id"/>
+		<result property="code" column="code"/>
+		<result property="empNo" column="emp_no"/>
+		<result property="companyNo" column="company_no"/>
+		<result property="deptNo" column="dept_no"/>
+		<result property="positionNo" column="position_no"/>
+		<result property="hireTime" column="hire_time" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
+		<result property="method" column="method"/>
+		<result property="leaveTime" column="leave_time" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
+		<result property="reason" column="reason"/>
+		<result property="iskeepEmail" column="iskeep_email"/>
+		<result property="keepTime" column="keep_time" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
+		<result property="activitiNo" column="activiti_no"/>
+		<result property="inUserNo" column="in_user_no"/>
+		<result property="inTime" column="in_time" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
+		<result property="editUserNo" column="edit_user_no"/>
+		<result property="editTime" column="edit_time" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
+		<result property="editComment" column="edit_comment"/>
+	</resultMap>
+	<select id="getList" resultMap="resultMapResignApplication">
+		SELECT id,code,emp_no,company_no,dept_no,position_no,hire_time,method,leave_time,reason,iskeep_email,keep_time,activiti_no,in_user_no,in_time,edit_user_no,edit_time,edit_comment
+		FROM resign_application
+	</select>
+	<select id="getPagingList" resultMap="resultMapResignApplication" parameterType="com.hzfh.api.employee.model.query.ResignApplicationCondition" statementType="STATEMENT">
+		SELECT id,code,emp_no,company_no,dept_no,position_no,hire_time,method,leave_time,reason,iskeep_email,keep_time,activiti_no,in_user_no,in_time,edit_user_no,edit_time,edit_comment FROM resign_application where 1=1
+		ORDER BY
+		<foreach item="item" collection="sortItemList" separator=",">
+			${item.sortFeild} ${item.sortType}
+		</foreach>
+		LIMIT ${startIndex},${pageSize}
+	</select>
+	<select id="getTotalCount" resultType="int" parameterType="com.hzfh.api.employee.model.query.ResignApplicationCondition" statementType="STATEMENT">
+		SELECT count(1) FROM resign_application where 1=1
+	</select>
+	<select id="getInfo" resultMap="resultMapResignApplication" parameterType="int">
+		SELECT id,code,emp_no,company_no,dept_no,position_no,hire_time,method,leave_time,reason,iskeep_email,keep_time,activiti_no,in_user_no,in_time,edit_user_no,edit_time,edit_comment FROM resign_application where id=#{id}
+	</select>
+	<insert id="add" parameterType="com.hzfh.api.employee.model.ResignApplication" useGeneratedKeys="true" keyProperty="id">
+		insert into resign_application
+		(code,emp_no,company_no,dept_no,position_no,hire_time,method,leave_time,reason,iskeep_email,keep_time,activiti_no,in_user_no,in_time,edit_user_no,edit_time,edit_comment)
+		values
+		(#{code},#{empNo},#{companyNo},#{deptNo},#{positionNo},#{hireTime},#{method},#{leaveTime},#{reason},#{iskeepEmail},#{keepTime},#{activitiNo},#{inUserNo},current_timestamp(),#{editUserNo},current_timestamp(),#{editComment})
+	</insert>
+	<update id="update" parameterType="com.hzfh.api.employee.model.ResignApplication">
+		update resign_application set 
+		code=#{code},emp_no=#{empNo},company_no=#{companyNo},dept_no=#{deptNo},position_no=#{positionNo},hire_time=#{hireTime},method=#{method},leave_time=#{leaveTime},reason=#{reason},iskeep_email=#{iskeepEmail},keep_time=#{keepTime},activiti_no=#{activitiNo},edit_user_no=#{editUserNo},edit_time=current_timestamp(),edit_comment=#{editComment}
+		where id=#{id}
+	</update>
+	<delete id="delete" parameterType="int">
+		delete from resign_application where id = #{id}
+	</delete>
+</mapper>

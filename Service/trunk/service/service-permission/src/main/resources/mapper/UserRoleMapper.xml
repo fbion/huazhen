@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hzfh.service.permission.mapper.UserRoleMapper">
+	<resultMap type="com.hzfh.api.permission.model.UserRole" id="resultMapUserRole">
+		<result property="id" column="id"/>
+		<result property="userNo" column="user_no"/>
+		<result property="roleNo" column="role_no"/>
+		<result property="inUserNo" column="in_user_no"/>
+		<result property="inTime" column="in_time" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
+		<result property="editUserNo" column="edit_user_no"/>
+		<result property="editTime" column="edit_time" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
+		<result property="editComment" column="edit_comment"/>
+	</resultMap>
+	<select id="getList" resultMap="resultMapUserRole">
+		SELECT id,user_no,role_no,in_user_no,in_time,edit_user_no,edit_time,edit_comment
+		FROM user_role
+	</select>
+	<select id="getPagingList" resultMap="resultMapUserRole" parameterType="com.hzfh.api.permission.model.query.UserRoleCondition" statementType="STATEMENT">
+		SELECT id,user_no,role_no,in_user_no,in_time,edit_user_no,edit_time,edit_comment FROM user_role where 1=1
+		 <if test="userNo != 0">and user_no=${userNo}</if>
+		ORDER BY
+		<foreach item="item" collection="sortItemList" separator=",">
+			${item.sortFeild} ${item.sortType}
+		</foreach>
+		LIMIT ${startIndex},${pageSize}
+	</select>
+	<select id="getTotalCount" resultType="int" parameterType="com.hzfh.api.permission.model.query.UserRoleCondition" statementType="STATEMENT">
+		SELECT count(1) FROM user_role where 1=1
+		<if test="userNo != 0">and user_no=${userNo}</if>
+	</select>
+	<select id="getInfo" resultMap="resultMapUserRole" parameterType="int">
+		SELECT id,user_no,role_no,in_user_no,in_time,edit_user_no,edit_time,edit_comment FROM user_role where id=#{id}
+	</select>
+	
+	<!-- mengchong 2015/02/11 -->
+	<select id="getInfoByUserNoAndRoleNo" resultMap="resultMapUserRole" parameterType="int">
+		SELECT id,user_no,role_no,in_user_no,in_time,edit_user_no,edit_time,edit_comment FROM user_role where user_no=#{0} and role_no=#{1}
+	</select>
+    <select id="getInfoByRoleNo" resultMap="resultMapUserRole" parameterType="int">
+        SELECT id,user_no,role_no,in_user_no,in_time,edit_user_no,edit_time,edit_comment FROM user_role where  role_no=#{roleNo}
+    </select>
+
+	<insert id="add" parameterType="com.hzfh.api.permission.model.UserRole" useGeneratedKeys="true" keyProperty="id">
+		insert into user_role
+		(user_no,role_no,in_user_no,in_time,edit_user_no,edit_time,edit_comment)
+		values
+		(#{userNo},#{roleNo},#{inUserNo},current_timestamp(),#{editUserNo},current_timestamp(),#{editComment})
+	</insert>
+	<update id="update" parameterType="com.hzfh.api.permission.model.UserRole">
+		update user_role set 
+		user_no=#{userNo},role_no=#{roleNo},edit_user_no=#{editUserNo},edit_time=current_timestamp(),edit_comment=#{editComment}
+		where id=#{id}
+	</update>
+	<delete id="delete" parameterType="int">
+		delete from user_role where id = #{id}
+	</delete>
+</mapper>

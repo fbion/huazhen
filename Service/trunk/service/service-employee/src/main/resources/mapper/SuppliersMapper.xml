@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hzfh.service.employee.mapper.SuppliersMapper">
+	<resultMap type="com.hzfh.api.employee.model.Suppliers" id="resultMapSuppliers">
+		<result property="id" column="id"/>
+		<result property="supplierName" column="supplier_name"/>
+		<result property="contactPerson" column="contact_person"/>
+		<result property="phone" column="phone"/>
+		<result property="phone2" column="phone2"/>
+		<result property="mail" column="mail"/>
+		<result property="supplierAddr" column="supplier_addr"/>
+		<result property="supplierType" column="supplier_type"/>
+		<result property="inUserNo" column="in_user_no"/>
+		<result property="inTime" column="in_time" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
+		<result property="editUserNo" column="edit_user_no"/>
+		<result property="editTime" column="edit_time" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
+		<result property="editComment" column="edit_comment"/>
+	</resultMap>
+	<select id="getList" resultMap="resultMapSuppliers">
+		SELECT id,supplier_name,contact_person,phone,phone2,mail,supplier_addr,supplier_type,in_user_no,in_time,edit_user_no,edit_time,edit_comment
+		FROM suppliers
+	</select>
+	<select id="getPagingList" resultMap="resultMapSuppliers" parameterType="com.hzfh.api.employee.model.query.SuppliersCondition" statementType="STATEMENT">
+		SELECT id,supplier_name,contact_person,phone,phone2,mail,supplier_addr,supplier_type,in_user_no,in_time,edit_user_no,edit_time,edit_comment FROM suppliers where 1=1
+		<if test="supplierName !=null and supplierName !=''">and supplier_name LIKE CONCAT("%",'${supplierName}',"%")	</if>
+		<if test="contactPerson !=null and contactPerson !=''">and contact_person = '${contactPerson}'	</if>
+		<if test="supplierType !=null and supplierType !=''">and supplier_type = '${supplierType}'	</if>
+		ORDER BY
+		<foreach item="item" collection="sortItemList" separator=",">
+			${item.sortFeild} ${item.sortType}
+		</foreach>
+		LIMIT ${startIndex},${pageSize}
+	</select>
+	<select id="getTotalCount" resultType="int" parameterType="com.hzfh.api.employee.model.query.SuppliersCondition" statementType="STATEMENT">
+		SELECT count(1) FROM suppliers where 1=1 
+		<if test="supplierName !=null and supplierName !=''">and supplier_name LIKE CONCAT("%",'${supplierName}',"%")	</if>
+		<if test="contactPerson !=null and contactPerson !=''">and contact_person = '${contactPerson}'	</if>
+		<if test="supplierType !=null and supplierType !=''">and supplier_type = '${supplierType}'	</if>
+	</select>
+	<select id="getInfo" resultMap="resultMapSuppliers" parameterType="int">
+		SELECT id,supplier_name,contact_person,phone,phone2,mail,supplier_addr,supplier_type,in_user_no,in_time,edit_user_no,edit_time,edit_comment FROM suppliers where id=#{id}
+	</select>
+	<insert id="add" parameterType="com.hzfh.api.employee.model.Suppliers" useGeneratedKeys="true" keyProperty="id">
+		insert into suppliers
+		(supplier_name,contact_person,phone,phone2,mail,supplier_addr,supplier_type,in_user_no,in_time,edit_user_no,edit_time,edit_comment)
+		values
+		(#{supplierName},#{contactPerson},#{phone},#{phone2},#{mail},#{supplierAddr},#{supplierType},#{inUserNo},current_timestamp(),#{editUserNo},current_timestamp(),#{editComment})
+	</insert>
+	<update id="update" parameterType="com.hzfh.api.employee.model.Suppliers">
+		update suppliers set 
+		supplier_name=#{supplierName},contact_person=#{contactPerson},phone=#{phone},phone2=#{phone2},mail=#{mail},supplier_addr=#{supplierAddr},supplier_type=#{supplierType},edit_user_no=#{editUserNo},edit_time=current_timestamp(),edit_comment=#{editComment}
+		where id=#{id}
+	</update>
+	<delete id="delete" parameterType="int">
+		delete from suppliers where id = #{id}
+	</delete>
+</mapper>

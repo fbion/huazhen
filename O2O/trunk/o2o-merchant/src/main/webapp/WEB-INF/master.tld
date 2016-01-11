@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<taglib xmlns="http://java.sun.com/xml/ns/javaee"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-jsptaglibrary_2_1.xsd"
+        version="2.1">
+
+    <tlib-version>1.0</tlib-version>
+    <short-name>bean</short-name>
+    <uri>/hz-tags</uri>
+    <tag>
+        <name>Content</name>
+        <tag-class>com.hzframework.web.master.ContentTag</tag-class>
+        <body-content>JSP</body-content>
+        <attribute>
+            <name>contentPlaceHolderId</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+    </tag>
+    <tag>
+        <name>ContentPlaceHolder</name>
+        <tag-class>com.hzframework.web.master.ContentPlaceHolderTag</tag-class>
+        <body-content>JSP</body-content>
+        <attribute>
+            <name>id</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+    </tag>
+    <tag>
+        <name>MasterPage</name>
+        <tag-class>com.hzframework.web.master.MasterPageTag</tag-class>
+        <body-content>JSP</body-content>
+        <attribute>
+            <name>id</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+    </tag>
+    <tag>
+        <name>ContentPage</name>
+        <tag-class>com.hzframework.web.master.ContentPageTag</tag-class>
+        <body-content>JSP</body-content>
+        <attribute>
+            <name>materPageId</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+    </tag>
+
+</taglib>

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hzfh.service.customer.mapper.ActivityFeedbackMapper">
+	<resultMap type="com.hzfh.api.customer.model.ActivityFeedback" id="resultMapActivityFeedback">
+		<result property="id" column="id"/>
+		<result property="p2pCustomerNo" column="p2p_customer_no"/>
+		<result property="advise" column="advise"/>
+		<result property="feedbackTime" column="feedback_time" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
+		<result property="count" column="count"/>
+		<result property="approverNo" column="approver_no"/>
+		<result property="editTime" column="edit_time" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
+		<result property="status" column="status"/>
+	</resultMap>
+	<select id="getList" resultMap="resultMapActivityFeedback">
+		SELECT id,p2p_customer_no,advise,feedback_time,count,approver_no,edit_time,status
+		FROM activity_feedback
+	</select>
+	<select id="getPagingList" resultMap="resultMapActivityFeedback" parameterType="com.hzfh.api.customer.model.query.ActivityFeedbackCondition" statementType="STATEMENT">
+		SELECT id,p2p_customer_no,advise,feedback_time,count,approver_no,edit_time,status FROM activity_feedback where 1=1
+		ORDER BY
+		<foreach item="item" collection="sortItemList" separator=",">
+			${item.sortFeild} ${item.sortType}
+		</foreach>
+		LIMIT ${startIndex},${pageSize}
+	</select>
+	<select id="getTotalCount" resultType="int" parameterType="com.hzfh.api.customer.model.query.ActivityFeedbackCondition" statementType="STATEMENT">
+		SELECT count(1) FROM activity_feedback where 1=1
+	</select>
+	<select id="getInfo" resultMap="resultMapActivityFeedback" parameterType="int">
+		SELECT id,p2p_customer_no,advise,feedback_time,count,approver_no,edit_time,status FROM activity_feedback where id=#{id}
+	</select>
+	<insert id="add" parameterType="com.hzfh.api.customer.model.ActivityFeedback" useGeneratedKeys="true" keyProperty="id">
+		insert into activity_feedback
+		(p2p_customer_no,advise,feedback_time,count,approver_no,edit_time,status)
+		values
+		(#{p2pCustomerNo},#{advise},#{feedbackTime},#{count},#{approverNo},current_timestamp(),#{status})
+	</insert>
+	<update id="update" parameterType="com.hzfh.api.customer.model.ActivityFeedback">
+		update activity_feedback set 
+		p2p_customer_no=#{p2pCustomerNo},advise=#{advise},feedback_time=#{feedbackTime},count=#{count},approver_no=#{approverNo},edit_time=current_timestamp(),status=#{status}
+		where id=#{id}
+	</update>
+	<delete id="delete" parameterType="int">
+		delete from activity_feedback where id = #{id}
+	</delete>
+</mapper>

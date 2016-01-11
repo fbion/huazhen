@@ -1,0 +1,29 @@
+<%@ page language="java" contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib prefix="s" uri="/struts-tags" %>
+<%@ taglib prefix="m" uri="/hz-tags" %>
+
+<m:ContentPage materPageId="layout">
+    <m:Content contentPlaceHolderId="center">
+        <div class="wrappSearch mt30">
+            <h3></h3>
+            <div class="wrappSearchContent">
+            供应商名称: <input type="text" id="bySupplierName">
+            供应商分类: <select id="bySupplierType"><option value="0">全部</option><option value="1">三星</option></select>
+            联系人：<input type="text" id="byContactPerson">
+            
+            
+                <input id="btnSearch" type="button" value="查询" class="btn_style"/>
+            </div>
+        </div>
+        <p class="mt50 pl20"> 
+			<s:if test="showAddButton">
+                <input type="button" id="btnAdd" value="新建" class="btn_style"/>
+            </s:if></p>
+        <div class="pic mt20 pl20">
+            <table id="gridTable" class="gridTable">
+            </table>
+            <div id="gridPager" class="gridPager">
+            </div>
+        </div>
+    </m:Content>
+</m:ContentPage>

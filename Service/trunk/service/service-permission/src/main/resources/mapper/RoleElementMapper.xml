@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hzfh.service.permission.mapper.RoleElementMapper">
+	<resultMap type="com.hzfh.api.permission.model.RoleElement" id="resultMapRoleElement">
+		<result property="id" column="id"/>
+		<result property="roleNo" column="role_no"/>
+		<result property="eleNo" column="ele_no"/>
+		<result property="newItem" column="new_item"/>
+		<result property="edit" column="edit"/>
+		<result property="query" column="query"/>
+		<result property="del" column="del"/>
+		<result property="inUserNo" column="in_user_no"/>
+		<result property="inTime" column="in_time" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
+		<result property="editUserNo" column="edit_user_no"/>
+		<result property="editTime" column="edit_time" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
+		<result property="editComment" column="edit_comment"/>
+	</resultMap>
+	<select id="getList" resultMap="resultMapRoleElement">
+		SELECT id,role_no,ele_no,new_item,edit,query,del,in_user_no,in_time,edit_user_no,edit_time,edit_comment
+		FROM role_element
+	</select>
+	<select id="getPagingList" resultMap="resultMapRoleElement" parameterType="com.hzfh.api.permission.model.query.RoleElementCondition" statementType="STATEMENT">
+		SELECT id,role_no,ele_no,new_item,edit,query,del,in_user_no,in_time,edit_user_no,edit_time,edit_comment FROM role_element where 1=1
+		ORDER BY
+		<foreach item="item" collection="sortItemList" separator=",">
+			${item.sortFeild} ${item.sortType}
+		</foreach>
+		LIMIT ${startIndex},${pageSize}
+	</select>
+	<select id="getTotalCount" resultType="int" parameterType="com.hzfh.api.permission.model.query.RoleElementCondition" statementType="STATEMENT">
+		SELECT count(1) FROM role_element where 1=1
+	</select>
+	<select id="getInfo" resultMap="resultMapRoleElement" parameterType="int">
+		SELECT id,role_no,ele_no,new_item,edit,query,del,in_user_no,in_time,edit_user_no,edit_time,edit_comment FROM role_element where id=#{id}
+	</select>
+	<select id="getRoleElementByEleIdAndRoleId" resultMap="resultMapRoleElement" parameterType="int">
+		SELECT id,role_no,ele_no,new_item,edit,query,del,in_user_no,in_time,edit_user_no,edit_time,edit_comment FROM role_element where role_no=#{roleId} and ele_no =#{elementId} 
+	</select>
+	<insert id="add" parameterType="com.hzfh.api.permission.model.RoleElement" useGeneratedKeys="true" keyProperty="id">
+		insert into role_element
+		(role_no,ele_no,new_item,edit,query,del,in_user_no,in_time,edit_user_no,edit_time,edit_comment)
+		values
+		(#{roleNo},#{eleNo},#{newItem},#{edit},#{query},#{del},#{inUserNo},current_timestamp(),#{editUserNo},current_timestamp(),#{editComment})
+	</insert>
+	<update id="update" parameterType="com.hzfh.api.permission.model.RoleElement">
+		update role_element set 
+		role_no=#{roleNo},ele_no=#{eleNo},new_item=#{newItem},edit=#{edit},query=#{query},del=#{del},edit_user_no=#{editUserNo},edit_time=current_timestamp(),edit_comment=#{editComment}
+		where id=#{id}
+	</update>
+	<delete id="delete" parameterType="int">
+		delete from role_element where id = #{id}
+	</delete>
+    <select id="getRoleElementByRoleIdAndAlias" resultMap="resultMapRoleElement">
+        SELECT
+	re.id,
+	re.role_no,
+	re.ele_no,
+	re.new_item,
+	re.edit,
+	re.`query`,
+	re.del,
+	re.in_user_no,
+	re.in_time,
+	re.edit_user_no,
+	re.edit_time,
+	re.edit_comment,
+	e.name,
+	e.alias,
+	e.level
+FROM
+	role_element re
+LEFT JOIN
+	element e
+ON
+	re.ele_no = e.id
+WHERE
+	re.role_no = #{roleId}
+AND
+	e.alias = #{alias}
+    </select>
+    <select id="getSubRoleElementsByRoleIdAndParentEleId" resultMap="resultMapRoleElement">
+        SELECT
+	re.id,
+	re.role_no,
+	re.ele_no,
+	re.new_item,
+	re.edit,
+	re.`query`,
+	re.del,
+	re.in_user_no,
+	re.in_time,
+	re.edit_user_no,
+	re.edit_time,
+	re.edit_comment,
+	e.name,
+	e.alias
+FROM
+	role_element re
+LEFT JOIN
+	element e
+ON
+	re.ele_no = e.id
+WHERE
+	re.role_no = #{roleId}
+AND
+	e.parent_no = #{parentEleId}
+    </select>
+</mapper>

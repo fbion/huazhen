@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hzfh.service.payment.mapper.PaymentyCallbackNotifyMapper">
+	<resultMap type="com.hzfh.api.payment.model.PaymentyCallbackNotify" id="resultMapPaymentyCallbackNotify">
+		<result property="id" column="id"/>
+		<result property="url" column="url"/>
+		<result property="param" column="param"/>
+		<result property="sign" column="sign"/>
+		<result property="operType" column="oper_type"/>
+		<result property="type" column="type"/>
+		<result property="respTime" column="resp_time" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
+	</resultMap>
+	<select id="getList" resultMap="resultMapPaymentyCallbackNotify">
+		SELECT id,url,param,sign,oper_type,type,resp_time
+		FROM paymenty_callback_notify
+	</select>
+	<select id="getPagingList" resultMap="resultMapPaymentyCallbackNotify" parameterType="com.hzfh.api.payment.model.query.PaymentyCallbackNotifyCondition" statementType="STATEMENT">
+		SELECT id,url,param,sign,oper_type,type,resp_time FROM paymenty_callback_notify where 1=1
+		ORDER BY
+		<foreach item="item" collection="sortItemList" separator=",">
+			${item.sortFeild} ${item.sortType}
+		</foreach>
+		LIMIT ${startIndex},${pageSize}
+	</select>
+	<select id="getTotalCount" resultType="int" parameterType="com.hzfh.api.payment.model.query.PaymentyCallbackNotifyCondition" statementType="STATEMENT">
+		SELECT count(1) FROM paymenty_callback_notify where 1=1
+	</select>
+	<select id="getInfo" resultMap="resultMapPaymentyCallbackNotify" parameterType="int">
+		SELECT id,url,param,sign,oper_type,type,resp_time FROM paymenty_callback_notify where id=#{id}
+	</select>
+	<insert id="add" parameterType="com.hzfh.api.payment.model.PaymentyCallbackNotify" useGeneratedKeys="true" keyProperty="id">
+		insert into paymenty_callback_notify
+		(url,param,sign,oper_type,type,resp_time)
+		values
+		(#{url},#{param},#{sign},#{operType},#{type},#{respTime})
+	</insert>
+	<update id="update" parameterType="com.hzfh.api.payment.model.PaymentyCallbackNotify">
+		update paymenty_callback_notify set 
+		url=#{url},param=#{param},sign=#{sign},oper_type=#{operType},type=#{type},resp_time=#{respTime}
+		where id=#{id}
+	</update>
+	<delete id="delete" parameterType="int">
+		delete from paymenty_callback_notify where id = #{id}
+	</delete>
+</mapper>

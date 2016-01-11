@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hzfh.service.baseInfo.mapper.BannerLocationMapper">
+    <resultMap type="com.hzfh.api.baseInfo.model.BannerLocation" id="resultMapBannerLocation">
+        <result property="id" column="id"/>
+        <result property="pageType" column="page_type"/>
+        <result property="positionNo" column="position_no"/>
+        <result property="width" column="width"/>
+        <result property="height" column="height"/>
+        <result property="inUserNo" column="in_user_no"/>
+        <result property="inTime" column="in_time" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
+        <result property="editUserNo" column="edit_user_no"/>
+        <result property="editTime" column="edit_time" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
+        <result property="name" column="name"/>
+    </resultMap>
+    <select id="getList" resultMap="resultMapBannerLocation">
+        SELECT id,page_type,position_no,width,height,in_user_no,in_time,edit_user_no,edit_time,name
+        FROM banner_location
+    </select>
+    <select id="getPagingList" resultMap="resultMapBannerLocation" parameterType="com.hzfh.api.baseInfo.model.query.BannerLocationCondition" statementType="STATEMENT">
+        SELECT id,page_type,position_no,width,height,in_user_no,in_time,edit_user_no,edit_time,name FROM banner_location where 1=1
+        ORDER BY
+        <foreach item="item" collection="sortItemList" separator=",">
+            ${item.sortFeild} ${item.sortType}
+        </foreach>
+        LIMIT ${startIndex},${pageSize}
+    </select>
+    <select id="getTotalCount" resultType="int" parameterType="com.hzfh.api.baseInfo.model.query.BannerLocationCondition" statementType="STATEMENT">
+        SELECT count(1) FROM banner_location where 1=1
+    </select>
+    <select id="getInfo" resultMap="resultMapBannerLocation" parameterType="int">
+        SELECT id,page_type,position_no,width,height,in_user_no,in_time,edit_user_no,edit_time,name FROM banner_location where id=#{id}
+    </select>
+    <insert id="add" parameterType="com.hzfh.api.baseInfo.model.BannerLocation" useGeneratedKeys="true" keyProperty="id">
+        insert into banner_location
+        (page_type,position_no,width,height,in_user_no,in_time,edit_user_no,edit_time,name)
+        values
+        (#{pageType},#{positionNo},#{width},#{height},#{inUserNo},current_timestamp(),#{editUserNo},current_timestamp(),#{name})
+    </insert>
+    <update id="update" parameterType="com.hzfh.api.baseInfo.model.BannerLocation">
+        update banner_location set
+        page_type=#{pageType},position_no=#{positionNo},width=#{width},height=#{height},edit_user_no=#{editUserNo},edit_time=current_timestamp(),name=#{name}
+        where id=#{id}
+    </update>
+    <delete id="delete" parameterType="int">
+        delete from banner_location where id = #{id}
+    </delete>
+    <select id="getInfoByCondition" resultMap="resultMapBannerLocation" parameterType="com.hzfh.api.baseInfo.model.query.BannerLocationCondition" statementType="STATEMENT">
+        SELECT id,page_type,position_no,width,height,in_user_no,in_time,edit_user_no,edit_time,name FROM banner_location where 1=1
+       <if test="id!=0"> and id = ${id}</if>
+       <if test="pageType!=0"> and page_type = ${pageType}</if>
+       <if test="positionNo!=0"> and position_no = ${positionNo}</if>
+    </select>
+</mapper>

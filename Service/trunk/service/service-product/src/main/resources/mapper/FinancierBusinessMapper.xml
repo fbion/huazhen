@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hzfh.service.product.mapper.FinancierBusinessMapper">
+	<resultMap type="com.hzfh.api.product.model.FinancierBusiness" id="resultMapFinancierBusiness">
+		<result property="id" column="id"/>
+		<result property="code" column="code"/>
+		<result property="name" column="name"/>
+		<result property="owner" column="owner"/>
+		<result property="telephone" column="telephone"/>
+		<result property="relationLevel" column="relation_level"/>
+		<result property="contactImportance" column="contact_importance"/>
+		<result property="fax" column="fax"/>
+		<result property="postcode" column="postcode"/>
+		<result property="website" column="website"/>
+		<result property="email" column="email"/>
+		<result property="bankName" column="bank_name"/>
+		<result property="bankAddress" column="bank_address"/>
+		<result property="bankAccount" column="bank_account"/>
+		<result property="address" column="address"/>
+		<result property="contactPrimary" column="contact_primary"/>
+		<result property="contactCellphone1" column="contact_cellphone1"/>
+		<result property="contactCellphone2" column="contact_cellphone2"/>
+		<result property="contactTelephone" column="contact_telephone"/>
+		<result property="contactPosition" column="contact_position"/>
+		<result property="contactWeinxin" column="contact_weinxin"/>
+		<result property="contactQq" column="contact_qq"/>
+		<result property="contactAddress" column="contact_address"/>
+		<result property="requireMoneyTotal" column="require_money_total"/>
+		<result property="requireTime" column="require_time" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
+		<result property="requireComment" column="require_comment"/>
+		<result property="permitNumber" column="permit_number"/>
+		<result property="organizationNumber" column="organization_number"/>
+		<result property="comment" column="comment"/>
+		<result property="managerNo" column="manager_no"/>
+		<result property="inUserNo" column="in_user_no"/>
+		<result property="inTime" column="in_time" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
+		<result property="editUserNo" column="edit_user_no"/>
+		<result property="editTime" column="edit_time" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
+		<result property="editComment" column="edit_comment"/>
+		<result property="isTest" column="is_test"/>
+	</resultMap>
+	<select id="getList" resultMap="resultMapFinancierBusiness">
+		SELECT id,code,name,owner,telephone,relation_level,contact_importance,fax,postcode,website,email,bank_name,bank_address,bank_account,address,contact_primary,contact_cellphone1,contact_cellphone2,contact_telephone,contact_position,contact_weinxin,contact_qq,contact_address,require_money_total,require_time,require_comment,permit_number,organization_number,comment,manager_no,in_user_no,in_time,edit_user_no,edit_time,edit_comment,is_test
+		FROM financier_business
+	</select>
+	<select id="getPagingList" resultMap="resultMapFinancierBusiness" parameterType="com.hzfh.api.product.model.query.FinancierBusinessCondition" statementType="STATEMENT">
+		SELECT id,code,name,owner,telephone,relation_level,contact_importance,fax,postcode,website,email,bank_name,bank_address,bank_account,address,contact_primary,contact_cellphone1,contact_cellphone2,contact_telephone,contact_position,contact_weinxin,contact_qq,contact_address,require_money_total,require_time,require_comment,permit_number,organization_number,comment,manager_no,in_user_no,in_time,edit_user_no,edit_time,edit_comment,is_test FROM financier_business where 1=1
+		<if test="name != null and name !=''">and name LIKE CONCAT('%','${name}','%')</if>
+		<if test="relationLevel !=0">and  relation_level = ${relationLevel} </if>
+		<if test="importance !=0">and contact_importance = ${importance} </if> 
+		<if test="workMateString !=null">and manager_no in (${workMateString})	</if>
+		<if test="isTest>-1">and is_test=${isTest}</if>
+		ORDER BY
+		<foreach item="item" collection="sortItemList" separator=",">
+			${item.sortFeild} ${item.sortType}
+		</foreach>
+		LIMIT ${startIndex},${pageSize}
+	</select>
+	<select id="getTotalCount" resultType="int" parameterType="com.hzfh.api.product.model.query.FinancierBusinessCondition" statementType="STATEMENT">
+		SELECT count(1) FROM financier_business where 1=1
+		<if test="name != null and name !=''">and name LIKE CONCAT('%','${name}','%')</if>
+		<if test="relationLevel !=0">and  relation_level = ${relationLevel} </if>
+		<if test="importance !=0">and contact_importance = ${importance} </if>
+		<if test="workMateString !=null">and manager_no in (${workMateString}) </if> 
+		<if test="isTest>-1">and is_test=${isTest}</if>
+	</select>
+	<select id="getInfo" resultMap="resultMapFinancierBusiness" parameterType="int">
+		SELECT id,code,name,owner,telephone,relation_level,contact_importance,fax,postcode,website,email,bank_name,bank_address,bank_account,address,contact_primary,contact_cellphone1,contact_cellphone2,contact_telephone,contact_position,contact_weinxin,contact_qq,contact_address,require_money_total,require_time,require_comment,permit_number,organization_number,comment,manager_no,in_user_no,in_time,edit_user_no,edit_time,edit_comment,is_test FROM financier_business where id=#{id}
+	</select>
+	<insert id="add" parameterType="com.hzfh.api.product.model.FinancierBusiness" useGeneratedKeys="true" keyProperty="id">
+		insert into financier_business
+		(code,name,owner,telephone,relation_level,contact_importance,fax,postcode,website,email,bank_name,bank_address,bank_account,address,contact_primary,contact_cellphone1,contact_cellphone2,contact_telephone,contact_position,contact_weinxin,contact_qq,contact_address,require_money_total,require_time,require_comment,permit_number,organization_number,comment,manager_no,in_user_no,in_time,edit_user_no,edit_time,edit_comment,is_test)
+		values
+		(#{code},#{name},#{owner},#{telephone},#{relationLevel},#{contactImportance},#{fax},#{postcode},#{website},#{email},#{bankName},#{bankAddress},#{bankAccount},#{address},#{contactPrimary},#{contactCellphone1},#{contactCellphone2},#{contactTelephone},#{contactPosition},#{contactWeinxin},#{contactQq},#{contactAddress},#{requireMoneyTotal},#{requireTime},#{requireComment},#{permitNumber},#{organizationNumber},#{comment},#{managerNo},#{inUserNo},current_timestamp(),#{editUserNo},current_timestamp(),#{editComment},#{isTest})
+	</insert>
+	<update id="update" parameterType="com.hzfh.api.product.model.FinancierBusiness">
+		update financier_business set 
+		code=#{code},name=#{name},owner=#{owner},telephone=#{telephone},relation_level=#{relationLevel},contact_importance=#{contactImportance},fax=#{fax},postcode=#{postcode},website=#{website},email=#{email},bank_name=#{bankName},bank_address=#{bankAddress},bank_account=#{bankAccount},address=#{address},contact_primary=#{contactPrimary},contact_cellphone1=#{contactCellphone1},contact_cellphone2=#{contactCellphone2},contact_telephone=#{contactTelephone},contact_position=#{contactPosition},contact_weinxin=#{contactWeinxin},contact_qq=#{contactQq},contact_address=#{contactAddress},require_money_total=#{requireMoneyTotal},require_time=#{requireTime},require_comment=#{requireComment},permit_number=#{permitNumber},organization_number=#{organizationNumber},comment=#{comment},manager_no=#{managerNo},edit_user_no=#{editUserNo},edit_time=current_timestamp(),edit_comment=#{editComment},is_test=#{isTest}
+		where id=#{id}
+	</update>
+	<delete id="delete" parameterType="int">
+		delete from financier_business where id = #{id}
+	</delete>
+</mapper>

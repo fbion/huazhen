@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <mappers>
+		<mapper resource="mapper/CompanySalesDailyMapper.xml"/>
+		<mapper resource="mapper/CompanySalesTotalMapper.xml"/>
+		<mapper resource="mapper/DeptSalesDailyMapper.xml"/>
+		<mapper resource="mapper/DeptSalesTotalMapper.xml"/>
+		<mapper resource="mapper/EmpSalesDailyMapper.xml"/>
+		<mapper resource="mapper/EmpSalesTotalMapper.xml"/>
+        <mapper resource="mapper/AddCustomerReportMapper.xml"/>
+        <mapper resource="mapper/AddSalesReportMapper.xml"/>
+        <mapper resource="mapper/PaymentReportMapper.xml"/>
+        <mapper resource="mapper/PaymentReportDeatilMapper.xml"/>
+    </mappers>
+</configuration>

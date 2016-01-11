@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns="http://www.springframework.org/schema/beans" xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+
+       http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context-4.0.xsd"
+       default-autowire="byName" default-lazy-init="false">
+    <context:component-scan base-package="com.hzfh.service"/>
+    <context:annotation-config/>
+    <bean id="hessianMapping"
+          class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+        <property name="mappings">
+            <props>
+                <prop key="/lotteries">lotteriesService</prop>
+                <prop key="/winningRecord">winningRecordService</prop>
+                <prop key="/activityUsers">activityUsersService</prop>
+                <prop key="/drawSetting">drawSettingService</prop>
+                <prop key="/activityApplyUser">activityApplyUserService</prop>
+            </props>
+        </property>
+    </bean>
+	<bean id="lotteriesServiceImpl" class="com.hzfh.service.market.serviceImpl.LotteriesServiceImpl" />
+  	<bean id="lotteriesService" class="org.springframework.remoting.caucho.HessianServiceExporter">
+   		<property name="service" ref="lotteriesServiceImpl" />
+   	 	<property name="serviceInterface" value="com.hzfh.api.market.service.LotteriesService" />
+  	</bean>
+	<bean id="winningRecordServiceImpl" class="com.hzfh.service.market.serviceImpl.WinningRecordServiceImpl" />
+  	<bean id="winningRecordService" class="org.springframework.remoting.caucho.HessianServiceExporter">
+   		<property name="service" ref="winningRecordServiceImpl" />
+   	 	<property name="serviceInterface" value="com.hzfh.api.market.service.WinningRecordService" />
+  	</bean>
+  	<bean id="activityUsersServiceImpl" class="com.hzfh.service.market.serviceImpl.ActivityUsersServiceImpl" />
+  	<bean id="activityUsersService" class="org.springframework.remoting.caucho.HessianServiceExporter">
+   		<property name="service" ref="activityUsersServiceImpl" />
+   	 	<property name="serviceInterface" value="com.hzfh.api.market.service.ActivityUsersService" />
+  	</bean>
+  	<bean id="drawSettingServiceImpl" class="com.hzfh.service.market.serviceImpl.DrawSettingServiceImpl" />
+  	<bean id="drawSettingService" class="org.springframework.remoting.caucho.HessianServiceExporter">
+   		<property name="service" ref="drawSettingServiceImpl" />
+   	 	<property name="serviceInterface" value="com.hzfh.api.market.service.DrawSettingService" />
+  	</bean>
+  	<bean id="activityApplyUserServiceImpl" class="com.hzfh.service.market.serviceImpl.ActivityApplyUserServiceImpl" />
+  <bean id="activityApplyUserService" class="org.springframework.remoting.caucho.HessianServiceExporter">
+    <property name="service" ref="activityApplyUserServiceImpl" />
+    <property name="serviceInterface" value="com.hzfh.api.market.service.ActivityApplyUserService" />
+  </bean>
+</beans>

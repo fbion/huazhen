@@ -1,0 +1,280 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:activiti="http://activiti.org/bpmn" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" xmlns:tns="http://www.activiti.org/test" typeLanguage="http://www.w3.org/2001/XMLSchema" expressionLanguage="http://www.w3.org/1999/XPath" targetNamespace="http://www.activiti.org/test" id="m1438914688831" name="">
+  <process id="salesAuditProcess" name="打款审批" isExecutable="true" isClosed="false" processType="None">
+    <startEvent id="_2" name="StartEvent"></startEvent>
+    <userTask id="_3" name="领导审核" activiti:assignee="${leader}"></userTask>
+    <userTask id="_5" name="财务审核" activiti:assignee="${financeDirector}"></userTask>
+    <userTask id="_7" name="门店运营审核" activiti:assignee="${shopOperation}"></userTask>
+    <endEvent id="_8" name="EndEvent"></endEvent>
+    <exclusiveGateway id="_9" name="ExclusiveGateway"></exclusiveGateway>
+    <exclusiveGateway id="_10" name="ExclusiveGateway"></exclusiveGateway>
+    <sequenceFlow id="_17" sourceRef="_5" targetRef="_10"></sequenceFlow>
+    <exclusiveGateway id="_27" name="ExclusiveGateway"></exclusiveGateway>
+    <sequenceFlow id="_28" sourceRef="_7" targetRef="_27"></sequenceFlow>
+    <userTask id="_21" name="订单录入人审核" activiti:assignee="${creator}"></userTask>
+    <sequenceFlow id="_4" sourceRef="_3" targetRef="_9"></sequenceFlow>
+    <userTask id="_6" name="订单录入人审核" activiti:assignee="${creator}"></userTask>
+    <userTask id="_11" name="订单录入人审核" activiti:assignee="${creator}"></userTask>
+    <serviceTask id="_24" name="给领导邮件" activiti:class="com.hzfh.service.workFlow.serviceTask.sales.SalesAuditStartServiceTask">
+      <extensionElements>
+        <activiti:field name="userId">
+          <activiti:expression>${leader}</activiti:expression>
+        </activiti:field>
+        <activiti:field name="url">
+          <activiti:expression>${url}</activiti:expression>
+        </activiti:field>
+        <activiti:field name="salesId">
+          <activiti:expression>${salesId}</activiti:expression>
+        </activiti:field>
+      </extensionElements>
+    </serviceTask>
+    <sequenceFlow id="_25" sourceRef="_2" targetRef="_24"></sequenceFlow>
+    <serviceTask id="_14" name="给财务邮件" activiti:class="com.hzfh.service.workFlow.serviceTask.sales.SalesAuditServiceTaskByLeader">
+      <extensionElements>
+        <activiti:field name="userId">
+          <activiti:expression>${financeDirector}</activiti:expression>
+        </activiti:field>
+        <activiti:field name="url">
+          <activiti:expression>${url}</activiti:expression>
+        </activiti:field>
+        <activiti:field name="salesId">
+          <activiti:expression>${salesId}</activiti:expression>
+        </activiti:field>
+      </extensionElements>
+    </serviceTask>
+    <sequenceFlow id="_26" sourceRef="_24" targetRef="_3"></sequenceFlow>
+    <sequenceFlow id="_29" sourceRef="_9" targetRef="_14">
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${pass == true}]]></conditionExpression>
+    </sequenceFlow>
+    <sequenceFlow id="_30" sourceRef="_14" targetRef="_5"></sequenceFlow>
+    <serviceTask id="_31" name="给门店运营邮件" activiti:class="com.hzfh.service.workFlow.serviceTask.sales.SalesAuditServiceTaskByFinance">
+      <extensionElements>
+        <activiti:field name="userId">
+          <activiti:expression>${shopOperation}</activiti:expression>
+        </activiti:field>
+        <activiti:field name="url">
+          <activiti:expression>${url}</activiti:expression>
+        </activiti:field>
+        <activiti:field name="salesId">
+          <activiti:expression>${salesId}</activiti:expression>
+        </activiti:field>
+      </extensionElements>
+    </serviceTask>
+    <sequenceFlow id="_32" sourceRef="_10" targetRef="_31">
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${pass == true}]]></conditionExpression>
+    </sequenceFlow>
+    <sequenceFlow id="_33" sourceRef="_31" targetRef="_7"></sequenceFlow>
+    <serviceTask id="_34" name="ServiceTask" activiti:class="com.hzfh.service.workFlow.serviceTask.sales.SalesAuditBackServiceTask">
+      <extensionElements>
+        <activiti:field name="userId">
+          <activiti:expression>${creator}</activiti:expression>
+        </activiti:field>
+        <activiti:field name="salesId">
+          <activiti:expression>${salesId}</activiti:expression>
+        </activiti:field>
+      </extensionElements>
+    </serviceTask>
+    <sequenceFlow id="_35" sourceRef="_9" targetRef="_34">
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${pass == false}]]></conditionExpression>
+    </sequenceFlow>
+    <sequenceFlow id="_36" sourceRef="_34" targetRef="_21"></sequenceFlow>
+    <sequenceFlow id="_37" sourceRef="_21" targetRef="_3"></sequenceFlow>
+    <serviceTask id="_38" name="ServiceTask" activiti:class="com.hzfh.service.workFlow.serviceTask.sales.SalesAuditBackServiceTask">
+      <extensionElements>
+        <activiti:field name="userId">
+          <activiti:expression>${creator}</activiti:expression>
+        </activiti:field>
+        <activiti:field name="url">
+          <activiti:expression>${url}</activiti:expression>
+        </activiti:field>
+        <activiti:field name="salesId">
+          <activiti:expression>${salesId}</activiti:expression>
+        </activiti:field>
+      </extensionElements>
+    </serviceTask>
+    <sequenceFlow id="_39" sourceRef="_6" targetRef="_5"></sequenceFlow>
+    <sequenceFlow id="_40" sourceRef="_10" targetRef="_38">
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${pass == false}]]></conditionExpression>
+    </sequenceFlow>
+    <sequenceFlow id="_41" sourceRef="_38" targetRef="_6"></sequenceFlow>
+    <serviceTask id="_42" name="ServiceTask" activiti:class="com.hzfh.service.workFlow.serviceTask.sales.SalesAuditBackServiceTask">
+      <extensionElements>
+        <activiti:field name="userId">
+          <activiti:expression>${creator}</activiti:expression>
+        </activiti:field>
+        <activiti:field name="url">
+          <activiti:expression>${url}</activiti:expression>
+        </activiti:field>
+        <activiti:field name="salesId">
+          <activiti:expression>${salesId}</activiti:expression>
+        </activiti:field>
+      </extensionElements>
+    </serviceTask>
+    <sequenceFlow id="_43" sourceRef="_27" targetRef="_42">
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${pass == false}]]></conditionExpression>
+    </sequenceFlow>
+    <sequenceFlow id="_44" sourceRef="_42" targetRef="_11"></sequenceFlow>
+    <sequenceFlow id="_12" sourceRef="_11" targetRef="_7"></sequenceFlow>
+    <serviceTask id="_15" name="ServiceTask" activiti:class="com.hzfh.service.workFlow.serviceTask.sales.SalesAuditEndServiceTask">
+      <extensionElements>
+        <activiti:field name="userId">
+          <activiti:expression>${financeDirector}</activiti:expression>
+        </activiti:field>
+        <activiti:field name="salesId">
+          <activiti:expression>${salesId}</activiti:expression>
+        </activiti:field>
+      </extensionElements>
+    </serviceTask>
+    <sequenceFlow id="_16" sourceRef="_27" targetRef="_15">
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${pass == true}]]></conditionExpression>
+    </sequenceFlow>
+    <sequenceFlow id="_18" sourceRef="_15" targetRef="_8"></sequenceFlow>
+  </process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_salesAuditProcess">
+    <bpmndi:BPMNPlane bpmnElement="salesAuditProcess" id="BPMNPlane_salesAuditProcess">
+      <bpmndi:BPMNShape bpmnElement="_2" id="BPMNShape__2">
+        <omgdc:Bounds height="35.0" width="35.0" x="340.0" y="-5.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="_3" id="BPMNShape__3">
+        <omgdc:Bounds height="55.0" width="85.0" x="320.0" y="130.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="_5" id="BPMNShape__5">
+        <omgdc:Bounds height="55.0" width="85.0" x="320.0" y="355.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="_7" id="BPMNShape__7">
+        <omgdc:Bounds height="55.0" width="85.0" x="320.0" y="565.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="_8" id="BPMNShape__8">
+        <omgdc:Bounds height="35.0" width="35.0" x="340.0" y="900.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="_9" id="BPMNShape__9">
+        <omgdc:Bounds height="32.0" width="32.0" x="345.0" y="240.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="_10" id="BPMNShape__10">
+        <omgdc:Bounds height="32.0" width="32.0" x="345.0" y="460.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="_27" id="BPMNShape__27">
+        <omgdc:Bounds height="32.0" width="32.0" x="340.0" y="690.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="_21" id="BPMNShape__21">
+        <omgdc:Bounds height="55.0" width="85.0" x="565.0" y="130.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="_6" id="BPMNShape__6">
+        <omgdc:Bounds height="55.0" width="85.0" x="575.0" y="355.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="_11" id="BPMNShape__11">
+        <omgdc:Bounds height="55.0" width="85.0" x="580.0" y="565.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="_24" id="BPMNShape__24">
+        <omgdc:Bounds height="55.0" width="85.0" x="160.0" y="130.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="_14" id="BPMNShape__14">
+        <omgdc:Bounds height="55.0" width="85.0" x="150.0" y="295.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="_31" id="BPMNShape__31">
+        <omgdc:Bounds height="55.0" width="85.0" x="160.0" y="500.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="_34" id="BPMNShape__34">
+        <omgdc:Bounds height="55.0" width="85.0" x="565.0" y="230.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="_38" id="BPMNShape__38">
+        <omgdc:Bounds height="55.0" width="85.0" x="575.0" y="450.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="_42" id="BPMNShape__42">
+        <omgdc:Bounds height="55.0" width="85.0" x="580.0" y="685.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="_15" id="BPMNShape__15">
+        <omgdc:Bounds height="55.0" width="85.0" x="315.0" y="800.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge bpmnElement="_17" id="BPMNEdge__17">
+        <omgdi:waypoint x="362.0" y="410.0"></omgdi:waypoint>
+        <omgdi:waypoint x="361.0" y="460.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_28" id="BPMNEdge__28">
+        <omgdi:waypoint x="362.0" y="620.0"></omgdi:waypoint>
+        <omgdi:waypoint x="356.0" y="690.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_4" id="BPMNEdge__4">
+        <omgdi:waypoint x="362.0" y="185.0"></omgdi:waypoint>
+        <omgdi:waypoint x="361.0" y="240.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_25" id="BPMNEdge__25">
+        <omgdi:waypoint x="340.0" y="12.0"></omgdi:waypoint>
+        <omgdi:waypoint x="220.0" y="15.0"></omgdi:waypoint>
+        <omgdi:waypoint x="202.0" y="130.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_26" id="BPMNEdge__26">
+        <omgdi:waypoint x="245.0" y="157.0"></omgdi:waypoint>
+        <omgdi:waypoint x="320.0" y="157.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_29" id="BPMNEdge__29">
+        <omgdi:waypoint x="345.0" y="256.0"></omgdi:waypoint>
+        <omgdi:waypoint x="190.0" y="255.0"></omgdi:waypoint>
+        <omgdi:waypoint x="192.0" y="295.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_30" id="BPMNEdge__30">
+        <omgdi:waypoint x="192.0" y="350.0"></omgdi:waypoint>
+        <omgdi:waypoint x="195.0" y="385.0"></omgdi:waypoint>
+        <omgdi:waypoint x="320.0" y="382.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_32" id="BPMNEdge__32">
+        <omgdi:waypoint x="345.0" y="476.0"></omgdi:waypoint>
+        <omgdi:waypoint x="205.0" y="475.0"></omgdi:waypoint>
+        <omgdi:waypoint x="202.0" y="500.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_33" id="BPMNEdge__33">
+        <omgdi:waypoint x="202.0" y="555.0"></omgdi:waypoint>
+        <omgdi:waypoint x="205.0" y="595.0"></omgdi:waypoint>
+        <omgdi:waypoint x="320.0" y="592.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_35" id="BPMNEdge__35">
+        <omgdi:waypoint x="377.0" y="256.0"></omgdi:waypoint>
+        <omgdi:waypoint x="470.0" y="255.0"></omgdi:waypoint>
+        <omgdi:waypoint x="565.0" y="257.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_36" id="BPMNEdge__36">
+        <omgdi:waypoint x="607.0" y="230.0"></omgdi:waypoint>
+        <omgdi:waypoint x="607.0" y="185.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_37" id="BPMNEdge__37">
+        <omgdi:waypoint x="565.0" y="157.0"></omgdi:waypoint>
+        <omgdi:waypoint x="485.0" y="160.0"></omgdi:waypoint>
+        <omgdi:waypoint x="405.0" y="157.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_39" id="BPMNEdge__39">
+        <omgdi:waypoint x="575.0" y="382.0"></omgdi:waypoint>
+        <omgdi:waypoint x="405.0" y="382.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_40" id="BPMNEdge__40">
+        <omgdi:waypoint x="377.0" y="476.0"></omgdi:waypoint>
+        <omgdi:waypoint x="480.0" y="475.0"></omgdi:waypoint>
+        <omgdi:waypoint x="575.0" y="477.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_41" id="BPMNEdge__41">
+        <omgdi:waypoint x="617.0" y="450.0"></omgdi:waypoint>
+        <omgdi:waypoint x="617.0" y="410.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_43" id="BPMNEdge__43">
+        <omgdi:waypoint x="372.0" y="706.0"></omgdi:waypoint>
+        <omgdi:waypoint x="480.0" y="710.0"></omgdi:waypoint>
+        <omgdi:waypoint x="580.0" y="712.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_44" id="BPMNEdge__44">
+        <omgdi:waypoint x="622.0" y="685.0"></omgdi:waypoint>
+        <omgdi:waypoint x="622.0" y="620.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_12" id="BPMNEdge__12">
+        <omgdi:waypoint x="580.0" y="592.0"></omgdi:waypoint>
+        <omgdi:waypoint x="405.0" y="592.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_16" id="BPMNEdge__16">
+        <omgdi:waypoint x="356.0" y="722.0"></omgdi:waypoint>
+        <omgdi:waypoint x="357.0" y="800.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_18" id="BPMNEdge__18">
+        <omgdi:waypoint x="357.0" y="855.0"></omgdi:waypoint>
+        <omgdi:waypoint x="357.0" y="900.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</definitions>

@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<cssConfig xmlns="http://www.hzfh.com/web"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://www.hzfh.com/web ../../Schemas/Resources/Css.xsd">
+
+    <cssMappings>
+        <!--Common begin-->
+        
+        <css name="style" order="15">style.css?t=20151126</css>
+        <css name="pagination" order="15">pagination.css?t=20151126</css>
+        <css name="common" order="10">common.css?t=20151126</css> 
+    </cssMappings>
+
+</cssConfig>

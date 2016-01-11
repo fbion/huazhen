@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hzfh.service.report.mapper.DeptSalesTotalMapper">
+	<resultMap type="com.hzfh.api.report.model.DeptSalesTotal" id="resultMapDeptSalesTotal">
+		<result property="id" column="id"/>
+		<result property="productNo" column="product_no"/>
+		<result property="productName" column="product_name"/>
+		<result property="deptNo" column="dept_no"/>
+		<result property="deptName" column="dept_name"/>
+		<result property="moneyTotal" column="money_total"/>
+		<result property="inUserNo" column="in_user_no"/>
+		<result property="inTime" column="in_time" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
+		<result property="editUserNo" column="edit_user_no"/>
+		<result property="editTime" column="edit_time" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
+		<result property="editComment" column="edit_comment"/>
+		<result property="count" column="count"/>
+		<result property="deptType" column="dept_type"/>
+	</resultMap>
+	<select id="getList" resultMap="resultMapDeptSalesTotal">
+		SELECT id,product_no,product_name,dept_no,dept_name,money_total,in_user_no,in_time,edit_user_no,edit_time,edit_comment,count,dept_type
+		FROM dept_sales_total
+	</select>
+	<select id="getPagingList" resultMap="resultMapDeptSalesTotal" parameterType="com.hzfh.api.report.model.query.DeptSalesTotalCondition" statementType="STATEMENT">
+		SELECT id,product_no,product_name,dept_no,dept_name,money_total,in_user_no,in_time,edit_user_no,edit_time,edit_comment,count,dept_type FROM dept_sales_total where 1=1
+		ORDER BY
+		<foreach item="item" collection="sortItemList" separator=",">
+			${item.sortFeild} ${item.sortType}
+		</foreach>
+		LIMIT ${startIndex},${pageSize}
+	</select>
+	<select id="getTotalCount" resultType="int" parameterType="com.hzfh.api.report.model.query.DeptSalesTotalCondition" statementType="STATEMENT">
+		SELECT count(1) FROM dept_sales_total where 1=1
+	</select>
+	<select id="getInfo" resultMap="resultMapDeptSalesTotal" parameterType="int">
+		SELECT id,product_no,product_name,dept_no,dept_name,money_total,in_user_no,in_time,edit_user_no,edit_time,edit_comment,count,dept_type FROM dept_sales_total where id=#{id}
+	</select>
+	<insert id="add" parameterType="com.hzfh.api.report.model.DeptSalesTotal" useGeneratedKeys="true" keyProperty="id">
+		insert into dept_sales_total
+		(product_no,product_name,dept_no,dept_name,money_total,in_user_no,in_time,edit_user_no,edit_time,edit_comment,count,dept_type)
+		values
+		(#{productNo},#{productName},#{deptNo},#{deptName},#{moneyTotal},#{inUserNo},current_timestamp(),#{editUserNo},current_timestamp(),#{editComment},#{count},#{deptType})
+	</insert>
+	<update id="update" parameterType="com.hzfh.api.report.model.DeptSalesTotal">
+		update dept_sales_total set 
+		product_no=#{productNo},product_name=#{productName},dept_no=#{deptNo},dept_name=#{deptName},money_total=#{moneyTotal},edit_user_no=#{editUserNo},edit_time=current_timestamp(),edit_comment=#{editComment},count=#{count},dept_type=#{dept_type}
+		where id=#{id}
+	</update>
+	<delete id="delete" parameterType="int">
+		delete from dept_sales_total where id = #{id}
+	</delete>
+		<!--create by Zorro 2015/4/21-->
+	<select id="getListByProductNo" resultMap="resultMapDeptSalesTotal" parameterType="int">
+		SELECT id,product_no,product_name,dept_no,dept_name,money_total,in_user_no,in_time,edit_user_no,edit_time,edit_comment,count,dept_type
+		FROM dept_sales_total where product_no= #{productNo}
+	</select>
+	
+</mapper>
+	
+
+	

@@ -1,0 +1,15 @@
+package com.hzfh.api.baseInfo.model.helper;
+
+public enum SnEnum {
+	SN_RECHARGE,
+	SN_WITHDRAW,
+	SN_FREEZE,
+	SN_CHANGE, 
+	SN_ENTERPRISEREGISTER,
+	SN_REGISTER,
+	SN_CHANGEPWD,
+	SN_BIND_BANK_CARD,
+    SN_UNBIND_BANK_CARD,
+    SN_RESET_MOBILE,
+    SN_TRANSFER_REQUEST_NO
+}

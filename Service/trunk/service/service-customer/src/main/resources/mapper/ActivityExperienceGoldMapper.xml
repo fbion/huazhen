@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hzfh.service.customer.mapper.ActivityExperienceGoldMapper">
+	<resultMap type="com.hzfh.api.customer.model.ActivityExperienceGold" id="resultMapActivityExperienceGold">
+		<result property="id" column="id"/>
+		<result property="goldMoney" column="gold_money"/>
+		<result property="day" column="day"/>
+		<result property="inUserNo" column="in_user_no"/>
+		<result property="inTime" column="in_time" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
+		<result property="editUserNo" column="edit_user_no"/>
+		<result property="editTime" column="edit_time" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
+		<result property="editComment" column="edit_comment"/>
+		<result property="isTest" column="is_test"/>
+		<result property="productType" column="product_type"/>
+		<result property="productName" column="product_name"/>
+		<result property="activityNo" column="activity_no"/>
+		<result property="conditionDescription" column="condition_description"/>
+	</resultMap>
+	<select id="getList" resultMap="resultMapActivityExperienceGold">
+		SELECT id,gold_money,day,in_user_no,in_time,edit_user_no,edit_time,edit_comment,is_test,product_type,product_name,condition_description,activity_no
+		FROM activity_experience_gold
+	</select>
+	<select id="getPagingList" resultMap="resultMapActivityExperienceGold" parameterType="com.hzfh.api.customer.model.query.ActivityExperienceGoldCondition" statementType="STATEMENT">
+		SELECT id,gold_money,day,in_user_no,in_time,edit_user_no,edit_time,edit_comment,is_test,product_type,product_name,condition_description,activity_no FROM activity_experience_gold where 1=1
+		ORDER BY
+		<foreach item="item" collection="sortItemList" separator=",">
+			${item.sortFeild} ${item.sortType}
+		</foreach>
+		LIMIT ${startIndex},${pageSize}
+	</select>
+	<select id="getTotalCount" resultType="int" parameterType="com.hzfh.api.customer.model.query.ActivityExperienceGoldCondition" statementType="STATEMENT">
+		SELECT count(1) FROM activity_experience_gold where 1=1
+	</select>
+	<select id="getInfo" resultMap="resultMapActivityExperienceGold" parameterType="int">
+		SELECT id,gold_money,day,in_user_no,in_time,edit_user_no,edit_time,edit_comment,is_test,product_type,product_name,condition_description,activity_no FROM activity_experience_gold where id=#{id}
+	</select>
+	<insert id="add" parameterType="com.hzfh.api.customer.model.ActivityExperienceGold" useGeneratedKeys="true" keyProperty="id">
+		insert into activity_experience_gold
+		(gold_money,day,in_user_no,in_time,edit_user_no,edit_time,edit_comment,is_test,product_type,product_name,condition_description,activity_no)
+		values
+		(#{goldMoney},#{day},#{inUserNo},current_timestamp(),#{editUserNo},current_timestamp(),#{editComment},#{isTest},#{productType},#{productName},#{conditionDescription},#{activityNo})
+	</insert>
+	<update id="update" parameterType="com.hzfh.api.customer.model.ActivityExperienceGold">
+		update activity_experience_gold set 
+		gold_money=#{goldMoney},day=#{day},edit_user_no=#{editUserNo},edit_time=current_timestamp(),edit_comment=#{editComment},is_test=#{isTest},product_type=#{productType},product_name=#{productName},condition_description=#{conditionDescription},activity_no=#{activityNo}
+		where id=#{id}
+	</update>
+	<delete id="delete" parameterType="int">
+		delete from activity_experience_gold where id = #{id}
+	</delete>
+	<select id="getActExperienceGoldModelByActId" resultMap="resultMapActivityExperienceGold">
+		SELECT id,gold_money,day,in_user_no,in_time,edit_user_no,edit_time,edit_comment,is_test,product_type,product_name,condition_description,activity_no
+		FROM activity_experience_gold where activity_no = #{activityNo}
+	</select>
+	
+</mapper>

@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!-- 客户端Hessian代理工厂Bean  -->
+    <!-- 20150717 优化work flow -->
+	<bean id="approvalHistoriaService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+        <property name="serviceUrl">
+            <value>http://workflowservice.hzfh.com:8080/service-workFlow/approvalHistoria</value>
+        </property>
+        <property name="serviceInterface">
+            <value>com.hzfh.api.workFlow.service.ApprovalHistoriaService</value>
+        </property>
+        <property name="overloadEnabled" value="true"></property>
+    </bean>
+	<bean id="auditTaskService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+        <property name="serviceUrl">
+            <value>http://workflowservice.hzfh.com:8080/service-workFlow/auditTask</value>
+        </property>
+        <property name="serviceInterface">
+            <value>com.hzfh.api.workFlow.service.AuditTaskService</value>
+        </property>
+        <property name="overloadEnabled" value="true"></property>
+    </bean>
+	<bean id="processDefinitionService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+        <property name="serviceUrl">
+            <value>http://workflowservice.hzfh.com:8080/service-workFlow/processDefinition</value>
+        </property>
+        <property name="serviceInterface">
+            <value>com.hzfh.api.workFlow.service.ProcessDefinitionService</value>
+        </property>
+        <property name="overloadEnabled" value="true"></property>
+    </bean>
+	<bean id="processingService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+        <property name="serviceUrl">
+            <value>http://workflowservice.hzfh.com:8080/service-workFlow/processing</value>
+        </property>
+        <property name="serviceInterface">
+            <value>com.hzfh.api.workFlow.service.ProcessingService</value>
+        </property>
+        <property name="overloadEnabled" value="true"></property>
+    </bean>
+	<bean id="actHiProcinstService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+        <property name="serviceUrl">
+            <value>http://workflowservice.hzfh.com:8080/service-workFlow/actHiProcinst</value>
+        </property>
+        <property name="serviceInterface">
+            <value>com.hzfh.api.workFlow.service.ActHiProcinstService</value>
+        </property>
+        <property name="overloadEnabled" value="true"></property>
+    </bean>
+	<bean id="actHiTaskinstService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+        <property name="serviceUrl">
+            <value>http://workflowservice.hzfh.com:8080/service-workFlow/actHiTaskinst</value>
+        </property>
+        <property name="serviceInterface">
+            <value>com.hzfh.api.workFlow.service.ActHiTaskinstService</value>
+        </property>
+        <property name="overloadEnabled" value="true"></property>
+    </bean>
+	<bean id="actRuTaskService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+        <property name="serviceUrl">
+            <value>http://workflowservice.hzfh.com:8080/service-workFlow/actRuTask</value>
+        </property>
+        <property name="serviceInterface">
+            <value>com.hzfh.api.workFlow.service.ActRuTaskService</value>
+        </property>
+        <property name="overloadEnabled" value="true"></property>
+    </bean>
+</beans>

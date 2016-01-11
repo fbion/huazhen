@@ -1,0 +1,257 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context-4.0.xsd
+       http://www.springframework.org/schema/tx
+       http://www.springframework.org/schema/tx/spring-tx.xsd
+       http://www.springframework.org/schema/aop
+       http://www.springframework.org/schema/aop/spring-aop-4.0.xsd">
+
+    <!-- 加载配置文件 -->
+    <context:property-placeholder location="classpath:db.properties"/>
+    <!-- 指定spring注解注入层 -->
+    <context:component-scan base-package="com.hzfh.service.baseInfo"/>
+
+    <!-- DataSource begin-->
+    <!-- 数据库连接池管理 -->
+    <bean id="c3p0DataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"
+          destroy-method="close">
+        <property name="driverClass" value="${db.driverClass}"/>
+        <property name="jdbcUrl" value="${db.jdbcUrl}"/>
+        <property name="user" value="${db.user}"/>
+        <property name="password" value="${db.password}"/>
+
+
+        <property name="initialPoolSize" value="${db.initialPoolSize}"/>
+
+        <!--最大空闲时间,60秒内未使用则连接被丢弃。若为0则永不丢弃。Default: 0 -->
+        <property name="maxIdleTime" value="${db.maxIdleTime}"/>
+        <!--连接池中保留的最大连接数。Default: 15 -->
+        <property name="maxPoolSize" value="${db.maxPoolSize}"/>
+        <property name="minPoolSize" value="${db.minPoolSize}"/>
+
+        <!--当连接池中的连接耗尽的时候c3p0一次同时获取的连接数。Default: 3 -->
+        <property name="acquireIncrement" value="${db.acquireIncrement}"/>
+        <!--两次连接中间隔时间，单位毫秒。Default: 1000 -->
+        <property name="acquireRetryDelay" value="${db.acquireRetryDelay}"/>
+        <!--定义在从数据库获取新连接失败后重复尝试的次数。Default: 30 -->
+        <property name="acquireRetryAttempts" value="${db.acquireRetryAttempts}"/>
+        <!--获取连接失败将会引起所有等待连接池来获取连接的线程抛出异常。但是数据源仍有效保留，并在下次调用getConnection()的时候继续尝试获取连接。如果设为true，那么在尝试
+            获取连接失败后该数据源将申明已断开并永久关闭。Default: false -->
+        <property name="breakAfterAcquireFailure" value="${db.breakAfterAcquireFailure}"/>
+    </bean>
+
+    <!-- ================================事务相关控制================================================= -->
+
+    <bean name="transactionManager"
+          class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="c3p0DataSource"/>
+    </bean>
+
+    <tx:advice id="txAdvice" transaction-manager="transactionManager">
+        <tx:attributes>
+            <tx:method name="delete*" propagation="REQUIRED" read-only="false"
+                       rollback-for="java.lang.Exception" no-rollback-for="java.lang.RuntimeException"/>
+            <tx:method name="insert*" propagation="REQUIRED" read-only="false"
+                       rollback-for="java.lang.RuntimeException"/>
+            <tx:method name="update*" propagation="REQUIRED" read-only="false"
+                       rollback-for="java.lang.Exception"/>
+            <tx:method name="find*" propagation="SUPPORTS"/>
+            <tx:method name="get*" propagation="SUPPORTS"/>
+            <tx:method name="select*" propagation="SUPPORTS"/>
+        </tx:attributes>
+    </tx:advice>
+
+    <aop:config>
+        <aop:pointcut id="pc"
+                      expression="execution(public * com.hzfh.service.baseInfo.serviceImpl.*.*(..))"/>
+        <!--把事务控制在Service层 -->
+        <aop:advisor pointcut-ref="pc" advice-ref="txAdvice"/>
+    </aop:config>
+
+    <!--mybatis-->
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="c3p0DataSource"/>
+        <property name="configLocation" value="classpath:MyBatis-Config.xml"/>
+    </bean>
+        <bean class="org.mybatis.spring.mapper.MapperFactoryBean" id="codeAdviserMapper">
+        <property name="mapperInterface" value="com.hzfh.service.baseInfo.mapper.CodeAdviserMapper"/>
+        <property name="sqlSessionFactory" ref="sqlSessionFactory"/>
+    </bean>
+    <bean class="org.mybatis.spring.mapper.MapperFactoryBean" id="bannerInfoMapper">
+        <property name="mapperInterface" value="com.hzfh.service.baseInfo.mapper.BannerInfoMapper"/>
+        <property name="sqlSessionFactory" ref="sqlSessionFactory"/>
+    </bean>
+    <bean class="org.mybatis.spring.mapper.MapperFactoryBean" id="bannerLocationMapper">
+        <property name="mapperInterface" value="com.hzfh.service.baseInfo.mapper.BannerLocationMapper"/>
+        <property name="sqlSessionFactory" ref="sqlSessionFactory"/>
+    </bean>
+    <bean class="org.mybatis.spring.mapper.MapperFactoryBean" id="codeAgentMapper">
+        <property name="mapperInterface" value="com.hzfh.service.baseInfo.mapper.CodeAgentMapper"/>
+        <property name="sqlSessionFactory" ref="sqlSessionFactory"/>
+    </bean>
+    <bean class="org.mybatis.spring.mapper.MapperFactoryBean" id="codeCompanyMapper">
+        <property name="mapperInterface" value="com.hzfh.service.baseInfo.mapper.CodeCompanyMapper"/>
+        <property name="sqlSessionFactory" ref="sqlSessionFactory"/>
+    </bean>
+    <bean class="org.mybatis.spring.mapper.MapperFactoryBean" id="codeCus1Mapper">
+        <property name="mapperInterface" value="com.hzfh.service.baseInfo.mapper.CodeCus1Mapper"/>
+        <property name="sqlSessionFactory" ref="sqlSessionFactory"/>
+    </bean>
+    <bean class="org.mybatis.spring.mapper.MapperFactoryBean" id="codeCus2Mapper">
+        <property name="mapperInterface" value="com.hzfh.service.baseInfo.mapper.CodeCus2Mapper"/>
+        <property name="sqlSessionFactory" ref="sqlSessionFactory"/>
+    </bean>
+    <bean class="org.mybatis.spring.mapper.MapperFactoryBean" id="codeDeptMapper">
+        <property name="mapperInterface" value="com.hzfh.service.baseInfo.mapper.CodeDeptMapper"/>
+        <property name="sqlSessionFactory" ref="sqlSessionFactory"/>
+    </bean>
+    <bean class="org.mybatis.spring.mapper.MapperFactoryBean" id="codeEmpMapper">
+        <property name="mapperInterface" value="com.hzfh.service.baseInfo.mapper.CodeEmpMapper"/>
+        <property name="sqlSessionFactory" ref="sqlSessionFactory"/>
+    </bean>
+    <bean class="org.mybatis.spring.mapper.MapperFactoryBean" id="codeExpenseMapper">
+        <property name="mapperInterface" value="com.hzfh.service.baseInfo.mapper.CodeExpenseMapper"/>
+        <property name="sqlSessionFactory" ref="sqlSessionFactory"/>
+    </bean>
+    <bean class="org.mybatis.spring.mapper.MapperFactoryBean" id="codeIncomeMapper">
+        <property name="mapperInterface" value="com.hzfh.service.baseInfo.mapper.CodeIncomeMapper"/>
+        <property name="sqlSessionFactory" ref="sqlSessionFactory"/>
+    </bean>
+    <bean class="org.mybatis.spring.mapper.MapperFactoryBean" id="codeIssueMapper">
+        <property name="mapperInterface" value="com.hzfh.service.baseInfo.mapper.CodeIssueMapper"/>
+        <property name="sqlSessionFactory" ref="sqlSessionFactory"/>
+    </bean>
+    <bean class="org.mybatis.spring.mapper.MapperFactoryBean" id="codeNeed1Mapper">
+        <property name="mapperInterface" value="com.hzfh.service.baseInfo.mapper.CodeNeed1Mapper"/>
+        <property name="sqlSessionFactory" ref="sqlSessionFactory"/>
+    </bean>
+    <bean class="org.mybatis.spring.mapper.MapperFactoryBean" id="codeNeed2Mapper">
+        <property name="mapperInterface" value="com.hzfh.service.baseInfo.mapper.CodeNeed2Mapper"/>
+        <property name="sqlSessionFactory" ref="sqlSessionFactory"/>
+    </bean>
+    <bean class="org.mybatis.spring.mapper.MapperFactoryBean" id="codePactMapper">
+        <property name="mapperInterface" value="com.hzfh.service.baseInfo.mapper.CodePactMapper"/>
+        <property name="sqlSessionFactory" ref="sqlSessionFactory"/>
+    </bean>
+    <bean class="org.mybatis.spring.mapper.MapperFactoryBean" id="codeProduct1Mapper">
+        <property name="mapperInterface" value="com.hzfh.service.baseInfo.mapper.CodeProduct1Mapper"/>
+        <property name="sqlSessionFactory" ref="sqlSessionFactory"/>
+    </bean>
+    <bean class="org.mybatis.spring.mapper.MapperFactoryBean" id="codeProduct2Mapper">
+        <property name="mapperInterface" value="com.hzfh.service.baseInfo.mapper.CodeProduct2Mapper"/>
+        <property name="sqlSessionFactory" ref="sqlSessionFactory"/>
+    </bean>
+    <bean class="org.mybatis.spring.mapper.MapperFactoryBean" id="codeProduct3Mapper">
+        <property name="mapperInterface" value="com.hzfh.service.baseInfo.mapper.CodeProduct3Mapper"/>
+        <property name="sqlSessionFactory" ref="sqlSessionFactory"/>
+    </bean>
+    <bean class="org.mybatis.spring.mapper.MapperFactoryBean" id="codeProduct4Mapper">
+        <property name="mapperInterface" value="com.hzfh.service.baseInfo.mapper.CodeProduct4Mapper"/>
+        <property name="sqlSessionFactory" ref="sqlSessionFactory"/>
+    </bean>
+    <bean class="org.mybatis.spring.mapper.MapperFactoryBean" id="codeSalesMapper">
+        <property name="mapperInterface" value="com.hzfh.service.baseInfo.mapper.CodeSalesMapper"/>
+        <property name="sqlSessionFactory" ref="sqlSessionFactory"/>
+    </bean>
+    <bean class="org.mybatis.spring.mapper.MapperFactoryBean" id="dicDataMapper">
+        <property name="mapperInterface" value="com.hzfh.service.baseInfo.mapper.DicDataMapper"/>
+        <property name="sqlSessionFactory" ref="sqlSessionFactory"/>
+    </bean>
+    <bean class="org.mybatis.spring.mapper.MapperFactoryBean" id="dicTypeMapper">
+        <property name="mapperInterface" value="com.hzfh.service.baseInfo.mapper.DicTypeMapper"/>
+        <property name="sqlSessionFactory" ref="sqlSessionFactory"/>
+    </bean>
+    <!-- P2P -->
+    <bean class="org.mybatis.spring.mapper.MapperFactoryBean" id="districtMapper">
+        <property name="mapperInterface" value="com.hzfh.service.baseInfo.mapper.DistrictMapper"/>
+        <property name="sqlSessionFactory" ref="sqlSessionFactory"/>
+    </bean>
+
+    <bean class="org.mybatis.spring.mapper.MapperFactoryBean" id="emailMapper">
+        <property name="mapperInterface" value="com.hzfh.service.baseInfo.mapper.EmailMapper"/>
+        <property name="sqlSessionFactory" ref="sqlSessionFactory"/>
+    </bean>
+
+    <bean class="org.mybatis.spring.mapper.MapperFactoryBean" id="loginFailedMapper">
+        <property name="mapperInterface" value="com.hzfh.service.baseInfo.mapper.LoginFailedMapper"/>
+        <property name="sqlSessionFactory" ref="sqlSessionFactory"/>
+    </bean>
+
+    <bean class="org.mybatis.spring.mapper.MapperFactoryBean" id="provinceMapper">
+        <property name="mapperInterface" value="com.hzfh.service.baseInfo.mapper.ProvinceMapper"/>
+        <property name="sqlSessionFactory" ref="sqlSessionFactory"/>
+    </bean>
+    <bean class="org.mybatis.spring.mapper.MapperFactoryBean" id="captchaMapper">
+        <property name="mapperInterface" value="com.hzfh.service.baseInfo.mapper.CaptchaMapper"/>
+        <property name="sqlSessionFactory" ref="sqlSessionFactory"/>
+    </bean>
+
+    <bean class="org.mybatis.spring.mapper.MapperFactoryBean" id="cityMapper">
+        <property name="mapperInterface" value="com.hzfh.service.baseInfo.mapper.CityMapper"/>
+        <property name="sqlSessionFactory" ref="sqlSessionFactory"/>
+    </bean>
+
+    <bean class="org.mybatis.spring.mapper.MapperFactoryBean" id="letterMapper">
+        <property name="mapperInterface" value="com.hzfh.service.baseInfo.mapper.LetterMapper"/>
+        <property name="sqlSessionFactory" ref="sqlSessionFactory"/>
+    </bean>
+    <bean class="org.mybatis.spring.mapper.MapperFactoryBean" id="announcementMapper">
+        <property name="mapperInterface" value="com.hzfh.service.baseInfo.mapper.AnnouncementMapper"/>
+        <property name="sqlSessionFactory" ref="sqlSessionFactory"/>
+    </bean>
+    <bean class="org.mybatis.spring.mapper.MapperFactoryBean" id="letterStepMapper">
+        <property name="mapperInterface" value="com.hzfh.service.baseInfo.mapper.LetterStepMapper"/>
+        <property name="sqlSessionFactory" ref="sqlSessionFactory"/>
+    </bean>
+    
+    <bean class="org.mybatis.spring.mapper.MapperFactoryBean" id="emailFilesMapper">
+        <property name="mapperInterface" value="com.hzfh.service.baseInfo.mapper.EmailFilesMapper"/>
+        <property name="sqlSessionFactory" ref="sqlSessionFactory"/>
+    </bean>
+    
+    <bean class="org.mybatis.spring.mapper.MapperFactoryBean" id="smsMapper">
+        <property name="mapperInterface" value="com.hzfh.service.baseInfo.mapper.SmsMapper"/>
+        <property name="sqlSessionFactory" ref="sqlSessionFactory"/>
+    </bean>
+    <bean class="org.mybatis.spring.mapper.MapperFactoryBean" id="smstempleteMapper">
+        <property name="mapperInterface" value="com.hzfh.service.baseInfo.mapper.SmstempleteMapper"/>
+        <property name="sqlSessionFactory" ref="sqlSessionFactory"/>
+    </bean>
+    <bean class="org.mybatis.spring.mapper.MapperFactoryBean" id="smsCaptchaMapper">
+        <property name="mapperInterface" value="com.hzfh.service.baseInfo.mapper.SmsCaptchaMapper"/>
+        <property name="sqlSessionFactory" ref="sqlSessionFactory"/>
+    </bean>
+    
+    <bean class="org.mybatis.spring.mapper.MapperFactoryBean" id="snMapper">
+        <property name="mapperInterface" value="com.hzfh.service.baseInfo.mapper.SnMapper"/>
+        <property name="sqlSessionFactory" ref="sqlSessionFactory"/>
+    </bean>
+    <bean class="org.mybatis.spring.mapper.MapperFactoryBean" id="calendarMapper"> 
+    	<property name="mapperInterface" value="com.hzfh.service.baseInfo.mapper.CalendarMapper"/>
+    	<property name="sqlSessionFactory" ref="sqlSessionFactory"/> 
+    </bean>
+    
+    
+
+    <!-- DataSource end-->
+    
+    <bean id="propertyConfigurer"
+          class="com.hzframework.helper.PropertyHelper">
+        <property name="ignoreResourceNotFound" value="true"/>
+        <property name="fileEncoding" value="utf-8"/>
+        <property name="locations">
+            <list>
+                <value>classpath*:properties/sn.properties</value>
+            </list>
+        </property>
+    </bean>
+    
+</beans>

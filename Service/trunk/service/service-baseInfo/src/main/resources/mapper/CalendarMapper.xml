@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hzfh.service.baseInfo.mapper.CalendarMapper">
+	<resultMap type="com.hzfh.api.baseInfo.model.Calendar" id="resultMapCalendar">
+		<result property="id" column="id"/>
+		<result property="userNo" column="user_no"/>
+		<result property="inTime" column="in_time" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
+		<result property="editTime" column="edit_time" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
+		<result property="content" column="content"/>
+		<result property="startTime" column="start_time" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
+		<result property="endTime" column="end_time" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
+		<result property="state" column="state"/>
+		<result property="theme" column="theme"/>
+	</resultMap>
+	<select id="getList" resultMap="resultMapCalendar">
+		SELECT id,user_no,in_time,edit_time,content,start_time,end_time,state,theme
+		FROM calendar
+	</select>
+	<select id="getPagingList" resultMap="resultMapCalendar" parameterType="com.hzfh.api.baseInfo.model.query.CalendarCondition" statementType="STATEMENT">
+		SELECT id,user_no,in_time,edit_time,content,start_time,end_time,state,theme FROM calendar where 1=1
+		ORDER BY
+		<foreach item="item" collection="sortItemList" separator=",">
+			${item.sortFeild} ${item.sortType}
+		</foreach>
+		LIMIT ${startIndex},${pageSize}
+	</select>
+	<select id="getTotalCount" resultType="int" parameterType="com.hzfh.api.baseInfo.model.query.CalendarCondition" statementType="STATEMENT">
+		SELECT count(1) FROM calendar where 1=1
+	</select>
+	<select id="getInfo" resultMap="resultMapCalendar" parameterType="int">
+		SELECT id,user_no,in_time,edit_time,content,start_time,end_time,state,theme FROM calendar where id=#{id}
+	</select>
+	<insert id="add" parameterType="com.hzfh.api.baseInfo.model.Calendar" useGeneratedKeys="true" keyProperty="id">
+		insert into calendar
+		(user_no,in_time,edit_time,content,start_time,end_time,state,theme)
+		values
+		(#{userNo},current_timestamp(),current_timestamp(),#{content},#{startTime},#{endTime},#{state},#{theme})
+	</insert>
+	<update id="update" parameterType="com.hzfh.api.baseInfo.model.Calendar">
+		update calendar set 
+		user_no=#{userNo},edit_time=current_timestamp(),content=#{content},start_time=#{startTime},end_time=#{endTime},state=#{state},theme=#{theme}
+		where id=#{id}
+	</update>
+	<delete id="delete" parameterType="int">
+		delete from calendar where id = #{id}
+	</delete>
+</mapper>

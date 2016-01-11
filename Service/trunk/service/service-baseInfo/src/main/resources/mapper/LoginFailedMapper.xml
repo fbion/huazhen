@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hzfh.service.baseInfo.mapper.LoginFailedMapper">
+	<resultMap type="com.hzfh.api.baseInfo.model.LoginFailed" id="resultMapLoginFailed">
+		<result property="id" column="id"/>
+		<result property="loginTime" column="login_time" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
+		<result property="userName" column="user_name"/>
+		<result property="password" column="password"/>
+		<result property="ip" column="ip"/>
+		<result property="site" column="site"/>
+	</resultMap>
+	<select id="getList" resultMap="resultMapLoginFailed">
+		SELECT id,login_time,user_name,password,ip,site
+		FROM login_failed
+	</select>
+	<select id="getPagingList" resultMap="resultMapLoginFailed" parameterType="com.hzfh.api.baseInfo.model.query.LoginFailedCondition" statementType="STATEMENT">
+		SELECT id,login_time,user_name,password,ip,site FROM login_failed where 1=1
+		ORDER BY
+		<foreach item="item" collection="sortItemList" separator=",">
+			${item.sortFeild} ${item.sortType}
+		</foreach>
+		LIMIT ${startIndex},${pageSize}
+	</select>
+	<select id="getTotalCount" resultType="int" parameterType="com.hzfh.api.baseInfo.model.query.LoginFailedCondition" statementType="STATEMENT">
+		SELECT count(1) FROM login_failed where 1=1
+	</select>
+	<select id="getInfo" resultMap="resultMapLoginFailed" parameterType="int">
+		SELECT id,login_time,user_name,password,ip,site FROM login_failed where id=#{id}
+	</select>
+	<insert id="add" parameterType="com.hzfh.api.baseInfo.model.LoginFailed" useGeneratedKeys="true" keyProperty="id">
+		insert into login_failed
+		(login_time,user_name,password,ip,site)
+		values
+		(current_timestamp(),#{userName},#{password},#{ip},#{site})
+	</insert>
+	<update id="update" parameterType="com.hzfh.api.baseInfo.model.LoginFailed">
+		update login_failed set 
+		login_time=#{loginTime},user_name=#{userName},password=#{password},ip=#{ip},site=#{site}
+		where id=#{id}
+	</update>
+	<delete id="delete" parameterType="int">
+		delete from login_failed where id = #{id}
+	</delete>
+</mapper>

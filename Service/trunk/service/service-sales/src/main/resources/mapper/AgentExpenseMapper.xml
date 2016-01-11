@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hzfh.service.sales.mapper.AgentExpenseMapper">
+	<resultMap type="com.hzfh.api.sales.model.AgentExpense" id="resultMapAgentExpense">
+		<result property="id" column="id"/>
+		<result property="code" column="code"/>
+		<result property="name" column="name"/>
+		<result property="customerType" column="customer_type"/>
+		<result property="customerNo" column="customer_no"/>
+		<result property="salesNo" column="sales_no"/>
+		<result property="payTotal" column="pay_total"/>
+		<result property="payFirst" column="pay_first"/>
+		<result property="payReal" column="pay_real"/>
+		<result property="payRemain" column="pay_remain"/>
+		<result property="payDate" column="pay_date" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
+		<result property="agentType" column="agent_type"/>
+		<result property="agentNo" column="agent_no"/>
+		<result property="payType" column="pay_type"/>
+		<result property="receiptNumber" column="receipt_number"/>
+		<result property="comment" column="comment"/>
+		<result property="inUserNo" column="in_user_no"/>
+		<result property="inTime" column="in_time" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
+		<result property="editUserNo" column="edit_user_no"/>
+		<result property="editTime" column="edit_time" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
+		<result property="editComment" column="edit_comment"/>
+	</resultMap>
+	<select id="getList" resultMap="resultMapAgentExpense">
+		SELECT id,code,name,customer_type,customer_no,sales_no,pay_total,pay_first,pay_real,pay_remain,pay_date,agent_type,agent_no,pay_type,receipt_number,comment,in_user_no,in_time,edit_user_no,edit_time,edit_comment
+		FROM agent_expense
+	</select>
+	<select id="getPagingList" resultMap="resultMapAgentExpense" parameterType="com.hzfh.api.sales.model.query.AgentExpenseCondition" statementType="STATEMENT">
+		SELECT id,code,name,customer_type,customer_no,sales_no,pay_total,pay_first,pay_real,pay_remain,pay_date,agent_type,agent_no,pay_type,receipt_number,comment,in_user_no,in_time,edit_user_no,edit_time,edit_comment FROM agent_expense where 1=1
+		<if test="customerType !=0">and customer_type=${customerType}</if>
+		<if test="customer !=0">and customer_no=${customer}</if>
+		<if test="agentType !=0">and agent_type=${agentType}</if>
+		<if test="agent !=0">and agent_no=${agent}</if>
+		ORDER BY
+		<foreach item="item" collection="sortItemList" separator=",">
+			${item.sortFeild} ${item.sortType}
+		</foreach>
+		LIMIT ${startIndex},${pageSize}
+	</select>
+	<select id="getTotalCount" resultType="int" parameterType="com.hzfh.api.sales.model.query.AgentExpenseCondition" statementType="STATEMENT">
+		SELECT count(1) FROM agent_expense where 1=1
+		<if test="customerType !=0">and customer_type=${customerType}</if>
+		<if test="customer !=0">and customer_no=${customer}</if>
+		<if test="agentType !=0">and agent_type=${agentType}</if>
+		<if test="agent !=0">and agent_no=${agent}</if>
+	</select>
+	<select id="getInfo" resultMap="resultMapAgentExpense" parameterType="int">
+		SELECT id,code,name,customer_type,customer_no,sales_no,pay_total,pay_first,pay_real,pay_remain,pay_date,agent_type,agent_no,pay_type,receipt_number,comment,in_user_no,in_time,edit_user_no,edit_time,edit_comment FROM agent_expense where id=#{id}
+	</select>
+	<insert id="add" parameterType="com.hzfh.api.sales.model.AgentExpense" useGeneratedKeys="true" keyProperty="id">
+		insert into agent_expense
+		(code,name,customer_type,customer_no,sales_no,pay_total,pay_first,pay_real,pay_remain,pay_date,agent_type,agent_no,pay_type,receipt_number,comment,in_user_no,in_time,edit_user_no,edit_time,edit_comment)
+		values
+		(#{code},#{name},#{customerType},#{customerNo},#{salesNo},#{payTotal},#{payFirst},#{payReal},#{payRemain},#{payDate},#{agentType},#{agentNo},#{payType},#{receiptNumber},#{comment},#{inUserNo},current_timestamp(),#{editUserNo},current_timestamp(),#{editComment})
+	</insert>
+	<update id="update" parameterType="com.hzfh.api.sales.model.AgentExpense">
+		update agent_expense set 
+		code=#{code},name=#{name},customer_type=#{customerType},customer_no=#{customerNo},sales_no=#{salesNo},pay_total=#{payTotal},pay_first=#{payFirst},pay_real=#{payReal},pay_remain=#{payRemain},pay_date=#{payDate},agent_type=#{agentType},agent_no=#{agentNo},pay_type=#{payType},receipt_number=#{receiptNumber},comment=#{comment},edit_user_no=#{editUserNo},edit_time=current_timestamp(),edit_comment=#{editComment}
+		where id=#{id}
+	</update>
+	<delete id="delete" parameterType="int">
+		delete from agent_expense where id = #{id}
+	</delete>
+</mapper>

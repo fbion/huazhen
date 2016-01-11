@@ -1,0 +1,331 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+        "http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+     <package name="processing" extends="struts-login" namespace="/workFlow/processing">
+        <action name="list" class="com.hzfh.fmp.controller.workFlow.ProcessingAction">
+            <result>/workFlow/processingList.jsp</result>
+        </action>
+    </package>
+    <package name="ajaxProcessing" extends="struts-error" namespace="/workFlow/processing">
+        <action name="ajaxAuditComment" class="com.hzfh.fmp.controller.workFlow.ajax.AjaxProcessingAction" method="getAuditComment">
+           <result>/workFlow/auditComment.jsp</result>
+        </action>
+        <action name="ajaxProductAuditComment" class="com.hzfh.fmp.controller.workFlow.ajax.AjaxProcessingAction" method="getAuditComment">
+            <result type="json">
+                <param name="includeProperties">
+                    commentList.*
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+        <action name="ajaxAuditProcess" class="com.hzfh.fmp.controller.workFlow.ajax.AjaxAuditTaskAction" method="getAuditProcess">
+            <result>/workFlow/auditProcess.jsp</result>
+        </action>
+        <action name="ajaxGetAuditComment" class="com.hzfh.fmp.controller.workFlow.ajax.AjaxProcessingAction" method="getAuditComment">
+            <result type="json">
+                <param name="includeProperties">
+                    commentList.*
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+        <action name="ajaxListProcessing" class="com.hzfh.fmp.controller.workFlow.ajax.AjaxProcessingAction">
+            <result type="json">
+                <param name="includeProperties">
+                    resultList.*,
+                    pageSize, pageIndex, pageCount, recordCount
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+        <action name="ajaxEditProcessing" class="com.hzfh.fmp.controller.workFlow.ajax.AjaxProcessingAction" method="edit">
+            <result type="json">
+                <param name="includeProperties">
+                    errCode,errDesc
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+            </action>
+		<action name="ajaxStartTempRecruitNeedProcess" class="com.hzfh.fmp.controller.workFlow.ajax.AjaxProcessingAction" method="startTempRecruitNeedProcess">
+            <result type="json">
+                <param name="includeProperties">
+                    errCode,errDesc,activitiNo
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+		<action name="ajaxStartDeptYearNeedProcess" class="com.hzfh.fmp.controller.workFlow.ajax.AjaxProcessingAction" method="startDeptYearNeedProcess">
+            <result type="json">
+                <param name="includeProperties">
+                    errCode,errDesc,activitiNo
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+		<action name="ajaxStartExtendProbationApplicationProcesss" class="com.hzfh.fmp.controller.workFlow.ajax.AjaxProcessingAction" method="startExtendProbationApplicationProcesss">
+            <result type="json">
+                <param name="includeProperties">
+                    errCode,errDesc,activitiNo
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+        <action name="ajaxStartRepaymentExaminationProcess" class="com.hzfh.fmp.controller.workFlow.ajax.AjaxProcessingAction" method="startRepaymentExaminationProcess">
+            <result type="json">
+                <param name="includeProperties">
+                    errCode,errDesc,activitiNo
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+		<action name="ajaxStartPersonalChangeProcess" class="com.hzfh.fmp.controller.workFlow.ajax.AjaxProcessingAction" method="startPersonalChangeProcess">
+            <result type="json">
+                <param name="includeProperties">
+                    errCode,errDesc,activitiNo
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+		<action name="ajaxStartResignApplicationProcess" class="com.hzfh.fmp.controller.workFlow.ajax.AjaxProcessingAction" method="startResignApplicationProcess">
+            <result type="json">
+                <param name="includeProperties">
+                    errCode,errDesc,activitiNo
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+		<action name="ajaxStartAttendanceApplicationProcess" class="com.hzfh.fmp.controller.workFlow.ajax.AjaxProcessingAction" method="startAttendanceApplicationProcess">
+            <result type="json">
+                <param name="includeProperties">
+                    errCode,errDesc,activitiNo
+               </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+        <action name="ajaxStartProductAuditProcess" class="com.hzfh.fmp.controller.workFlow.ajax.AjaxProcessingAction" method="startProductAuditProcess">
+            <result type="json">
+                <param name="includeProperties">
+                    errCode,errDesc,activitiNo
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+        <action name="ajaxStartP2pProductAuditProcess" class="com.hzfh.fmp.controller.workFlow.ajax.AjaxProcessingAction" method="startP2pProductAuditProcess">
+            <result type="json">
+                <param name="includeProperties">
+                    errCode,errDesc,activitiNo
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+        <action name="ajaxStartSalesAuditProcess" class="com.hzfh.fmp.controller.workFlow.ajax.AjaxProcessingAction" method="startSalesAuditProcess">
+            <result type="json">
+                <param name="includeProperties">
+                    errCode,errDesc,activitiNo
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+		<action name="ajaxStartYearNeedProcess" class="com.hzfh.fmp.controller.workFlow.ajax.AjaxProcessingAction" method="startYearNeedProcess">
+            <result type="json">
+                <param name="includeProperties">
+                    errCode,errDesc,activitiNo
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+        <action name="ajaxStartProbationEvaluationProcess" class="com.hzfh.fmp.controller.workFlow.ajax.AjaxProcessingAction" method="startProbationEvaluationProcess">
+            <result type="json">
+                <param name="includeProperties">
+                    errCode,errDesc,activitiNo
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+        <action name="ajaxStartManagerEvaluationProcess" class="com.hzfh.fmp.controller.workFlow.ajax.AjaxProcessingAction" method="startManagerEvaluationProcess">
+            <result type="json">
+                <param name="includeProperties">
+                    errCode,errDesc,activitiNo
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+    </package>
+     <package name="auditTask" extends="struts-login" namespace="/workFlow/auditTask">
+        <action name="list" class="com.hzfh.fmp.controller.workFlow.AuditTaskAction">
+            <result>/workFlow/auditTaskList.jsp</result>
+        </action>
+    </package>
+    <package name="ajaxAuditTask" extends="struts-error" namespace="/workFlow/auditTask">
+        
+        <action name="ajaxListAuditTask" class="com.hzfh.fmp.controller.workFlow.ajax.AjaxAuditTaskAction">
+            <result type="json">
+                <param name="includeProperties">
+                    resultList.*,
+                    pageSize, pageIndex, pageCount, recordCount
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+        <action name="ajaxListAuditTaskAccept" class="com.hzfh.fmp.controller.workFlow.ajax.AjaxAuditTaskAction" method="acceptTask">
+            <result type="json">
+                <param name="includeProperties">
+                    resultList.*,
+                    pageSize, pageIndex, pageCount, recordCount
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+        <action name="ajaxEditAuditTask" class="com.hzfh.fmp.controller.workFlow.ajax.AjaxAuditTaskAction" method="edit">
+            <result type="json">
+                <param name="includeProperties">
+                    errCode,errDesc
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+		<action name="ajaxGetAuditTask" class="com.hzfh.fmp.controller.workFlow.ajax.AjaxAuditTaskAction" method="getInfoById">
+            <result type="json">
+                <param name="includeProperties">
+                    info.*,errCode,errDesc
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+		<action name="ajaxAddClaim" class="com.hzfh.fmp.controller.workFlow.ajax.AjaxAuditTaskAction" method="addClaim">
+            <result type="json">
+                <param name="includeProperties">
+                    errCode,errDesc
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+		<action name="ajaxAddExamine" class="com.hzfh.fmp.controller.workFlow.ajax.AjaxAuditTaskAction" method="addExamine">
+            <result type="json">
+                <param name="includeProperties">
+                    errCode,errDesc
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+        <action name="ajaxAddExamineForExtendProbationApplication" class="com.hzfh.fmp.controller.workFlow.ajax.AjaxAuditTaskAction" method="addExamineForExtendProbationApplication">
+            <result type="json">
+                <param name="includeProperties">
+                    errCode,errDesc
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+        <action name="ajaxAddExamineForProbationWorkSummary" class="com.hzfh.fmp.controller.workFlow.ajax.AjaxAuditTaskAction" method="addExamineForProbationWorkSummary">
+            <result type="json">
+                <param name="includeProperties">
+                    errCode,errDesc
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+        <action name="ajaxAddExamineForProbationEvaluation" class="com.hzfh.fmp.controller.workFlow.ajax.AjaxAuditTaskAction" method="addExamineForProbationEvaluation">
+            <result type="json">
+                <param name="includeProperties">
+                    errCode,errDesc
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+        <action name="ajaxAddExamineWithEmail" class="com.hzfh.fmp.controller.workFlow.ajax.AjaxAuditTaskAction" method="addExamineWithEmail">
+            <result type="json">
+                <param name="includeProperties">
+                    errCode,errDesc
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+		<action name="ajaxGetAuditImg" class="com.hzfh.fmp.controller.workFlow.ajax.AjaxAuditTaskAction" method="getAuditImg"></action>
+    </package>
+        <package name="actReProcDef" extends="struts-login" namespace="/workFlow/actReProcDef">
+        <action name="list" class="com.hzfh.fmp.controller.workFlow.ActReProcDefAction">
+            <result>/workFlow/actReProcDefList.jsp</result>
+        </action>
+		<action name="edit" class="com.hzfh.fmp.controller.workFlow.ActReProcDefAddAction">
+            <result>/workFlow/actReProcDefAdd.jsp</result>
+        </action>
+    </package>
+    <package name="ajaxActReProcDef" extends="struts-error" namespace="/workFlow/actReProcDef">
+        <action name="ajaxListActReProcDef" class="com.hzfh.fmp.controller.workFlow.ajax.AjaxActReProcDefAction">
+            <result type="json">
+                <param name="includeProperties">
+                    resultList.*,
+                    pageSize, pageIndex, pageCount, recordCount
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+        <action name="ajaxEditActReProcDef" class="com.hzfh.fmp.controller.workFlow.ajax.AjaxActReProcDefAction" method="edit">
+            <result type="json">
+                <param name="includeProperties">
+                    errCode,errDesc
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+		<action name="ajaxGetActReProcDef" class="com.hzfh.fmp.controller.workFlow.ajax.AjaxActReProcDefAction" method="getInfoById">
+            <result type="json">
+                <param name="includeProperties">
+                    info.*,errCode,errDesc
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+    </package>
+    <package name="approvalHistoria" extends="struts-login" namespace="/workFlow/approvalHistoria">
+        <action name="list" class="com.hzfh.fmp.controller.workFlow.ApprovalHistoriaAction">
+            <result>/workFlow/approvalHistoriaList.jsp</result>
+        </action>
+        </package>
+    <package name="ajaxApprovalHistoria" extends="struts-error" namespace="/workFlow/approvalHistoria">
+        <action name="ajaxListApprovalHistoria" class="com.hzfh.fmp.controller.workFlow.ajax.AjaxApprovalHistoriaAction">
+            <result type="json">
+                <param name="includeProperties">
+                    resultList.*,
+                    pageSize, pageIndex, pageCount, recordCount
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+    </package>
+</struts>

@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+        "http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+
+	<package name="p2pProductDetails" extends="default" namespace="/product">
+		<action name="productDetails" class="com.hzfh.p2p.controller.product.ProductDetailAction">
+			<result name="success">/product/productDetails.jsp</result>
+			<result name="error" type="redirect">/product/p2pProductList.jsp</result>
+		</action>
+	</package>
+	<package name="p2pProductFeatures" extends="default" namespace="/product">
+		<action name="productFeatures" class="com.hzfh.p2p.controller.product.ProductFeaturesAction">
+			<result>/product/productFeatures.jsp</result>
+		</action>
+	</package>
+	<package name="p2pProduct" extends="default" namespace="/product">
+        <action name="p2pProductList" class="com.hzfh.p2p.controller.product.P2pProductAction">
+            <result>/product/p2pProductList.jsp</result>
+        </action>
+    </package>
+
+
+    <package name="p2pInvestment" extends="default" namespace="/product">
+        <action name="p2pInvestment" class="com.hzfh.p2p.controller.product.ProductFeaturesAction">
+            <result>/product/productFeatures.jsp</result>
+        </action>
+    </package>
+    <package name="p2pServiceContract" extends="default" namespace="/product">
+        <action name="serviceContract" class="com.hzfh.p2p.controller.product.ServiceContractAction">
+            <result>/product/serviceContract.jsp</result>
+        </action>
+    </package>
+    <package name="productSuperiority" extends="default" namespace="/product">
+        <action name="productSuperiority" class="com.hzfh.p2p.controller.product.ProductSuperiorityAction">
+            <result>/product/productSuperiority.jsp</result>
+        </action>
+    </package>
+    <package name="securityAssurance" extends="default" namespace="/product">
+        <action name="securityAssurance" class="com.hzfh.p2p.controller.product.SecurityAssuranceAction">
+            <result>/product/securityAssurance.jsp</result>
+        </action>
+    </package>
+    <package name="lawsRegulations" extends="default" namespace="/product">
+        <action name="lawsRegulations" class="com.hzfh.p2p.controller.product.LawsRegulationsAction">
+            <result>/product/lawsRegulations.jsp</result>
+        </action>
+        <action name="lawsRegulationsContent" class="com.hzfh.p2p.controller.product.LawsRegulationsContentAction">
+           <result name="lawsRegulationsContent">/product/lawsRegulationsContent.jsp</result>
+           <result name="lawsRegulationsContent1">/product/lawsRegulationsContent1.jsp</result>
+           <result name="lawsRegulationsContent2">/product/lawsRegulationsContent2.jsp</result>
+        </action>
+    </package>
+    
+    <package name="confirmInfo" extends="default" namespace="/product">
+        <action name="confirmInfo" class="com.hzfh.p2p.controller.product.ConfirmInfoAction">
+            <result>/product/productConfirm.jsp</result>
+            <interceptor-ref name="loginDefault" />
+        </action>
+
+    </package>
+    <package name="contractConfirm" extends="default" namespace="/product">
+        <action name="contractConfirm" class="com.hzfh.p2p.controller.product.ContractConfirmAction">
+            <result>/product/contractConfirm.jsp</result>
+            <interceptor-ref name="loginDefault" />
+        </action>
+    </package>
+    <package name="paymentConfirm" extends="default" namespace="/product">
+        <action name="paymentConfirm" class="com.hzfh.p2p.controller.product.PaymentConfirmAction">
+            <result>/product/paymentConfirm.jsp</result>
+            <interceptor-ref name="loginDefault" />
+        </action>
+    </package>
+    <package name="paymentComplete" extends="default" namespace="/product">
+        <action name="paymentComplete" class="com.hzfh.p2p.controller.product.PaymentCompleteAction">
+            <result>/product/paymentComplete.jsp</result>
+            <interceptor-ref name="loginDefault" />
+        </action>
+    </package>
+    <package name="ajaxPaymentConfirm" extends="json-default,default"
+             namespace="/product">
+        <action name="ajaxPaymentConfirm" class="com.hzfh.p2p.controller.product.ajax.AjaxPaymentConfirm">
+            <result type="json">
+                <param name="includeProperties">
+                     message.*,investmentMoney,p2pProductNo,paymentData.*
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+    </package>
+    <package name="AjaxProductDetail" extends="json-default,default"
+             namespace="/product">
+        <action name="ajaxProductDetail" class="com.hzfh.p2p.controller.product.ajax.AjaxProductDetailAction">
+            <result type="json">
+                <param name="includeProperties">
+                     message.*
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+        <action name="ajaxListProductRecord" class="com.hzfh.p2p.controller.product.ajax.AjaxProductDetailAction" 
+        	method="getProductRecordList">
+        	<result>/product/productDetailsOfInvestRecord.jsp</result>
+        </action>
+        <action name="ajaxProductListCrossDomain" class="com.hzfh.p2p.controller.product.ajax.AjaxProductCrossDomainAction" method="getProductList">
+        <result type="json">
+                <param name="includeProperties">
+                    msg
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+        <action name="ajaxProductDetailCrossDomain" class="com.hzfh.p2p.controller.product.ajax.AjaxProductCrossDomainAction" method="getProductDetail">
+        </action>
+        <action name="ajaxAppointmentCrossDomain" class="com.hzfh.p2p.controller.product.ajax.AjaxProductCrossDomainAction" method="getProductAppointment">
+        </action>
+    </package>
+
+</struts>

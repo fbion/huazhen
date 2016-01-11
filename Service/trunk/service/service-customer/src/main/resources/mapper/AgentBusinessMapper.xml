@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hzfh.service.customer.mapper.AgentBusinessMapper">
+	<resultMap type="com.hzfh.api.customer.model.AgentBusiness" id="resultMapAgentBusiness">
+		<result property="id" column="id"/>
+		<result property="code" column="code"/>
+		<result property="name" column="name"/>
+		<result property="email" column="email"/>
+		<result property="telephone" column="telephone"/>
+		<result property="owner" column="owner"/>
+		<result property="website" column="website"/>
+		<result property="address" column="address"/>
+		<result property="contactPrimary" column="contact_primary"/>
+		<result property="contactPosition" column="contact_position"/>
+		<result property="contactWeixin" column="contact_weixin"/>
+		<result property="contactQq" column="contact_qq"/>
+		<result property="contactCellphone1" column="contact_cellphone1"/>
+		<result property="contactCellphone2" column="contact_cellphone2"/>
+		<result property="contactTelephone" column="contact_telephone"/>
+		<result property="contactAddress" column="contact_address"/>
+		<result property="contactImportance" column="contact_importance"/>
+		<result property="comment" column="comment"/>
+		<result property="relationLevel" column="relation_level"/>
+		<result property="saleTotal" column="sale_total"/>
+		<result property="managerNo" column="manager_no"/>
+		<result property="inUserNo" column="in_user_no"/>
+		<result property="inTime" column="in_time" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
+		<result property="editUserNo" column="edit_user_no"/>
+		<result property="editTime" column="edit_time" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
+		<result property="editComment" column="edit_comment"/>
+		<result property="isTest" column="is_test"/>
+		<result property="sourceType" column="source_type" />
+	</resultMap>
+	<select id="getList" resultMap="resultMapAgentBusiness">
+		SELECT id,code,name,email,telephone,owner,website,address,contact_primary,contact_position,contact_weixin,contact_qq,contact_cellphone1,contact_cellphone2,contact_telephone,contact_address,contact_importance,comment,relation_level,sale_total,manager_no,in_user_no,in_time,edit_user_no,edit_time,edit_comment,is_test,source_type
+		FROM agent_business
+	</select>
+	<select id="getPagingList" resultMap="resultMapAgentBusiness" parameterType="com.hzfh.api.customer.model.query.AgentBusinessCondition" statementType="STATEMENT">
+		SELECT id,code,name,email,telephone,owner,website,address,contact_primary,contact_position,contact_weixin,contact_qq,contact_cellphone1,contact_cellphone2,contact_telephone,contact_address,contact_importance,comment,relation_level,sale_total,manager_no,in_user_no,in_time,edit_user_no,edit_time,edit_comment,is_test,source_type
+		FROM agent_business where 1=1
+		<if test="name != null and name !=''">and name LIKE CONCAT('%','${name}','%')</if>
+        <if test="empNo != 0">and manager_no=${empNo}</if>
+		<if test="importance != 0">and contact_importance = ${importance}</if>
+		<if test="relationLevel !=0">and relation_level = ${relationLevel}</if>
+		<if test="findTimeUp!=null and findTimeUp!=''">and   in_time &lt;= '${findTimeUp}'</if>
+        <if test="findTimeDown!=null and findTimeDown!=''">and   in_time &gt;= '${findTimeDown}'</if>
+		<if test="workMateString !=null">and manager_no in (${workMateString})	</if>
+		<if test="isTest>-1">and is_test=${isTest}</if>
+		<if test="isSales > 0">and sale_total &gt; 0</if>
+		ORDER BY
+		<foreach item="item" collection="sortItemList" separator=",">
+			${item.sortFeild} ${item.sortType}
+		</foreach>
+		LIMIT ${startIndex},${pageSize}
+	</select>
+    <select id="getListForExcel" resultMap="resultMapAgentBusiness" parameterType="com.hzfh.api.customer.model.query.AgentBusinessCondition" statementType="STATEMENT">
+        SELECT id,code,name,email,telephone,owner,website,address,contact_primary,contact_position,contact_weixin,contact_qq,contact_cellphone1,contact_cellphone2,contact_telephone,contact_address,contact_importance,comment,relation_level,sale_total,manager_no,in_user_no,in_time,edit_user_no,edit_time,edit_comment,is_test,source_type
+        FROM agent_business where 1=1
+        <if test="name != null and name !=''">and name LIKE CONCAT('%','${name}','%')</if>
+        <if test="empNo != 0">and manager_no=${empNo}</if>
+        <if test="importance != 0">and contact_importance = ${importance}</if>
+        <if test="relationLevel !=0">and relation_level = ${relationLevel}</if>
+        <if test="findTimeUp!=null and findTimeUp!=''">and   in_time &lt;= '${findTimeUp}'</if>
+        <if test="findTimeDown!=null and findTimeDown!=''">and   in_time &gt;= '${findTimeDown}'</if>
+        <if test="workMateString !=null">and manager_no in (${workMateString})	</if>
+        <if test="isTest>-1">and is_test=${isTest}</if>
+        <if test="isSales > 0">and sale_total &gt; 0</if>
+        ORDER BY
+        <foreach item="item" collection="sortItemList" separator=",">
+            ${item.sortFeild} ${item.sortType}
+        </foreach>
+    </select>
+
+	<select id="getTotalCount" resultType="int" parameterType="com.hzfh.api.customer.model.query.AgentBusinessCondition" statementType="STATEMENT">
+		SELECT count(1) FROM agent_business where 1=1
+		<if test="name != null and name !=''">and name LIKE CONCAT('%','${name}','%')</if>
+        <if test="empNo != 0">and manager_no=${empNo}</if>
+		<if test="importance != 0">and contact_importance = ${importance}</if>
+		<if test="relationLevel !=0">and relation_level = ${relationLevel}</if>
+		<if test="findTimeUp!=null and findTimeUp!=''">and   in_time &lt;= '${findTimeUp}'</if>
+        <if test="findTimeDown!=null and findTimeDown!=''">and   in_time &gt;= '${findTimeDown}'</if>
+		<if test="workMateString !=null">and manager_no in (${workMateString})	</if>
+		<if test="isTest>-1">and is_test=${isTest}</if>
+		<if test="isSales > 0">and sale_total &gt; 0</if>
+	</select>
+	<select id="getInfo" resultMap="resultMapAgentBusiness" parameterType="int">
+		SELECT id,code,name,email,telephone,owner,website,address,contact_primary,contact_position,contact_weixin,contact_qq,contact_cellphone1,contact_cellphone2,contact_telephone,contact_address,contact_importance,comment,relation_level,sale_total,manager_no,in_user_no,in_time,edit_user_no,edit_time,edit_comment,is_test,source_type
+		FROM agent_business where id=#{id}
+	</select>
+	<insert id="add" parameterType="com.hzfh.api.customer.model.AgentBusiness" useGeneratedKeys="true" keyProperty="id">
+		insert into agent_business
+		(code,name,email,telephone,owner,website,address,contact_primary,contact_position,contact_weixin,contact_qq,contact_cellphone1,contact_cellphone2,contact_telephone,contact_address,contact_importance,comment,relation_level,sale_total,manager_no,in_user_no,in_time,edit_user_no,edit_time,edit_comment,is_test,source_type)
+		values
+		(#{code},#{name},#{email},#{telephone},#{owner},#{website},#{address},#{contactPrimary},#{contactPosition},#{contactWeixin},#{contactQq},#{contactCellphone1},#{contactCellphone2},#{contactTelephone},#{contactAddress},#{contactImportance},#{comment},#{relationLevel},#{saleTotal},#{managerNo},#{inUserNo},current_timestamp(),#{editUserNo},current_timestamp(),#{editComment},#{isTest},#{sourceType})
+	</insert>
+	<update id="update" parameterType="com.hzfh.api.customer.model.AgentBusiness">
+		update agent_business set 
+		code=#{code},name=#{name},email=#{email},telephone=#{telephone},owner=#{owner},website=#{website},address=#{address},contact_primary=#{contactPrimary},contact_position=#{contactPosition},contact_weixin=#{contactWeixin},contact_qq=#{contactQq},contact_cellphone1=#{contactCellphone1},contact_cellphone2=#{contactCellphone2},contact_telephone=#{contactTelephone},contact_address=#{contactAddress},contact_importance=#{contactImportance},comment=#{comment},relation_level=#{relationLevel},sale_total=#{saleTotal},edit_user_no=#{editUserNo},manager_no=#{managerNo},edit_time=current_timestamp(),edit_comment=#{editComment},is_test=#{isTest},source_type=#{sourceType}
+		where id=#{id}
+	</update>
+	<delete id="delete" parameterType="int">
+		delete from agent_business where id = #{id}
+	</delete>
+    <select id="getMyAgentBusiness" parameterType="java.lang.String" resultMap="resultMapAgentBusiness">
+        SELECT id,code,name,email,telephone,owner,website,address,contact_primary,contact_position,contact_weixin,contact_qq,contact_cellphone1,contact_cellphone2,contact_telephone,contact_address,contact_importance,comment,relation_level,sale_total,manager_no,in_user_no,in_time,edit_user_no,edit_time,edit_comment,is_test,source_type
+		FROM agent_business where 1=1
+        <if test="workMateString !=null">and manager_no in (${workMateString})	</if>
+    </select>
+    
+    
+    
+    <!-- getNoPagingList create By Zorro 2014/4/30 -->
+    <select id="getNoPagingList" resultMap="resultMapAgentBusiness" parameterType="com.hzfh.api.customer.model.query.AgentBusinessCondition" statementType="STATEMENT">
+		SELECT id,code,name,email,telephone,owner,website,address,contact_primary,contact_position,contact_weixin,contact_qq,contact_cellphone1,contact_cellphone2,contact_telephone,contact_address,contact_importance,comment,relation_level,sale_total,manager_no,in_user_no,in_time,edit_user_no,edit_time,edit_comment,is_test FROM agent_business where 1=1
+		<if test="name != null and name !=''">and name LIKE CONCAT('%','${name}','%')</if>
+        <if test="empNo != 0">and manager_no=${empNo}</if>
+		<if test="importance != 0">and contact_importance = ${importance}</if>
+		<if test="relationLevel !=0">and relation_level = ${relationLevel}</if>
+		<if test="workMateString !=null">and manager_no in (${workMateString})	</if>
+		<if test="isTest>-1">and is_test=${isTest}</if>
+		<if test="isSales > 0">and sale_total &gt; 0</if>
+		ORDER BY
+		<foreach item="item" collection="sortItemList" separator=",">
+			${item.sortFeild} ${item.sortType}
+		</foreach>
+	</select>
+    <select id="getAgentBusinessListByManageNo" resultMap="resultMapAgentBusiness" parameterType="int" >
+		SELECT id,code,name,email,telephone,owner,website,address,contact_primary,contact_position,contact_weixin,contact_qq,contact_cellphone1,contact_cellphone2,contact_telephone,contact_address,contact_importance,comment,relation_level,sale_total,manager_no,in_user_no,in_time,edit_user_no,edit_time,edit_comment,is_test
+		FROM agent_business where manager_no =#{mamageNo} and email!=""
+	</select>
+    <update id="updateTradeTotalById">
+		UPDATE agent_business SET sale_total=sale_total+#{tradeTotal} WHERE id=#{id}
+	</update>
+    
+</mapper>

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hzfh.service.customer.mapper.ActivityCustomerCashBonusMapper">
+	<resultMap type="com.hzfh.api.customer.model.ActivityCustomerCashBonus" id="resultMapActivityCustomerCashBonus">
+		<result property="id" column="id"/>
+		<result property="p2pCustomerNo" column="p2p_customer_no"/>
+		<result property="cashBonusNo" column="cash_bonus_no"/>
+		<result property="myActivityNo" column="my_activity_no"/>
+		<result property="acquisitionTime" column="acquisition_time" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
+		<result property="accountTime" column="account_time" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
+		<result property="status" column="status"/>
+	</resultMap>
+	<select id="getList" resultMap="resultMapActivityCustomerCashBonus">
+		SELECT id,p2p_customer_no,cash_bonus_no,my_activity_no,acquisition_time,account_time,status
+		FROM activity_customer_cash_bonus
+	</select>
+	<select id="getPagingList" resultMap="resultMapActivityCustomerCashBonus" parameterType="com.hzfh.api.customer.model.query.ActivityCustomerCashBonusCondition" statementType="STATEMENT">
+		SELECT id,p2p_customer_no,cash_bonus_no,my_activity_no,acquisition_time,account_time,status FROM activity_customer_cash_bonus where 1=1
+		ORDER BY
+		<foreach item="item" collection="sortItemList" separator=",">
+			${item.sortFeild} ${item.sortType}
+		</foreach>
+		LIMIT ${startIndex},${pageSize}
+	</select>
+	<select id="getTotalCount" resultType="int" parameterType="com.hzfh.api.customer.model.query.ActivityCustomerCashBonusCondition" statementType="STATEMENT">
+		SELECT count(1) FROM activity_customer_cash_bonus where 1=1
+	</select>
+	<select id="getInfo" resultMap="resultMapActivityCustomerCashBonus" parameterType="int">
+		SELECT id,p2p_customer_no,cash_bonus_no,my_activity_no,acquisition_time,account_time,status FROM activity_customer_cash_bonus where id=#{id}
+	</select>
+	<select id="getInfoByCustomerIdAndInvitedId" resultMap="resultMapActivityCustomerCashBonus" parameterType="int">
+	
+			SELECT a.* from activity_customer_cash_bonus as a 
+			inner join activity_customer_detail b
+			inner join activity_customer_task c
+			on a.my_activity_no = b.id
+			and b.activity_customer_task_no=c.id
+			where a.p2p_customer_no=#{customerId}  and b.invited_no=#{invitedId}
+	</select>
+	<insert id="add" parameterType="com.hzfh.api.customer.model.ActivityCustomerCashBonus" useGeneratedKeys="true" keyProperty="id">
+		insert into activity_customer_cash_bonus
+		(p2p_customer_no,cash_bonus_no,my_activity_no,acquisition_time,account_time,status)
+		values
+		(#{p2pCustomerNo},#{cashBonusNo},#{myActivityNo},#{acquisitionTime},#{accountTime},#{status})
+	</insert>
+	<update id="update" parameterType="com.hzfh.api.customer.model.ActivityCustomerCashBonus">
+		update activity_customer_cash_bonus set 
+		p2p_customer_no=#{p2pCustomerNo},cash_bonus_no=#{cashBonusNo},my_activity_no=#{myActivityNo},acquisition_time=#{acquisitionTime},account_time=#{accountTime},status=#{status}
+		where id=#{id}
+	</update>
+	<delete id="delete" parameterType="int">
+		delete from activity_customer_cash_bonus where id = #{id}
+	</delete>
+	<update id="updateStatusById">
+		update activity_customer_cash_bonus set 
+		status=#{status}
+		where id=#{id}
+	</update>
+</mapper>

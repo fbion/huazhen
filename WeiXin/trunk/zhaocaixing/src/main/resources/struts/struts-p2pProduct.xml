@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+        "http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+
+	<package name="p2pProductDetails" extends="default" namespace="/customer">
+		<action name="productDetails" class="com.hzfh.weixin.controller.product.ProductDetailAction">
+			<result>/product/productDetails.jsp</result>
+		</action>
+		<action name="productDetailsInfo" class="com.hzfh.weixin.controller.product.ProductDetailAction" method="productDetailsInfo">
+			<result>/product/productDetailsInfo.jsp</result>
+		</action>
+		<action name="investInfo" class="com.hzfh.weixin.controller.product.ProductDetailAction" method="toInvestInfo">
+			<result>/product/investInfo.jsp</result>
+		</action>
+	</package>
+	<package name="p2pProductFeatures" extends="default" namespace="/product">
+		<action name="productFeatures" class="com.hzfh.weixin.controller.product.ProductFeaturesAction">
+			<result>/product/productFeatures.jsp</result>
+		</action>
+	</package>
+
+	<package name="AjaxProductDetail" extends="json-default,default"
+             namespace="/product">
+        <action name="ajaxProductDetail" class="com.hzfh.weixin.controller.product.ajax.AjaxProductDetailAction">
+            <result type="json">
+                <param name="includeProperties">
+                     message.*
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+        <action name="ajaxListProductRecord" class="com.hzfh.weixin.controller.product.ajax.AjaxProductDetailAction" 
+        	method="getProductRecordList">
+        	<result>/product/productDetailsOfInvestRecord.jsp</result>
+        </action>
+
+    </package> 
+	
+
+	<package name="p2pServiceContract" extends="default" namespace="/product">
+        <action name="serviceContract" class="com.hzfh.weixin.controller.product.ServiceContractAction">
+            <result>/product/serviceContract.jsp</result>
+        </action>
+    </package>
+
+	<!-- <package name="ajaxP2pProduct" extends="json-default,default"
+		namespace="/product/p2pProduct">
+		<action name="ajaxP2pProductList"
+			class="com.hzfh.weixin.controller.product.ajax.AjaxP2pProductAction"
+			method="getList">
+			<result type="json">
+				<param name="includeProperties">
+					p2pProductList.*
+				</param>
+				<param name="noCache">true</param>
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+	</package> -->
+</struts>

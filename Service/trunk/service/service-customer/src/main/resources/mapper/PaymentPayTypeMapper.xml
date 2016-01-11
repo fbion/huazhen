@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hzfh.service.customer.mapper.PaymentPayTypeMapper">
+	<resultMap type="com.hzfh.api.customer.model.PaymentPayType" id="resultMapPaymentPayType">
+		<result property="id" column="id"/>
+		<result property="platformNo" column="platform_no"/>
+		<result property="name" column="name"/>
+		<result property="isPlatform" column="is_platform"/>
+		<result property="bankCode" column="bank_code"/>
+		<result property="payType" column="pay_type"/>
+		<result property="enable" column="enable"/>
+	</resultMap>
+	<select id="getList" resultMap="resultMapPaymentPayType">
+		SELECT id,platform_no,name,is_platform,bank_code,pay_type,enable
+		FROM payment_pay_type
+	</select>
+	<select id="getPagingList" resultMap="resultMapPaymentPayType" parameterType="com.hzfh.api.customer.model.query.PaymentPayTypeCondition" statementType="STATEMENT">
+		SELECT id,platform_no,name,is_platform,bank_code,pay_type,enable FROM payment_pay_type where 1=1
+		ORDER BY
+		<foreach item="item" collection="sortItemList" separator=",">
+			${item.sortFeild} ${item.sortType}
+		</foreach>
+		LIMIT ${startIndex},${pageSize}
+	</select>
+	<select id="getTotalCount" resultType="int" parameterType="com.hzfh.api.customer.model.query.PaymentPayTypeCondition" statementType="STATEMENT">
+		SELECT count(1) FROM payment_pay_type where 1=1
+	</select>
+	<select id="getInfo" resultMap="resultMapPaymentPayType" parameterType="int">
+		SELECT id,platform_no,name,is_platform,bank_code,pay_type,enable FROM payment_pay_type where id=#{id}
+	</select>
+	<insert id="add" parameterType="com.hzfh.api.customer.model.PaymentPayType" useGeneratedKeys="true" keyProperty="id">
+		insert into payment_pay_type
+		(platform_no,name,is_platform,bank_code,pay_type,enable)
+		values
+		(#{platformNo},#{name},#{isPlatform},#{bankCode},#{payType},#{enable})
+	</insert>
+	<update id="update" parameterType="com.hzfh.api.customer.model.PaymentPayType">
+		update payment_pay_type set 
+		platform_no=#{platformNo},name=#{name},is_platform=#{isPlatform},bank_code=#{bankCode},pay_type=#{payType},enable=#{enable}
+		where id=#{id}
+	</update>
+	<delete id="delete" parameterType="int">
+		delete from payment_pay_type where id = #{id}
+	</delete>
+</mapper>

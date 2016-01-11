@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hzfh.service.employee.mapper.EmployeeInformationMapper">
+    <resultMap type="com.hzfh.api.employee.model.EmployeeInformation" id="resultMapEmployeeInformation">
+        <result property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="deptNo" column="dept_no"/>
+        <result property="empNo" column="emp_no"/>
+        <result property="deptName" column="dept_name"/>
+        <result property="positionNo" column="position_no"/>
+        <result property="sex" column="sex"/>
+        <result property="nation" column="nation"/>
+        <result property="marry" column="marry"/>
+        <result property="childrenSitiatio" column="children_sitiatio"/>
+        <result property="protocolStartTime" column="protocol_start_time" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
+        <result property="protocolEndTime" column="protocol_end_time" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
+        <result property="officalTime" column="offical_time" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
+        <result property="contractStartTime" column="contract_start_time" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
+        <result property="contractEndTime" column="contract_end_time" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
+        <result property="birthday" column="birthday" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
+        <result property="birthdayYear" column="birthday_year"/>
+        <result property="idCard" column="id_card"/>
+        <result property="homeAddress" column="home_address"/>
+        <result property="degree1" column="degree1"/>
+        <result property="graduationSchool1" column="graduation_school1"/>
+        <result property="major1" column="major1"/>
+        <result property="degree2" column="degree2"/>
+        <result property="graduationSchool2" column="graduation_school2"/>
+        <result property="major2" column="major2"/>
+        <result property="permanentPlace" column="permanent_place"/>
+        <result property="birthPlace" column="birth_place"/>
+        <result property="certificate1" column="certificate1"/>
+        <result property="certificateDate1" column="certificate_date1" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
+        <result property="certificate2" column="certificate2"/>
+        <result property="certificateDate2" column="certificate_date2" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
+        <result property="politicalStatus" column="political_status"/>
+        <result property="startTime" column="start_time" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
+        <result property="endTime" column="end_time" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
+        <result property="comment" column="comment"/>
+        <result property="status" column="status"/>
+        <result property="inTime" column="in_time" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
+        <result property="inUserNo" column="in_user_no"/>
+        <result property="editTime" column="edit_time" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
+        <result property="editUserNo" column="edit_user_no"/>
+    </resultMap>
+    <select id="getList" resultMap="resultMapEmployeeInformation">
+        SELECT id,name,dept_no,emp_no,dept_name,position_no,sex,nation,marry,children_sitiatio,protocol_start_time,protocol_end_time,offical_time,contract_start_time,contract_end_time,birthday,birthday_year,id_card,home_address,degree1,graduation_school1,major1,degree2,graduation_school2,major2,permanent_place,birth_place,certificate1,certificate_date1,certificate2,certificate_date2,political_status,start_time,end_time,comment,status,in_time,in_user_no,edit_time,edit_user_no
+        FROM employee_information
+    </select>
+    <select id="getPagingList" resultMap="resultMapEmployeeInformation" parameterType="com.hzfh.api.employee.model.query.EmployeeInformationCondition" statementType="STATEMENT">
+        SELECT id,name,dept_no,emp_no,dept_name,position_no,sex,nation,marry,children_sitiatio,protocol_start_time,protocol_end_time,offical_time,contract_start_time,contract_end_time,birthday,birthday_year,id_card,home_address,degree1,graduation_school1,major1,degree2,graduation_school2,major2,permanent_place,birth_place,certificate1,certificate_date1,certificate2,certificate_date2,political_status,start_time,end_time,comment,status,in_time,in_user_no,edit_time,edit_user_no FROM employee_information where 1=1
+        ORDER BY
+        <foreach item="item" collection="sortItemList" separator=",">
+            ${item.sortFeild} ${item.sortType}
+        </foreach>
+        LIMIT ${startIndex},${pageSize}
+    </select>
+    <select id="getTotalCount" resultType="int" parameterType="com.hzfh.api.employee.model.query.EmployeeInformationCondition" statementType="STATEMENT">
+        SELECT count(1) FROM employee_information where 1=1
+    </select>
+    
+    <select id="getExtendEmp" resultMap="resultMapEmployeeInformation">
+        select id,name,dept_no,emp_no,dept_name,position_no,sex,nation,marry,children_sitiatio,protocol_start_time,protocol_end_time,offical_time,contract_start_time,contract_end_time,birthday,birthday_year,id_card,home_address,degree1,graduation_school1,major1,degree2,graduation_school2,major2,permanent_place,birth_place,certificate1,certificate_date1,certificate2,certificate_date2,political_status,start_time,end_time,comment,status
+         from employee_information  where `status`=4  or `status`=5;
+    </select>
+    <select id="getInfo" resultMap="resultMapEmployeeInformation" parameterType="int">
+        SELECT id,name,dept_no,emp_no,dept_name,position_no,sex,nation,marry,children_sitiatio,protocol_start_time,protocol_end_time,offical_time,contract_start_time,contract_end_time,birthday,birthday_year,id_card,home_address,degree1,graduation_school1,major1,degree2,graduation_school2,major2,permanent_place,birth_place,certificate1,certificate_date1,certificate2,certificate_date2,political_status,start_time,end_time,comment,status,in_time,in_user_no,edit_time,edit_user_no FROM employee_information where id=#{id}
+    </select>
+    <insert id="add" parameterType="com.hzfh.api.employee.model.EmployeeInformation" useGeneratedKeys="true" keyProperty="id">
+        insert into employee_information
+        (name,dept_no,emp_no,dept_name,position_no,sex,nation,marry,children_sitiatio,protocol_start_time,protocol_end_time,offical_time,contract_start_time,contract_end_time,birthday,birthday_year,id_card,home_address,degree1,graduation_school1,major1,degree2,graduation_school2,major2,permanent_place,birth_place,certificate1,certificate_date1,certificate2,certificate_date2,political_status,start_time,end_time,comment,status,in_time,in_user_no,edit_time,edit_user_no)
+        values
+        (#{name},#{deptNo},#{empNo},#{deptName},#{positionNo},#{sex},#{nation},#{marry},#{childrenSitiatio},#{protocolStartTime},#{protocolEndTime},#{officalTime},#{contractStartTime},#{contractEndTime},#{birthday},#{birthdayYear},#{idCard},#{homeAddress},#{degree1},#{graduationSchool1},#{major1},#{degree2},#{graduationSchool2},#{major2},#{permanentPlace},#{birthPlace},#{certificate1},#{certificateDate1},#{certificate2},#{certificateDate2},#{politicalStatus},#{startTime},#{endTime},#{comment},#{status},current_timestamp(),#{inUserNo},current_timestamp(),#{editUserNo})
+    </insert>
+    <update id="update" parameterType="com.hzfh.api.employee.model.EmployeeInformation">
+        update employee_information set
+        name=#{name},dept_no=#{deptNo},emp_no=#{empNo},dept_name=#{deptName},position_no=#{positionNo},sex=#{sex},nation=#{nation},marry=#{marry},children_sitiatio=#{childrenSitiatio},protocol_start_time=#{protocolStartTime},protocol_end_time=#{protocolEndTime},offical_time=#{officalTime},contract_start_time=#{contractStartTime},contract_end_time=#{contractEndTime},birthday=#{birthday},birthday_year=#{birthdayYear},id_card=#{idCard},home_address=#{homeAddress},degree1=#{degree1},graduation_school1=#{graduationSchool1},major1=#{major1},degree2=#{degree2},graduation_school2=#{graduationSchool2},major2=#{major2},permanent_place=#{permanentPlace},birth_place=#{birthPlace},certificate1=#{certificate1},certificate_date1=#{certificateDate1},certificate2=#{certificate2},certificate_date2=#{certificateDate2},political_status=#{politicalStatus},start_time=#{startTime},end_time=#{endTime},comment=#{comment},status=#{status},edit_time=current_timestamp(),edit_user_no=#{editUserNo}
+        where id=#{id}
+    </update>
+    <delete id="delete" parameterType="int">
+        delete from employee_information where id = #{id}
+    </delete>
+
+    <select id="getListForExcel" resultMap="resultMapEmployeeInformation" parameterType="com.hzfh.api.employee.model.query.EmployeeInformationCondition" statementType="STATEMENT">
+        SELECT id,name,dept_no,emp_no,dept_name,position_no,sex,nation,marry,children_sitiatio,protocol_start_time,protocol_end_time,offical_time,contract_start_time,contract_end_time,birthday,birthday_year,id_card,home_address,degree1,graduation_school1,major1,degree2,graduation_school2,major2,permanent_place,birth_place,certificate1,certificate_date1,certificate2,certificate_date2,political_status,start_time,end_time,comment,status
+        FROM employee_information where 1=1
+        ORDER BY
+        <foreach item="item" collection="sortItemList" separator=",">
+            ${item.sortFeild} ${item.sortType}
+        </foreach>
+    </select>
+    <select id="getListForExcelByType" resultMap="resultMapEmployeeInformation" parameterType="int" statementType="STATEMENT">
+        SELECT id,name,dept_no,emp_no,dept_name,position_no,sex,nation,marry,children_sitiatio,protocol_start_time,protocol_end_time,offical_time,contract_start_time,contract_end_time,birthday,birthday_year,id_card,home_address,degree1,graduation_school1,major1,degree2,graduation_school2,major2,permanent_place,birth_place,certificate1,certificate_date1,certificate2,certificate_date2,political_status,start_time,end_time,comment,status
+        FROM employee_information where status = ${type}
+
+    </select>
+</mapper>

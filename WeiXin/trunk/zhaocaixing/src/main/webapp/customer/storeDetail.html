@@ -1,0 +1,93 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+	<title>华镇金融服务协议</title>
+	<link rel="stylesheet"  type="text/css" href="http://xfbwebresource.hzfh.dev/css/common.css" />
+	<link rel="stylesheet"  type="text/css" href="http://xfbwebresource.hzfh.dev/css/style.css" />
+
+</head>
+<body>
+	<header>
+        <div id="header">
+            <h2>
+                <a href="http://wx.52touzi.com/index"><img id="logo" src="http://reswx.52touzi.com/img/logo.png" width="92" height="30"><span>华镇社区金融
+                    </span>
+                </a>
+            </h2>
+            <div class="login_register">
+                
+                <a href="http://wx.52touzi.com/customer/login" class="login">登录</a>|<a id="link" href="http://wx.52touzi.com/customer/register" class="register">注册</a>
+                        <script type="text/javascript">
+                        window.onload=function(){
+                                var ua = navigator.userAgent.toLowerCase();
+                                if(ua.match(/MicroMessenger/i)=="micromessenger") {
+                                    var url="https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx9d93a55d91f39b14&redirect_uri=http://wx.52touzi.com/customer/register&response_type=code&scope=snsapi_base&state=1&connect_redirect=1#wechat_redirect";
+                                    document.getElementById("link").href=url;
+                                    return true;
+
+                                } else {
+                                    document.getElementById("link").href="http://wx.52touzi.com/customer/register";
+                                    return false;
+                                }
+
+                            } 
+                        </script>
+                
+                
+            </div>
+             
+        </div>
+        <p class="header_tips">您身边的理财专家</p>
+    </header>
+
+	<div class="mt20 contentmt">
+	    <div class="aboutUs_cont">
+            <h4>
+                <span>STORE</span>
+                <em>旗下门店</em>
+            </h4>
+            <div class="mt20 fw">门店位置：北京市丰台区公益西桥北名流未来大厦一层101</div>
+            <iframe src="http://www.52touzi.com/baseInfo/map/getStoreMap?id=14" width="100%" height="550" frameborder="0" scrolling="no" class="mt20"></iframe>
+            <dl class="mt50 pt20">
+                <dt class="pb20">
+                    <i class="icon1 pl15"></i>联系电话
+                </dt>
+                <dd>门店联系电话：010-57282328</dd>
+               <!--  <dd>人工服务时间：7*24 小时</dd> -->
+            </dl>
+               
+            
+            
+            <!-- 页码 -->
+           <!-- <div class="productList_page mt30 pb30">
+                <div class="myInvestment_page">
+                    <div id="pagination"><div class="pagination"><span class="current prev">上一页</span><span class="current">1</span><a href="javascript:void(0)">2</a><a href="javascript:void(0)" class="next">下一页</a></div></div>
+                    
+                        第<span class="pl5 pr5">1</span>页&nbsp;
+                        共<span class="pl5 pr5">2</span>页
+                    
+                    共<span class="pl5 pr5" id="totalCount">10</span>条记录
+                    <input type="hidden" id="pageIndex" value="1">
+                    <input type="hidden" id="pageUrl" value="http://www.52touzi.com/customer/store/storeList?1=1">
+                </div>-->
+            </div>
+        </div>
+   </div>
+
+   <footer>
+		<div id="footer">
+			<p>
+				<a href="http://xfb.hzfh.dev/customer/personalInfo">个人信息</a> 
+				<a href="http://xfb.hzfh.dev/customer/myReservation">我的预约</a> 
+				<a href="http://xfb.hzfh.dev/customer/myInvestment">我的投资</a> 
+			    <a href="http://xfb.hzfh.dev/customer/myInvite">我的邀请</a> 
+				<a href="http://xfb.hzfh.dev/product/productFeatures?name=connection">联系我们</a> 
+				<a href="http://xfb.hzfh.dev/product/productFeatures?name=introduce">关于我们</a> 
+			</p>
+			<p>	<span>客服热线：400-0340-668</span>
+			</p>
+		</div>
+   </footer>
+</body>
+</html>

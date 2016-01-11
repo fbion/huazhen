@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hzfh.service.employee.mapper.ManagerEvaluationMapper">
+	<resultMap type="com.hzfh.api.employee.model.ManagerEvaluation" id="resultMapManagerEvaluation">
+		<result property="id" column="id"/>
+		<result property="companyNo" column="company_no"/>
+		<result property="deptNo" column="dept_no"/>
+		<result property="empNo" column="emp_no"/>
+		<result property="scoreIntroduction" column="score_introduction"/>
+		<result property="scoreAccord" column="score_accord"/>
+		<result property="score" column="score"/>
+		<result property="suggestion" column="suggestion"/>
+		<result property="activitiNo" column="activiti_no"/>
+		<result property="inUserNo" column="in_user_no"/>
+		<result property="inTime" column="in_time" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
+		<result property="editUserNo" column="edit_user_no"/>
+		<result property="editTime" column="edit_time" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
+		<result property="editComment" column="edit_comment"/>
+		<result property="managerTime" column="manager_time"/>
+		<result property="workFlowStatus" column="activiti_status"/>
+	</resultMap>
+	<select id="getList" resultMap="resultMapManagerEvaluation">
+		SELECT id,company_no,dept_no,emp_no,score_introduction,score_accord,score,suggestion,activiti_no,in_user_no,in_time,edit_user_no,edit_time,edit_comment,manager_time,activiti_status
+		FROM manager_evaluation
+	</select>
+	<select id="getPagingList" resultMap="resultMapManagerEvaluation" parameterType="com.hzfh.api.employee.model.query.ManagerEvaluationCondition" statementType="STATEMENT">
+		SELECT id,company_no,dept_no,emp_no,score_introduction,score_accord,score,suggestion,activiti_no,in_user_no,in_time,edit_user_no,edit_time,edit_comment,manager_time,activiti_status FROM manager_evaluation where 1=1
+		<if test="empNo!=0"> and emp_no='${empNo}'</if>
+		<if test="companyNo!=0"> and company_no=${companyNo}</if>
+		<if test="deptNo!=0"> and dept_no=${deptNo}</if>
+		<if test="activitiStatus>-1"> and activiti_status=${activitiStatus}</if>
+		<if test="workMateString !=null"> and emp_no in (${workMateString}) and activiti_status = 1</if>
+		<if test="workMateUserNoString !=null"> and in_user_no in (${workMateUserNoString})</if>
+		<if test="dateUp !=null and dateDown !=null"> and '${dateDown}' &lt;= first_time and first_time &lt; '${dateUp}'</if>
+		ORDER BY
+		<foreach item="item" collection="sortItemList" separator=",">
+			${item.sortFeild} ${item.sortType}
+		</foreach>
+		LIMIT ${startIndex},${pageSize}
+	</select>
+	<select id="getTotalCount" resultType="int" parameterType="com.hzfh.api.employee.model.query.ManagerEvaluationCondition" statementType="STATEMENT">
+		SELECT count(1) FROM manager_evaluation where 1=1
+		<if test="empNo!=0"> and emp_no='${empNo}'</if>
+		<if test="companyNo!=0"> and company_no=${companyNo}</if>
+		<if test="deptNo!=0"> and dept_no=${deptNo}</if>
+		<if test="activitiStatus>-1"> and activiti_status=${activitiStatus}</if>
+		<if test="workMateString !=null"> and emp_no in (${workMateString}) and activiti_status = 1 </if>
+		<if test="workMateUserNoString !=null"> and in_user_no in (${workMateUserNoString})</if>
+		<if test="dateUp !=null and dateDown !=null"> and '${dateDown}' &lt;= first_time and first_time &lt; '${dateUp}'</if>
+	</select>
+	<select id="getInfo" resultMap="resultMapManagerEvaluation" parameterType="int">
+		SELECT id,company_no,dept_no,emp_no,score_introduction,score_accord,score,suggestion,activiti_no,in_user_no,in_time,edit_user_no,edit_time,edit_comment,manager_time,activiti_status FROM manager_evaluation where id=#{id}
+	</select>
+	<insert id="add" parameterType="com.hzfh.api.employee.model.ManagerEvaluation" useGeneratedKeys="true" keyProperty="id">
+		insert into manager_evaluation
+		(company_no,dept_no,emp_no,score_introduction,score_accord,score,suggestion,activiti_no,in_user_no,in_time,edit_user_no,edit_time,edit_comment,manager_time,activiti_status)
+		values
+		(#{companyNo},#{deptNo},#{empNo},#{scoreIntroduction},#{scoreAccord},#{score},#{suggestion},#{activitiNo},#{inUserNo},current_timestamp(),#{editUserNo},current_timestamp(),#{editComment},#{managerTime},#{workFlowStatus})
+	</insert>
+	<update id="update" parameterType="com.hzfh.api.employee.model.ManagerEvaluation">
+		update manager_evaluation set 
+		company_no=#{companyNo},dept_no=#{deptNo},emp_no=#{empNo},score_introduction=#{scoreIntroduction},score_accord=#{scoreAccord},score=#{score},suggestion=#{suggestion},activiti_no=#{activitiNo},edit_user_no=#{editUserNo},edit_time=current_timestamp(),edit_comment=#{editComment},manager_time=#{managerTime},activiti_status=#{workFlowStatus}
+		where id=#{id}
+	</update>
+	<delete id="delete" parameterType="int">
+		delete from manager_evaluation where id = #{id}
+	</delete>
+	
+	<update id="updateActivitiStatusByActivitiNo" parameterType="String">
+		update manager_evaluation set 
+		activiti_status=1
+		where activiti_no=#{activitiNo}
+	</update>
+</mapper>

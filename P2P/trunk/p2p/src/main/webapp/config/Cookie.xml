@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<cookieConfig xmlns="http://www.hzfh.com/web"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://www.hzfh.com/web ./Schemas/Cookie.xsd">
+    <cookie name="puid" topLevelDomain="true" path="/" expiresAfter="00.00:00:00" secureOnly="false" renderInClient="true"/>
+    <cookie name="plogin_time" topLevelDomain="true" path="/" expiresAfter="00.00:00:00" secureOnly="false" renderInClient="true"/>
+     <cookie name="pun" topLevelDomain="true" path="/" expiresAfter="00.00:00:00" secureOnly="false" renderInClient="true"/>
+     <cookie name="pcaptcha" topLevelDomain="true" path="/" expiresAfter="00.00:00:00" secureOnly="false" renderInClient="true"/>
+     <cookie name="puk" topLevelDomain="true" path="/" expiresAfter="00.00:00:00" secureOnly="false" renderInClient="true"/>
+     
+</cookieConfig>

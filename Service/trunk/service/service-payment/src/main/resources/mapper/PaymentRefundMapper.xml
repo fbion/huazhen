@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hzfh.service.payment.mapper.PaymentRefundMapper">
+    <resultMap type="com.hzfh.api.payment.model.PaymentRefund" id="resultMapPaymentRefund">
+        <result property="id" column="id"/>
+        <result property="salesNo" column="sales_no"/>
+        <result property="p2pProductNo" column="p2p_product_no"/>
+        <result property="p2pProductName" column="p2p_product_name"/>
+        <result property="p2pCustomerNo" column="p2p_customer_no"/>
+        <result property="p2pCustomerName" column="p2p_customer_name"/>
+        <result property="payerNo" column="payer_no"/>
+        <result property="payerName" column="payer_name"/>
+        <result property="salesMoney" column="sales_money"/>
+        <result property="interest" column="interest"/>
+        <result property="payMoney" column="pay_money"/>
+        <result property="serviceCharge" column="service_charge"/>
+        <result property="payStartTime" column="pay_start_time" jdbcType="DATE" javaType="java.sql.Date"/>
+        <result property="payEndTime" column="pay_end_time" jdbcType="DATE" javaType="java.sql.Date"/>
+        <result property="status" column="status"/>
+        <result property="inUserNo" column="in_user_no"/>
+        <result property="inTime" column="in_time" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
+        <result property="editUserNo" column="edit_user_no"/>
+        <result property="editTime" column="edit_time" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
+        <result property="editComment" column="edit_comment"/>
+        <result property="times" column="times"/>
+        <result property="productType" column="product_type"/>
+        <result property="payType" column="pay_type"/>
+        <result property="actualPayTime" column="actual_pay_time" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
+        <result property="productNo" column="product_no"/>
+        <result property="productName" column="product_name"/>
+        <result property="customerNo" column="customer_no"/>
+        <result property="customerName" column="customer_name"/>
+        <result property="isSendSms" column="is_send_sms"/>
+        <result property="isUse" column="is_use"/>
+        <result property="paymentType" column="payment_type"/>
+        <result property="isTest" column="is_test"/>
+        <result property="examineStatus" column="examine_status"/>
+
+    </resultMap>
+    <select id="getList" resultMap="resultMapPaymentRefund">
+		SELECT id,sales_no,p2p_product_no,payment_type,is_test,product_type,pay_type,actual_pay_time,p2p_product_name,p2p_customer_no,p2p_customer_name,payer_no,payer_name,sales_money,interest,pay_money,service_charge,pay_start_time,pay_end_time,status,in_user_no,in_time,edit_user_no,edit_time,edit_comment,times,product_type,pay_type,actual_pay_time,product_no,product_name,customer_no,customer_name,is_send_sms,is_use
+		FROM payment_refund
+	</select>
+
+    <select id="getListForExcel" resultMap="resultMapPaymentRefund"
+            parameterType="com.hzfh.api.payment.model.query.PaymentRefundCondition" statementType="STATEMENT">
+        SELECT
+        id,sales_no,p2p_product_no,p2p_product_name,payment_type,is_test,product_type,pay_type,actual_pay_time,p2p_customer_no,p2p_customer_name,payer_no,payer_name,sales_money,interest,pay_money,service_charge,pay_start_time,pay_end_time,status,in_user_no,in_time,edit_user_no,edit_time,edit_comment,times,product_type,pay_type,actual_pay_time,product_no,product_name,customer_no,customer_name,is_send_sms,is_use
+        FROM payment_refund where 1=1 AND is_use = 1
+        <if test="isTest>-1">and is_test=${isTest}</if>
+        <if test="productType != 0">and product_type = ${productType}</if>
+        <if test="salesNos != null and salesNos != ''">and sales_no in (${salesNos})</if>
+        <if test="p2pProductNo != 0">and p2p_product_no = ${p2pProductNo}</if>
+        <if test="status != 0">and status = ${status}</if>
+        <if test="smsStatus != -1">and is_send_sms = ${smsStatus}</if>
+        <if test="payType >=  0">and pay_type = ${payType}</if>
+        <if test="byStartRepayIssue == null or byStartRepayIssue == '' or byEndRepayIssue == null or byEndRepayIssue == ''">
+            <if test="isNow==1">
+                and date_format(DATE_SUB(actual_pay_time, INTERVAL 1 MONTH),'%Y-%m') = date_format(now(),'%Y-%m')
+            </if>
+        </if>
+        <if test="byStartRepayIssue != null and byStartRepayIssue != ''">and actual_pay_time &gt;=
+            '${byStartRepayIssue}'
+        </if>
+        <if test="byEndRepayIssue != null and byEndRepayIssue != ''">and actual_pay_time &lt;= '${byEndRepayIssue}'</if>
+        <if test="startTime != null and startTime != ''">and pay_start_time &gt;= '${startTime}'</if>
+        <if test="endTime != null and endTime != ''">and pay_start_time &lt;= '${endTime}'</if>
+        <if test="p2pCustomerNo != 0">and p2p_customer_no = ${p2pCustomerNo}</if>
+        ORDER BY
+        <foreach item="item" collection="sortItemList" separator=",">
+            ${item.sortFeild} ${item.sortType}
+        </foreach>
+    </select>
+    <select id="getPagingList" resultMap="resultMapPaymentRefund"
+            parameterType="com.hzfh.api.payment.model.query.PaymentRefundCondition" statementType="STATEMENT">
+        SELECT
+        id,sales_no,p2p_product_no,p2p_product_name,is_test,payment_type,product_type,pay_type,actual_pay_time,p2p_customer_no,p2p_customer_name,payer_no,payer_name,sales_money,interest,pay_money,service_charge,pay_start_time,pay_end_time,status,in_user_no,in_time,edit_user_no,edit_time,edit_comment,times,product_type,pay_type,actual_pay_time,product_no,product_name,customer_no,customer_name,is_send_sms,is_use
+        FROM payment_refund where 1=1 AND is_use = 1
+        <if test="isTest>-1">and is_test=${isTest}</if>
+        <if test="productType != 0">and product_type = ${productType}</if>
+        <if test="salesNos != null and salesNos != ''">and sales_no in (${salesNos})</if>
+        <if test="p2pProductNo != 0">and p2p_product_no = ${p2pProductNo}</if>
+        <if test="status != 0">and status = ${status}</if>
+        <if test="smsStatus != -1">and is_send_sms = ${smsStatus}</if>
+        <if test="payType >=  0">and pay_type = ${payType}</if>
+        <if test="online!=0">
+        	<if test="customerNo !=0">and (p2p_customer_no = ${p2pCustomerNo} or customer_no=${customerNo})</if>
+        </if>
+        <if test="online==0">
+	        <if test="p2pCustomerNo != 0">and p2p_customer_no = ${p2pCustomerNo}</if>
+        </if>
+        <if test="byStartRepayIssue == null or byStartRepayIssue == '' or byEndRepayIssue == null or byEndRepayIssue == ''">
+            <if test="isNow==1">
+                and date_format(DATE_SUB(actual_pay_time, INTERVAL 1 MONTH),'%Y-%m') = date_format(now(),'%Y-%m')
+            </if>
+        </if>
+        <if test="byStartRepayIssue != null and byStartRepayIssue != ''">and actual_pay_time &gt;=
+            '${byStartRepayIssue}'
+        </if>
+        <if test="byEndRepayIssue != null and byEndRepayIssue != ''">and actual_pay_time &lt;= '${byEndRepayIssue}'</if>
+        <if test="startTime != null and startTime != ''">and pay_start_time &gt;= '${startTime}'</if>
+        <if test="endTime != null and endTime != ''">and pay_start_time &lt;= '${endTime}'</if>
+        
+        ORDER BY
+        <foreach item="item" collection="sortItemList" separator=",">
+            ${item.sortFeild} ${item.sortType}
+        </foreach>
+        LIMIT ${startIndex},${pageSize}
+    </select>
+
+    <update id="cancelSendSmsByIds" parameterType="List">
+        update payment_refund set is_send_sms = 0 where
+        <foreach item="id" collection="idList" separator="or">
+            id = ${id}
+        </foreach>
+    </update>
+
+    <select id="getTotalCount" resultType="int" parameterType="com.hzfh.api.payment.model.query.PaymentRefundCondition"
+            statementType="STATEMENT">
+        SELECT count(1) FROM payment_refund where 1=1 AND is_use = 1
+        <if test="isTest>-1">and is_test=${isTest}</if>
+        <if test="productType != 0">and product_type = ${productType}</if>
+        <if test="salesNos != null and salesNos != ''">and sales_no in (${salesNos})</if>
+        <if test="p2pProductNo != 0">and p2p_product_no = ${p2pProductNo}</if>
+        <if test="status != 0">and status = ${status}</if>
+        <if test="smsStatus != -1">and is_send_sms = ${smsStatus}</if>
+        <if test="payType >=  0">and pay_type = ${payType}</if>
+        <if test="online!=0">
+        	<if test="customerNo !=0">and (p2p_customer_no = ${p2pCustomerNo} or customer_no=${customerNo})</if>
+        </if>
+        <if test="online==0">
+	        <if test="p2pCustomerNo != 0">and p2p_customer_no = ${p2pCustomerNo}</if>
+        </if>
+        <if test="byStartRepayIssue == null or byStartRepayIssue == '' or byEndRepayIssue == null or byEndRepayIssue == ''">
+            <if test="isNow==1">
+                and date_format(DATE_SUB(actual_pay_time, INTERVAL 1 MONTH),'%Y-%m') = date_format(now(),'%Y-%m')
+            </if>
+        </if>
+        <if test="byStartRepayIssue != null and byStartRepayIssue != ''">and actual_pay_time &gt;=
+            '${byStartRepayIssue}'
+        </if>
+        <if test="byEndRepayIssue != null and byEndRepayIssue != ''">and actual_pay_time &lt;= '${byEndRepayIssue}'</if>
+        <if test="startTime != null and startTime != ''">and pay_start_time &gt;= '${startTime}'</if>
+        <if test="endTime != null and endTime != ''">and pay_start_time &lt;= '${endTime}'</if>
+        <!-- <if test="p2pCustomerNo != 0">and p2p_customer_no = ${p2pCustomerNo}</if> -->
+	</select>
+    <select id="getInfo" resultMap="resultMapPaymentRefund" parameterType="int">
+		SELECT id,sales_no,p2p_product_no,is_test,payment_type,p2p_product_name,product_type,pay_type,actual_pay_time,p2p_customer_no,p2p_customer_name,payer_no,payer_name,sales_money,interest,pay_money,service_charge,pay_start_time,pay_end_time,status,in_user_no,in_time,edit_user_no,edit_time,edit_comment,times,product_type,pay_type,actual_pay_time,product_no,product_name,customer_no,customer_name,is_send_sms,is_use
+		 FROM payment_refund where id=#{id}
+	</select>
+    <select id="getHonourBySalesNo" resultMap="resultMapPaymentRefund" parameterType="int">
+        SELECT id,sales_no,p2p_product_no,is_test,payment_type,p2p_product_name,product_type,pay_type,actual_pay_time,p2p_customer_no,p2p_customer_name,payer_no,payer_name,sales_money,interest,pay_money,service_charge,pay_start_time,pay_end_time,status,in_user_no,in_time,edit_user_no,edit_time,edit_comment,times,product_type,pay_type,actual_pay_time,product_no,product_name,customer_no,customer_name,is_send_sms,is_use
+        FROM payment_refund where sales_no = #{salesNo} and payment_type = 1 and is_use = 1;
+    </select>
+
+    <insert id="add" parameterType="com.hzfh.api.payment.model.PaymentRefund" useGeneratedKeys="true" keyProperty="id">
+		insert into payment_refund
+		(sales_no,p2p_product_no,p2p_product_name,is_test,payment_type,p2p_customer_no,p2p_customer_name,payer_no,payer_name,sales_money,interest,pay_money,service_charge,pay_start_time,pay_end_time,status,in_user_no,in_time,edit_user_no,edit_time,edit_comment,times,pay_type,actual_pay_time,product_type,product_no,product_name,customer_no,customer_name,is_send_sms,is_use,examine_status)
+		values
+		(#{salesNo},#{p2pProductNo},#{p2pProductName},0,#{paymentType},#{p2pCustomerNo},#{p2pCustomerName},#{payerNo},#{payerName},#{salesMoney},#{interest},#{payMoney},#{serviceCharge},#{payStartTime},#{payEndTime},#{status},#{inUserNo},current_timestamp(),#{editUserNo},current_timestamp(),#{editComment},#{times},#{payType},#{actualPayTime},#{productType},#{productNo},#{productName},#{customerNo},#{customerName},#{isSendSms},#{isUse},0)
+	</insert>
+    <update id="update" parameterType="com.hzfh.api.payment.model.PaymentRefund">
+		update payment_refund set 
+		sales_no=#{salesNo},p2p_product_no=#{p2pProductNo},is_test=#{isTest},payment_type=#{paymentType},product_type=#{productType},pay_type=#{payType},actual_pay_time=#{actualPayTime},p2p_product_name=#{p2pProductName},p2p_customer_no=#{p2pCustomerNo},p2p_customer_name=#{p2pCustomerName},payer_no=#{payerNo},payer_name=#{payerName},sales_money=#{salesMoney},interest=#{interest},pay_money=#{payMoney},service_charge=#{serviceCharge},pay_start_time=#{payStartTime},pay_end_time=#{payEndTime},status=#{status},edit_user_no=#{editUserNo},edit_time=current_timestamp(),times=#{times},pay_type=#{payType},actual_pay_time=#{actualPayTime},product_type=#{productType},product_no=#{productNo},product_name=#{productName},customer_no=#{customerNo},customer_name=#{customerName},is_send_sms=#{isSendSms},is_use=#{isUse}
+		where id=#{id}
+	</update>
+    <delete id="delete" parameterType="int">
+		delete from payment_refund where id = #{id}
+	</delete>
+    <delete id="deleteBySaleNo" parameterType="int">
+        delete from payment_refund where sales_no = #{salesNo}
+    </delete>
+
+    <update id="updateStatusById">
+		UPDATE payment_refund set status=#{status} WHERE id=#{id}
+	</update>
+    <update id="updatePaymentTypeBySalesNoAndHonour">
+        UPDATE payment_refund set payment_type = #{paymentType} WHERE sales_no = #{salesNo} and payment_type = 1
+    </update>
+    <update id="updatePayMoneyBySalesNoAndHonour">
+        UPDATE payment_refund set pay_money = #{payMoney} WHERE sales_no = #{salesNo} and payment_type = 1
+    </update>
+
+    <select id="getInfoBySalesIdAndIsUse" resultMap="resultMapPaymentRefund">
+        SELECT id,sales_no,p2p_product_no,payment_type,is_test,p2p_product_name,product_type,pay_type,actual_pay_time,p2p_customer_no,p2p_customer_name,payer_no,payer_name,sales_money,interest,pay_money,service_charge,pay_start_time,pay_end_time,status,in_user_no,in_time,edit_user_no,edit_time,times,product_type,pay_type,actual_pay_time,product_no,product_name,customer_no,customer_name,is_send_sms,is_use
+        FROM payment_refund where sales_no = #{salesId}  and is_use =#{isUse} ORDER BY actual_pay_time
+    </select>
+    <select id="getInfoBySalesId" resultMap="resultMapPaymentRefund">
+        SELECT id,sales_no,p2p_product_no,payment_type,is_test,p2p_product_name,product_type,pay_type,actual_pay_time,p2p_customer_no,p2p_customer_name,payer_no,payer_name,sales_money,interest,pay_money,service_charge,pay_start_time,pay_end_time,status,in_user_no,in_time,edit_user_no,edit_time,times,product_type,pay_type,actual_pay_time,product_no,product_name,customer_no,customer_name,is_send_sms,is_use
+        FROM payment_refund where sales_no=#{salesId} ORDER BY actual_pay_time
+    </select>
+    <select id="getInfoBySalesIdLimit" resultMap="resultMapPaymentRefund">
+        SELECT id,sales_no,p2p_product_no,p2p_product_name,is_test,payment_type,product_type,pay_type,actual_pay_time,p2p_customer_no,p2p_customer_name,payer_no,payer_name,sales_money,interest,pay_money,service_charge,pay_start_time,pay_end_time,status,in_user_no,in_time,edit_user_no,edit_time,times,product_type,pay_type,actual_pay_time,product_no,product_name,customer_no,customer_name,is_send_sms
+        FROM payment_refund where sales_no=#{salesNo}  ORDER BY id DESC limit 1
+    </select>
+
+    <select id="getInvestmentIncome" resultType="Double">
+		SELECT SUM(interest) FROM payment_refund WHERE p2p_customer_no=#{customerNo} and status=#{status} and is_use=1
+	</select>
+    <select id="getInvestIncomeingByCustomerNo" resultType="Double">
+		SELECT SUM(interest) FROM payment_refund WHERE p2p_customer_no=#{customerNo} and (status BETWEEN 1 AND 2 ) and is_use= 1;
+	</select>
+    
+    <select id="getMaxTimeBySalesNo" resultType="int">
+        SELECT MAX(times) FROM payment_refund WHERE sales_no=#{salesNo}
+    </select>
+    <select id="getTotalValue" resultType="double">
+    select sum(pay_money) from payment_refund where sales_no = #{saleNo} and is_use = 1
+    </select>
+    <select id="getTimesIsUseBySalesNo" resultType="int">
+        select max(times) from payment_refund where sales_no = #{salesNo} and is_use = 1
+    </select>
+    <update id="updateExamineStatusByIds">
+        UPDATE payment_refund SET examine_status = #{examineStatus} WHERE id in (${ids})
+    </update>
+
+    <update id="updateLastPayMoneyOfSales">
+        UPDATE payment_refund SET pay_money=sales_money+interest WHERE sales_no=#{salesNo} AND times=#{maxTime}
+    </update>
+    <update id="updateP2pCustomerNoByCustomerNo">
+        update payment_refund set p2p_customer_no = ${p2pCustomerNo} where customer_no = ${customerNo}
+    </update>
+
+    <select id="getListByByHonourDateAndTypeAndStatus" resultMap="resultMapPaymentRefund" parameterType="String">
+        SELECT id,sales_no,p2p_product_no,is_test,payment_type,examine_status,p2p_product_name,product_type,pay_type,actual_pay_time,p2p_customer_no,p2p_customer_name,payer_no,payer_name,sales_money,interest,pay_money,service_charge,pay_start_time,pay_end_time,status,in_user_no,in_time,edit_user_no,edit_time,edit_comment,times,product_type,pay_type,actual_pay_time,product_no,product_name,customer_no,customer_name,is_send_sms,is_use
+        FROM payment_refund where actual_pay_time = '${honourDate}' and payment_type in (${type}) and examine_status in (${status}) and is_use = 1
+    </select>
+
+
+</mapper>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hzfh.service.baseInfo.mapper.CodeAdviserMapper">
+	<resultMap type="com.hzfh.api.baseInfo.model.CodeAdviser" id="resultMapCodeAdviser">
+		<result property="id" column="id"/>
+		<result property="inTime" column="in_time" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
+	</resultMap>
+	<select id="getList" resultMap="resultMapCodeAdviser">
+		SELECT id,in_time
+		FROM code_adviser order by in_time desc
+	</select>
+	<select id="getPagingList" resultMap="resultMapCodeAdviser" parameterType="com.hzfh.api.baseInfo.model.query.CodeAdviserCondition" statementType="STATEMENT">
+		SELECT id,in_time FROM code_adviser where 1=1
+		ORDER BY 
+		<foreach item="item" collection="sortItemList" separator=",">
+			${item.sortFeild} ${item.sortType}
+		</foreach>
+		LIMIT ${startIndex},${pageSize}
+	</select>
+	<select id="getTotalCount" resultType="int" parameterType="com.hzfh.api.baseInfo.model.query.CodeAdviserCondition" statementType="STATEMENT">
+		SELECT count(1) FROM code_adviser where 1=1
+	</select>
+	<select id="getInfo" resultMap="resultMapCodeAdviser" parameterType="int">
+		SELECT id,in_time FROM code_adviser where id=#{id}
+	</select>
+	<insert id="add" parameterType="com.hzfh.api.baseInfo.model.CodeAdviser" useGeneratedKeys="true" keyProperty="id">
+		insert into code_adviser
+		(in_time)
+		values
+		(current_timestamp())
+	</insert>
+	<update id="update" parameterType="com.hzfh.api.baseInfo.model.CodeAdviser">
+		update code_adviser set 
+		
+		where id=#{id}
+	</update>
+	<delete id="delete" parameterType="int">
+		delete from code_adviser where id = #{id}
+	</delete>
+</mapper>

@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hzfh.service.workFlow.mapper.ActHiTaskinstMapper">
+	<resultMap type="com.hzfh.api.workFlow.model.ActHiTaskinst" id="resultMapActHiTaskinst">
+		<result property="id" column="id_"/>
+		<result property="procDefId" column="proc_def_id_"/>
+		<result property="taskDefKey" column="task_def_key_"/>
+		<result property="procInstId" column="proc_inst_id_"/>
+		<result property="executionId" column="execution_id_"/>
+		<result property="name" column="name_"/>
+		<result property="parentTaskId" column="parent_task_id_"/>
+		<result property="description" column="description_"/>
+		<result property="owner" column="owner_"/>
+		<result property="assignee" column="assignee_"/>
+		<result property="startTime" column="start_time_" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
+		<result property="claimTime" column="claim_time_" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
+		<result property="endTime" column="end_time_" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
+		<result property="duration" column="duration_"/>
+		<result property="deleteReason" column="delete_reason_"/>
+		<result property="priority" column="priority_"/>
+		<result property="dueDate" column="due_date_" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
+		<result property="formKey" column="form_key_"/>
+		<result property="category" column="category_"/>
+		<result property="tenantId" column="tenant_id_"/>
+	</resultMap>
+	<select id="getList" resultMap="resultMapActHiTaskinst">
+		SELECT id_,proc_def_id_,task_def_key_,proc_inst_id_,execution_id_,name_,parent_task_id_,description_,owner_,assignee_,start_time_,claim_time_,end_time_,duration_,delete_reason_,priority_,due_date_,form_key_,category_,tenant_id_
+		FROM ACT_HI_TASKINST
+	</select>
+
+    <select id="getListByActivitiNo" resultMap="resultMapActHiTaskinst">
+        SELECT id_,proc_def_id_,task_def_key_,proc_inst_id_,execution_id_,name_,parent_task_id_,description_,owner_,assignee_,start_time_,claim_time_,end_time_,duration_,delete_reason_,priority_,due_date_,form_key_,category_,tenant_id_
+        FROM ACT_HI_TASKINST where proc_inst_id_ = ${activitiNo}
+    </select>
+	<!-- p.start_user_id_ as owner_,p.business_key_ as form_key_ -->
+	<select id="getPagingList" resultMap="resultMapActHiTaskinst" parameterType="com.hzfh.api.workFlow.model.query.ActHiTaskinstCondition" statementType="STATEMENT">
+		SELECT t.id_ as id_,t.proc_def_id_ as proc_def_id_,t.task_def_key_ as task_def_key_,t.proc_inst_id_ as proc_inst_id_,t.execution_id_ as execution_id_,t.name_ as name_,t.parent_task_id_ as parent_task_id_,t.description_ as description_,p.start_user_id_ as owner_,t.assignee_ as assignee_,t.start_time_ as start_time_,t.claim_time_ as claim_time_,p.end_time_ as end_time_,t.duration_ as duration_,t.delete_reason_ as delete_reason_,t.priority_ as priority_,t.due_date_ as due_date_,p.business_key_ as form_key_,t.category_ as category_,t.tenant_id_ as tenant_id_
+		FROM ACT_HI_TASKINST t,ACT_HI_PROCINST p where 1=1 and t.proc_inst_id_ = p.proc_inst_id_ 
+		<if test="assignee != null">and t.assignee_ = ${assignee} and t.delete_reason_ = "completed"</if>
+		<if test="bySelectTitle != null and bySelectTitle != ''"> and t.proc_def_id_ LIKE CONCAT('${bySelectTitle}',"%")</if>
+		<if test="byStatus == 1">and p.end_time_ is not null</if>
+		<if test="byStatus == 2">and p.end_time_ is null</if>
+		<if test="byStatus == 3">and p.end_act_id_='deleteActiviti'</if>
+		ORDER BY
+		<foreach item="item" collection="sortItemList" separator=",">
+			${item.sortFeild} ${item.sortType}
+		</foreach>
+		LIMIT ${startIndex},${pageSize}
+	</select>
+	<select id="getTotalCount" resultType="int" parameterType="com.hzfh.api.workFlow.model.query.ActHiTaskinstCondition" statementType="STATEMENT">
+		SELECT count(1) FROM ACT_HI_TASKINST t,ACT_HI_PROCINST p where 1=1 and t.proc_inst_id_ = p.proc_inst_id_
+		<if test="assignee != null">and t.assignee_ = ${assignee} and t.delete_reason_ = "completed"</if>
+		<if test="bySelectTitle != null and bySelectTitle != ''"> and t.proc_def_id_ LIKE CONCAT('${bySelectTitle}',"%")</if>
+		<if test="byStatus == 1">and p.end_time_ is not null</if>
+		<if test="byStatus == 2">and p.end_time_ is null</if>
+		<if test="byStatus == 3">and p.end_act_id_='deleteActiviti'</if>
+	</select>
+	<select id="getInfo" resultMap="resultMapActHiTaskinst" parameterType="int">
+		SELECT id_,proc_def_id_,task_def_key_,proc_inst_id_,execution_id_,name_,parent_task_id_,description_,owner_,assignee_,start_time_,claim_time_,end_time_,duration_,delete_reason_,priority_,due_date_,form_key_,category_,tenant_id_ FROM act_hi_taskinst where id=#{id}
+	</select>
+	<insert id="add" parameterType="com.hzfh.api.workFlow.model.ActHiTaskinst" useGeneratedKeys="true" keyProperty="id">
+		insert into act_hi_taskinst
+		(id_,proc_def_id_,task_def_key_,proc_inst_id_,execution_id_,name_,parent_task_id_,description_,owner_,assignee_,start_time_,claim_time_,end_time_,duration_,delete_reason_,priority_,due_date_,form_key_,category_,tenant_id_)
+		values
+		(#{id},#{procDefId},#{taskDefKey},#{procInstId},#{executionId},#{name},#{parentTaskId},#{description},#{owner},#{assignee},#{startTime},#{claimTime},#{endTime},#{duration},#{deleteReason},#{priority},#{dueDate},#{formKey},#{category},#{tenantId})
+	</insert>
+	<update id="update" parameterType="com.hzfh.api.workFlow.model.ActHiTaskinst">
+		update ACT_HI_TASKINST set 
+		id_=#{id},proc_def_id_=#{procDefId},task_def_key_=#{taskDefKey},proc_inst_id_=#{procInstId},execution_id_=#{executionId},name_=#{name},parent_task_id_=#{parentTaskId},description_=#{description},owner_=#{owner},assignee_=#{assignee},start_time_=#{startTime},claim_time_=#{claimTime},end_time_=#{endTime},duration_=#{duration},delete_reason_=#{deleteReason},priority_=#{priority},due_date_=#{dueDate},form_key_=#{formKey},category_=#{category},tenant_id_=#{tenantId}
+		where id=#{id}
+	</update>
+	<delete id="delete" parameterType="int">
+		delete from ACT_HI_TASKINST where id = #{id}
+	</delete>
+	<delete id="deleteByActivitiNo">
+		delete from ACT_HI_TASKINST where proc_inst_id_ = #{activitiNo}
+	</delete>
+	<update id="updateAssigneeByActivitiNo">
+		update ACT_HI_TASKINST set 
+		ASSIGNEE_=#{assignee}
+		where PROC_INST_ID_=#{activitiNo}
+		ORDER BY id_ DESC
+		LIMIT 1
+	</update>
+</mapper>

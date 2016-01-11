@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hzfh.service.baseInfo.mapper.CityMapper">
+	<resultMap type="com.hzfh.api.baseInfo.model.City" id="resultMapCity">
+		<result property="id" column="id"/>
+		<result property="code" column="code"/>
+		<result property="name" column="name"/>
+		<result property="enabled" column="enabled"/>
+		<result property="priority" column="priority"/>
+		<result property="provinceNo" column="province_no"/>
+		<result property="inUserNo" column="in_user_no"/>
+		<result property="inTime" column="in_time" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
+		<result property="editUserNo" column="edit_user_no"/>
+		<result property="editTime" column="edit_time" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
+		<result property="editComment" column="edit_comment"/>
+	</resultMap>
+	<select id="getList" resultMap="resultMapCity">
+		SELECT id,code,name,enabled,priority,province_no,in_user_no,in_time,edit_user_no,edit_time,edit_comment
+		FROM city
+	</select>
+	<select id="getCityListByProvinceNo" resultMap="resultMapCity" parameterType="int">
+		SELECT id,code,name,enabled,priority,province_no,in_user_no,in_time,edit_user_no,edit_time,edit_comment
+		FROM city WHERE	province_no = #{provinceNo}
+	</select>
+	<select id="getPagingList" resultMap="resultMapCity" parameterType="com.hzfh.api.baseInfo.model.query.CityCondition" statementType="STATEMENT">
+		SELECT id,code,name,enabled,priority,province_no,in_user_no,in_time,edit_user_no,edit_time,edit_comment FROM city where 1=1
+		ORDER BY
+		<foreach item="item" collection="sortItemList" separator=",">
+			${item.sortFeild} ${item.sortType}
+		</foreach>
+		LIMIT ${startIndex},${pageSize}
+	</select>
+	<select id="getTotalCount" resultType="int" parameterType="com.hzfh.api.baseInfo.model.query.CityCondition" statementType="STATEMENT">
+		SELECT count(1) FROM city where 1=1
+	</select>
+	<select id="getInfo" resultMap="resultMapCity" parameterType="int">
+		SELECT id,code,name,enabled,priority,province_no,in_user_no,in_time,edit_user_no,edit_time,edit_comment FROM city where id=#{id}
+	</select>
+	<insert id="add" parameterType="com.hzfh.api.baseInfo.model.City" useGeneratedKeys="true" keyProperty="id">
+		insert into city
+		(code,name,enabled,priority,province_no,in_user_no,in_time,edit_user_no,edit_time,edit_comment)
+		values
+		(#{code},#{name},#{enabled},#{priority},#{provinceNo},#{inUserNo},current_timestamp(),#{editUserNo},current_timestamp(),#{editComment})
+	</insert>
+	<update id="update" parameterType="com.hzfh.api.baseInfo.model.City">
+		update city set 
+		code=#{code},name=#{name},enabled=#{enabled},priority=#{priority},province_no=#{provinceNo},edit_user_no=#{editUserNo},edit_time=current_timestamp(),edit_comment=#{editComment}
+		where id=#{id}
+	</update>
+	<delete id="delete" parameterType="int">
+		delete from city where id = #{id}
+	</delete>
+	<select id="getCityListByProvinceNoAndEnabled" resultMap="resultMapCity">
+		SELECT id,code,name,enabled,priority,province_no,in_user_no,in_time,edit_user_no,edit_time,edit_comment
+		FROM city WHERE	province_no = #{provinceNo} and enabled = #{enabled}
+	</select>
+</mapper>

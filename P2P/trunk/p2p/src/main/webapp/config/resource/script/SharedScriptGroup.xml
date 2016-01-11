@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<scriptConfig xmlns="http://www.hzfh.com/web"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://www.hzfh.com/web ../../Schemas/Resources/Script.xsd">
+
+    <sharedScriptGroups default="Common">
+
+        <scriptGroup name="Common">
+            <scriptName>jQuery</scriptName>
+            <scriptName>jQuerylazyload</scriptName> 
+           
+            <scriptName>common</scriptName>
+            <!--<scriptName>html5shiv</scriptName>-->
+            <!--<scriptName>respond</scriptName>-->
+            <scriptName>environmentVariable</scriptName>
+            <scriptName>base</scriptName>
+            <scriptName>banner</scriptName>
+            <scriptName>echarts-plain</scriptName> 
+            <scriptName>lazyload</scriptName> 
+        </scriptGroup>
+        <scriptGroup name="Empty"></scriptGroup>
+    </sharedScriptGroups>
+</scriptConfig>

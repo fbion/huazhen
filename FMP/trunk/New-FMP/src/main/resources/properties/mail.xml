@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+    <comment>邮件配置</comment>
+    <entry key="mail.host"><![CDATA[mail.bestinvestor.com.cn]]></entry>
+    <entry key="mail.user"><![CDATA[administrator]]></entry>
+    <entry key="mail.pass"><![CDATA[huazhen@123]]></entry>
+    <entry key="mail.postfix"><![CDATA[bestinvestor.com.cn]]></entry>
+    <entry key="mail.sender.name1"><![CDATA[华镇金融]]></entry>
+    <entry key="mail.sender.name2"><![CDATA[系统管理员]]></entry>
+    <entry key="mail.sender.name"><![CDATA[华镇社区金融]]></entry>
+    <entry key="mail.positive.subject"><![CDATA[转正通知]]></entry>
+    <entry key="mail.delay.subject"><![CDATA[延迟转正通知]]></entry>
+
+    <entry key="mail.examineRemind.subject"><![CDATA[员工信息审核通知]]></entry>
+    <entry key="mail.examineRemind.body"><![CDATA["已完成员工信息填写，并提交保存，请及时审核"]]></entry>
+
+    <entry key="mail.positiveEvaluation.subject"><![CDATA[试用转正通知]]></entry>
+    <entry key="mail.positiveEvaluation.body"><![CDATA["
+
+            您好，您直属下级%s即将结束试用期，请要求个人在试用期结束前填写试用期工作总结，
+            并由您进行评估后转正材料提交人事行政部。
+            链接地址：%s
+            (请复制该链接到火狐浏览器打开)
+            请勿回复，本邮箱不接受邮件，如有疑问，请联系人事专员
+    "]]></entry>
+
+
+
+    <entry key="mail.positive.body"><![CDATA[您已通过试用期转正评估，请尽快填写“试用期工作总结”
+            链接地址：%s
+            (请复制该链接到火狐浏览器打开)
+            请勿回复，本邮箱不接受邮件，如有疑问，请联系人事专员
+    ]]></entry>
+
+    <entry key="mail.delay.body"><![CDATA[
+            经公司领导研究决定，您需要延迟延迟转正，请填写“延长试用期申请表”
+            链接地址：%s
+            (请复制该链接到火狐浏览器打开)
+            请勿回复，本邮箱不接受邮件，如有疑问，请联系人事专员
+    ]]></entry>
+
+
+</properties>

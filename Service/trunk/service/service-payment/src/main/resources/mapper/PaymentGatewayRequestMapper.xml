@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hzfh.service.payment.mapper.PaymentGatewayRequestMapper">
+	<resultMap type="com.hzfh.api.payment.model.PaymentGatewayRequest" id="resultMapPaymentGatewayRequest">
+		<result property="id" column="id"/>
+		<result property="url" column="url"/>
+		<result property="param" column="param"/>
+		<result property="reqTime" column="req_time" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
+	</resultMap>
+	<select id="getList" resultMap="resultMapPaymentGatewayRequest">
+		SELECT id,url,param,req_time
+		FROM payment_gateway_required
+	</select>
+	<select id="getPagingList" resultMap="resultMapPaymentGatewayRequest" parameterType="com.hzfh.api.payment.model.query.PaymentGatewayRequestCondition" statementType="STATEMENT">
+		SELECT id,url,param,req_time FROM payment_gateway_required where 1=1
+		ORDER BY
+		<foreach item="item" collection="sortItemList" separator=",">
+			${item.sortFeild} ${item.sortType}
+		</foreach>
+		LIMIT ${startIndex},${pageSize}
+	</select>
+	<select id="getTotalCount" resultType="int" parameterType="com.hzfh.api.payment.model.query.PaymentGatewayRequestCondition" statementType="STATEMENT">
+		SELECT count(1) FROM payment_gateway_required where 1=1
+	</select>
+	<select id="getInfo" resultMap="resultMapPaymentGatewayRequest" parameterType="int">
+		SELECT id,url,param,req_time FROM payment_gateway_required where id=#{id}
+	</select>
+	<insert id="add" parameterType="com.hzfh.api.payment.model.PaymentGatewayRequest" useGeneratedKeys="true" keyProperty="id">
+		insert into payment_gateway_required
+		(url,param,req_time)
+		values
+		(#{url},#{param},#{reqTime})
+	</insert>
+	<update id="update" parameterType="com.hzfh.api.payment.model.PaymentGatewayRequest">
+		update payment_gateway_required set 
+		url=#{url},param=#{param},req_time=#{reqTime}
+		where id=#{id}
+	</update>
+	<delete id="delete" parameterType="int">
+		delete from payment_gateway_required where id = #{id}
+	</delete>
+</mapper>

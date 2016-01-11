@@ -1,0 +1,494 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	<bean id="knowledgeBaseService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+        <property name="serviceUrl">
+            <value>http://employeeservice.hzfh.com:8080/service-employee/knowledgeBase</value>
+        </property>
+        <property name="serviceInterface">
+            <value>com.hzfh.api.employee.service.KnowledgeBaseService</value>
+        </property>
+
+        <property name="overloadEnabled" value="true"></property>
+    </bean>
+    <bean id="knowledgeAttachmentService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+        <property name="serviceUrl">
+            <value>http://employeeservice.hzfh.com:8080/service-employee/knowledgeAttachment</value>
+        </property>
+        <property name="serviceInterface">
+            <value>com.hzfh.api.employee.service.KnowledgeAttachmentService</value>
+        </property>
+
+        <property name="overloadEnabled" value="true"></property>
+    </bean>
+	<bean id="companyService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+        <property name="serviceUrl"><!-- employeeservice.hzfh.com -->
+            <value>http://employeeservice.hzfh.com:8080/service-employee/company</value>
+        </property>
+        <property name="serviceInterface">
+            <value>com.hzfh.api.employee.service.CompanyService</value>
+        </property>
+
+        <property name="overloadEnabled" value="true"></property>
+    </bean>
+	<bean id="departmentService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+        <property name="serviceUrl">
+            <value>http://employeeservice.hzfh.com:8080/service-employee/department</value>
+        </property>
+        <property name="serviceInterface">
+            <value>com.hzfh.api.employee.service.DepartmentService</value>
+        </property>
+
+        <property name="overloadEnabled" value="true"></property>
+    </bean>
+    <bean id="deptYearNeedService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+        <property name="serviceUrl">
+            <value>http://employeeservice.hzfh.com:8080/service-employee/deptYearNeed</value>
+        </property>
+        <property name="serviceInterface">
+            <value>com.hzfh.api.employee.service.DeptYearNeedService</value>
+        </property>
+
+        <property name="overloadEnabled" value="true"></property>
+    </bean>
+	<bean id="deptYearNeedDetailService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+        <property name="serviceUrl">
+            <value>http://employeeservice.hzfh.com:8080/service-employee/deptYearNeedDetail</value>
+        </property>
+        <property name="serviceInterface">
+            <value>com.hzfh.api.employee.service.DeptYearNeedDetailService</value>
+        </property>
+
+        <property name="overloadEnabled" value="true"></property>
+    </bean>
+     <bean id="extendProbationApplicationService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+        <property name="serviceUrl">
+            <value>http://employeeservice.hzfh.com:8080/service-employee/extendProbationApplication</value>
+        </property>
+        <property name="serviceInterface">
+            <value>com.hzfh.api.employee.service.ExtendProbationApplicationService</value>
+        </property>
+
+        <property name="overloadEnabled" value="true"></property>
+    </bean>
+     <bean id="yearNeedService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+        <property name="serviceUrl">
+            <value>http://employeeservice.hzfh.com:8080/service-employee/yearNeed</value>
+        </property>
+        <property name="serviceInterface">
+            <value>com.hzfh.api.employee.service.YearNeedService</value>
+        </property>
+
+        <property name="overloadEnabled" value="true"></property>
+    </bean>
+	<bean id="yearNeedDetailService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+        <property name="serviceUrl">
+            <value>http://employeeservice.hzfh.com:8080/service-employee/yearNeedDetail</value>
+        </property>
+        <property name="serviceInterface">
+            <value>com.hzfh.api.employee.service.YearNeedDetailService</value>
+        </property>
+
+        <property name="overloadEnabled" value="true"></property>
+    </bean>
+    <bean id="recruitFollowService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+        <property name="serviceUrl">
+            <value>http://employeeservice.hzfh.com:8080/service-employee/recruitFollow</value>
+        </property>
+        <property name="serviceInterface">
+            <value>com.hzfh.api.employee.service.RecruitFollowService</value>
+        </property>
+
+        <property name="overloadEnabled" value="true"></property>
+    </bean>
+	<bean id="empBrokerageLadderService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+        <property name="serviceUrl">
+            <value>http://employeeservice.hzfh.com:8080/service-employee/empBrokerageLadder</value>
+        </property>
+        <property name="serviceInterface">
+            <value>com.hzfh.api.employee.service.EmpBrokerageLadderService</value>
+        </property>
+
+        <property name="overloadEnabled" value="true"></property>
+    </bean>
+	<bean id="employeeService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+        <property name="serviceUrl">
+            <value>http://employeeservice.hzfh.com:8080/service-employee/employee</value>
+        </property>
+        <property name="serviceInterface">
+            <value>com.hzfh.api.employee.service.EmployeeService</value>
+        </property>
+
+        <property name="overloadEnabled" value="true"></property>
+    </bean>
+    <bean id="employeeDetailService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+        <property name="serviceUrl">
+            <value>http://employeeservice.hzfh.com:8080/service-employee/employeeDetail</value>
+        </property>
+        <property name="serviceInterface">
+            <value>com.hzfh.api.employee.service.EmployeeDetailService</value>
+        </property>
+
+        <property name="overloadEnabled" value="true"></property>
+    </bean>
+    <bean id="employeeEducationService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+        <property name="serviceUrl">
+            <value>http://employeeservice.hzfh.com:8080/service-employee/employeeEducation</value>
+        </property>
+        <property name="serviceInterface">
+            <value>com.hzfh.api.employee.service.EmployeeEducationService</value>
+        </property>
+
+        <property name="overloadEnabled" value="true"></property>
+    </bean>
+    <bean id="familyMembersService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+        <property name="serviceUrl">
+            <value>http://employeeservice.hzfh.com:8080/service-employee/familyMembers</value>
+        </property>
+        <property name="serviceInterface">
+            <value>com.hzfh.api.employee.service.FamilyMembersService</value>
+        </property>
+
+        <property name="overloadEnabled" value="true"></property>
+    </bean>
+    <bean id="fixedAssetsService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+        <property name="serviceUrl">
+            <value>http://employeeservice.hzfh.com:8080/service-employee/fixedAssets</value>
+        </property>
+        <property name="serviceInterface">
+            <value>com.hzfh.api.employee.service.FixedAssetsService</value>
+        </property>
+
+        <property name="overloadEnabled" value="true"></property>
+    </bean>
+    	<bean id="suppliersService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+        <property name="serviceUrl">
+            <value>http://employeeservice.hzfh.com:8080/service-employee/suppliers</value>
+        </property>
+        <property name="serviceInterface">
+            <value>com.hzfh.api.employee.service.SuppliersService</value>
+        </property>
+
+        <property name="overloadEnabled" value="true"></property>
+    </bean>
+    <bean id="employeeCredentialService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+        <property name="serviceUrl">
+            <value>http://employeeservice.hzfh.com:8080/service-employee/employeeCredential</value>
+        </property>
+        <property name="serviceInterface">
+            <value>com.hzfh.api.employee.service.EmployeeCredentialService</value>
+        </property>
+
+        <property name="overloadEnabled" value="true"></property>
+    </bean>
+	<bean id="otherService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+        <property name="serviceUrl">
+            <value>http://employeeservice.hzfh.com:8080/service-employee/other</value>
+        </property>
+        <property name="serviceInterface">
+            <value>com.hzfh.api.employee.service.OtherService</value>
+        </property>
+
+        <property name="overloadEnabled" value="true"></property>
+    </bean>
+	<bean id="overtimeService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+        <property name="serviceUrl">
+            <value>http://employeeservice.hzfh.com:8080/service-employee/overtime</value>
+        </property>
+        <property name="serviceInterface">
+            <value>com.hzfh.api.employee.service.OvertimeService</value>
+        </property>
+
+        <property name="overloadEnabled" value="true"></property>
+    </bean>
+	<bean id="paymentService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+        <property name="serviceUrl">
+            <value>http://employeeservice.hzfh.com:8080/service-employee/payment</value>
+        </property>
+        <property name="serviceInterface">
+            <value>com.hzfh.api.employee.service.PaymentService</value>
+        </property>
+
+        <property name="overloadEnabled" value="true"></property>
+    </bean>
+	<bean id="positionService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+        <property name="serviceUrl">
+            <value>http://employeeservice.hzfh.com:8080/service-employee/position</value>
+        </property>
+        <property name="serviceInterface">
+            <value>com.hzfh.api.employee.service.PositionService</value>
+        </property>
+
+        <property name="overloadEnabled" value="true"></property>
+    </bean>
+	<bean id="positionLevelService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+        <property name="serviceUrl">
+            <value>http://employeeservice.hzfh.com:8080/service-employee/positionLevel</value>
+        </property>
+        <property name="serviceInterface">
+            <value>com.hzfh.api.employee.service.PositionLevelService</value>
+        </property>
+
+        <property name="overloadEnabled" value="true"></property>
+    </bean>
+	<bean id="welfareService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+        <property name="serviceUrl">
+            <value>http://employeeservice.hzfh.com:8080/service-employee/welfare</value>
+        </property>
+        <property name="serviceInterface">
+            <value>com.hzfh.api.employee.service.WelfareService</value>
+        </property>
+
+        <property name="overloadEnabled" value="true"></property>
+    </bean>
+	<bean id="achievementCommissionService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+        <property name="serviceUrl">
+            <value>http://employeeservice.hzfh.com:8080/service-employee/achievementCommission</value>
+        </property>
+        <property name="serviceInterface">
+            <value>com.hzfh.api.employee.service.AchievementCommissionService</value>
+        </property>
+
+        <property name="overloadEnabled" value="true"></property>
+    </bean>
+    <bean id="evaluationContentService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+        <property name="serviceUrl">
+            <value>http://employeeservice.hzfh.com:8080/service-employee/evaluationContent</value>
+        </property>
+        <property name="serviceInterface">
+            <value>com.hzfh.api.employee.service.EvaluationContentService</value>
+        </property>
+
+        <property name="overloadEnabled" value="true"></property>
+    </bean>
+	<bean id="evaluationScoreService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+        <property name="serviceUrl">
+            <value>http://employeeservice.hzfh.com:8080/service-employee/evaluationScore</value>
+        </property>
+        <property name="serviceInterface">
+            <value>com.hzfh.api.employee.service.EvaluationScoreService</value>
+        </property>
+
+        <property name="overloadEnabled" value="true"></property>
+    </bean>
+    <bean id="subsidyService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+        <property name="serviceUrl">
+            <value>http://employeeservice.hzfh.com:8080/service-employee/subsidy</value>
+        </property>
+        <property name="serviceInterface">
+            <value>com.hzfh.api.employee.service.SubsidyService</value>
+        </property>
+
+        <property name="overloadEnabled" value="true"></property>
+    </bean>
+	<bean id="subsidyTotalService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+        <property name="serviceUrl">
+            <value>http://employeeservice.hzfh.com:8080/service-employee/subsidyTotal</value>
+        </property>
+        <property name="serviceInterface">
+            <value>com.hzfh.api.employee.service.SubsidyTotalService</value>
+        </property>
+
+        <property name="overloadEnabled" value="true"></property>
+    </bean>
+    <bean id="recruitAskRecordService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+        <property name="serviceUrl">
+            <value>http://employeeservice.hzfh.com:8080/service-employee/recruitAskRecord</value>
+        </property>
+        <property name="serviceInterface">
+            <value>com.hzfh.api.employee.service.RecruitAskRecordService</value>
+        </property>
+
+        <property name="overloadEnabled" value="true"></property>
+    </bean>
+    <bean id="interviewEvaluationRecordService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+        <property name="serviceUrl">
+            <value>http://employeeservice.hzfh.com:8080/service-employee/interviewEvaluationRecord</value>
+        </property>
+        <property name="serviceInterface">
+            <value>com.hzfh.api.employee.service.InterviewEvaluationRecordService</value>
+        </property>
+
+        <property name="overloadEnabled" value="true"></property>
+    </bean>
+
+    <bean id="empCompilePlanService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+        <property name="serviceUrl">
+            <value>http://employeeservice.hzfh.com:8080/service-employee/empCompilePlan</value>
+        </property>
+        <property name="serviceInterface">
+            <value>com.hzfh.api.employee.service.EmpCompilePlanService</value>
+        </property>
+
+        <property name="overloadEnabled" value="true"></property>
+    </bean>
+
+    <bean id="employeeInformationService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+        <property name="serviceUrl">
+            <value>http://employeeservice.hzfh.com:8080/service-employee/employeeInformation</value>
+        </property>
+        <property name="serviceInterface">
+            <value>com.hzfh.api.employee.service.EmployeeInformationService</value>
+        </property>
+
+        <property name="overloadEnabled" value="true"></property>
+    </bean>
+
+    <bean id="workExperienceService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+        <property name="serviceUrl">
+            <value>http://employeeservice.hzfh.com:8080/service-employee/workExperience</value>
+        </property>
+        <property name="serviceInterface">
+            <value>com.hzfh.api.employee.service.WorkExperienceService</value>
+        </property>
+
+        <property name="overloadEnabled" value="true"></property>
+    </bean>
+      <bean id="tempRecruitDetailService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+        <property name="serviceUrl">
+            <value>http://employeeservice.hzfh.com:8080/service-employee/tempRecruitDetail</value>
+        </property>
+        <property name="serviceInterface">
+            <value>com.hzfh.api.employee.service.TempRecruitDetailService</value>
+        </property>
+
+        <property name="overloadEnabled" value="true"></property>
+    </bean>
+	<bean id="tempRecruitNeedService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+        <property name="serviceUrl">
+            <value>http://employeeservice.hzfh.com:8080/service-employee/tempRecruitNeed</value>
+        </property>
+        <property name="serviceInterface">
+            <value>com.hzfh.api.employee.service.TempRecruitNeedService</value>
+        </property>
+
+        <property name="overloadEnabled" value="true"></property>
+    </bean>
+
+    <bean id="attendanceApplicationService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+        <property name="serviceUrl">
+            <value>http://employeeservice.hzfh.com:8080/service-employee/attendanceApplication</value>
+        </property>
+        <property name="serviceInterface">
+            <value>com.hzfh.api.employee.service.AttendanceApplicationService</value>
+        </property>
+
+        <property name="overloadEnabled" value="true"></property>
+    </bean>
+
+    <bean id="resignApplicationService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+        <property name="serviceUrl">
+            <value>http://employeeservice.hzfh.com:8080/service-employee/resignApplication</value>
+        </property>
+        <property name="serviceInterface">
+            <value>com.hzfh.api.employee.service.ResignApplicationService</value>
+        </property>
+
+        <property name="overloadEnabled" value="true"></property>
+    </bean>
+
+    <bean id="personalChangeService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+        <property name="serviceUrl">
+            <value>http://employeeservice.hzfh.com:8080/service-employee/personalChange</value>
+        </property>
+        <property name="serviceInterface">
+            <value>com.hzfh.api.employee.service.PersonalChangeService</value>
+        </property>
+
+        <property name="overloadEnabled" value="true"></property>
+    </bean>
+
+    <bean id="probationWorkSummaryService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+        <property name="serviceUrl">
+            <value>http://employeeservice.hzfh.com:8080/service-employee/probationWorkSummary</value>
+        </property>
+        <property name="serviceInterface">
+            <value>com.hzfh.api.employee.service.ProbationWorkSummaryService</value>
+        </property>
+
+        <property name="overloadEnabled" value="true"></property>
+    </bean>
+
+    <bean id="managerEvaluationService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+        <property name="serviceUrl">
+            <value>http://employeeservice.hzfh.com:8080/service-employee/managerEvaluation</value>
+        </property>
+        <property name="serviceInterface">
+            <value>com.hzfh.api.employee.service.ManagerEvaluationService</value>
+        </property>
+
+        <property name="overloadEnabled" value="true"></property>
+    </bean>
+
+    <bean id="probationEvaluationService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+        <property name="serviceUrl">
+            <value>http://employeeservice.hzfh.com:8080/service-employee/probationEvaluation</value>
+        </property>
+        <property name="serviceInterface">
+            <value>com.hzfh.api.employee.service.ProbationEvaluationService</value>
+        </property>
+
+        <property name="overloadEnabled" value="true"></property>
+    </bean>
+	<bean id="probationEvaluationContentService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+        <property name="serviceUrl">
+            <value>http://employeeservice.hzfh.com:8080/service-employee/probationEvaluationContent</value>
+        </property>
+        <property name="serviceInterface">
+            <value>com.hzfh.api.employee.service.ProbationEvaluationContentService</value>
+        </property>
+
+        <property name="overloadEnabled" value="true"></property>
+    </bean>
+	<bean id="probationEvaluationContentTemplateService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+        <property name="serviceUrl">
+            <value>http://employeeservice.hzfh.com:8080/service-employee/probationEvaluationContentTemplate</value>
+        </property>
+        <property name="serviceInterface">
+            <value>com.hzfh.api.employee.service.ProbationEvaluationContentTemplateService</value>
+        </property>
+
+        <property name="overloadEnabled" value="true"></property>
+    </bean>
+	<bean id="probationEvaluationScoreService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+        <property name="serviceUrl">
+            <value>http://employeeservice.hzfh.com:8080/service-employee/probationEvaluationScore</value>
+        </property>
+        <property name="serviceInterface">
+            <value>com.hzfh.api.employee.service.ProbationEvaluationScoreService</value>
+        </property>
+
+        <property name="overloadEnabled" value="true"></property>
+    </bean>
+    <bean id="yearNeedTotalService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+        <property name="serviceUrl">
+            <value>http://employeeservice.hzfh.com:8080/service-employee/yearNeedTotal</value>
+        </property>
+        <property name="serviceInterface">
+            <value>com.hzfh.api.employee.service.YearNeedTotalService</value>
+        </property>
+
+        <property name="overloadEnabled" value="true"></property>
+    </bean>
+    <bean id="needReleaseService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+        <property name="serviceUrl">
+            <value>http://employeeservice.hzfh.com:8080/service-employee/needRelease</value>
+        </property>
+        <property name="serviceInterface">
+            <value>com.hzfh.api.employee.service.NeedReleaseService</value>
+        </property>
+
+        <property name="overloadEnabled" value="true"></property>
+    </bean>
+    <bean id="commissionWealthCenterService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+        <property name="serviceUrl">
+            <value>http://employeeservice.hzfh.com:8080/service-employee/commissionWealthCenter</value>
+        </property>
+        <property name="serviceInterface">
+            <value>com.hzfh.api.employee.service.CommissionWealthCenterService</value>
+        </property>
+
+        <property name="overloadEnabled" value="true"></property>
+    </bean>
+</beans>

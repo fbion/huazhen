@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hzfh.service.customer.mapper.PaymentBankInfoMapper">
+	<resultMap type="com.hzfh.api.customer.model.PaymentBankInfo" id="resultMapPaymentBankInfo">
+		<result property="id" column="id"/>
+		<result property="name" column="name"/>
+		<result property="code" column="code"/>
+		<result property="logo" column="logo"/>
+		<result property="enable" column="enable"/>
+	</resultMap>
+	<select id="getList" resultMap="resultMapPaymentBankInfo">
+		SELECT id,name,code,logo,enable
+		FROM payment_bank_info
+	</select>
+	<select id="getPagingList" resultMap="resultMapPaymentBankInfo" parameterType="com.hzfh.api.customer.model.query.PaymentBankInfoCondition" statementType="STATEMENT">
+		SELECT id,name,code,logo,enable FROM payment_bank_info where 1=1
+		ORDER BY
+		<foreach item="item" collection="sortItemList" separator=",">
+			${item.sortFeild} ${item.sortType}
+		</foreach>
+		LIMIT ${startIndex},${pageSize}
+	</select>
+	<select id="getTotalCount" resultType="int" parameterType="com.hzfh.api.customer.model.query.PaymentBankInfoCondition" statementType="STATEMENT">
+		SELECT count(1) FROM payment_bank_info where 1=1
+	</select>
+	<select id="getInfo" resultMap="resultMapPaymentBankInfo" parameterType="int">
+		SELECT id,name,code,logo,enable FROM payment_bank_info where id=#{id}
+	</select>
+	<insert id="add" parameterType="com.hzfh.api.customer.model.PaymentBankInfo" useGeneratedKeys="true" keyProperty="id">
+		insert into payment_bank_info
+		(name,code,logo,enable)
+		values
+		(#{name},#{code},#{logo},#{enable})
+	</insert>
+	<update id="update" parameterType="com.hzfh.api.customer.model.PaymentBankInfo">
+		update payment_bank_info set 
+		name=#{name},code=#{code},logo=#{logo},enable=#{enable}
+		where id=#{id}
+	</update>
+	<delete id="delete" parameterType="int">
+		delete from payment_bank_info where id = #{id}
+	</delete>
+	
+	<select id="getBankByBankCode" resultMap="resultMapPaymentBankInfo">
+		SELECT id,name,code,logo,enable FROM payment_bank_info where code=#{code}
+	</select>
+	
+	<select id="getListByStatus" resultMap="resultMapPaymentBankInfo">
+		SELECT id,name,code,logo,enable
+		FROM payment_bank_info where enable = #{enable}
+	</select>
+</mapper>

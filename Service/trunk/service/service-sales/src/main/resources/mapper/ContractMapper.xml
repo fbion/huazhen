@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hzfh.service.sales.mapper.ContractMapper">
+	<resultMap type="com.hzfh.api.sales.model.Contract" id="resultMapContract">
+		<result property="id" column="id"/>
+		<result property="code" column="code"/>
+		<result property="content" column="content"/>
+		<result property="inTime" column="in_time" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
+	</resultMap>
+	<select id="getList" resultMap="resultMapContract">
+		SELECT id,code,content,in_time
+		FROM contract
+	</select>
+	<select id="getPagingList" resultMap="resultMapContract" parameterType="com.hzfh.api.sales.model.query.ContractCondition" statementType="STATEMENT">
+		SELECT id,code,content,in_time FROM contract where 1=1
+		ORDER BY
+		<foreach item="item" collection="sortItemList" separator=",">
+			${item.sortFeild} ${item.sortType}
+		</foreach>
+		LIMIT ${startIndex},${pageSize}
+	</select>
+	<select id="getTotalCount" resultType="int" parameterType="com.hzfh.api.sales.model.query.ContractCondition" statementType="STATEMENT">
+		SELECT count(1) FROM contract where 1=1
+	</select>
+	<select id="getInfo" resultMap="resultMapContract" parameterType="int">
+		SELECT id,code,content,in_time FROM contract where id=#{id}
+	</select>
+	<insert id="add" parameterType="com.hzfh.api.sales.model.Contract" useGeneratedKeys="true" keyProperty="id">
+		insert into contract
+		(code,content,in_time)
+		values
+		(#{code},#{content},current_timestamp())
+	</insert>
+	<update id="update" parameterType="com.hzfh.api.sales.model.Contract">
+		update contract set 
+		code=#{code},content=#{content}
+		where id=#{id}
+	</update>
+	<delete id="delete" parameterType="int">
+		delete from contract where id = #{id}
+	</delete>
+</mapper>

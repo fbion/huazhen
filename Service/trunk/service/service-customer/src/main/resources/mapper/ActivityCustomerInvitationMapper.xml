@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hzfh.service.customer.mapper.ActivityCustomerInvitationMapper">
+	<resultMap type="com.hzfh.api.customer.model.ActivityCustomerInvitation" id="resultMapActivityCustomerInvitation">
+		<result property="id" column="id"/>
+		<result property="p2pCustomerNo" column="p2p_customer_no"/>
+		<result property="invitedNo" column="invited_no"/>
+		<result property="registerTime" column="register_time" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
+		<result property="authenticationTime" column="authentication_time" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
+		<result property="investTime" column="invest_time" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
+		<result property="rewardsMoney" column="rewards_money"/>
+		<result property="inviteTime" column="invite_time" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
+		<result property="approverNo" column="approver_no"/>
+		<result property="activityNo" column="activity_no"/>
+		<result property="status" column="status"/>
+		<result property="activityCustomerCashBonusNo" column="activity_customer_cash_bonus_no"/>
+		<result property="requestNo" column="request_no"/>
+		<result property="relatedNo" column="related_no"/>
+		<result property="activityRewardType" column="activity_reward_type"/>
+	</resultMap>
+	<select id="getList" resultMap="resultMapActivityCustomerInvitation">
+		SELECT id,p2p_customer_no,invited_no,register_time,authentication_time,invest_time,rewards_money,invite_time,approver_no,activity_no,status,activity_customer_cash_bonus_no,request_no,related_no,activity_reward_type
+		FROM activity_customer_invitation
+	</select>
+	<select id="getPagingList" resultMap="resultMapActivityCustomerInvitation" parameterType="com.hzfh.api.customer.model.query.ActivityCustomerInvitationCondition" statementType="STATEMENT">
+		SELECT id,p2p_customer_no,invited_no,register_time,authentication_time,invest_time,rewards_money,invite_time,approver_no,activity_no,status,activity_customer_cash_bonus_no,request_no,related_no,activity_reward_type FROM activity_customer_invitation where 1=1
+		<if test="status !=0">and status=${status}</if>
+		<if test="p2pCustomerNo !=0">and p2p_customer_no=${p2pCustomerNo}</if>
+		<if test="activityNo !=0">and activity_no=${activityNo}</if>
+		<if test="authenticationTime!=null and authenticationTime!=''"> and authentication_time &lt;= '${authenticationTime}'</if>
+		<if test="activityRewardType !=0">and activity_reward_type=${activityRewardType}</if>
+		ORDER BY
+		<foreach item="item" collection="sortItemList" separator=",">
+			${item.sortFeild} ${item.sortType}
+		</foreach>
+		LIMIT ${startIndex},${pageSize}
+	</select>
+	<select id="getTotalCount" resultType="int" parameterType="com.hzfh.api.customer.model.query.ActivityCustomerInvitationCondition" statementType="STATEMENT">
+		SELECT count(1) FROM activity_customer_invitation where 1=1
+		<if test="status !=0">and status=${status}</if>
+		<if test="activityNo !=0">and activity_no=${activityNo}</if>
+		<if test="p2pCustomerNo !=0">and p2p_customer_no=${p2pCustomerNo}</if>
+		<if test="authenticationTime!=null and authenticationTime!=''"> and authentication_time &lt;= '${authenticationTime}'</if>
+		<if test="activityRewardType !=0">and activity_reward_type=${activityRewardType}</if>
+	</select>
+	<select id="getInfo" resultMap="resultMapActivityCustomerInvitation" parameterType="int">
+		SELECT id,p2p_customer_no,invited_no,register_time,authentication_time,invest_time,rewards_money,invite_time,approver_no,activity_no,status,activity_customer_cash_bonus_no,request_no,related_no,activity_reward_type FROM activity_customer_invitation where id=#{id}
+	</select>
+	<select id="getInfoByCondition" resultMap="resultMapActivityCustomerInvitation" parameterType="int">
+		SELECT id,p2p_customer_no,invited_no,register_time,authentication_time,invest_time,rewards_money,invite_time,approver_no,activity_no,status,activity_customer_cash_bonus_no,related_no,activity_reward_type FROM activity_customer_invitation where invited_no=#{invitedNo} and  activity_no=#{activityNo}
+	</select>
+	<insert id="add" parameterType="com.hzfh.api.customer.model.ActivityCustomerInvitation" useGeneratedKeys="true" keyProperty="id">
+		insert into activity_customer_invitation
+		(p2p_customer_no,invited_no,register_time,authentication_time,invest_time,rewards_money,invite_time,approver_no,activity_no,status,activity_customer_cash_bonus_no,request_no,related_no,activity_reward_type)
+		values
+		(#{p2pCustomerNo},#{invitedNo},#{registerTime},#{authenticationTime},#{investTime},#{rewardsMoney},#{inviteTime},#{approverNo},#{activityNo},#{status},#{activityCustomerCashBonusNo},#{requestNo},#{relatedNo},#{activityRewardType})
+	</insert>
+	<update id="update" parameterType="com.hzfh.api.customer.model.ActivityCustomerInvitation">
+		update activity_customer_invitation set 
+		p2p_customer_no=#{p2pCustomerNo},invited_no=#{invitedNo},register_time=#{registerTime},authentication_time=#{authenticationTime},invest_time=#{investTime},rewards_money=#{rewardsMoney},invite_time=#{inviteTime},approver_no=#{approverNo},activity_no=#{activityNo},status=#{status},activity_customer_cash_bonus_no=#{activityCustomerCashBonusNo},request_no=#{requestNo},related_no=#{relatedNo},activity_reward_type=#{activityRewardType}
+		where id=#{id}
+	</update>
+	<delete id="delete" parameterType="int">
+		delete from activity_customer_invitation where id = #{id}
+	</delete>
+	<select id="getListByCashBonusStatus" resultMap="resultMapActivityCustomerInvitation" parameterType="int">
+		SELECT a.id,a.p2p_customer_no,a.invited_no,a.register_time,a.authentication_time,a.invest_time,a.rewards_money,a.invite_time,
+		a.approver_no,a.activity_no,a.status,a.activity_customer_cash_bonus_no,request_no,related_no,activity_reward_type
+		FROM activity_customer_invitation a
+		inner join activity_customer_cash_bonus b
+		on a.activity_customer_cash_bonus_no=b.id
+		and b.status= #{status}
+	</select>
+	<update id="updateApproverNoById">
+		update activity_customer_invitation set 
+		approver_no=#{approverNo}
+		where id=#{id}
+	</update>
+	<select id="getInfoByRequestNo" resultMap="resultMapActivityCustomerInvitation">
+		SELECT id,p2p_customer_no,invited_no,register_time,authentication_time,invest_time,rewards_money,invite_time,approver_no,activity_no,status,activity_customer_cash_bonus_no,request_no,related_no,activity_reward_type FROM activity_customer_invitation 
+		where request_no=#{requestNo}
+	</select>
+	<select id="getListByCashBonusStatusAndId" resultMap="resultMapActivityCustomerInvitation">
+		(SELECT a.id,a.p2p_customer_no,a.invited_no,a.register_time,a.authentication_time,a.invest_time,a.rewards_money,a.invite_time,
+		a.approver_no,a.activity_no,a.status,a.activity_customer_cash_bonus_no,request_no,related_no,activity_reward_type
+		FROM activity_customer_invitation a
+		inner join activity_customer_cash_bonus b
+		on a.related_no=b.id
+		and a.activity_reward_type=2
+		and b.status= #{status}
+		and a.activity_no = #{id}
+		and a.status = #{statusTrue}
+		and a.authentication_time &lt;= '${authenticationTime}'
+		<if test="type !=0">and a.activity_reward_type=${type}</if>)
+
+	UNION
+
+		(SELECT a.id,a.p2p_customer_no,a.invited_no,a.register_time,a.authentication_time,a.invest_time,a.rewards_money,a.invite_time,
+		a.approver_no,a.activity_no,a.status,a.activity_customer_cash_bonus_no,request_no,related_no,activity_reward_type
+		FROM activity_customer_invitation a
+		inner join activity_customer_experience_gold b
+		on a.related_no=b.id
+		and a.activity_reward_type=1
+		and b.status= #{status}
+		and a.activity_no = #{id}
+		and a.status = #{statusTrue}
+		and a.authentication_time &lt;= '${authenticationTime}'
+		<if test="type !=0">and a.activity_reward_type=${type}</if>)
+	</select>
+</mapper>

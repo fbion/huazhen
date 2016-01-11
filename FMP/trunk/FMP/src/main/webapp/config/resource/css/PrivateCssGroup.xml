@@ -1,0 +1,617 @@
+<?xml version="1.0"?>
+<cssConfig xmlns="http://www.hzfh.com/web" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.hzfh.com/web ../../Schemas/Resources/Css.xsd">
+	<privateCssGroups>
+		<cssGroup name="Home" sharedCssGroup="Common">
+			<cssName>page</cssName>
+			<pages>
+				<pageName>index</pageName>
+                <pageName>error</pageName>
+                <pageName>errorPage</pageName>
+			</pages>
+		</cssGroup>
+
+		<cssGroup name="NewIndex" sharedCssGroup="NewCommonWithEasyUI">
+			<pages>
+				<pageName>newIndex</pageName>
+				<pageName>main</pageName>
+			</pages>
+		</cssGroup>
+		<cssGroup name="Login" sharedCssGroup="Empty">
+			<cssName>base</cssName>
+			<cssName>page</cssName>
+			<pages>
+				<pageName>login</pageName>
+			</pages>
+		</cssGroup>
+		<cssGroup name="UpdatePwd" sharedCssGroup="Empty">
+			<cssName>common</cssName>
+			<cssName>base</cssName>
+			<cssName>page</cssName>
+			<pages>
+				<pageName>updatePwd</pageName>
+			</pages>
+		</cssGroup>
+        <cssGroup name="deptYearNeedDetailAdd" sharedCssGroup="NCommon">
+        <cssName>page</cssName>
+			<pages>
+				<pageName>deptYearNeedDetailAdd</pageName>
+			</pages>
+		</cssGroup>
+		<cssGroup name="yearNeedList" sharedCssGroup="NCommon">
+		 <cssName>page</cssName>
+		  <cssName>easyUi</cssName>
+		 <cssName>jquery-ui</cssName>
+         <cssName>jqgrid</cssName>
+			<pages>
+				<pageName>yearNeedList</pageName>
+			</pages>
+		</cssGroup>
+		 <cssGroup name="deptYearNeedAdd" sharedCssGroup="NCommon">
+		 <cssName>page</cssName>
+		 <cssName>easyUi</cssName>
+         <cssName>icon</cssName>
+			<pages>
+				<pageName>deptYearNeedAdd</pageName>
+			</pages>
+		</cssGroup>
+		<cssGroup name="deptYearNeedList" sharedCssGroup="NCommon">
+		 <cssName>page</cssName>
+		 <cssName>jquery-ui</cssName>
+         <cssName>jqgrid</cssName>
+         <cssName>easyUi</cssName>
+		 <cssName>icon</cssName>
+			<pages>
+				<pageName>deptYearNeedList</pageName>
+			</pages>
+		</cssGroup>
+		
+		<cssGroup name="activityAdd" sharedCssGroup="Common">
+			<cssName>page</cssName>
+			<pages>
+				<pageName>activityAdd</pageName>
+			</pages>
+		</cssGroup>	
+		<cssGroup name="activitiesAdd" sharedCssGroup="Common">
+			<cssName>page</cssName>
+			<pages>
+				<pageName>activitiesAdd</pageName>
+			</pages>
+		</cssGroup>		
+		<cssGroup name="activitiesAddDetail" sharedCssGroup="Common">
+			<cssName>page</cssName>
+			<cssName>easyUi</cssName>
+			<pages>
+				<pageName>activitiesAddDetail</pageName>
+			</pages>
+		</cssGroup>	
+		<cssGroup name="activityAttachmentAdd" sharedCssGroup="NCommon">
+			<pages>
+				<pageName>activityAttachmentAdd</pageName>
+			</pages>
+		</cssGroup>	
+		<cssGroup name="activityAttachmentList" sharedCssGroup="Common">
+			<pages>
+				<pageName>activityAttachmentList</pageName>
+			</pages>
+		</cssGroup>	
+		<cssGroup name="activityList" sharedCssGroup="Common">
+			<pages>
+				<pageName>activityList</pageName>
+			</pages>
+		</cssGroup>	
+		<cssGroup name="activitiesList" sharedCssGroup="Common">
+			<pages>
+				<pageName>activitiesList</pageName>
+			</pages>
+		</cssGroup>	
+		<cssGroup name="applyCustomerAdd" sharedCssGroup="Common">
+			<cssName>page</cssName>
+			<pages>
+				<pageName>applyCustomerAdd</pageName>
+			</pages>
+		</cssGroup>
+        <cssGroup name="importData" sharedCssGroup="Common">
+            <pages>
+                <pageName>importData</pageName>
+            </pages>
+        </cssGroup>
+        <cssGroup name="applyCustomerList" sharedCssGroup="Common">
+			<pages>
+				<pageName>applyCustomerList</pageName>
+			</pages>
+		</cssGroup>	
+		<cssGroup name="applyEmployeeList" sharedCssGroup="Common">
+			<pages>
+				<pageName>applyEmployeeList</pageName>
+			</pages>
+		</cssGroup>	
+		<cssGroup name="applyEmployeeAdd" sharedCssGroup="NCommon">
+			<pages>
+				<pageName>applyEmployeeAdd</pageName>
+			</pages>
+		</cssGroup>
+
+        <cssGroup name="bannerInfoAdd" sharedCssGroup="NCommon">
+            <cssName>page</cssName>
+            <cssName>easyUi</cssName>
+            <cssName>icon</cssName>
+            <pages>
+                <pageName>bannerInfoAdd</pageName>
+            </pages>
+        </cssGroup>
+        <cssGroup name="announcementAdd" sharedCssGroup="NCommon">
+            <cssName>page</cssName>
+            <cssName>easyUi</cssName>
+            <cssName>icon</cssName>
+            <pages>
+                <pageName>announcementAdd</pageName>
+            </pages>
+        </cssGroup>
+        <cssGroup name="tempRecruitDetailAdd" sharedCssGroup="NCommon">
+        	<cssName>page</cssName>
+		 	<cssName>easyUi</cssName>
+		 	<cssName>icon</cssName>
+			<pages>
+				<pageName>tempRecruitDetailAdd</pageName>
+			</pages>
+		</cssGroup>
+		<cssGroup name="tempRecruitDetailList" sharedCssGroup="NCommon">
+		 <cssName>page</cssName>
+			<pages>
+				<pageName>tempRecruitDetailList</pageName>
+			</pages>
+		</cssGroup>
+		 <cssGroup name="tempRecruitNeedAdd" sharedCssGroup="NCommon">
+		 <cssName>page</cssName>
+		 <cssName>easyUi</cssName>
+		 <cssName>icon</cssName>
+			<pages>
+				<pageName>tempRecruitNeedAdd</pageName>
+			</pages>
+		</cssGroup>
+		<cssGroup name="tempRecruitNeedList" sharedCssGroup="NCommon">
+        <cssName>page</cssName>
+        <cssName>jquery-ui</cssName>
+        <cssName>jqgrid</cssName>
+        <pages>
+            <pageName>tempRecruitNeedList</pageName>
+        </pages>
+    </cssGroup>
+
+		<cssGroup name="extendProbationApplicationList" sharedCssGroup="NCommon">
+		 <cssName>page</cssName>
+		 <cssName>jquery-ui</cssName>
+         <cssName>jqgrid</cssName>
+			<pages>
+				<pageName>extendProbationApplicationList</pageName>
+			</pages>
+		</cssGroup>
+		<cssGroup name="extendProbationApplicationAdd" sharedCssGroup="NCommon">
+		 <cssName>page</cssName>
+		 <cssName>jquery-ui</cssName>
+         <cssName>jqgrid</cssName>
+         <cssName>easyUi</cssName>
+         <cssName>icon</cssName>
+			<pages>
+				<pageName>extendProbationApplicationAdd</pageName>
+			</pages>
+		</cssGroup>
+		
+		
+		<cssGroup name="needReleaseAdd" sharedCssGroup="NCommon">
+		 <cssName>easyUi</cssName>
+		 <cssName>icon</cssName>
+            <cssName>zTreeDemo</cssName>
+            <cssName>zTreeStyle</cssName>
+			<pages>
+				<pageName>needReleaseAdd</pageName>
+			</pages>
+		</cssGroup>
+		<cssGroup name="needReleaseTask" sharedCssGroup="NCommon">
+		 <cssName>easyUi</cssName>
+		 <cssName>icon</cssName>
+			<pages>
+				<pageName>needReleaseTask</pageName>
+			</pages>
+		</cssGroup>
+		<cssGroup name="needReleaseList" sharedCssGroup="NCommon">
+        <cssName>jquery-ui</cssName>
+        <cssName>jqgrid</cssName>
+        <pages>
+            <pageName>needReleaseList</pageName>
+        </pages>
+    </cssGroup>
+		
+		
+		<cssGroup name="knowledgeBaseAdd" sharedCssGroup="NCommon">
+		 <cssName>easyUi</cssName>
+		 <cssName>icon</cssName>
+			<pages>
+				<pageName>knowledgeBaseAdd</pageName>
+			</pages>
+		</cssGroup>
+		<cssGroup name="knowledgeBaseInfo" sharedCssGroup="NCommon">
+		 <cssName>easyUi</cssName>
+		 <cssName>icon</cssName>
+		 <pages>
+				<pageName>knowledgeBaseInfo</pageName>
+			</pages>
+		</cssGroup>
+		<cssGroup name="knowledgeBaseList" sharedCssGroup="NCommon">
+		<cssName>pagination</cssName>
+        <cssName>jquery-ui</cssName>
+        <cssName>jqgrid</cssName>
+        <pages>
+            <pageName>knowledgeBaseList</pageName>
+        </pages>
+    </cssGroup>
+		<cssGroup name="test" sharedCssGroup="NCommon">
+			
+          	<cssName>zTreeDemo</cssName>
+          	<cssName>zTreeStyle</cssName>
+			
+			<pages>
+			   <pageName>test</pageName>
+			</pages>
+		</cssGroup>
+        <cssGroup name="interviewEvaluationRecordAdd" sharedCssGroup="NCommon">
+
+            <cssName>zTreeDemo</cssName>
+            <cssName>zTreeStyle</cssName>
+            <cssName>jquery-ui</cssName>
+            <cssName>jqgrid</cssName>
+            <cssName>easyUi</cssName>
+            <cssName>icon</cssName>
+            <pages>
+                <pageName>interviewEvaluationRecordAdd</pageName>
+            </pages>
+        </cssGroup>
+		<cssGroup name="Edit" sharedCssGroup="NCommon">
+			<cssName>jquery-ui</cssName>
+			<cssName>jqgrid</cssName>
+			<cssName>easyUi</cssName>
+           	<cssName>icon</cssName>
+            <cssName>zTreeDemo</cssName>
+            <cssName>zTreeStyle</cssName>
+            <cssName>select2</cssName>
+            <cssName>select2-bootstrap</cssName>
+           <pages>
+               <pageName>paymentReportDeatilList</pageName>
+                <pageName>confirmactionLetter</pageName>
+                <pageName>mailList</pageName>
+                <pageName>salesAddForProduct</pageName>
+                <pageName>salesAddForP2pProduct</pageName>
+                <pageName>letterAdd</pageName>
+				<pageName>productAdd</pageName>
+			   <pageName>productDetail</pageName>
+			   <pageName>p2pProductDetail</pageName>
+			   <pageName>p2pProductAdd</pageName>
+				<pageName>taskAdd</pageName>
+				<pageName>customerCompanyAdd</pageName>
+				<pageName>customerPersonalAdd</pageName>
+				<pageName>agentBusinessAdd</pageName>
+				<pageName>agentAdviserAdd</pageName>
+				<pageName>subsidyTotalAdd</pageName>
+				<pageName>managerEvaluationAdd</pageName>
+				<pageName>probationWorkSummaryAdd</pageName>
+				<pageName>partnerIssuerAdd</pageName>
+				<pageName>probationEvaluationAdd</pageName>
+				<pageName>sendLetter</pageName>
+                <pageName>addCustomerReport</pageName>
+                <pageName>addSalesReport</pageName>
+                <pageName>addCustomerReportWealth</pageName>
+			</pages>
+		</cssGroup>
+		<cssGroup name="Detail" sharedCssGroup="NCommon">
+			<cssName>jquery-ui</cssName>
+            <cssName>jqgrid</cssName>
+			<pages>
+                <pageName>salesDetailForProduct</pageName>
+				<pageName>salesDetail</pageName>
+                <pageName>salesDetailOnLine</pageName>
+                <pageName>customerCompanyDetail</pageName>
+                <pageName>customerPersonalDetail</pageName>
+                <pageName>agentAdviserDetail</pageName>
+                <pageName>agentBusinessDetail</pageName>
+                <pageName>financierBusinessDetail</pageName>
+                <pageName>financierPersonalDetail</pageName>
+                <pageName>partnerIssuerDetail</pageName>
+			</pages>
+		</cssGroup>
+		<cssGroup name="DetailWithEasyUI" sharedCssGroup="NCommon">
+			<cssName>jquery-ui</cssName>
+			<cssName>easyUi</cssName>
+			<cssName>jqgrid</cssName>
+			<pages>
+				<pageName>salesDetailForP2pProduct</pageName>
+			</pages>
+		</cssGroup>
+		<cssGroup name="DetailWithNoJqGrid" sharedCssGroup="NCommon">
+            <cssName>zTreeDemo</cssName>
+            <cssName>zTreeStyle</cssName>
+			<pages>
+                <pageName>employeeAdd</pageName>
+                <pageName>financierPersonalAdd</pageName>
+                <pageName>financierBusinessAdd</pageName>
+                <pageName>departmentAdd</pageName>
+                <pageName>subsidyTotalAdd</pageName>
+                <pageName>probationWorkSummaryAdd</pageName>
+                <pageName>paymentMoneyRechargeAdd</pageName>
+                <pageName>paymentMoneyWithdrawAdd</pageName>
+                <pageName>paymentRefundAdd</pageName>
+			</pages>
+		</cssGroup>
+		<cssGroup name="recruitAskRecord" sharedCssGroup="NCommon">
+			<cssName>jquery-ui</cssName>
+			<cssName>jqgrid</cssName>
+			<cssName>easyUi</cssName>
+			<cssName>icon</cssName>
+			<cssName>autocomplete</cssName>
+            <cssName>select2</cssName>
+            <cssName>select2-bootstrap</cssName>
+			<pages>
+				<pageName>recruitAskRecordAdd</pageName>
+			</pages>
+		</cssGroup>
+		
+		<cssGroup name="privilege" sharedCssGroup="Common">
+				<cssName>easyUi</cssName>
+           		<cssName>icon</cssName>
+           		<cssName>demo</cssName>
+           		<cssName>dhtmlxTree</cssName>
+           		<cssName>page</cssName>
+			<pages>
+				<pageName>userList</pageName>
+				<pageName>roleList</pageName>
+				<pageName>privilegeList</pageName>
+				<pageName>elementList</pageName>
+			</pages>
+		</cssGroup>
+		
+		<cssGroup name="workFlowList" sharedCssGroup="Common">
+				<cssName>easyUi</cssName>
+           		<cssName>icon</cssName>
+           		<cssName>demo</cssName>
+           		<cssName>dhtmlxTree</cssName>
+			<pages>
+				<pageName>actIdGroupList</pageName>
+				<pageName>actIdUserList</pageName><!-- mengchong 2015/05/13 workflow -->
+			</pages>
+		</cssGroup>
+		<cssGroup name="workFlowAdd" sharedCssGroup="NCommon">
+				<cssName>easyUi</cssName>
+           		<cssName>icon</cssName>
+           		<cssName>demo</cssName>
+           		<cssName>dhtmlxTree</cssName>
+			<pages>
+				<pageName>actIdUserAdd</pageName>
+				<pageName>actIdGroupAdd</pageName><!-- mengchong 2015/05/13 workflow -->
+			</pages>
+		</cssGroup>
+		<cssGroup name="processingList" sharedCssGroup="Common">
+				<cssName>page</cssName>
+			<pages>
+				<pageName>processingList</pageName>
+				<pageName>actReProcDefList</pageName>
+			</pages>
+		</cssGroup>
+		<cssGroup name="auditTaskList" sharedCssGroup="Common">
+				<cssName>page</cssName>
+				<cssName>easyUi</cssName>
+           		<cssName>icon</cssName>
+			<pages>
+				<pageName>auditTaskList</pageName>
+			</pages>
+		</cssGroup>
+		
+		
+		<cssGroup name="customerPersonalList" sharedCssGroup="Common">
+				<cssName>easyUi</cssName>
+           		<cssName>icon</cssName>
+           		<cssName>demo</cssName>
+           		<cssName>page</cssName>
+                <cssName>zTreeDemo</cssName>
+                <cssName>zTreeStyle</cssName>
+			<pages>
+                <pageName>paymentReportList</pageName>
+                <pageName>salesListOnLine</pageName>
+                <pageName>salesList</pageName>
+				<pageName>customerCompanyList</pageName>
+                <pageName>customerCompanyListEffective</pageName>
+                <pageName>customerPersonalListEffective</pageName>
+			    <pageName>customerPersonalList</pageName>
+			    <pageName>p2pSubscribeList</pageName>
+                <pageName>attendanceApplicationList</pageName>
+                <pageName>personalChangeList</pageName>
+                <pageName>resignApplicationList</pageName>
+                <pageName>recruitAskRecordList</pageName>
+                <pageName>yearNeedTotalList</pageName>
+			</pages>
+		</cssGroup>
+		
+		<cssGroup name="fixedAssetsList" sharedCssGroup="NCommon">
+		 <cssName>page</cssName>
+		 <cssName>jquery-ui</cssName>
+         <cssName>jqgrid</cssName>
+         <cssName>easyUi</cssName>
+		 <cssName>icon</cssName>
+			<pages>
+				<pageName>fixedAssetsList</pageName>
+			</pages>
+		</cssGroup>
+		<cssGroup name="fixedAssetsAdd" sharedCssGroup="Common">
+			<cssName>page</cssName>
+			<pages>
+				<pageName>fixedAssetsAdd</pageName>
+			</pages>
+		</cssGroup>		
+		<cssGroup name="fixedAssetsDetail" sharedCssGroup="Common">
+			<cssName>page</cssName>
+			<cssName>easyUi</cssName>
+			<pages>
+				<pageName>fixedAssetsDetail</pageName>
+			</pages>
+		</cssGroup>	
+		
+		<cssGroup name="suppliersList" sharedCssGroup="NCommon">
+		 <cssName>page</cssName>
+		 <cssName>jquery-ui</cssName>
+         <cssName>jqgrid</cssName>
+         <cssName>easyUi</cssName>
+		 <cssName>icon</cssName>
+			<pages>
+				<pageName>suppliersList</pageName>
+			</pages>
+		</cssGroup>
+		<cssGroup name="suppliersAdd" sharedCssGroup="Common">
+		 <cssName>page</cssName>
+		 <cssName>jquery-ui</cssName>
+         <cssName>jqgrid</cssName>
+         <cssName>easyUi</cssName>
+		 <cssName>icon</cssName>
+			<pages>
+				<pageName>suppliersAdd</pageName>
+			</pages>
+		</cssGroup>		
+		<cssGroup name="suppliersDetail" sharedCssGroup="Common">
+			<cssName>page</cssName>
+			<cssName>easyUi</cssName>
+			<pages>
+				<pageName>suppliersDetail</pageName>
+			</pages>
+		</cssGroup>	
+		
+		<cssGroup name="add" sharedCssGroup="NCommon">
+		 <cssName>page</cssName>
+		 <cssName>easyUi</cssName>
+         <cssName>icon</cssName>
+			<pages>
+				<pageName>attendanceApplicationAdd</pageName>
+				<pageName>personalChangeAdd</pageName>
+				<pageName>resignApplicationAdd</pageName>
+				<pageName>managerEvaluationAdd</pageName>
+				<pageName>probationEvaluationAdd</pageName>
+                <pageName>yearNeedTotalAdd</pageName>
+                <pageName>ajaxDrawSettingAdd</pageName>
+                <pageName>drawSettingAdd</pageName>
+
+			</pages>
+		</cssGroup>
+
+        <cssGroup name="employeeList" sharedCssGroup="Common">
+            <cssName>easyUi</cssName>
+            <cssName>page</cssName>
+            <cssName>icon</cssName>
+            <cssName>zTreeDemo</cssName>
+            <cssName>zTreeStyle</cssName>
+            <cssName>select2</cssName>
+            <cssName>select2-bootstrap</cssName>
+            <pages>
+                <pageName>employeeList</pageName>
+            </pages>
+        </cssGroup>
+        <cssGroup name="List" sharedCssGroup="Common">
+            <cssName>zTreeDemo</cssName>
+            <cssName>zTreeStyle</cssName>
+			<pages>
+				<!-- workFlow here -->
+				<!-- baseInfo here -->
+				<pageName>dicDataList</pageName>
+				<pageName>dicTypeList</pageName>
+                <pageName>letterList</pageName>
+                <pageName>remindList</pageName>
+				<!-- Permission here -->
+				
+				<!-- <pageName>privilegeList</pageName> -->
+				<pageName>dataManage</pageName>
+				<!-- mengchong 2015/05/13 workflow -->
+				
+				<pageName>userRoleList</pageName>
+				<pageName>rolePrivilegeList</pageName>
+                <pageName>achievementCommissionList</pageName>
+
+				<!-- Customer here -->
+				<pageName>activityList</pageName>
+				<pageName>activityListP2p</pageName>
+				<pageName>agentAdviserList</pageName>
+				<pageName>agentAdviserListEffective</pageName>
+				<pageName>agentBusinessList</pageName>
+				<pageName>agentBusinessListEffective</pageName>
+				<pageName>customerActivityList</pageName>
+				<pageName>customerBrokerageLadderList</pageName>
+				<!-- <pageName>customerCompanyList</pageName> -->
+				<pageName>customerEmpList</pageName>
+				<pageName>customerFollowList</pageName>
+				<pageName>customerNoticeList</pageName>
+                <pageName>p2pCustomerList</pageName>
+                <pageName>paymentMoneyRechargeList</pageName>
+                <pageName>paymentMoneyWithdrawList</pageName>
+
+				<!-- <pageName>customerPersonalList</pageName> -->
+				<pageName>customerVisitList</pageName>
+				<pageName>noticeList</pageName>
+                <pageName>creditorList</pageName>
+				<!-- employee here -->
+				<!--<pageName>employeeList</pageName>-->
+				<pageName>companyList</pageName>
+				<pageName>departmentList</pageName>
+				<pageName>empBrokerageLadderList</pageName>
+				<pageName>employeeDetailList</pageName>
+				<pageName>employeeEducationList</pageName>
+				<pageName>otherList</pageName>
+				<pageName>overtimeList</pageName>
+				<pageName>paymentList</pageName>
+				<pageName>positionList</pageName>
+				<pageName>positionLevelList</pageName>
+				<pageName>signList</pageName>
+				<pageName>subsidyList</pageName>
+				<pageName>subsidyTotalList</pageName>
+				<pageName>welfareList</pageName>
+
+
+				<pageName>managerEvaluationList</pageName>
+				<pageName>probationWorkSummaryList</pageName>
+                <pageName>empCompilePlanList</pageName>
+                <pageName>probationEvaluationList</pageName>
+				<!-- product here -->
+				<pageName>productList</pageName>
+				<pageName>protocolList</pageName>
+				<pageName>productDetailList</pageName>
+				<pageName>productBrokerageStepList</pageName>
+				<pageName>partnerIssuerList</pageName>
+				<pageName>financierPersonalList</pageName>
+				<pageName>financierBusinessList</pageName>
+				<pageName>decisionLogList</pageName>
+				<pageName>decisionList</pageName>
+                <pageName>p2pProductList</pageName>
+                <pageName>financeProductList</pageName>
+				<!-- sales here -->
+				<pageName>agentExpenseList</pageName>
+				<pageName>agentRateList</pageName>
+				<pageName>brokerageCalculateList</pageName>
+				<pageName>contractList</pageName>
+				<pageName>incomeList</pageName>
+
+				<pageName>salesEmpCalculateList</pageName>
+				<pageName>p2pInvestmentList</pageName>
+				<!-- payment here -->
+				<pageName>paymentRefundList</pageName>
+
+			</pages>
+		</cssGroup>
+		<cssGroup name="calendar" sharedCssGroup="Common">
+				<!-- <cssName>fullcalendar</cssName>
+           		<cssName>fullcalendarPrint</cssName> -->
+           		<cssName>dhtmlxscheduler</cssName>
+			<pages>
+                <pageName>calendarList</pageName>
+			</pages>
+		</cssGroup>
+		<cssGroup name="loanSituation" sharedCssGroup="NCommon">
+			<pages>
+                <pageName>loanSituation</pageName>
+			</pages>
+		</cssGroup>
+	</privateCssGroups>
+</cssConfig>

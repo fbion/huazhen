@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hzfh.service.report.mapper.CompanySalesTotalMapper">
+	<resultMap type="com.hzfh.api.report.model.CompanySalesTotal" id="resultMapCompanySalesTotal">
+		<result property="id" column="id"/>
+		<result property="productNo" column="product_no"/>
+		<result property="productName" column="product_name"/>
+		<result property="companyNo" column="company_no"/>
+		<result property="companyName" column="company_name"/>
+		<result property="moneyTotal" column="money_total"/>
+		<result property="inUserNo" column="in_user_no"/>
+		<result property="inTime" column="in_time" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
+		<result property="editUserNo" column="edit_user_no"/>
+		<result property="editTime" column="edit_time" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
+		<result property="editComment" column="edit_comment"/>
+	</resultMap>
+	<select id="getList" resultMap="resultMapCompanySalesTotal">
+		SELECT id,product_no,product_name,company_no,company_name,money_total,in_user_no,in_time,edit_user_no,edit_time,edit_comment
+		FROM company_sales_total
+	</select>
+	<select id="getPagingList" resultMap="resultMapCompanySalesTotal" parameterType="com.hzfh.api.report.model.query.CompanySalesTotalCondition" statementType="STATEMENT">
+		SELECT id,product_no,product_name,company_no,company_name,money_total,in_user_no,in_time,edit_user_no,edit_time,edit_comment FROM company_sales_total where 1=1
+		ORDER BY
+		<foreach item="item" collection="sortItemList" separator=",">
+			${item.sortFeild} ${item.sortType}
+		</foreach>
+		LIMIT ${startIndex},${pageSize}
+	</select>
+	<select id="getTotalCount" resultType="int" parameterType="com.hzfh.api.report.model.query.CompanySalesTotalCondition" statementType="STATEMENT">
+		SELECT count(1) FROM company_sales_total where 1=1
+	</select>
+	<select id="getInfo" resultMap="resultMapCompanySalesTotal" parameterType="int">
+		SELECT id,product_no,product_name,company_no,company_name,money_total,in_user_no,in_time,edit_user_no,edit_time,edit_comment FROM company_sales_total where id=#{id}
+	</select>
+	<insert id="add" parameterType="com.hzfh.api.report.model.CompanySalesTotal" useGeneratedKeys="true" keyProperty="id">
+		insert into company_sales_total
+		(product_no,product_name,company_no,company_name,money_total,in_user_no,in_time,edit_user_no,edit_time,edit_comment)
+		values
+		(#{productNo},#{productName},#{companyNo},#{companyName},#{moneyTotal},#{inUserNo},current_timestamp(),#{editUserNo},current_timestamp(),#{editComment})
+	</insert>
+	<update id="update" parameterType="com.hzfh.api.report.model.CompanySalesTotal">
+		update company_sales_total set 
+		product_no=#{productNo},product_name=#{productName},company_no=#{companyNo},company_name=#{companyName},money_total=#{moneyTotal},edit_user_no=#{editUserNo},edit_time=current_timestamp(),edit_comment=#{editComment}
+		where id=#{id}
+	</update>
+	<delete id="delete" parameterType="int">
+		delete from company_sales_total where id = #{id}
+	</delete>
+	<select id="getListByProductNo" resultMap="resultMapCompanySalesTotal">
+		SELECT id,product_no,product_name,company_no,company_name,money_total,in_user_no,in_time,edit_user_no,edit_time,edit_comment
+		FROM company_sales_total 
+		where product_no=#{productId}
+	</select>
+	
+	
+</mapper>

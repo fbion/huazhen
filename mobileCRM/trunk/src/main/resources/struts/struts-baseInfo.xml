@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+        "http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+    <package name="calculationInvestment" extends="json-default,default" namespace="/baseInfo/calculation">
+        <action name="ajaxCalculationInvestment" class="com.hzfh.mobile.controller.baseInfo.ajax.AjaxCalculationInvestmentAction">
+            <result type="json">
+                <param name="includeProperties">
+                    x,totalLoanInterest,rente,profitRatex,errcode
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+    	<action name="calculationInvestment" class="com.hzfh.mobile.controller.baseInfo.CalculationInvestmentAction">
+    		<result>/baseInfo/calculationInvestment.jsp</result>
+    	</action>
+    </package>
+</struts>

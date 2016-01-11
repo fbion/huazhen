@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns="http://www.springframework.org/schema/beans" xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+
+       http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context-4.0.xsd"
+       default-autowire="byName" default-lazy-init="false">
+    <context:component-scan base-package="com.hzfh.service"/>
+    <context:annotation-config/>
+    <bean id="hessianMapping"
+          class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+        <property name="mappings">
+            <props>
+                <prop key="/role">roleService</prop>
+                <prop key="/user">userService</prop>
+                <prop key="/userRole">userRoleService</prop>
+                <prop key="/menu">menuService</prop>
+                <prop key="/roleElement">roleElementService</prop>
+                <prop key="/element">elementService</prop>
+            </props>
+        </property>
+    </bean>
+
+    <bean id="roleServiceImpl" class="com.hzfh.service.permission.serviceImpl.RoleServiceImpl"/>
+    <bean id="roleService"
+          class="org.springframework.remoting.caucho.HessianServiceExporter">
+        <property name="service" ref="roleServiceImpl"/>
+        <property name="serviceInterface" value="com.hzfh.api.permission.service.RoleService"/>
+    </bean>
+
+    <bean id="userServiceImpl" class="com.hzfh.service.permission.serviceImpl.UserServiceImpl"/>
+    <bean id="userService"
+          class="org.springframework.remoting.caucho.HessianServiceExporter">
+        <property name="service" ref="userServiceImpl"/>
+        <property name="serviceInterface" value="com.hzfh.api.permission.service.UserService"/>
+    </bean>
+
+    <bean id="userRoleServiceImpl" class="com.hzfh.service.permission.serviceImpl.UserRoleServiceImpl"/>
+    <bean id="userRoleService"
+          class="org.springframework.remoting.caucho.HessianServiceExporter">
+        <property name="service" ref="userRoleServiceImpl"/>
+        <property name="serviceInterface" value="com.hzfh.api.permission.service.UserRoleService"/>
+    </bean>
+
+    <bean id="menuServiceImpl" class="com.hzfh.service.permission.serviceImpl.MenuServiceImpl"/>
+    <bean id="menuService" class="org.springframework.remoting.caucho.HessianServiceExporter">
+        <property name="service" ref="menuServiceImpl"/>
+        <property name="serviceInterface" value="com.hzfh.api.permission.service.MenuService"/>
+    </bean>
+
+    <bean id="roleElementServiceImpl" class="com.hzfh.service.permission.serviceImpl.RoleElementServiceImpl"/>
+    <bean id="roleElementService" class="org.springframework.remoting.caucho.HessianServiceExporter">
+        <property name="service" ref="roleElementServiceImpl"/>
+        <property name="serviceInterface" value="com.hzfh.api.permission.service.RoleElementService"/>
+    </bean>
+
+
+    <bean id="elementServiceImpl" class="com.hzfh.service.permission.serviceImpl.ElementServiceImpl"/>
+    <bean id="elementService" class="org.springframework.remoting.caucho.HessianServiceExporter">
+        <property name="service" ref="elementServiceImpl"/>
+        <property name="serviceInterface" value="com.hzfh.api.permission.service.ElementService"/>
+    </bean>
+</beans>

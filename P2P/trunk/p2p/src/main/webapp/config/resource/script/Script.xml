@@ -1,0 +1,105 @@
+<?xml version="1.0"?>
+<scriptConfig xmlns="http://www.hzfh.com/web"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://www.hzfh.com/web ../../schemas/resources/Script.xsd">
+
+    <scriptMappings>
+        <!--Common begin-->
+        <script name="jQuery" order="1" isDevelop="false">jquery-1.11.1.min.js?t=20150907</script>
+        <!-- <script name="bootstrap" order="2" isDevelop="false">bootstrap.js</script> -->
+        <script name="common" order="3" isDevelop="false">common.js?t=20150907</script>
+        <!--<script name="html5shiv" order="4" isDevelop="false" limitBrowserType="IEOnly" limitBrowserVersion="8">html5shiv.min.js</script>-->
+        <!--<script name="respond" order="5" isDevelop="false" limitBrowserType="IEOnly" limitBrowserVersion="8">respond.min.js</script>-->
+        <script name="pagination" order="6" isDevelop="false">jquery.pagination.js</script>
+        
+        <script name="echarts-plain" order="2" isDevelop="false">echarts-plain.js?t=20150907</script>
+        <script name="sea" order="7" isDevelop="false">sea.js?t=20150907</script>
+       
+        <script name="banner" order="4" isDevelop="true">baseInfo/banner.js?t=20150907</script>
+        <script name="bulletin" order="26" isDevelop="true">baseInfo/bulletin.js?t=20150907</script>
+        <script name="announcement" order="5" isDevelop="true">baseInfo/announcement.js?t=20150907</script>
+        <script name="errorPage" order="29" isDevelop="true">baseInfo/errorPage.js?t=20150907</script>
+        
+        <script name="ajaxfileupload" order="8" isDevelop="true">common/ajaxfileupload.js?t=20150907</script>
+        <script name="upload" order="9" isDevelop="true">common/upload.js?t=20150907</script>
+        
+
+        <script name="environmentVariable" order="8" isDevelop="true" type="Inline"></script>
+        <script name="json2" order="9" isDevelop="true">common/json2.js?t=20150907</script>
+        <script name="base" order="10" isDevelop="true">common/base.js?t=20150907</script>
+        <script name="enumList" order="21" isDevelop="true">common/enumList.js?t=20150907</script>
+        <script name="validform" order="16" isDevelop="true">common/Validform_v5.3.2_min.js</script>
+        <script name="base64" order="17" isDevelop="true">common/base64.js?t=20150907</script>
+        <script name="n-linkage" order="18" isDevelop="true">common/n-linkage.js?t=20150907</script>
+        <script name="passwordStrength" order="19" isDevelop="true">common/passwordStrength.js?t=20150907</script>
+		<script name="laydate" order="15" isDevelop="true">common/laydate/laydate.js?t=20150907</script>        
+        
+        <script name="index" order="22" isDevelop="true">customer/index.js?t=20150907</script>
+        <script name="fullSlide" order="21" isDevelop="false">fullSlide.js?t=20150907</script>
+
+
+        <!-- Customer here -->
+        <script name="register" order="20" isDevelop="true">customer/register.js?t=20150907</script>
+        <script name="login" order="20" isDevelop="true">customer/login.js?t=20150907</script>
+        <script name="reservation" order="19" isDevelop="true">customer/reservation.js?t=20150907</script>
+        <script name="investment" order="19" isDevelop="true">customer/investment.js?t=20150907</script>
+        <script name="productFeatures" order="19" isDevelop="true">product/productFeatures.js?t=20150907</script>
+        <script name="p2pProductList" order="19" isDevelop="true">product/p2pProductList.js?t=20150907</script>
+        <script name="personalInfo" order="20" isDevelop="true">customer/personalInfo.js?t=20150907</script>
+        <script name="editPassword" order="25" isDevelop="true">customer/editPassword.js?t=20150907</script>
+        <script name="productDetails" order="20" isDevelop="true">product/productDetails.js?t=20150907</script>
+        <script name="forgetPassword" order="20" isDevelop="true">customer/forgetPassword.js?t=20150907</script>
+        <script name="chooseWayPassword" order="20" isDevelop="true">customer/chooseWayPassword.js?t=20150907</script>
+        <script name="byEmailPassword" order="20" isDevelop="true">customer/byEmailPassword.js?t=20150907</script>
+        <script name="byCellphonePassword" order="20" isDevelop="true">customer/byCellphonePassword.js?t=20150907</script>
+        <script name="resetPassword" order="20" isDevelop="true">customer/resetPassword.js?t=20150907</script>
+        <script name="education" order="26" isDevelop="true">customer/education.js?t=20150907</script>
+        <script name="account" order="26" isDevelop="true">customer/account.js?t=20150907</script>
+        <script name="paymentAccountSecurity" order="26" isDevelop="true">customer/paymentAccountSecurity.js?t=20150907</script>
+        <script name="paymentMoneyRechargeList" order="26" isDevelop="true">customer/paymentMoneyRechargeList.js?t=20150907</script>
+
+        <script name="moneyDetail" order="26" isDevelop="true">customer/moneyDetail.js?t=20150907</script>
+        <script name="productConfirm" order="26" isDevelop="true">product/productConfirm.js?t=20150907</script>
+        <script name="contractConfirm" order="26" isDevelop="true">product/contractConfirm.js?t=20150907</script>
+        <script name="paymentConfirm" order="26" isDevelop="true">product/paymentConfirm.js?t=20150907</script>
+
+        <script name="paymentMoneyWithdrawList" order="26" isDevelop="true">customer/paymentMoneyWithdrawList.js?t=20150907</script>
+        
+		<script name="moneyDetail" order="26" isDevelop="true">customer/moneyDetail.js?t=20150907</script>
+		<script name="registerSuccess" order="26" isDevelop="true">customer/registerSuccess.js?t=20150907</script>
+		<script name="bankCard" order="26" isDevelop="true">customer/bankCard.js?t=20150907</script>
+		<script name="myCoupons" order="26" isDevelop="true">customer/myCoupons.js?t=20150907</script>
+		<script name="myIntegral" order="26" isDevelop="true">customer/myIntegral.js?t=20150907</script>
+		<script name="myReward" order="26" isDevelop="true">customer/myReward.js?t=20150907</script>
+		<script name="myInfo" order="26" isDevelop="true">customer/myInfo.js?t=20150907</script>
+		<script name="helpCenter" order="26" isDevelop="true">customer/helpCenter.js?t=20150907</script>
+		<script name="knowledgeForum" order="26" isDevelop="true">customer/knowledgeForum.js?t=20150907</script>
+		<script name="popularize" order="26" isDevelop="true">customer/popularize.js?t=20150907</script>
+		<script name="reservationHelp" order="26" isDevelop="true">customer/reservationHelp.js?t=20150907</script>
+		<script name="financing" order="26" isDevelop="true">customer/financing.js?t=20150907</script>
+		<script name="accountCentral" order="26" isDevelop="true">customer/accountCentral.js?t=20150907</script>
+		<script name="lawsRegulations" order="26" isDevelop="true">product/lawsRegulations.js?t=20150907</script>
+		<script name="productSuperiority" order="26" isDevelop="true">product/productSuperiority.js?t=20150907</script>
+		<script name="securityAssurance" order="26" isDevelop="true">product/securityAssurance.js?t=20150907</script>
+		<script name="serviceContract" order="26" isDevelop="true">product/serviceContract.js?t=20150907</script>
+
+		<script name="enterpriseCulture" order="26" isDevelop="true">customer/enterpriseCulture.js?t=20150907</script>
+		<script name="mediaReports" order="26" isDevelop="true">customer/mediaReports.js?t=20150907</script>
+		<script name="aboutCompany" order="26" isDevelop="true">customer/aboutCompany.js?t=20150907</script>
+	 	<script name="myInvite" order="26" isDevelop="true">customer/myInvite.js?t=20150907</script> 
+		
+		<script name="joinUs" order="26" isDevelop="true">customer/joinUs.js?t=20150907</script>
+		<script name="contactUs" order="26" isDevelop="true">customer/contactUs.js?t=20150907</script>
+		<script name="store" order="26" isDevelop="true">customer/store.js?t=20150907</script>
+		<script name="noviceArea" order="26" isDevelop="true">customer/noviceArea.js?t=20150907</script>
+		
+		<script name="emailValidation" order="26" isDevelop="true">customer/emailValidation.js?t=20150907</script>
+		<script name="employeePhoto" order="27" isDevelop="true">customer/employeePhoto.js?t=20150907</script>
+		
+		<script name="jQuerylazyload" order="27" isDevelop="true">common/jquery.lazyload.min.js?t=20150907</script>
+		<script name="lazyload" order="28" isDevelop="true">common/lazyload.js?t=20150907</script>
+		
+		
+		
+    </scriptMappings>
+</scriptConfig>

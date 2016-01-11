@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hzfh.service.customer.mapper.EmailChangeMapper">
+	<resultMap type="com.hzfh.api.customer.model.EmailChange" id="resultMapEmailChange">
+		<result property="id" column="id"/>
+		<result property="customerNo" column="customer_no"/>
+		<result property="oldEmail" column="old_email"/>
+		<result property="newEmali" column="new_emali"/>
+		<result property="portraitPath" column="portrait_path"/>
+		<result property="cardPath" column="card_path"/>
+		<result property="pathStatus" column="path_status"/>
+		<result property="inTime" column="in_time" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
+		<result property="auditor" column="auditor"/>
+		<result property="conftime" column="conftime" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
+		<result property="comment" column="comment"/>
+	</resultMap>
+	<select id="getList" resultMap="resultMapEmailChange">
+		SELECT id,customer_no,old_email,new_emali,portrait_path,card_path,path_status,in_time,auditor,conftime,comment
+		FROM email_change
+	</select>
+	<select id="getListByCondition" resultMap="resultMapEmailChange" parameterType="com.hzfh.api.customer.model.query.EmailChangeCondition" statementType="STATEMENT">
+		SELECT id,customer_no,old_email,new_emali,portrait_path,card_path,path_status,in_time,auditor,conftime,comment FROM email_change where 1=1
+		<if test="customerNo!=0"> and customer_no = ${customerNo}</if>
+		<if test="pathStatus!=-1"> and path_status = ${pathStatus}</if>
+	</select>
+	<select id="getPagingList" resultMap="resultMapEmailChange" parameterType="com.hzfh.api.customer.model.query.EmailChangeCondition" statementType="STATEMENT">
+		SELECT id,customer_no,old_email,new_emali,portrait_path,card_path,path_status,in_time,auditor,conftime,comment FROM email_change where 1=1
+		ORDER BY
+		<foreach item="item" collection="sortItemList" separator=",">
+			${item.sortFeild} ${item.sortType}
+		</foreach>
+		LIMIT ${startIndex},${pageSize}
+	</select>
+	<select id="getTotalCount" resultType="int" parameterType="com.hzfh.api.customer.model.query.EmailChangeCondition" statementType="STATEMENT">
+		SELECT count(1) FROM email_change where 1=1
+	</select>
+	<select id="getInfo" resultMap="resultMapEmailChange" parameterType="int">
+		SELECT id,customer_no,old_email,new_emali,portrait_path,card_path,path_status,in_time,auditor,conftime,comment FROM email_change where id=#{id}
+	</select>
+	<insert id="add" parameterType="com.hzfh.api.customer.model.EmailChange" useGeneratedKeys="true" keyProperty="id">
+		insert into email_change
+		(customer_no,old_email,new_emali,portrait_path,card_path,path_status,in_time,auditor,conftime,comment)
+		values
+		(#{customerNo},#{oldEmail},#{newEmali},#{portraitPath},#{cardPath},#{pathStatus},current_timestamp(),#{auditor},#{conftime},#{comment})
+	</insert>
+	<update id="update" parameterType="com.hzfh.api.customer.model.EmailChange">
+		update email_change set 
+		customer_no=#{customerNo},old_email=#{oldEmail},new_emali=#{newEmali},portrait_path=#{portraitPath},card_path=#{cardPath},path_status=#{pathStatus},auditor=#{auditor},conftime=#{conftime},comment=#{comment}
+		where id=#{id}
+	</update>
+	<delete id="delete" parameterType="int">
+		delete from email_change where id = #{id}
+	</delete>
+</mapper>

@@ -1,0 +1,161 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+	<title>注册</title>
+	<link rel="stylesheet"  type="text/css" href="http://xfbwebresource.hzfh.dev/css/common.css" />
+	<link rel="stylesheet"  type="text/css" href="http://xfbwebresource.hzfh.dev/css/style.css" />
+</head>
+<body>
+	<header>
+        <div id="header">
+            <h2>
+                <a href="http://wx.52touzi.com/index"><img id="logo" src="http://reswx.52touzi.com/img/logo.png" width="92" height="30"><span>华镇社区金融
+                    </span>
+                </a>
+            </h2>
+            <div class="login_register">
+                
+                <a href="http://wx.52touzi.com/customer/login" class="login">登录</a>|<a id="link" href="http://wx.52touzi.com/customer/register" class="register">注册</a>
+                        <script type="text/javascript">
+                        window.onload=function(){
+                                var ua = navigator.userAgent.toLowerCase();
+                                if(ua.match(/MicroMessenger/i)=="micromessenger") {
+                                    var url="https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx9d93a55d91f39b14&redirect_uri=http://wx.52touzi.com/customer/register&response_type=code&scope=snsapi_base&state=1&connect_redirect=1#wechat_redirect";
+                                    document.getElementById("link").href=url;
+                                    return true;
+
+                                } else {
+                                    document.getElementById("link").href="http://wx.52touzi.com/customer/register";
+                                    return false;
+                                }
+
+                            } 
+                        </script>
+                
+                
+            </div>
+             
+        </div>
+        <p class="header_tips">您身边的理财专家</p>
+    </header>
+
+	<div id="content" class="mt20">
+            <form class="validform registerInfo pt10 pb20 newregisterInfo">
+             <input id="code" type="hidden" value="">
+                    <dl class="icon_user" id="input_username">
+                        <dt>姓　　名:</dt>
+                        <dd>
+                            <input type="text" name="username" placeholder="请输入姓名" tabindex="1" class="uiText input" id="username" datatype="verifyUsername" nullmsg="请填写姓名" errormsg="请输入正确的姓名" sucmsg=" ">
+                        </dd>
+                    </dl>
+                    <div class="desc Validform_checktip"></div>                    
+                    
+                    <dl class="" id="input_telephone">
+                        <dt>手机号码:</dt>
+                        <dd>
+                          <input type="text" name="telephone" tabindex="4" class="input" id="telephone" placeholder="请输入手机号码" datatype="verifyTelephone" nullmsg="请输入手机号码" errormsg="请输入正确的手机号码" sucmsg=" ">
+                        </dd>
+                    </dl>
+                    <div class="desc Validform_checktip"></div>
+  
+                    <dl class="getVerCode" id="input_sms_captcha">
+                        <dt></dt>
+                        <dd>
+                          <input type="text" class="input" name="smsCaptcha" id="smsCaptcha" tabindex="6" placeholder="输入手机验证码" datatype="verifySmsCaptcha" nullmsg="请输入手机验证码" errormsg="请输入6位数字的手机验证码" sucmsg=" ">
+                          <input id="getSmsCaptcha" value="获取手机验证码" type="button">
+                        </dd>
+                    </dl>
+                    <div class="desc Validform_checktip"></div>
+
+                    <dl class="icon_user" id="input_username">
+                        <dt>门　　店:</dt>
+                        <dd>
+                            <select name="stores" datatype="verifySelect" nullmsg="请选择门店" errormsg="请选择门店" sucmsg=" ">
+                                <option>公益西桥门店</option>
+                                <option>公益东桥门店</option>
+                                <option>公益中桥门店</option>
+                            </select>
+                        </dd>
+                     </dl>
+                
+                <dl class="managingdirectordl">
+                    <dt>理财经理:</dt>
+             <!-- <dt class="managingdirector">理财经理 ：</dt></br> -->
+                     <dd>
+                        <ul>
+                             <li>
+                                
+                                 <img src="http://xfbwebresource.hzfh.dev/img/new1.jpg" alt="" />
+                                 <p>
+                                    <input type="radio" value="276" name="choose_customers">
+                                    <label class="pl5">杨利娜</label>
+                                </p>
+                             </li>
+                             <li>
+                                 <img src="http://xfbwebresource.hzfh.dev/img/new1.jpg" alt="" />
+                                 <p>
+                                    <input type="radio" value="276" name="choose_customers">
+                                    <label class="pl5">杨利娜</label>
+                                </p>
+                             </li>
+                             <li>
+                                 <img src="http://xfbwebresource.hzfh.dev/img/new1.jpg" alt="" />
+                                 <p>
+                                    <input type="radio" value="276" name="choose_customers">
+                                    <label class="pl5">杨利娜</label>
+                                </p>
+                             </li>
+                             <li>
+                                 <img src="http://xfbwebresource.hzfh.dev/img/new1.jpg" alt="" />
+                                 <p>
+                                    <input type="radio" value="276" name="choose_customers">
+                                    <label class="pl5">杨利娜</label>
+                                </p>
+                             </li>
+                             <li>
+                                 <img src="http://xfbwebresource.hzfh.dev/img/new1.jpg" alt="" />
+                                 <p>
+                                    <input type="radio" value="276" name="choose_customers">
+                                    <label class="pl5">杨利娜</label>
+                                </p>
+                             </li>
+                             <li>
+                                 <img src="http://xfbwebresource.hzfh.dev/img/new1.jpg" alt="" />
+                                 <p>
+                                    <input type="radio" value="276" name="choose_customers">
+                                    <label class="pl5">杨利娜</label>
+                                </p>
+                             </li>
+                             
+                         </ul> 
+                     </dd>
+                     <dd class="twoarrows">
+                         <a href="###" class="twoarrows_leftarrow">&lt;</a>
+                         <a href="###" class="twoarrows_rightarrow">&gt;</a>
+
+                     </dd>
+              </dl>
+                   
+                    <div class="registerSubmit pt20 pb20">
+                         <input type="submit" value="提交" class="submit_btn btn p5">
+                    </div>
+             </form>
+                </div>
+
+   <footer>
+		<div id="footer">
+			<p>
+				<a href="http://xfb.hzfh.dev/customer/personalInfo">个人信息</a> 
+				<a href="http://xfb.hzfh.dev/customer/myReservation">我的预约</a> 
+				<a href="http://xfb.hzfh.dev/customer/myInvestment">我的投资</a> 
+			    <a href="http://xfb.hzfh.dev/customer/myInvite">我的邀请</a> 
+				<a href="http://xfb.hzfh.dev/product/productFeatures?name=connection">联系我们</a> 
+				<a href="http://xfb.hzfh.dev/product/productFeatures?name=introduce">关于我们</a> 
+			</p>
+			<p>	<span>客服热线：400-0340-668</span>
+			</p>
+		</div>
+   </footer>
+</body>
+</html>

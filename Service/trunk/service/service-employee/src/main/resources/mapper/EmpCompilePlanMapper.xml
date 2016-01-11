@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hzfh.service.employee.mapper.EmpCompilePlanMapper">
+    <resultMap type="com.hzfh.api.employee.model.EmpCompilePlan" id="resultMapEmpCompilePlan">
+        <result property="id" column="id"/>
+        <result property="companyNo" column="company_no"/>
+        <result property="deptNo" column="dept_no"/>
+        <result property="positionNo" column="position_no"/>
+        <result property="dueEmpNumber" column="due_emp_number"/>
+        <result property="realEmpNumber" column="real_emp_number"/>
+        <result property="allEmpName" column="all_emp_name"/>
+        <result property="lackEmpNumber" column="lack_emp_number"/>
+        <result property="planTime" column="plan_time" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
+        <result property="inUserNo" column="in_user_no"/>
+        <result property="inTime" column="in_time" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
+        <result property="editUserNo" column="edit_user_no"/>
+        <result property="editTime" column="edit_time" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
+        <result property="editComment" column="edit_comment"/>
+        <result property="year" column="year"/>
+        <result property="month" column="month"/>
+    </resultMap>
+    <sql id="Base_Column_List" >
+		id,company_no,dept_no,position_no,due_emp_number,real_emp_number,all_emp_name,lack_emp_number,plan_time,in_user_no,in_time,edit_user_no,edit_time,edit_comment,year,month
+    </sql>
+    <select id="getList" resultMap="resultMapEmpCompilePlan">
+        SELECT <include refid="Base_Column_List"/> FROM emp_compile_plan
+    </select>
+    <select id="getPagingList" resultMap="resultMapEmpCompilePlan" parameterType="com.hzfh.api.employee.model.query.EmpCompilePlanCondition" statementType="STATEMENT">
+        select id,company_no,dept_no,position_no,real_emp_number+sum(lack_emp_number) due_emp_number,
+        real_emp_number,all_emp_name,sum(lack_emp_number) lack_emp_number,plan_time,in_time,year,month
+        from emp_compile_plan where 1=1
+        <if test="byDept!=0">and dept_no =${byDept}
+        </if>
+        <if test="byYear!=0">and year =${byYear}
+        </if>
+        <if test="byMonth!=0">and month =${byMonth}
+        </if>
+        GROUP BY position_no
+        ORDER BY
+        <foreach item="item" collection="sortItemList" separator=",">
+            ${item.sortFeild} ${item.sortType}
+        </foreach>
+        LIMIT ${startIndex},${pageSize}
+    </select>
+    <select id="getTotalCount" resultType="int" parameterType="com.hzfh.api.employee.model.query.EmpCompilePlanCondition" statementType="STATEMENT">
+        SELECT count(DISTINCT position_no) FROM emp_compile_plan where 1=1
+        <if test="byDept!=0">and dept_no =${byDept}
+        </if>
+        <if test="byYear!=0">and year =${byYear}
+        </if>
+        <if test="byMonth!=0">and month =${byMonth}
+        </if>
+    </select>
+    <select id="getInfo" resultMap="resultMapEmpCompilePlan" parameterType="int">
+        SELECT <include refid="Base_Column_List"/> FROM emp_compile_plan where id=#{id}
+    </select>
+    <insert id="add" parameterType="com.hzfh.api.employee.model.EmpCompilePlan" useGeneratedKeys="true" keyProperty="id">
+        insert into emp_compile_plan
+        (company_no,dept_no,position_no,due_emp_number,real_emp_number,all_emp_name,lack_emp_number,plan_time,in_user_no,in_time,edit_user_no,edit_time,edit_comment,year,month)
+        values
+        (#{companyNo},#{deptNo},#{positionNo},#{dueEmpNumber},#{realEmpNumber},#{allEmpName},#{lackEmpNumber},#{planTime},#{inUserNo},current_timestamp(),#{editUserNo},current_timestamp(),#{editComment},#{year},#{month})
+    </insert>
+    <update id="update" parameterType="com.hzfh.api.employee.model.EmpCompilePlan">
+        update emp_compile_plan set
+        company_no=#{companyNo},dept_no=#{deptNo},position_no=#{positionNo},due_emp_number=#{dueEmpNumber},real_emp_number=#{realEmpNumber},all_emp_name=#{allEmpName},
+        lack_emp_number=#{lackEmpNumber},plan_time=#{planTime},edit_user_no=#{editUserNo},edit_time=current_timestamp(),edit_comment=#{editComment},year=#{year},month=#{month}
+        where id=#{id}
+    </update>
+    <delete id="delete" parameterType="int">
+        delete from emp_compile_plan where id = #{id}
+    </delete>
+    <select id="getListForExcel" resultMap="resultMapEmpCompilePlan" parameterType="com.hzfh.api.employee.model.query.EmpCompilePlanCondition" statementType="STATEMENT">
+        SELECT <include refid="Base_Column_List"/>
+        FROM emp_compile_plan where 1=1
+        <if test="byDept!=0">and dept_no =${byDept} </if>
+        <if test="byYear!=0">and year =${byYear} </if>
+        <if test="byMonth!=0">and month =${byMonth}</if>
+        ORDER BY
+        <foreach item="item" collection="sortItemList" separator=",">
+            ${item.sortFeild} ${item.sortType}
+        </foreach>
+    </select>
+</mapper>

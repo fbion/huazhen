@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hzfh.service.customer.mapper.ActivityCouponsProductMapper">
+	<resultMap type="com.hzfh.api.customer.model.ActivityCouponsProduct" id="resultMapActivityCouponsProduct">
+		<result property="id" column="id"/>
+		<result property="p2pProductNo" column="p2p_product_no"/>
+		<result property="couponsNo" column="coupons_no"/>
+		<result property="inUserNo" column="in_user_no"/>
+		<result property="inTime" column="in_time" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
+		<result property="editUserNo" column="edit_user_no"/>
+		<result property="editTime" column="edit_time" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
+		<result property="editComment" column="edit_comment"/>
+		<result property="lowMoney" column="low_money"/>
+	</resultMap>
+	<select id="getList" resultMap="resultMapActivityCouponsProduct">
+		SELECT id,p2p_product_no,coupons_no,in_user_no,in_time,edit_user_no,edit_time,edit_comment,low_money
+		FROM activity_coupons_product
+	</select>
+	<select id="getPagingList" resultMap="resultMapActivityCouponsProduct" parameterType="com.hzfh.api.customer.model.query.ActivityCouponsProductCondition" statementType="STATEMENT">
+		SELECT id,p2p_product_no,coupons_no,in_user_no,in_time,edit_user_no,edit_time,edit_comment,low_money FROM activity_coupons_product where 1=1
+		ORDER BY
+		<foreach item="item" collection="sortItemList" separator=",">
+			${item.sortFeild} ${item.sortType}
+		</foreach>
+		LIMIT ${startIndex},${pageSize}
+	</select>
+	<select id="getTotalCount" resultType="int" parameterType="com.hzfh.api.customer.model.query.ActivityCouponsProductCondition" statementType="STATEMENT">
+		SELECT count(1) FROM activity_coupons_product where 1=1
+	</select>
+	<select id="getInfo" resultMap="resultMapActivityCouponsProduct" parameterType="int">
+		SELECT id,p2p_product_no,coupons_no,in_user_no,in_time,edit_user_no,edit_time,edit_comment,low_money FROM activity_coupons_product where id=#{id}
+	</select>
+	<insert id="add" parameterType="com.hzfh.api.customer.model.ActivityCouponsProduct" useGeneratedKeys="true" keyProperty="id">
+		insert into activity_coupons_product
+		(p2p_product_no,coupons_no,in_user_no,in_time,edit_user_no,edit_time,edit_comment,low_money)
+		values
+		(#{p2pProductNo},#{couponsNo},#{inUserNo},current_timestamp(),#{editUserNo},current_timestamp(),#{editComment},#{lowMoney})
+	</insert>
+	<update id="update" parameterType="com.hzfh.api.customer.model.ActivityCouponsProduct">
+		update activity_coupons_product set 
+		p2p_product_no=#{p2pProductNo},coupons_no=#{couponsNo},edit_user_no=#{editUserNo},edit_time=current_timestamp(),edit_comment=#{editComment},low_money=#{lowMoney}
+		where id=#{id}
+	</update>
+	<delete id="delete" parameterType="int">
+		delete from activity_coupons_product where id = #{id}
+	</delete>
+</mapper>

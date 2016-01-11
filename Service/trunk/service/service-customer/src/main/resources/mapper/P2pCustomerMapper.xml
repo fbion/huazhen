@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hzfh.service.customer.mapper.P2pCustomerMapper">
+	<resultMap type="com.hzfh.api.customer.model.P2pCustomer" id="resultMapP2pCustomer">
+		<result property="id" column="id" />
+		<result property="userName" column="user_name" />
+		<result property="password" column="password" />
+		<result property="registerTime" column="register_time"
+			jdbcType="TIMESTAMP" javaType="java.sql.Timestamp" />
+		<result property="lastLoginTime" column="last_login_time"
+			jdbcType="TIMESTAMP" javaType="java.sql.Timestamp" />
+		<result property="currentLoginTime" column="current_login_time"
+			jdbcType="TIMESTAMP" javaType="java.sql.Timestamp" />
+		<result property="email" column="email" />
+		<result property="cellphone" column="cellphone" />
+		<result property="qq" column="qq" />
+		<result property="weixin" column="weixin" />
+		<result property="weibo" column="weibo" />
+		<result property="phone" column="phone" />
+		<result property="thirdPartyUser" column="third_party_user" />
+		<result property="cardUrl" column="card_url" />
+		<result property="realName" column="real_name" />
+		<result property="deptNo" column="dept_no" />
+		<result property="empNo" column="emp_no" />
+		<result property="provinceNo" column="province_no" />
+		<result property="cityNo" column="city_no" />
+		<result property="districtNo" column="district_no" />
+		<result property="address" column="address" />
+		<result property="secretKey" column="secret_key" />
+		<result property="customerNo" column="customer_no" />
+		<result property="cardType" column="card_type" />
+		<result property="cardNumber" column="card_number" />
+		<result property="avatar" column="avatar" />
+		<result property="status" column="status" />
+		<result property="customerType" column="customer_type" />
+		<result property="sex" column="sex" />
+		<result property="marry" column="marry" />
+		<result property="companyName" column="company_name" />
+		<result property="companyAddress" column="company_address" />
+		<result property="cardPath" column="card_path" />
+		<result property="portraitPath" column="portrait_path" />
+		<result property="pathStatus" column="path_status" />
+		<result property="loginFrom" column="login_from"/>
+	</resultMap>
+	<select id="getList" resultMap="resultMapP2pCustomer">
+		SELECT
+		id,user_name,password,register_time,last_login_time,current_login_time,email,cellphone,qq,weixin,weibo,phone,third_party_user,card_url,real_name,dept_no,emp_no,province_no,city_no,district_no,address,secret_key,customer_no,card_type,card_number,avatar,status,customer_type,sex,company_name,company_address,marry,card_path,portrait_path,path_status,login_from
+		FROM p2p_customer
+	</select>
+	<select id="getPagingList" resultMap="resultMapP2pCustomer"
+		parameterType="com.hzfh.api.customer.model.query.P2pCustomerCondition"
+		statementType="STATEMENT">
+		SELECT
+		id,user_name,password,register_time,last_login_time,current_login_time,email,cellphone,qq,weixin,weibo,phone,third_party_user,card_url,real_name,dept_no,emp_no,province_no,city_no,district_no,address,secret_key,customer_no,card_type,card_number,avatar,status,customer_type,sex,company_name,company_address,marry,card_path,portrait_path,path_status,login_from
+		FROM p2p_customer where 1=1
+
+        <if test="workMateString !=null">and emp_no in (${workMateString})</if>
+		<if test="p2pCustomerName!=null">and user_name LIKE CONCAT('%','${p2pCustomerName}','%')
+		</if>
+		<if test="byStatus!=0">and status = ${byStatus}
+		</if>
+
+		<if test="byEmpNo!=0">and emp_no = ${byEmpNo}
+		</if>
+		<if test="byDeptNo!=0">and dept_no = ${byDeptNo}
+		</if>
+		ORDER BY
+		<foreach item="item" collection="sortItemList" separator=",">
+			${item.sortFeild} ${item.sortType}
+		</foreach>
+		LIMIT ${startIndex},${pageSize}
+	</select>
+	<select id="getTotalCount" resultType="int"
+		parameterType="com.hzfh.api.customer.model.query.P2pCustomerCondition"
+		statementType="STATEMENT">
+		SELECT count(1) FROM p2p_customer where 1=1
+        <if test="workMateString !=null">and emp_no in (${workMateString})</if>
+        <if test="p2pCustomerName!=null">and user_name LIKE CONCAT('%','${p2pCustomerName}','%')
+        </if>
+        <if test="byStatus!=0">and status = ${byStatus}
+        </if>
+        <if test="byEmpNo!=0">and emp_no = ${byEmpNo}
+        </if>
+        <if test="byDeptNo!=0">and dept_no =${byDeptNo}
+        </if>
+    </select>
+	<select id="getInfo" resultMap="resultMapP2pCustomer"
+		parameterType="int">
+		SELECT
+		id,user_name,password,register_time,last_login_time,current_login_time,email,cellphone,qq,weixin,weibo,phone,third_party_user,card_url,real_name,dept_no,emp_no,province_no,city_no,district_no,address,secret_key,customer_no,card_type,card_number,avatar,status,customer_type,sex,company_name,company_address,marry,card_path,portrait_path,path_status,login_from
+		FROM p2p_customer where id=#{id}
+	</select>
+
+    <select id="getP2pCustomerByCustomerNo" resultMap="resultMapP2pCustomer"
+            parameterType="int">
+        SELECT
+        id,user_name,password,register_time,last_login_time,current_login_time,email,cellphone,qq,weixin,weibo,phone,third_party_user,card_url,real_name,dept_no,emp_no,province_no,city_no,district_no,address,secret_key,customer_no,card_type,card_number,avatar,status,customer_type,sex,company_name,company_address,marry,card_path,portrait_path,path_status,login_from
+        FROM p2p_customer where customer_no=#{customerNo}
+    </select>
+	<select id="getP2pCustomerByCardNubmer" resultMap="resultMapP2pCustomer">
+		SELECT
+		id,user_name,password,register_time,last_login_time,current_login_time,email,cellphone,qq,weixin,weibo,phone,third_party_user,card_url,real_name,dept_no,emp_no,province_no,city_no,district_no,address,secret_key,customer_no,card_type,card_number,avatar,status,customer_type,sex,company_name,company_address,marry,card_path,portrait_path,path_status,login_from
+		FROM p2p_customer where card_number=#{cardNumber}
+	</select>
+    <select id="getP2pCustomerByWeixin" resultMap="resultMapP2pCustomer">
+		SELECT
+		id,user_name,password,register_time,last_login_time,current_login_time,email,cellphone,qq,weixin,weibo,phone,third_party_user,card_url,real_name,dept_no,emp_no,province_no,city_no,district_no,address,secret_key,customer_no,card_type,card_number,avatar,status,customer_type,sex,company_name,company_address,marry,card_path,portrait_path,path_status,login_from
+		FROM p2p_customer where weixin=#{weixin}
+	</select>
+	<select id="selectByUserName" resultMap="resultMapP2pCustomer"
+		parameterType="String">
+		SELECT
+		id,user_name,password,register_time,last_login_time,current_login_time,current_login_time,email,cellphone,qq,weixin,weibo,phone,third_party_user,card_url,real_name,dept_no,emp_no,province_no,city_no,district_no,address,secret_key,customer_no,card_type,card_number,avatar,status,customer_type,sex,company_name,company_address,marry,card_path,portrait_path,path_status,login_from
+		FROM p2p_customer
+		where user_name=#{userName} <!-- or email = #{userName} or cellphone = #{userName} -->
+	</select>
+	<select id="selectByEmail" resultMap="resultMapP2pCustomer"
+		parameterType="String">
+		SELECT
+		id,user_name,password,register_time,last_login_time,current_login_time,email,cellphone,qq,weixin,weibo,phone,third_party_user,card_url,real_name,dept_no,emp_no,province_no,city_no,district_no,address,secret_key,customer_no,card_type,card_number,avatar,status,customer_type,sex,company_name,company_address,marry,card_path,portrait_path,path_status,login_from
+		FROM p2p_customer
+		where email=#{email}
+	</select>
+	<select id="selectByEmailAndStatus" resultMap="resultMapP2pCustomer">
+		SELECT
+		id,user_name,password,register_time,last_login_time,current_login_time,email,cellphone,qq,weixin,weibo,phone,third_party_user,card_url,real_name,dept_no,emp_no,province_no,city_no,district_no,address,secret_key,customer_no,card_type,card_number,avatar,status,customer_type,sex,company_name,company_address,marry,card_path,portrait_path,path_status,login_from
+		FROM p2p_customer
+		where email=#{email} and status=#{status}
+	</select>
+	<select id="selectPswd" parameterType="int" resultType="String">
+		SELECT
+		password FROM p2p_customer where id=#{id}
+	</select>
+	<select id="selectSecretKey" parameterType="int" resultType="String">
+		SELECT secret_key FROM p2p_customer where id=#{id}
+	</select>
+
+	<insert id="add" parameterType="com.hzfh.api.customer.model.P2pCustomer"
+		useGeneratedKeys="true" keyProperty="id">
+		insert into p2p_customer
+		(user_name,password,register_time,last_login_time,current_login_time,email,cellphone,qq,weixin,weibo,phone,third_party_user,card_url,real_name,dept_no,emp_no,province_no,city_no,district_no,address,secret_key,customer_no,card_type,card_number,avatar,status,customer_type,sex,company_name,company_address,marry,card_path,portrait_path,path_status,login_from)
+		values
+		(#{userName},#{password},current_timestamp(),#{lastLoginTime},#{currentLoginTime},#{email},#{cellphone},#{qq},#{weixin},#{weibo},#{phone},#{thirdPartyUser},#{cardUrl},#{realName},#{deptNo},#{empNo},#{provinceNo},#{cityNo},#{districtNo},#{address},#{secretKey},#{customerNo},#{cardType},#{cardNumber},#{avatar},#{status},#{customerType},#{sex},#{companyName},#{companyAddress},#{marry},#{cardPath},#{portraitPath},#{pathStatus},#{loginFrom})
+	</insert>
+	<update id="update" parameterType="com.hzfh.api.customer.model.P2pCustomer">
+		update p2p_customer set
+		user_name=#{userName},password=#{password},register_time=#{registerTime},last_login_time=#{lastLoginTime},email=#{email},cellphone=#{cellphone},qq=#{qq},weixin=#{weixin},weibo=#{weibo},phone=#{phone},third_party_user=#{thirdPartyUser},card_url=#{cardUrl},real_name=#{realName},dept_no=#{deptNo},emp_no=#{empNo},province_no=#{provinceNo},city_no=#{cityNo},district_no=#{districtNo},address=#{address},secret_key=#{secretKey},customer_no=#{customerNo},card_type=#{cardType},card_number=#{cardNumber},avatar=#{avatar},status=#{status},customer_type=#{customerType},sex=#{sex},company_name=#{companyName},company_address=#{companyAddress},marry=#{marry},card_path=#{cardPath},portrait_path=#{portraitPath},path_status=#{pathStatus},login_from=#{loginFrom}
+		where id=#{id}
+	</update>
+	<update id="updateLastLoginTime">
+		update p2p_customer set
+		current_login_time=current_timestamp(),last_login_time=#{lastLoginTime}
+		where id=#{id}
+	</update>
+	<update id="updatePswdById">
+		update p2p_customer set
+		password=#{password}
+		where
+		id=#{id}
+	</update>
+	<update id="updateEmpNoById" parameterType="int">
+		update p2p_customer
+		set
+		emp_no=#{empNo}
+		where id=#{id}
+	</update>
+	<update id="updateStatusById">
+		update p2p_customer set
+		status=#{status}
+		where id=#{id}
+	</update>
+	<update id="updateWeiXin">
+		update p2p_customer set
+		weixin=#{weixin}
+		where id=#{id}
+	</update>
+	<delete id="delete" parameterType="int">
+		delete from p2p_customer where
+		id = #{id}
+	</delete>
+	
+	<update id="updateNotWithCardNumber" parameterType="com.hzfh.api.customer.model.P2pCustomer">
+		update p2p_customer set card_type=#{cardType},
+ 		cellphone=#{cellphone},real_name=#{realName},province_no=#{provinceNo},city_no=#{cityNo},district_no=#{districtNo},address=#{address}
+		where id=#{id}
+	</update>
+	<update id="updateWithCardNumber" parameterType="com.hzfh.api.customer.model.P2pCustomer">
+		update p2p_customer set card_type=#{cardType},
+ 		cellphone=#{cellphone},real_name=#{realName},province_no=#{provinceNo},city_no=#{cityNo},district_no=#{districtNo},address=#{address},card_number=#{cardNumber}
+		where id=#{id}
+	</update>
+    <update id="updateP2pCustomerById" >
+        update p2p_customer set customer_no = #{customerNo} where id = #{id}
+    </update>
+
+    <update id="updateDeptNoAndEmpNoById" >
+        update p2p_customer set dept_no = #{deptNo},emp_no = #{empNo} where id = #{id}
+    </update>
+
+	<update id="updateCellphoneByCustomerNo" >
+        update p2p_customer set cellphone=#{cellphone} where id = #{customerId}
+    </update>
+    <update id="updateRealNameCustomerNo" parameterType="com.hzfh.api.customer.model.P2pCustomer">
+        update p2p_customer set real_name=#{realName},card_number=#{cardNumber} where id = #{id}
+    </update>
+    <select id="checkTelephoneById" resultMap="resultMapP2pCustomer">
+		SELECT
+		id,user_name,password,register_time,last_login_time,current_login_time,email,cellphone,qq,weixin,weibo,phone,third_party_user,card_url,real_name,dept_no,emp_no,province_no,city_no,district_no,address,secret_key,customer_no,card_type,card_number,avatar,status,customer_type,sex,company_name,company_address,marry,card_path,portrait_path,path_status,login_from
+		FROM p2p_customer where id!=#{id} and cellphone=#{telephone} 
+	</select>
+	<select id="getInfoByCellphone" parameterType="String" resultMap="resultMapP2pCustomer">
+		SELECT
+		id,user_name,password,register_time,current_login_time,last_login_time,email,cellphone,qq,weixin,weibo,phone,third_party_user,card_url,real_name,dept_no,emp_no,province_no,city_no,district_no,address,secret_key,customer_no,card_type,card_number,avatar,status,customer_type,sex,company_name,company_address,marry,card_path,portrait_path,path_status,login_from
+		FROM p2p_customer WHERE cellphone=#{cellphone}
+	</select>
+	<select id="getInfoByQq" parameterType="String" resultMap="resultMapP2pCustomer">
+		SELECT
+		id,user_name,password,register_time,last_login_time,current_login_time,email,cellphone,qq,weixin,weibo,phone,third_party_user,card_url,real_name,dept_no,emp_no,province_no,city_no,district_no,address,secret_key,customer_no,card_type,card_number,avatar,status,customer_type,sex,company_name,company_address,marry,card_path,portrait_path,path_status,login_from
+		FROM p2p_customer WHERE qq = #{openid}
+	</select>
+	<select id="getInfoByWeibo" parameterType="String" resultMap="resultMapP2pCustomer">
+		SELECT
+		id,user_name,password,register_time,last_login_time,current_login_time,email,cellphone,qq,weixin,weibo,phone,third_party_user,card_url,real_name,dept_no,emp_no,province_no,city_no,district_no,address,secret_key,customer_no,card_type,card_number,avatar,status,customer_type,sex,company_name,company_address,marry,card_path,portrait_path,path_status,login_from
+		FROM p2p_customer WHERE weibo = #{weibo}
+	</select>
+</mapper>

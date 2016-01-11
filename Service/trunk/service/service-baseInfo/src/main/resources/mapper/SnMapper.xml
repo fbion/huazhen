@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hzfh.service.baseInfo.mapper.SnMapper">
+	<resultMap type="com.hzfh.api.baseInfo.model.Sn" id="resultMapSn">
+		<result property="id" column="id"/>
+		<result property="timeCode" column="time_code"/>
+		<result property="bizCode" column="biz_code"/>
+		<result property="code" column="code"/>
+		<result property="inTime" column="in_time" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
+	</resultMap>
+	<select id="getList" resultMap="resultMapSn">
+		SELECT id,time_code,biz_code,code,in_time
+		FROM sn
+	</select>
+	<select id="getPagingList" resultMap="resultMapSn" parameterType="com.hzfh.api.baseInfo.model.query.SnCondition" statementType="STATEMENT">
+		SELECT id,time_code,biz_code,code,in_time FROM sn where 1=1
+		ORDER BY
+		<foreach item="item" collection="sortItemList" separator=",">
+			${item.sortFeild} ${item.sortType}
+		</foreach>
+		LIMIT ${startIndex},${pageSize}
+	</select>
+	<select id="getTotalCount" resultType="int" parameterType="com.hzfh.api.baseInfo.model.query.SnCondition" statementType="STATEMENT">
+		SELECT count(1) FROM sn where 1=1
+	</select>
+	<select id="getInfo" resultMap="resultMapSn" parameterType="int">
+		SELECT id,time_code,biz_code,code,in_time FROM sn where id=#{id}
+	</select>
+	<insert id="add" parameterType="com.hzfh.api.baseInfo.model.Sn" useGeneratedKeys="true" keyProperty="id">
+		insert into sn
+		(time_code,biz_code,code,in_time)
+		values
+		(#{timeCode},#{bizCode},#{code},current_timestamp())
+	</insert>
+	<update id="update" parameterType="com.hzfh.api.baseInfo.model.Sn">
+		update sn set 
+		time_code=#{timeCode},biz_code=#{bizCode},code=#{code}
+		where id=#{id}
+	</update>
+	<delete id="delete" parameterType="int">
+		delete from sn where id = #{id}
+	</delete>
+	<select id="truncateSn">
+		truncate sn;	
+	</select>
+	
+	
+	
+</mapper>

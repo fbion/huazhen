@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hzfh.service.employee.mapper.EmployeeDetailMapper">
+	<resultMap type="com.hzfh.api.employee.model.EmployeeDetail" id="resultMapEmployeeDetail">
+		<result property="id" column="id"/>
+		<result property="empNo" column="emp_no"/>
+		<result property="country" column="country"/>
+		<result property="iDCard" column="IDCard"/>
+		<result property="birthday" column="birthday" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
+		<result property="isPregnant" column="is_pregnant"/>
+		<result property="politicalStatus" column="political_status"/>
+		<result property="highestDegree" column="highest_degree"/>
+		<result property="profession" column="profession"/>
+		<result property="computerLevel" column="computer_level"/>
+		<result property="firstForeignLanguage" column="first_foreign_language"/>
+		<result property="firstForeignLanguageLevel" column="first_foreign_language_level"/>
+		<result property="secondForeignLanguage" column="second_foreign_language"/>
+		<result property="secondForeignLanguageLevel" column="second_foreign_language_level"/>
+		<result property="childrenSituation" column="children_situation"/>
+		<result property="height" column="height"/>
+		<result property="weight" column="weight"/>
+		<result property="healthSituation" column="health_situation"/>
+		<result property="homeTelephone" column="home_telephone"/>
+		<result property="permanentPlace" column="permanent_place"/>
+		<result property="permanentAddress" column="permanent_address"/>
+		<result property="permanentAddressPostcode" column="permanent_address_postcode"/>
+		<result property="addressPostcode" column="address_postcode"/>
+		<result property="birthPlace" column="birth_place"/>
+		<result property="emergencyContactName" column="emergency_contact_name"/>
+		<result property="emergencyContactCellphone" column="emergency_contact_cellphone"/>
+		<result property="nation" column="nation"/>
+		<result property="startTime" column="start_time" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
+		<result property="workTime" column="work_time"/>
+		<result property="workExperience" column="work_experience"/>
+		<result property="officialTime" column="official_time" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
+		<result property="endTime" column="end_time" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
+		<result property="protocolStartTime" column="protocol_start_time" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
+		<result property="protocolEndTime" column="protocol_end_time" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
+		<result property="contractStartTime" column="contract_start_time" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
+		<result property="contractEndTime" column="contract_end_time" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
+		<result property="bankAddress" column="bank_address"/>
+		<result property="bankAccount" column="bank_account"/>
+		<result property="reward" column="reward"/>
+		<result property="generalSituation" column="general_situation"/>
+		<result property="skill" column="skill"/>
+		<result property="hobby" column="hobby"/>
+		<result property="advantage" column="advantage"/>
+		<result property="disadvantage" column="disadvantage"/>
+		<result property="educationExperience" column="education_experience"/>
+		<result property="accept" column="accept"/>
+		<result property="remark" column="remark"/>
+		<result property="inUserNo" column="in_user_no"/>
+		<result property="inTime" column="in_time" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
+		<result property="editUserNo" column="edit_user_no"/>
+		<result property="editTime" column="edit_time" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
+		<result property="editComment" column="edit_comment"/>
+	</resultMap>
+	<sql id="Base_Column_List" >
+		id,emp_no,country,IDCard,birthday,is_pregnant,political_status,highest_degree,profession,computer_level,first_foreign_language,first_foreign_language_level,second_foreign_language,second_foreign_language_level,children_situation,height,weight,health_situation,home_telephone,permanent_place,permanent_address,permanent_address_postcode,address_postcode,birth_place,emergency_contact_name,emergency_contact_cellphone,nation,start_time,work_time,work_experience,official_time,end_time,protocol_start_time,protocol_end_time,contract_start_time,contract_end_time,bank_address,bank_account,reward,general_situation,skill,hobby,advantage,disadvantage,education_experience,accept,remark,in_user_no,in_time,edit_user_no,edit_time,edit_comment
+	</sql>
+	<select id="getList" resultMap="resultMapEmployeeDetail">
+		SELECT  <include refid="Base_Column_List"/> FROM employee_detail
+	</select>
+	<select id="getPagingList" resultMap="resultMapEmployeeDetail" parameterType="com.hzfh.api.employee.model.query.EmployeeDetailCondition" statementType="STATEMENT">
+		SELECT  <include refid="Base_Column_List"/>  FROM employee_detail where 1=1
+		ORDER BY
+		<foreach item="item" collection="sortItemList" separator=",">
+			${item.sortFeild} ${item.sortType}
+		</foreach>
+		LIMIT ${startIndex},${pageSize}
+	</select>
+	<select id="getTotalCount" resultType="int" parameterType="com.hzfh.api.employee.model.query.EmployeeDetailCondition" statementType="STATEMENT">
+		SELECT count(1) FROM employee_detail where 1=1
+	</select>
+	<select id="getInfo" resultMap="resultMapEmployeeDetail" parameterType="int">
+		SELECT  <include refid="Base_Column_List"/>  FROM employee_detail where id=#{id}
+	</select>
+	<insert id="add" parameterType="com.hzfh.api.employee.model.EmployeeDetail" useGeneratedKeys="true" keyProperty="id">
+		insert into employee_detail
+		(emp_no,country,IDCard,birthday,is_pregnant,political_status,highest_degree,profession,computer_level,first_foreign_language,first_foreign_language_level,second_foreign_language,second_foreign_language_level,children_situation,height,weight,health_situation,home_telephone,permanent_place,permanent_address,permanent_address_postcode,address_postcode,birth_place,emergency_contact_name,emergency_contact_cellphone,nation,start_time,work_time,work_experience,official_time,end_time,protocol_start_time,protocol_end_time,contract_start_time,contract_end_time,bank_address,bank_account,reward,general_situation,skill,hobby,advantage,disadvantage,education_experience,accept,remark,in_user_no,in_time,edit_user_no,edit_time,edit_comment)
+		values
+		(#{empNo},#{country},#{iDCard},#{birthday},#{isPregnant},#{politicalStatus},#{highestDegree},#{profession},#{computerLevel},#{firstForeignLanguage},#{firstForeignLanguageLevel},#{secondForeignLanguage},#{secondForeignLanguageLevel},#{childrenSituation},#{height},#{weight},#{healthSituation},#{homeTelephone},#{permanentPlace},#{permanentAddress},#{permanentAddressPostcode},#{addressPostcode},#{birthPlace},#{emergencyContactName},#{emergencyContactCellphone},#{nation},#{startTime},#{workTime},#{workExperience},#{officialTime},#{endTime},#{protocolStartTime},#{protocolEndTime},#{contractStartTime},#{contractEndTime},#{bankAddress},#{bankAccount},#{reward},#{generalSituation},#{skill},#{hobby},#{advantage},#{disadvantage},#{educationExperience},#{accept},#{remark},#{inUserNo},current_timestamp(),#{editUserNo},current_timestamp(),#{editComment})
+	</insert>
+	<update id="update" parameterType="com.hzfh.api.employee.model.EmployeeDetail">
+		update employee_detail set 
+		emp_no=#{empNo},country=#{country},IDCard=#{iDCard},birthday=#{birthday},is_pregnant=#{isPregnant},political_status=#{politicalStatus},highest_degree=#{highestDegree},profession=#{profession},computer_level=#{computerLevel},first_foreign_language=#{firstForeignLanguage},first_foreign_language_level=#{firstForeignLanguageLevel},second_foreign_language=#{secondForeignLanguage},second_foreign_language_level=#{secondForeignLanguageLevel},children_situation=#{childrenSituation},height=#{height},weight=#{weight},health_situation=#{healthSituation},home_telephone=#{homeTelephone},permanent_place=#{permanentPlace},permanent_address=#{permanentAddress},permanent_address_postcode=#{permanentAddressPostcode},address_postcode=#{addressPostcode},birth_place=#{birthPlace},emergency_contact_name=#{emergencyContactName},emergency_contact_cellphone=#{emergencyContactCellphone},nation=#{nation},start_time=#{startTime},work_time=#{workTime},work_experience=#{workExperience},official_time=#{officialTime},end_time=#{endTime},protocol_start_time=#{protocolStartTime},protocol_end_time=#{protocolEndTime},contract_start_time=#{contractStartTime},contract_end_time=#{contractEndTime},bank_address=#{bankAddress},bank_account=#{bankAccount},reward=#{reward},general_situation=#{generalSituation},skill=#{skill},hobby=#{hobby},advantage=#{advantage},disadvantage=#{disadvantage},education_experience=#{educationExperience},accept=#{accept},remark=#{remark},edit_user_no=#{editUserNo},edit_time=current_timestamp(),edit_comment=#{editComment}
+		where id=#{id}
+	</update>
+	<delete id="delete" parameterType="int">
+		delete from employee_detail where id = #{id}
+	</delete>
+
+	<select id="getEmpDetailByEmpNo" resultMap="resultMapEmployeeDetail">
+		SELECT  <include refid="Base_Column_List"/>  FROM employee_detail where emp_no=#{empNo}
+	</select>
+
+	<update id="updateEmpDetailByEmpNo" parameterType="com.hzfh.api.employee.model.EmployeeDetail">
+		update employee_detail set
+		remark=#{remark},birthday=#{birthday},nation=#{nation},political_status=#{politicalStatus},work_time=#{workTime},birth_place=#{birthPlace},is_pregnant=#{isPregnant},children_situation=#{childrenSituation},IDCard=#{IDCard},highest_degree=#{highestDegree},profession=#{profession},permanent_place=#{permanentPlace},height=#{height},weight=#{weight},health_situation=#{healthSituation},first_foreign_language=#{firstForeignLanguage},first_foreign_language_level=#{firstForeignLanguageLevel},second_foreign_language=#{secondForeignLanguage},second_foreign_language_level=#{secondForeignLanguageLevel},home_telephone=#{homeTelephone},permanent_address=#{permanentAddress},permanent_address_postcode=#{permanentAddressPostcode},address_postcode=#{addressPostcode},emergency_contact_name=#{emergencyContactName},emergency_contact_cellphone=#{emergencyContactCellphone},reward=#{reward},general_situation=#{generalSituation},skill=#{skill},hobby=#{hobby},advantage=#{advantage},disadvantage=#{disadvantage},education_experience=#{educationExperience},accept=#{accept},edit_time=current_timestamp()
+		where emp_no=#{empNo}
+	</update>
+
+	<update id="updateEmpDetailByOtherInfo" parameterType="com.hzfh.api.employee.model.EmployeeDetail">
+		update employee_detail set
+		bank_address=#{bankAddress},bank_account=#{bankAccount},computer_level=#{computerLevel},start_time=#{startTime},work_experience=#{workExperience},contract_start_time=#{contractStartTime},contract_end_time=#{contractEndTime},protocol_start_time=#{protocolStartTime},protocol_end_time=#{protocolEndTime},edit_time=current_timestamp()
+		WHERE emp_no=#{empNo}
+	</update>
+</mapper>

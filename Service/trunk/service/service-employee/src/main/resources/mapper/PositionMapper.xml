@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hzfh.service.employee.mapper.PositionMapper">
+	<resultMap type="com.hzfh.api.employee.model.Position" id="resultMapPosition">
+		<result property="id" column="id"/>
+		<result property="name" column="name"/>
+		<result property="comment" column="comment"/>
+		<result property="deptNo" column="dept_no"/>
+		<result property="inUserNo" column="in_user_no"/>
+		<result property="inTime" column="in_time" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
+		<result property="editUserNo" column="edit_user_no"/>
+		<result property="editTime" column="edit_time" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
+		<result property="editComment" column="edit_comment"/>
+	</resultMap>
+	<select id="getList" resultMap="resultMapPosition">
+		SELECT id,name,comment,dept_no,in_user_no,in_time,edit_user_no,edit_time,edit_comment
+		FROM position
+	</select>
+	<select id="getPagingList" resultMap="resultMapPosition" parameterType="com.hzfh.api.employee.model.query.PositionCondition" statementType="STATEMENT">
+		SELECT id,name,comment,dept_no,in_user_no,in_time,edit_user_no,edit_time,edit_comment FROM position where 1=1
+		<if test="name !=null and name !=''" >and name LIKE CONCAT('%','${name}','%')</if>
+		
+		ORDER BY
+		<foreach item="item" collection="sortItemList" separator=",">
+			${item.sortFeild} ${item.sortType}
+		</foreach>
+		LIMIT ${startIndex},${pageSize}
+	</select>
+	<select id="getTotalCount" resultType="int" parameterType="com.hzfh.api.employee.model.query.PositionCondition" statementType="STATEMENT">
+		SELECT count(1) FROM position where 1=1
+		<if test="name !=null and name !=''" >and name LIKE CONCAT('%','${name}','%')</if>
+	</select>
+	<select id="getInfo" resultMap="resultMapPosition" parameterType="int">
+		SELECT id,name,comment,dept_no,in_user_no,in_time,edit_user_no,edit_time,edit_comment FROM position where id=#{id}
+	</select>
+	<insert id="add" parameterType="com.hzfh.api.employee.model.Position" useGeneratedKeys="true" keyProperty="id">
+		insert into position
+		(name,comment,dept_no,in_user_no,in_time,edit_user_no,edit_time,edit_comment)
+		values
+		(#{name},#{comment},#{deptNo},#{inUserNo},current_timestamp(),#{editUserNo},current_timestamp(),#{editComment})
+	</insert>
+	<update id="update" parameterType="com.hzfh.api.employee.model.Position">
+		update position set 
+		name=#{name},comment=#{comment},dept_no=#{deptNo},edit_user_no=#{editUserNo},edit_time=current_timestamp(),edit_comment=#{editComment}
+		where id=#{id}
+	</update>
+	<delete id="delete" parameterType="int">
+		delete from position where id = #{id}
+	</delete>
+	<select id="getPositionByDept" resultMap="resultMapPosition" parameterType="int">
+		SELECT id,name,comment,dept_no,in_user_no,in_time,edit_user_no,edit_time,edit_comment FROM position
+		where dept_no=#{deptNo}
+	</select>
+	
+	<select id="getPositionListBydept" resultMap="resultMapPosition" parameterType="int">
+		SELECT id,name,comment,dept_no,in_user_no,in_time,edit_user_no,edit_time,edit_comment
+		FROM position where dept_no=#{dept}
+	</select>
+	<select id="getPositionByPositionNo" resultMap="resultMapPosition" parameterType="int">
+		SELECT id,name,comment,dept_no,in_user_no,in_time,edit_user_no,edit_time,edit_comment
+		FROM position where id=#{positionNo}
+	</select>
+	
+</mapper>

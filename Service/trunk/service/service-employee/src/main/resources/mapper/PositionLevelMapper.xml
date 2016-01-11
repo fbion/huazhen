@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hzfh.service.employee.mapper.PositionLevelMapper">
+	<resultMap type="com.hzfh.api.employee.model.PositionLevel"
+		id="resultMapPositionLevel">
+		<result property="id" column="id" />
+		<result property="name" column="name" />
+		<result property="comment" column="comment" />
+		<result property="deptNo" column="dept_no" />
+		<result property="positionNo" column="position_no" />
+		<result property="inUserNo" column="in_user_no" />
+		<result property="inTime" column="in_time" jdbcType="TIMESTAMP"
+			javaType="java.sql.Timestamp" />
+		<result property="editUserNo" column="edit_user_no" />
+		<result property="editTime" column="edit_time" jdbcType="TIMESTAMP"
+			javaType="java.sql.Timestamp" />
+		<result property="editComment" column="edit_comment" />
+	</resultMap>
+	<select id="getList" resultMap="resultMapPositionLevel">
+		SELECT
+		id,name,comment,dept_no,position_no,in_user_no,in_time,edit_user_no,edit_time,edit_comment
+		FROM position_level
+	</select>
+	<select id="getPagingList" resultMap="resultMapPositionLevel"
+		parameterType="com.hzfh.api.employee.model.query.PositionLevelCondition"
+		statementType="STATEMENT">
+		SELECT
+		id,name,comment,dept_no,position_no,in_user_no,in_time,edit_user_no,edit_time,edit_comment
+		FROM position_level where 1=1
+		<if test="dept !=0">and dept_no = ${dept}</if>
+
+		ORDER BY
+		<foreach item="item" collection="sortItemList" separator=",">
+			${item.sortFeild} ${item.sortType}
+		</foreach>
+		LIMIT ${startIndex},${pageSize}
+	</select>
+	<select id="getTotalCount" resultType="int"
+		parameterType="com.hzfh.api.employee.model.query.PositionLevelCondition"
+		statementType="STATEMENT">
+		SELECT count(1) FROM position_level where 1=1
+		<if test="dept !=0">and dept_no = ${dept}</if>
+	</select>
+	<select id="getInfo" resultMap="resultMapPositionLevel"
+		parameterType="int">
+		SELECT
+		id,name,comment,dept_no,position_no,in_user_no,in_time,edit_user_no,edit_time,edit_comment
+		FROM position_level where id=#{id}
+	</select>
+	<insert id="add" parameterType="com.hzfh.api.employee.model.PositionLevel"
+		useGeneratedKeys="true" keyProperty="id">
+		insert into position_level
+		(name,comment,dept_no,position_no,in_user_no,in_time,edit_user_no,edit_time,edit_comment)
+		values
+		(#{name},#{comment},#{deptNo},#{positionNo},#{inUserNo},current_timestamp(),#{editUserNo},current_timestamp(),#{editComment})
+	</insert>
+	<update id="update" parameterType="com.hzfh.api.employee.model.PositionLevel">
+		update position_level set
+		name=#{name},comment=#{comment},dept_no=#{deptNo},position_no=#{positionNo},edit_user_no=#{editUserNo},edit_time=current_timestamp(),edit_comment=#{editComment}
+		where id=#{id}
+	</update>
+	<delete id="delete" parameterType="int">
+		delete from position_level
+		where id = #{id}
+	</delete>
+	<select id="getPositionLevelListByDept" resultMap="resultMapPositionLevel"  parameterType="int">
+		SELECT
+		id,name,comment,dept_no,position_no,in_user_no,in_time,edit_user_no,edit_time,edit_comment
+		FROM position_level where dept_no= #{dept}
+	</select>
+
+
+</mapper>

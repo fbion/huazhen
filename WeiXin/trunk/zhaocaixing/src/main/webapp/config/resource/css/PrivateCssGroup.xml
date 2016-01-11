@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<cssConfig xmlns="http://www.hzfh.com/web" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.hzfh.com/web ../../Schemas/Resources/Css.xsd">
+	<privateCssGroups>
+		<cssGroup name="weixin" sharedCssGroup="Common">
+			<pages>
+				<pageName>eidtPassword</pageName>
+				<pageName>emailValidation</pageName>
+				<pageName>forgetPassword</pageName>
+				<pageName>resetPassword</pageName>
+				<pageName>resetSuccess</pageName>
+				<pageName>index</pageName>
+				<pageName>login</pageName>
+				<!-- <pageName>myInvestment</pageName>
+				<pageName>myReservation</pageName> -->
+				<pageName>personalInfo</pageName>
+				<pageName>productDetails</pageName>
+				<pageName>productFeatures</pageName>
+				<pageName>register</pageName>
+				<pageName>common</pageName>
+				<pageName>style</pageName>
+				<pageName>registerSuccess</pageName>
+				<pageName>newRegister</pageName>
+				<pageName>newRegister</pageName>
+			</pages>
+		</cssGroup>
+		<cssGroup name="pagination" sharedCssGroup="Common">
+			<cssName>pagination</cssName>
+			<pages>
+				<pageName>myInvestment</pageName>
+				<pageName>myReservation</pageName>
+				<pageName>common</pageName>
+				<pageName>style</pageName>
+			</pages>
+		</cssGroup>
+	</privateCssGroups>
+</cssConfig>

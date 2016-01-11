@@ -1,0 +1,296 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hzfh.service.customer.mapper.CustomerPersonalMapper">
+    <resultMap type="com.hzfh.api.customer.model.CustomerPersonal" id="resultMapCustomerPersonal">
+        <result property="id" column="id"/>
+        <result property="code" column="code"/>
+        <result property="cardType" column="card_type"/>
+        <result property="cardNumber" column="card_number"/>
+        <result property="name" column="name"/>
+        <result property="sex" column="sex"/>
+        <result property="email" column="email"/>
+        <result property="weixin" column="weixin"/>
+        <result property="qq" column="qq"/>
+        <result property="phone" column="phone"/>
+        <result property="cellphone1" column="cellphone1"/>
+        <result property="cellphone2" column="cellphone2"/>
+        <result property="birthday" column="birthday" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
+        <result property="address" column="address"/>
+        <result property="marry" column="marry"/>
+        <result property="companyName" column="company_name"/>
+        <result property="field" column="field"/>
+        <result property="relationLevel" column="relation_level"/>
+        <result property="riskHobby" column="risk_hobby"/>
+        <result property="sourceType" column="source_type"/>
+        <result property="agentNo" column="agent_no"/>
+        <result property="wealth" column="wealth"/>
+        <result property="tradeTotal" column="trade_total"/>
+        <result property="inUserNo" column="in_user_no"/>
+        <result property="inTime" column="in_time" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
+        <result property="editUserNo" column="edit_user_no"/>
+        <result property="editTime" column="edit_time" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
+        <result property="editComment" column="edit_comment"/>
+        <result property="findTime" column="find_time"/>
+        <result property="isTest" column="is_test"/>
+        <result property="p2pCustomerNo" column="p2p_customer_no"/>
+        <result property="isLogin" column="is_login"/>
+    </resultMap>
+    <sql id="base_column">
+        id,code,card_type,card_number,name,sex,email,weixin,qq,phone,cellphone1,cellphone2,birthday,address,marry,company_name,field,relation_level,risk_hobby,source_type,agent_no,wealth,trade_total,in_user_no,in_time,edit_user_no,edit_time,edit_comment,find_time,is_test,p2p_customer_no
+    </sql>
+    <select id="getList" resultMap="resultMapCustomerPersonal">
+		SELECT id,code,card_type,card_number,name,sex,email,weixin,qq,phone,cellphone1,cellphone2,birthday,address,marry,company_name,field,relation_level,risk_hobby,source_type,agent_no,wealth,trade_total,in_user_no,in_time,edit_user_no,edit_time,edit_comment,find_time,is_test,p2p_customer_no
+		FROM customer_personal
+	</select>
+
+    <select id="getListForExcel" resultMap="resultMapCustomerPersonal"
+            parameterType="com.hzfh.api.customer.model.query.CustomerPersonalCondition" statementType="STATEMENT">
+        SELECT
+        id,code,card_type,card_number,name,sex,email,weixin,qq,phone,cellphone1,cellphone2,birthday,address,marry,company_name,field,relation_level,risk_hobby,source_type,agent_no,wealth,trade_total,in_user_no,in_time,edit_user_no,edit_time,edit_comment,find_time,is_test,p2p_customer_no,is_login
+        FROM customer_personal as p
+        <if test="resultStatus != 0">
+            LEFT JOIN
+            ( SELECT f1.customer_no FROM customer_follow AS f1 LEFT JOIN
+            (SELECT MAX(f2.time) AS max_time,f2.customer_no AS f_customer_no FROM customer_follow AS f2 GROUP BY f2.customer_no) AS f3 ON f1.customer_no=f3.f_customer_no
+            WHERE f1.time = f3.max_time AND f1.result_status = ${resultStatus}) AS f4
+            ON p.id = f4.customer_no
+            WHERE p.id = f4.customer_no
+        </if>
+
+        <if test="resultStatus == 0">
+            where 1=1
+        </if>
+        <if test="isMyCustomer == true and workMateString !=null">
+            and id not in (select customer_no from p2p_customer
+            where emp_no=${workMateString} and customer_no!= 0
+            )
+        </if>
+        <if test="name != null and name !=''">and name LIKE CONCAT('%','${name}','%')</if>
+        <if test="cellphone1 != null and cellphone1 !=''">and ((cellphone1 LIKE CONCAT('%','${cellphone1}','%')) or
+            (cellphone1 = '${cellphone2}'))
+        </if>
+        <if test="relationLevel != 0">and relation_level=${relationLevel}</if>
+        <if test="empNo != 0">and agent_no=${empNo}</if>
+        <if test="sourceType != 0">and source_type=${sourceType}</if>
+        <if test="riskHobby != 0">and risk_hobby=${riskHobby}</if>
+        <if test="cardType != 0">and card_type=${cardType}</if>
+        <if test="workMateString !=null">and agent_no in (${workMateString})</if>
+        <if test="deptNo !=null">and agent_no in (${deptNo})</if>
+        <if test="cellphone!=null and cardNumber != null and p2pUserName != null">
+            and (card_number ='${cardNumber}' or cellphone1 ='${cellphone}' or `name` = '${p2pUserName}')
+        </if>
+
+        <if test="findTimeUp!=null and findTimeUp!=''">and find_time &lt;= '${findTimeUp}'</if>
+        <if test="findTimeDown!=null and findTimeDown!=''">and find_time &gt;= '${findTimeDown}'</if>
+        <if test="isTest>-1">and is_test=${isTest}</if>
+        <if test="isSales > 0">AND trade_total &gt; 0</if>
+        <if test="isSales == 0 ">
+            <![CDATA[ AND (trade_total <= 0 OR trade_total IS NULL) ]]>
+        </if>
+        ORDER BY
+        <foreach item="item" collection="sortItemList" separator=",">
+            ${item.sortFeild} ${item.sortType}
+        </foreach>
+    </select>
+    <select id="getPagingList" resultMap="resultMapCustomerPersonal"
+            parameterType="com.hzfh.api.customer.model.query.CustomerPersonalCondition" statementType="STATEMENT">
+        SELECT
+        id,code,card_type,card_number,name,sex,email,weixin,qq,phone,cellphone1,cellphone2,birthday,address,marry,company_name,field,relation_level,risk_hobby,source_type,agent_no,wealth,trade_total,in_user_no,in_time,edit_user_no,edit_time,edit_comment,find_time,is_test,p2p_customer_no,is_login
+        FROM customer_personal AS p
+        <if test="resultStatus != 0">
+            LEFT JOIN
+            ( SELECT f1.customer_no FROM customer_follow AS f1 LEFT JOIN
+            (SELECT MAX(f2.time) AS max_time,f2.customer_no AS f_customer_no FROM customer_follow AS f2 GROUP BY f2.customer_no) AS f3 ON f1.customer_no=f3.f_customer_no
+            WHERE f1.time = f3.max_time AND f1.result_status = ${resultStatus}) AS f4
+            ON p.id = f4.customer_no
+            WHERE p.id = f4.customer_no
+        </if>
+        <if test="resultStatus == 0">
+            where 1=1
+        </if>
+        <if test="isMyCustomer == true and workMateString !=null">and id not in (select customer_no from p2p_customer
+            where emp_no=${workMateString} and customer_no!= 0)
+        </if>
+        <if test="name != null and name !=''">and name LIKE CONCAT('%','${name}','%')</if>
+        <if test="cellphone1 != null and cellphone1 !=''">and ((cellphone1 LIKE CONCAT('%','${cellphone1}','%')) or
+            (cellphone1 = '${cellphone2}'))
+        </if>
+        <if test="relationLevel != 0">and relation_level=${relationLevel}</if>
+        <if test="empNo != 0">and agent_no=${empNo}</if>
+        <if test="sourceType != 0">and source_type=${sourceType}</if>
+        <if test="riskHobby != 0">and risk_hobby=${riskHobby}</if>
+        <if test="cardType != 0">and card_type=${cardType}</if>
+        <if test="workMateString !=null">and agent_no in (${workMateString})</if>
+        <if test="deptNo !=null">and agent_no in (${deptNo})</if>
+        <if test="cellphone!=null and cardNumber != null and p2pUserName != null">
+            and (card_number ='${cardNumber}' or cellphone1 ='${cellphone}' or `name` = '${p2pUserName}')
+        </if>
+
+        <if test="findTimeUp!=null and findTimeUp!=''">and find_time &lt;= '${findTimeUp}'</if>
+        <if test="findTimeDown!=null and findTimeDown!=''">and find_time &gt;= '${findTimeDown}'</if>
+        <if test="isTest>-1">and is_test=${isTest}</if>
+        <if test="isSales > 0">AND trade_total &gt; 0</if>
+        <if test="isSales == 0 ">
+            <![CDATA[ AND (trade_total <= 0 OR trade_total IS NULL) ]]>
+        </if>
+        ORDER BY
+        <foreach item="item" collection="sortItemList" separator=",">
+            ${item.sortFeild} ${item.sortType}
+        </foreach>
+        LIMIT ${startIndex},${pageSize}
+    </select>
+
+    <select id="getTotalCount" resultType="int"
+            parameterType="com.hzfh.api.customer.model.query.CustomerPersonalCondition" statementType="STATEMENT">
+        SELECT count(1) FROM customer_personal AS p
+        <if test="resultStatus != 0">
+            LEFT JOIN
+            ( SELECT f1.customer_no FROM customer_follow AS f1 LEFT JOIN
+            (SELECT MAX(f2.time) AS max_time,f2.customer_no AS f_customer_no FROM customer_follow AS f2 GROUP BY f2.customer_no) AS f3 ON f1.customer_no=f3.f_customer_no
+            WHERE f1.time = f3.max_time AND f1.result_status = ${resultStatus}) AS f4
+            ON p.id = f4.customer_no
+            WHERE p.id = f4.customer_no
+        </if>
+        <if test="resultStatus == 0">
+            where 1=1
+        </if>
+        <if test="isMyCustomer == true and workMateString !=null">and id not in (select customer_no from p2p_customer
+            where emp_no=${workMateString} and customer_no!= 0)
+        </if>
+        <if test="name != null and name !=''">and name LIKE CONCAT('%','${name}','%')</if>
+        <if test="cellphone1 != null and cellphone1 !=''">and ((cellphone1 LIKE CONCAT('%','${cellphone1}','%')) or
+            (cellphone1 = '${cellphone2}'))
+        </if>
+        <if test="relationLevel != 0">and relation_level=${relationLevel}</if>
+        <if test="empNo != 0">and agent_no=${empNo}</if>
+        <if test="sourceType != 0">and source_type=${sourceType}</if>
+        <if test="riskHobby != 0">and risk_hobby=${riskHobby}</if>
+        <if test="cardType != 0">and card_type=${cardType}</if>
+        <if test="workMateString !=null">and agent_no in (${workMateString})</if>
+        <if test="deptNo !=null">and agent_no in (${deptNo})</if>
+        <if test="cellphone!=null and cardNumber != null and p2pUserName != null">
+            and (card_number ='${cardNumber}' or cellphone1 ='${cellphone}' or `name` = '${p2pUserName}')
+        </if>
+
+        <if test="findTimeUp!=null and findTimeUp!=''">and find_time &lt;= '${findTimeUp}'</if>
+        <if test="findTimeDown!=null and findTimeDown!=''">and find_time &gt;= '${findTimeDown}'</if>
+        <if test="isTest>-1">and is_test=${isTest}</if>
+        <if test="isSales > 0">AND trade_total &gt; 0</if>
+        <if test="isSales == 0 ">
+            <![CDATA[ AND (trade_total <= 0 OR trade_total IS NULL) ]]>
+        </if>
+        <!--<if test="resultStatus != 0">-->
+            <!--AND id in (-->
+            <!--SELECT a.customer_no FROM customer_follow a-->
+            <!--WHERE (SELECT count(*) FROM customer_follow WHERE customer_no = a.customer_no AND time &gt; a.time ) &lt; 1-->
+            <!--AND time &lt;&gt; '' and a.result_status = ${resultStatus}-->
+            <!--ORDER BY a.time DESC-->
+            <!--)-->
+        <!--</if>-->
+    </select>
+
+    <select id="getInfo" resultMap="resultMapCustomerPersonal" parameterType="int">
+		SELECT id,code,is_login,card_type,card_number,name,sex,email,weixin,qq,phone,cellphone1,cellphone2,birthday,address,marry,company_name,field,relation_level,risk_hobby,source_type,agent_no,wealth,trade_total,in_user_no,in_time,edit_user_no,edit_time,edit_comment,find_time,is_test,p2p_customer_no FROM customer_personal where id=#{id}
+	</select>
+    <insert id="add" parameterType="com.hzfh.api.customer.model.CustomerPersonal" useGeneratedKeys="true"
+            keyProperty="id">
+		insert into customer_personal
+		(code,card_type,is_login,card_number,name,sex,email,weixin,qq,phone,cellphone1,cellphone2,birthday,address,marry,company_name,field,relation_level,risk_hobby,source_type,agent_no,wealth,trade_total,in_user_no,in_time,edit_user_no,edit_time,edit_comment,find_time,is_test,p2p_customer_no)
+		values
+		(#{code},#{cardType},0,#{cardNumber},#{name},#{sex},#{email},#{weixin},#{qq},#{phone},#{cellphone1},#{cellphone2},#{birthday},#{address},#{marry},#{companyName},#{field},#{relationLevel},#{riskHobby},#{sourceType},#{agentNo},#{wealth},#{tradeTotal},#{inUserNo},current_timestamp(),#{editUserNo},current_timestamp(),#{editComment},#{findTime},#{isTest},#{p2pCustomerNo})
+	</insert>
+    <update id="update" parameterType="com.hzfh.api.customer.model.CustomerPersonal">
+		update customer_personal set 
+		code=#{code},card_type=#{cardType},card_number=#{cardNumber},name=#{name},sex=#{sex},email=#{email},weixin=#{weixin},qq=#{qq},phone=#{phone},cellphone1=#{cellphone1},cellphone2=#{cellphone2},birthday=#{birthday},address=#{address},marry=#{marry},company_name=#{companyName},field=#{field},relation_level=#{relationLevel},risk_hobby=#{riskHobby},source_type=#{sourceType},agent_no=#{agentNo},wealth=#{wealth},trade_total=#{tradeTotal},edit_user_no=#{editUserNo},edit_time=current_timestamp(),edit_comment=#{editComment},find_time=#{findTime},is_test=#{isTest},p2p_customer_no=#{p2pCustomerNo}
+		where id=#{id}
+	</update>
+    <delete id="delete" parameterType="int">
+		delete from customer_personal where id = #{id}
+	</delete>
+    <select id="getMyCustomerPersonalList" parameterType="java.lang.String" resultMap="resultMapCustomerPersonal">
+        SELECT
+        id,code,card_type,card_number,name,sex,email,weixin,qq,phone,cellphone1,cellphone2,birthday,address,marry,company_name,field,relation_level,risk_hobby,source_type,agent_no,wealth,trade_total,in_user_no,in_time,edit_user_no,edit_time,edit_comment,find_time,is_test,p2p_customer_no
+        FROM customer_personal where 1=1
+        <if test="workMateString !=null">and agent_no in (${workMateString})</if>
+        AND card_number != ''
+    </select>
+
+    <select id="cardCheck" resultMap="resultMapCustomerPersonal">
+		SELECT id,code,card_type,card_number,name,sex,email,weixin,qq,phone,cellphone1,cellphone2,birthday,address,marry,company_name,field,relation_level,risk_hobby,source_type,agent_no,wealth,trade_total,in_user_no,in_time,edit_user_no,edit_time,edit_comment,find_time,is_test,p2p_customer_no
+		FROM customer_personal
+		where id!=#{id} and (card_number=#{cardNumber} or card_number=#{desCardNumber})
+	</select>
+    <select id="getCustomerByCardNumber" resultMap="resultMapCustomerPersonal">
+		SELECT id,code,card_type,card_number,name,sex,email,weixin,qq,phone,cellphone1,cellphone2,birthday,address,marry,company_name,field,relation_level,risk_hobby,source_type,agent_no,wealth,trade_total,in_user_no,in_time,edit_user_no,edit_time,edit_comment,find_time,is_test,p2p_customer_no
+		FROM customer_personal
+		where card_number=#{cardNumber};
+	</select>
+
+
+    <!-- getNoPagingList create by Zorro 2015/4/30 -->
+    <select id="getNoPagingList" resultMap="resultMapCustomerPersonal"
+            parameterType="com.hzfh.api.customer.model.query.CustomerPersonalCondition" statementType="STATEMENT">
+        SELECT
+        id,code,card_type,card_number,name,sex,email,weixin,qq,phone,cellphone1,cellphone2,birthday,address,marry,company_name,field,relation_level,risk_hobby,source_type,agent_no,wealth,trade_total,in_user_no,in_time,edit_user_no,edit_time,edit_comment,find_time,is_test,p2p_customer_no
+        FROM customer_personal where 1=1
+        <if test="isMyCustomer == true and workMateString !=null">and id not in (select customer_no from p2p_customer
+            where emp_no=${workMateString} and customer_no!= 0)
+        </if>
+        <if test="name != null and name !=''">and name LIKE CONCAT('%','${name}','%')</if>
+        <if test="relationLevel != 0">and relation_level=${relationLevel}</if>
+        <if test="empNo != 0">and agent_no=${empNo}</if>
+        <if test="riskHobby != 0">and risk_hobby=${riskHobby}</if>
+        <if test="sourceType != 0">and source_type=${sourceType}</if>
+        <if test="cardType != 0">and card_type=${cardType}</if>
+        <if test="workMateString !=null">and agent_no in (${workMateString})</if>
+        <if test="deptNo !=null">and agent_no in (${deptNo})</if>
+        <if test="cellphone!=null and cardNumber != null and p2pUserName != null">
+            and (card_number ='${cardNumber}' or cellphone1 ='${cellphone}' or `name` = '${p2pUserName}')
+        </if>
+
+        <if test="findTimeUp!=null and findTimeUp!=''">and find_time &lt;= '${findTimeUp}'</if>
+        <if test="findTimeDown!=null and findTimeDown!=''">and find_time &gt;= '${findTimeDown}'</if>
+        <if test="isTest>-1">and is_test=${isTest}</if>
+        ORDER BY
+        <foreach item="item" collection="sortItemList" separator=",">
+            ${item.sortFeild} ${item.sortType}
+        </foreach>
+    </select>
+
+    <select id="checkCustomerPersonalByNameAndCellphone" resultMap="resultMapCustomerPersonal">
+        SELECT
+        id,code,card_type,card_number,name,sex,email,weixin,qq,phone,cellphone1,cellphone2,birthday,address,marry,company_name,field,relation_level,risk_hobby,source_type,agent_no,wealth,trade_total,in_user_no,in_time,edit_user_no,edit_time,edit_comment,find_time,is_test,p2p_customer_no
+        FROM customer_personal where 1=1
+        <if test="id != 0">and id != #{id}</if>
+        <if test="name != null and name != ''">and name = #{name}</if>
+        <if test="cellPhone != null and cellPhone != ''">and (cellphone1 = #{cellPhone} or cellphone1 = #{desCellPhone}
+            or cellphone2 = #{cellPhone} or cellphone2 = #{desCellPhone})
+        </if>
+    </select>
+
+    <select id="getCustomerPersonalListByManagerNo" resultMap="resultMapCustomerPersonal">
+		SELECT id,code,card_type,card_number,name,sex,email,weixin,qq,phone,cellphone1,cellphone2,birthday,address,marry,company_name,field,relation_level,risk_hobby,source_type,agent_no,wealth,trade_total,in_user_no,in_time,edit_user_no,edit_time,edit_comment,find_time,is_test,p2p_customer_no
+		FROM customer_personal
+		WHERE agent_no = #{managerNo}
+	</select>
+
+    <update id="updateTradeTotalById">
+		UPDATE customer_personal SET trade_total=trade_total+#{tradeTotal} WHERE id=#{id}
+	</update>
+    <update id="updateLoginByP2pCustoemrNo">
+        UPDATE customer_personal SET is_login = is_login + 1 WHERE p2p_customer_no = #{p2pCustomerNo}
+    </update>
+
+    <select id="getInfoByP2pCustsomerNo" resultMap="resultMapCustomerPersonal">
+       SELECT id,code,card_type,card_number,name,sex,email,weixin,qq,phone,cellphone1,cellphone2,birthday,address,marry,company_name,field,relation_level,risk_hobby,source_type,agent_no,wealth,trade_total,in_user_no,in_time,edit_user_no,edit_time,edit_comment,find_time,is_test,p2p_customer_no
+		FROM customer_personal
+		WHERE p2p_customer_no = #{p2pCustomerNo}
+    </select>
+
+    <select id="getCurrentWeekCustomerPerson" resultMap="resultMapCustomerPersonal" parameterType="com.hzfh.api.customer.model.query.CustomerPersonalCondition" statementType="STATEMENT">
+        SELECT
+        <include refid="base_column"/>
+        FROM customer_personal WHERE is_test=0 AND YEARWEEK(DATE_FORMAT(find_time,'%y-%m-%d')) = YEARWEEK(NOW())
+        <if test="workMateString !=null">and agent_no in (${workMateString})</if>
+    </select>
+</mapper>

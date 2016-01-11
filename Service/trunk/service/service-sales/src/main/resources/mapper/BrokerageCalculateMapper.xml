@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hzfh.service.sales.mapper.BrokerageCalculateMapper">
+	<resultMap type="com.hzfh.api.sales.model.BrokerageCalculate" id="resultMapBrokerageCalculate">
+		<result property="id" column="id"/>
+		<result property="empNo" column="emp_no"/>
+		<result property="moneyTotal" column="money_total"/>
+		<result property="sumOrder" column="sum_order"/>
+		<result property="moneyBrokerage" column="money_brokerage"/>
+		<result property="calcTime" column="calc_time" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
+	</resultMap>
+	<select id="getList" resultMap="resultMapBrokerageCalculate">
+		SELECT id,emp_no,money_total,sum_order,money_brokerage,calc_time
+		FROM brokerage_calculate
+	</select>
+	<select id="getPagingList" resultMap="resultMapBrokerageCalculate" parameterType="com.hzfh.api.sales.model.query.BrokerageCalculateCondition" statementType="STATEMENT">
+		SELECT id,emp_no,money_total,sum_order,money_brokerage,calc_time FROM brokerage_calculate where 1=1
+		
+		ORDER BY
+		<foreach item="item" collection="sortItemList" separator=",">
+			${item.sortFeild} ${item.sortType}
+		</foreach>
+		LIMIT ${startIndex},${pageSize}
+	</select>
+	<select id="getTotalCount" resultType="int" parameterType="com.hzfh.api.sales.model.query.BrokerageCalculateCondition" statementType="STATEMENT">
+		SELECT count(1) FROM brokerage_calculate where 1=1
+	</select>
+	<select id="getInfo" resultMap="resultMapBrokerageCalculate" parameterType="int">
+		SELECT id,emp_no,money_total,sum_order,money_brokerage,calc_time FROM brokerage_calculate where id=#{id}
+	</select>
+	<insert id="add" parameterType="com.hzfh.api.sales.model.BrokerageCalculate" useGeneratedKeys="true" keyProperty="id">
+		insert into brokerage_calculate
+		(emp_no,money_total,sum_order,money_brokerage,calc_time)
+		values
+		(#{empNo},#{moneyTotal},#{sumOrder},#{moneyBrokerage},#{calcTime})
+	</insert>
+	<update id="update" parameterType="com.hzfh.api.sales.model.BrokerageCalculate">
+		update brokerage_calculate set 
+		emp_no=#{empNo},money_total=#{moneyTotal},sum_order=#{sumOrder},money_brokerage=#{moneyBrokerage},calc_time=#{calcTime}
+		where id=#{id}
+	</update>
+	<delete id="delete" parameterType="int">
+		delete from brokerage_calculate where id = #{id}
+	</delete>
+</mapper>

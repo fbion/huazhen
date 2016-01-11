@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hzfh.service.employee.mapper.InterviewEvaluationRecordMapper">
+	<resultMap type="com.hzfh.api.employee.model.InterviewEvaluationRecord" id="resultMapInterviewEvaluationRecord">
+		<result property="id" column="id"/>
+		<result property="name" column="name"/>
+		<result property="sex" column="sex"/>
+		<result property="desirePositionNo" column="desire_position_no"/>
+		<result property="firstTime" column="first_time" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
+		<result property="totalScore" column="total_score"/>
+		<result property="evaluation" column="evaluation"/>
+		<result property="conclusion" column="conclusion"/>
+		<result property="hirePositionNo" column="hire_position_no"/>
+		<result property="empNo" column="emp_no"/>
+		<result property="interviewDate" column="interview_date" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
+		<result property="firstEvaluation" column="first_evaluation"/>
+		<result property="secondEvaluation" column="second_evaluation"/>
+		<result property="inUserNo" column="in_user_no"/>
+		<result property="inTime" column="in_time" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
+		<result property="editUserNo" column="edit_user_no"/>
+		<result property="editTime" column="edit_time" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
+		<result property="editComment" column="edit_comment"/>
+        <result property="retestUserNo" column="retest_user_no"/>
+		<!-- <collection property="evaluationScoreList" ofType="com.hzfh.api.employee.Model.EvaluationScore" column="evaluation_record_no">
+		    <result property="id" column="id"/>
+		    <result property="evaluationRecordNo" column="evaluation_record_no"/>
+		    <result property="evaluationContentNo" column="evaluation_content_no"/>
+		    <result property="score" column="score"/>
+		</collection> -->
+	</resultMap>
+	<select id="getList" resultMap="resultMapInterviewEvaluationRecord">
+		SELECT id,name,sex,desire_position_no,retest_user_no,first_time,total_score,evaluation,conclusion,hire_position_no,emp_no,interview_date,first_evaluation,second_evaluation,in_user_no,in_time,edit_user_no,edit_time,edit_comment
+		FROM interview_evaluation_record
+	</select>
+	<select id="getPagingList" resultMap="resultMapInterviewEvaluationRecord" parameterType="com.hzfh.api.employee.model.query.InterviewEvaluationRecordCondition" statementType="STATEMENT">
+		SELECT id,name,sex,retest_user_no,desire_position_no,first_time,sum(total_score) as total_score,evaluation,conclusion,hire_position_no,emp_no,interview_date,first_evaluation,second_evaluation,in_user_no,in_time,edit_user_no,edit_time,edit_comment FROM interview_evaluation_record
+        where retest_user_no = (${retestUserNo}) or( 1=1
+        <if test="name!=null and name!=''"> and name='${name}'</if>
+        <if test="positionNo!=0"> and desire_position_no=${positionNo}</if>
+        <if test="workMateString !=null"> and emp_no in (${workMateString})</if>
+        <if test="dateUp !=null and dateDown !=null"> and '${dateDown}' &lt;= first_time and first_time &lt; '${dateUp}'</if>
+        )
+        group by name
+		ORDER BY
+		<foreach item="item" collection="sortItemList" separator=",">
+			${item.sortFeild} ${item.sortType}
+		</foreach>
+		LIMIT ${startIndex},${pageSize}
+	</select>
+	<select id="getTotalCount" resultType="int" parameterType="com.hzfh.api.employee.model.query.InterviewEvaluationRecordCondition" statementType="STATEMENT">
+		SELECT count(1) FROM interview_evaluation_record where 1=1
+		<if test="name!=null and name!=''"> and name='${name}'</if>
+		<if test="positionNo!=0"> and desire_position_no=${positionNo}</if>
+		<if test="workMateString !=null"> and emp_no in (${workMateString})</if>
+		<if test="dateUp !=null and dateDown !=null"> and '${dateDown}' &lt;= first_time and first_time &lt; '${dateUp}'</if>
+	</select>
+	<select id="getInfo" resultMap="resultMapInterviewEvaluationRecord" parameterType="int">
+		<!-- SELECT e.*,i.* FROM interview_evaluation_record i left join evaluation_score e on i.id = e.evaluation_record_no 
+		where 1=1 group by name
+		<if test="id!=0"> and i.id = #{id} </if>  -->
+		SELECT * FROM interview_evaluation_record where  id = #{id}
+	</select>
+	<select id="getInfoListByName" resultMap="resultMapInterviewEvaluationRecord" parameterType="String">
+		SELECT i.* FROM interview_evaluation_record i where 1=1
+		<if test="name!=null"> and i.name = #{name} </if> 
+		order by i.id ASC
+	</select>
+	<insert id="add" parameterType="com.hzfh.api.employee.model.InterviewEvaluationRecord" useGeneratedKeys="true" keyProperty="id">
+		insert into interview_evaluation_record
+		(name,sex,retest_user_no,desire_position_no,first_time,total_score,evaluation,conclusion,hire_position_no,emp_no,interview_date,first_evaluation,second_evaluation,in_user_no,in_time,edit_user_no,edit_time,edit_comment)
+		values
+		(#{name},#{sex},#{retestUserNo},#{desirePositionNo},#{firstTime},#{totalScore},#{evaluation},#{conclusion},#{hirePositionNo},#{empNo},#{interviewDate},#{firstEvaluation},#{secondEvaluation},#{inUserNo},current_timestamp(),#{editUserNo},current_timestamp(),#{editComment})
+	</insert>
+	<update id="update" parameterType="com.hzfh.api.employee.model.InterviewEvaluationRecord">
+		update interview_evaluation_record set 
+		name=#{name},sex=#{sex},retest_user_no=#{retestUserNo},desire_position_no=#{desirePositionNo},first_time=#{firstTime},total_score=#{totalScore},evaluation=#{evaluation},conclusion=#{conclusion},hire_position_no=#{hirePositionNo},emp_no=#{empNo},interview_date=#{interviewDate},first_evaluation=#{firstEvaluation},second_evaluation=#{secondEvaluation},edit_user_no=#{editUserNo},edit_time=current_timestamp(),edit_comment=#{editComment}
+		where id=#{id}
+	</update>
+	<delete id="delete" parameterType="int">
+		delete from interview_evaluation_record where id = #{id}
+	</delete>
+</mapper>

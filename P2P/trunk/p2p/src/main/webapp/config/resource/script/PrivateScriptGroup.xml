@@ -1,0 +1,398 @@
+<?xml version="1.0"?>
+<scriptConfig xmlns="http://www.hzfh.com/web"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.hzfh.com/web ../../schemas/resources/Script.xsd">
+
+	<privateScriptGroups>
+        <scriptGroup name="register" sharedScriptGroup="Common">
+            <scriptName>validform</scriptName>
+            <scriptName>base64</scriptName>
+            <scriptName>passwordStrength</scriptName>
+            <scriptName>register</scriptName>
+            <scriptName>json2</scriptName>
+            <scriptName>enumList</scriptName>
+            <scriptName>n-linkage</scriptName>
+            <pages>
+                <pageName>register</pageName>
+            </pages>
+        </scriptGroup>
+        <scriptGroup name="login" sharedScriptGroup="Common">
+            <scriptName>validform</scriptName>
+            <scriptName>base64</scriptName>
+            <scriptName>login</scriptName>
+            <pages>
+                <pageName>login</pageName>
+            </pages>
+        </scriptGroup>
+        <scriptGroup name="index" sharedScriptGroup="Common">
+            <scriptName>validform</scriptName>
+            <scriptName>base64</scriptName>
+            <scriptName>login</scriptName>
+            <scriptName>index</scriptName>
+            <scriptName>sea</scriptName>
+            <scriptName>fullSlide</scriptName>
+            <scriptName>announcement</scriptName>
+            <pages>
+				<pageName>index</pageName>
+            </pages>
+        </scriptGroup>
+        
+        
+        <scriptGroup name="editPwd" sharedScriptGroup="Common">
+         	<scriptName>editPassword</scriptName>
+         	<scriptName>validform</scriptName>
+            <scriptName>base64</scriptName>
+            <scriptName>passwordStrength</scriptName>
+            <scriptName>json2</scriptName>
+            <pages>
+				<pageName>editPassword</pageName>
+            </pages>
+        </scriptGroup>
+        <scriptGroup name="reservation" sharedScriptGroup="Common">
+         	<scriptName>reservation</scriptName>
+         	<scriptName>pagination</scriptName>
+         	<scriptName>enumList</scriptName>
+         	<scriptName>laydate</scriptName>
+            <pages>
+				<pageName>myReservation</pageName>
+            </pages>
+        </scriptGroup>
+        <scriptGroup name="investment" sharedScriptGroup="Common">
+         	<scriptName>investment</scriptName>
+         	<scriptName>pagination</scriptName>
+         	<scriptName>enumList</scriptName>
+         	<scriptName>laydate</scriptName>
+            <pages>
+				<pageName>myInvestment</pageName>
+            </pages>
+        </scriptGroup>
+        <scriptGroup name="personalInfo" sharedScriptGroup="Common">
+         	<scriptName>enumList</scriptName>
+         	<scriptName>personalInfo</scriptName>
+         	<scriptName>validform</scriptName>
+         	<scriptName>n-linkage</scriptName>
+            <pages>
+				<pageName>personalInfo</pageName>
+            </pages>
+        </scriptGroup>
+        <scriptGroup name="productFeatures" sharedScriptGroup="Common">
+         	<scriptName>productFeatures</scriptName>
+            <pages>
+				<pageName>productFeatures</pageName>
+            </pages>
+        </scriptGroup>
+        <scriptGroup name="serviceContract" sharedScriptGroup="Common">
+         	<scriptName>serviceContract</scriptName>
+            <pages>
+				<pageName>serviceContract</pageName>
+            </pages>
+        </scriptGroup>
+        <scriptGroup name="knowledgeForum" sharedScriptGroup="Common">
+         	<scriptName>knowledgeForum</scriptName>
+            <pages>
+				<pageName>knowledgeForum</pageName>
+            </pages>
+        </scriptGroup>
+        <scriptGroup name="productDetails" sharedScriptGroup="Common">
+         	<scriptName>productDetails</scriptName>
+            <scriptName>validform</scriptName>
+            <scriptName>base64</scriptName>
+            <scriptName>login</scriptName>
+            <scriptName>pagination</scriptName>
+            <pages>
+				<pageName>productDetails</pageName>
+            </pages>
+        </scriptGroup>
+        <scriptGroup name="forgetPassword" sharedScriptGroup="Common">
+      		<scriptName>base64</scriptName>
+            <scriptName>validform</scriptName>
+            <scriptName>forgetPassword</scriptName>
+            <pages>
+                <pageName>forgetPassword</pageName>
+            </pages>
+        </scriptGroup>
+        <scriptGroup name="chooseWayPassword" sharedScriptGroup="Common">
+            <scriptName>chooseWayPassword</scriptName>
+            <pages>
+                <pageName>chooseWayPassword</pageName>
+            </pages>
+        </scriptGroup>
+        <scriptGroup name="byEmailPassword" sharedScriptGroup="Common">
+            <scriptName>byEmailPassword</scriptName>
+            <pages>
+                <pageName>byEmailPassword</pageName>
+            </pages>
+        </scriptGroup>
+        <scriptGroup name="byCellphonePassword" sharedScriptGroup="Common">
+            <scriptName>byCellphonePassword</scriptName>
+            <scriptName>validform</scriptName>
+            <pages>
+                <pageName>byCellphonePassword</pageName>
+            </pages>
+        </scriptGroup>
+        <scriptGroup name="resetPassword" sharedScriptGroup="Common">
+            <scriptName>validform</scriptName>
+            <scriptName>base64</scriptName>
+            <scriptName>passwordStrength</scriptName>
+            <scriptName>resetPassword</scriptName>
+            <pages>
+                <pageName>resetPassword</pageName>
+            </pages>
+        </scriptGroup>
+        <scriptGroup name="investorEducationt" sharedScriptGroup="Common">
+            <scriptName>education</scriptName>
+            <pages>
+                <pageName>investorEducationt</pageName>
+            </pages>
+        </scriptGroup>
+        <scriptGroup name="p2pProductList" sharedScriptGroup="Common">
+            <scriptName>p2pProductList</scriptName>
+            <scriptName>pagination</scriptName>
+            <pages>
+                <pageName>p2pProductList</pageName>
+            </pages>
+        </scriptGroup>
+        <scriptGroup name="p2pPage" sharedScriptGroup="Common">
+            <pages>
+				<pageName>resetSuccess</pageName>
+				<pageName>productDetails</pageName>
+				<!-- <pageName>registerSuccess</pageName> -->
+				<pageName>p2pProductList</pageName> 
+            </pages>
+        </scriptGroup>
+        
+        <scriptGroup name="registerSuccess" sharedScriptGroup="Common">
+        	<scriptName>registerSuccess</scriptName>
+        	<pages>
+        		<pageName>registerSuccess</pageName>
+        	</pages>
+        </scriptGroup>
+        <scriptGroup name="emailValidation" sharedScriptGroup="Common">
+        	<scriptName>emailValidation</scriptName>
+        	<pages>
+        		<pageName>emailValidation</pageName>
+        	</pages>
+        </scriptGroup>
+        
+        <scriptGroup name="account" sharedScriptGroup="Common">
+         	<scriptName>account</scriptName>
+         	<scriptName>pagination</scriptName>
+            <pages>
+				<pageName>account</pageName>
+            </pages>
+        </scriptGroup>
+        
+
+        <scriptGroup name="paymentAccountSecurity" sharedScriptGroup="Common">
+            <scriptName>paymentAccountSecurity</scriptName>
+            <scriptName>validform</scriptName>
+            <scriptName>base64</scriptName>
+            <scriptName>editPassword</scriptName>
+            <scriptName>ajaxfileupload</scriptName>
+            <scriptName>upload</scriptName>
+            <pages>
+                <pageName>paymentAccountSecurity</pageName>
+            </pages>
+        </scriptGroup>
+        <scriptGroup name="myPaymentMoneyRechargeList" sharedScriptGroup="Common">
+            <scriptName>paymentMoneyRechargeList</scriptName>
+            <scriptName>pagination</scriptName>
+             <scriptName>validform</scriptName>
+            <pages>
+                <pageName>myPaymentMoneyRechargeList</pageName>
+            </pages>
+        </scriptGroup>
+        <scriptGroup name="myPaymentMoneyWithdrawList" sharedScriptGroup="Common">
+            <scriptName>paymentMoneyWithdrawList</scriptName>
+             <scriptName>validform</scriptName>
+            <scriptName>pagination</scriptName>
+            <pages>
+                <pageName>myPaymentMoneyWithdrawList</pageName>
+            </pages>
+        </scriptGroup>
+        
+        <scriptGroup name="moneyDetail" sharedScriptGroup="Common">
+         	<scriptName>moneyDetail</scriptName>
+         	<scriptName>enumList</scriptName>
+         	<scriptName>pagination</scriptName>
+         	<scriptName>laydate</scriptName>
+            <pages>
+				<pageName>moneyDetail</pageName>
+            </pages>
+        </scriptGroup>
+        <scriptGroup name="contractConfirm" sharedScriptGroup="Common">
+            <scriptName>contractConfirm</scriptName>
+            <pages>
+                <pageName>contractConfirm</pageName>
+            </pages>
+        </scriptGroup>
+        <scriptGroup name="productConfirm" sharedScriptGroup="Common">
+            <scriptName>productConfirm</scriptName>
+            <pages>
+                <pageName>productConfirm</pageName>
+            </pages>
+        </scriptGroup>
+        <scriptGroup name="paymentConfirm" sharedScriptGroup="Common">
+            <scriptName>paymentConfirm</scriptName>
+            <pages>
+                <pageName>paymentConfirm</pageName>
+            </pages>
+        </scriptGroup>
+        <scriptGroup name="enterpriseCulture" sharedScriptGroup="Common">
+            <scriptName>enterpriseCulture</scriptName>
+            <pages>
+                <pageName>enterpriseCulture</pageName>
+            </pages>
+        </scriptGroup>
+        <scriptGroup name="mediaReports" sharedScriptGroup="Common">
+            <scriptName>mediaReports</scriptName>
+            <pages>
+                <pageName>mediaReports</pageName>
+            </pages>
+        </scriptGroup>
+        <scriptGroup name="aboutCompany" sharedScriptGroup="Common">
+            <scriptName>aboutCompany</scriptName>
+            <pages>
+                <pageName>aboutCompany</pageName>
+            </pages>
+        </scriptGroup>
+        <scriptGroup name="bulletin" sharedScriptGroup="Common">
+            <scriptName>bulletin</scriptName>
+            <scriptName>pagination</scriptName>
+            <pages>
+                <pageName>bulletin</pageName>
+            </pages>
+        </scriptGroup>
+        <scriptGroup name="joinUs" sharedScriptGroup="Common">
+            <scriptName>joinUs</scriptName>
+            <pages>
+                <pageName>joinUs</pageName>
+            </pages>
+        </scriptGroup>
+        <scriptGroup name="contactUs" sharedScriptGroup="Common">
+            <scriptName>contactUs</scriptName>
+            <pages>
+                <pageName>contactUs</pageName>
+            </pages>
+        </scriptGroup>
+        <scriptGroup name="store" sharedScriptGroup="Common">
+            <scriptName>store</scriptName>
+            <scriptName>pagination</scriptName>
+            <pages>
+                <pageName>storeList</pageName>
+            </pages>
+        </scriptGroup>
+        <scriptGroup name="storeDetail" sharedScriptGroup="Common">
+            <scriptName>store</scriptName>
+            <pages>
+                <pageName>storeDetail</pageName>
+            </pages>
+        </scriptGroup>
+        <scriptGroup name="bankCard" sharedScriptGroup="Common">
+            <scriptName>bankCard</scriptName>
+            <pages>
+                <pageName>bankCard</pageName>
+            </pages>
+        </scriptGroup>
+        <scriptGroup name="myCoupons" sharedScriptGroup="Common">
+        	<scriptName>myCoupons</scriptName>
+        	<pages>
+        		<pageName>myCoupons</pageName>
+        	</pages>
+        </scriptGroup>
+        <scriptGroup name="myIntegral" sharedScriptGroup="Common">
+        	<scriptName>myIntegral</scriptName>
+        	<pages>
+        		<pageName>myIntegral</pageName>
+        	</pages>
+        </scriptGroup>
+        <scriptGroup name="myReward" sharedScriptGroup="Common">
+        	<scriptName>myReward</scriptName>
+        	<pages>
+        		<pageName>myReward</pageName>
+        	</pages>
+        </scriptGroup>
+        <scriptGroup name="myInfo" sharedScriptGroup="Common">
+        	<scriptName>myInfo</scriptName>
+        	<pages>
+        		<pageName>myInfo</pageName>
+        	</pages>
+        </scriptGroup>
+        <scriptGroup name="helpCenter" sharedScriptGroup="Common">
+        	<scriptName>helpCenter</scriptName>
+        	<pages>
+        		<pageName>helpCenter</pageName>
+        	</pages>
+        </scriptGroup>
+        <scriptGroup name="popularize" sharedScriptGroup="Common">
+        	<scriptName>popularize</scriptName>
+        	<pages>
+        		<pageName>popularize</pageName>
+        	</pages>
+        </scriptGroup>
+        <scriptGroup name="reservationHelp" sharedScriptGroup="Common">
+        	<scriptName>reservationHelp</scriptName>
+        	<pages>
+        		<pageName>reservationHelp</pageName>
+        	</pages>
+        </scriptGroup>
+        <scriptGroup name="financing" sharedScriptGroup="Common">
+        	<scriptName>financing</scriptName>
+        	<pages>
+        		<pageName>financing</pageName>
+        	</pages>
+        </scriptGroup>
+        <scriptGroup name="noviceArea" sharedScriptGroup="Common">
+        	<scriptName>noviceArea</scriptName>
+        	<pages>
+        		<pageName>noviceArea</pageName>
+        	</pages>
+        </scriptGroup>
+        <scriptGroup name="accountCentral" sharedScriptGroup="Common">
+        	<scriptName>accountCentral</scriptName>
+        	<pages>
+        		<pageName>accountCentral</pageName>
+        	</pages>
+        </scriptGroup>
+        <scriptGroup name="lawsRegulations" sharedScriptGroup="Common">
+        	<scriptName>lawsRegulations</scriptName>
+        	<pages>
+        		<pageName>lawsRegulations</pageName>
+        		<pageName>lawsRegulationsContent</pageName>
+        	</pages>
+        </scriptGroup>
+        <scriptGroup name="productSuperiority" sharedScriptGroup="Common">
+        	<scriptName>productSuperiority</scriptName>
+        	<pages>
+        		<pageName>productSuperiority</pageName>
+        	</pages>
+        </scriptGroup>
+        <scriptGroup name="securityAssurance" sharedScriptGroup="Common">
+        	<scriptName>securityAssurance</scriptName>
+        	<pages>
+        		<pageName>securityAssurance</pageName>
+        	</pages>
+        </scriptGroup>
+        <scriptGroup name="employeePhoto" sharedScriptGroup="Empty">
+        	<scriptName>employeePhoto</scriptName>
+        	<pages>
+        		<pageName>employeePhoto</pageName>
+        	</pages>
+        </scriptGroup>
+        
+        <scriptGroup name="errorPage" sharedScriptGroup="Common">
+        	<scriptName>errorPage</scriptName>
+        	<pages>
+        		<pageName>errorPage</pageName>
+        	</pages>
+        </scriptGroup>
+        <scriptGroup name="myInvite" sharedScriptGroup="Common">
+        	<scriptName>myInvite</scriptName>
+        	<scriptName>pagination</scriptName>
+        	<pages>
+        		<pageName>myInvite</pageName>
+        	</pages>
+        </scriptGroup>
+	</privateScriptGroups>
+
+</scriptConfig>

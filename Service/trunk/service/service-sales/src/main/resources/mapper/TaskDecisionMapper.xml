@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hzfh.service.sales.mapper.TaskDecisionMapper">
+	<resultMap type="com.hzfh.api.sales.model.TaskDecision" id="resultMapTaskDecision">
+		<result property="id" column="id"/>
+		<result property="productTaskNo" column="product_task_no"/>
+		<result property="depNo" column="dep_no"/>
+		<result property="isOk" column="is_ok"/>
+		<result property="checkTime" column="check_time" jdbcType="DATE" javaType="java.sql.Date"/>
+		<result property="empNo" column="emp_no"/>
+		<result property="sort" column="sort"/>
+		<result property="inUserNo" column="in_user_no"/>
+		<result property="inTime" column="in_time" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
+		<result property="editUserNo" column="edit_user_no"/>
+		<result property="editTime" column="edit_time" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
+		<result property="editComment" column="edit_comment"/>
+	</resultMap>
+	<select id="getList" resultMap="resultMapTaskDecision">
+		SELECT id,product_task_no,dep_no,is_ok,check_time,emp_no,sort,in_user_no,in_time,edit_user_no,edit_time,edit_comment
+		FROM task_decision
+	</select>
+	<select id="getPagingList" resultMap="resultMapTaskDecision" parameterType="com.hzfh.api.sales.model.query.TaskDecisionCondition" statementType="STATEMENT">
+		SELECT id,product_task_no,dep_no,is_ok,check_time,emp_no,sort,in_user_no,in_time,edit_user_no,edit_time,edit_comment FROM task_decision where 1=1
+		
+		ORDER BY
+		<foreach item="item" collection="sortItemList" separator=",">
+			${item.sortFeild} ${item.sortType}
+		</foreach>
+		LIMIT ${startIndex},${pageSize}
+	</select>
+	<select id="getTotalCount" resultType="int" parameterType="com.hzfh.api.sales.model.query.TaskDecisionCondition" statementType="STATEMENT">
+		SELECT count(1) FROM task_decision where 1=1
+	</select>
+	<select id="getInfo" resultMap="resultMapTaskDecision" parameterType="int">
+		SELECT id,product_task_no,dep_no,is_ok,check_time,emp_no,sort,in_user_no,in_time,edit_user_no,edit_time,edit_comment FROM task_decision where id=#{id}
+	</select>
+	<insert id="add" parameterType="com.hzfh.api.sales.model.TaskDecision" useGeneratedKeys="true" keyProperty="id">
+		insert into task_decision
+		(product_task_no,dep_no,is_ok,emp_no,sort,in_user_no,in_time,edit_user_no,edit_time,edit_comment)
+		values
+		(#{productTaskNo},#{depNo},#{isOk},#{empNo},#{sort},#{inUserNo},current_timestamp(),#{editUserNo},current_timestamp(),#{editComment})
+	</insert>
+	<update id="update" parameterType="com.hzfh.api.sales.model.TaskDecision">
+		update task_decision set 
+		product_task_no=#{productTaskNo},dep_no=#{depNo},is_ok=#{isOk},check_time=current_timestamp(),emp_no=#{empNo},sort=#{sort},edit_user_no=#{editUserNo},edit_time=current_timestamp(),edit_comment=#{editComment}
+		where id=#{id}
+	</update>
+	<delete id="delete" parameterType="int">
+		delete from task_decision where id = #{id}
+	</delete>
+	
+	
+	<select id="getListByProductTaskNo" parameterType="int" resultMap="resultMapTaskDecision">
+		SELECT id,product_task_no,dep_no,is_ok,check_time,emp_no,sort,in_user_no,in_time,edit_user_no,edit_time,edit_comment
+		FROM task_decision
+		where product_task_no=#{productTaskNo}
+	</select>
+	
+	
+	
+	
+	
+	
+	
+</mapper>

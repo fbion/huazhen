@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hzfh.service.sales.mapper.ProductTaskMapper">
+	<resultMap type="com.hzfh.api.sales.model.ProductTask" id="resultMapProductTask">
+		<result property="id" column="id"/>
+		<result property="productNo" column="product_no"/>
+		<result property="deptNo" column="dept_no"/>
+		<result property="status" column="status"/>
+		<result property="taskAmout" column="task_amout"/>
+		<result property="currAmout" column="curr_amout"/>
+		<result property="quota" column="quota"/>
+		<result property="salesCycle" column="sales_cycle"/>
+		<result property="incentivePolicy" column="incentive_policy"/>
+		<result property="salesPolicy" column="sales_policy"/>
+		<result property="inUserNo" column="in_user_no"/>
+		<result property="inTime" column="in_time" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
+		<result property="editUserNo" column="edit_user_no"/>
+		<result property="editTime" column="edit_time" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
+		<result property="editComment" column="edit_comment"/>
+		<result property="isTest" column="is_test"/>
+        <result property="activitiNo" column="activiti_no"/>
+        <result property="activitiStatus" column="activiti_status"/>
+	</resultMap>
+	<select id="getList" resultMap="resultMapProductTask">
+		SELECT id,product_no,dept_no,status,activiti_no,activiti_status,task_amout,curr_amout,quota,sales_cycle,incentive_policy,sales_policy,in_user_no,in_time,edit_user_no,edit_time,edit_comment,is_test
+		FROM product_task
+	</select>
+	<select id="getPagingList" resultMap="resultMapProductTask" parameterType="com.hzfh.api.sales.model.query.ProductTaskCondition" statementType="STATEMENT">
+		SELECT id,product_no,dept_no,status,task_amout,curr_amout,activiti_no,activiti_status,quota,sales_cycle,incentive_policy,sales_policy,in_user_no,in_time,edit_user_no,edit_time,edit_comment,is_test
+		FROM product_task where 1=1
+		<if test="status !=-1">and status=${status}</if>
+		<if test="product !=0">and product_no=${product}</if>
+		<if test="dept !=0">and dept_no=${dept}</if>
+		<if test="isTest>-1">and is_test=${isTest}</if>
+		ORDER BY
+		<foreach item="item" collection="sortItemList" separator=",">
+			${item.sortFeild} ${item.sortType}
+		</foreach>
+		LIMIT ${startIndex},${pageSize}
+	</select>
+	<select id="getTotalCount" resultType="int" parameterType="com.hzfh.api.sales.model.query.ProductTaskCondition" statementType="STATEMENT">
+		SELECT count(1) FROM product_task where 1=1
+        <if test="status !=-1">and status=${status}</if>
+		<if test="product !=0">and product_no=${product}</if>
+		<if test="dept !=0">and dept_no=${dept}</if>
+		<if test="isTest>-1">and is_test=${isTest}</if>
+	</select>
+	<select id="getInfo" resultMap="resultMapProductTask" parameterType="int">
+		SELECT id,product_no,dept_no,status,task_amout,curr_amout,quota,sales_cycle,incentive_policy,sales_policy,in_user_no,in_time,edit_user_no,edit_time,edit_comment,is_test FROM product_task where id=#{id}
+	</select>
+	<insert id="add" parameterType="com.hzfh.api.sales.model.ProductTask" useGeneratedKeys="true" keyProperty="id">
+		insert into product_task
+		(product_no,dept_no,status,activiti_no,activiti_status,task_amout,curr_amout,quota,sales_cycle,incentive_policy,sales_policy,in_user_no,in_time,edit_user_no,edit_time,edit_comment,is_test)
+		values
+		(#{productNo},#{deptNo},#{status},#{activitiNo},#{activitiStatus},#{taskAmout},#{currAmout},#{quota},#{salesCycle},#{incentivePolicy},#{salesPolicy},#{inUserNo},current_timestamp(),#{editUserNo},current_timestamp(),#{editComment},#{isTest})
+	</insert>
+	<update id="update" parameterType="com.hzfh.api.sales.model.ProductTask">
+		update product_task set 
+		product_no=#{productNo},dept_no=#{deptNo},status=#{status},task_amout=#{taskAmout},quota=#{quota},sales_cycle=#{salesCycle},incentive_policy=#{incentivePolicy},sales_policy=#{salesPolicy},edit_user_no=#{editUserNo},edit_time=current_timestamp(),edit_comment=#{editComment},is_test=#{isTest},
+		activiti_no=#{activitiNo},activiti_status=#{activitiStatus}
+		where id=#{id}
+	</update>
+	<delete id="delete" parameterType="int">
+		delete from product_task where id = #{id}
+	</delete>
+	
+	<select id="getListByProductNo" parameterType="int" resultMap="resultMapProductTask">
+		SELECT id,product_no,dept_no,status,task_amout,activiti_no,activiti_status,curr_amout,quota,sales_cycle,incentive_policy,sales_policy,in_user_no,in_time,edit_user_no,edit_time,edit_comment,is_test
+		FROM product_task
+		where product_no=#{product}
+	</select>
+    <update id="updateStatus" parameterType="com.hzfh.api.sales.model.ProductTask">
+        update product_task set
+        status=#{status},edit_user_no=#{editUserNo},edit_time=current_timestamp(),edit_comment=#{editComment}
+        where id=#{id}
+    </update>
+	<update id="updateAmount" parameterType="com.hzfh.api.sales.model.ProductTask">
+		update product_task set task_amout=task_amout-${taskAmout},curr_amout=curr_amout+${taskAmout}
+		where product_no=${productNo} and dept_no=${deptNo}
+	</update>
+	<update id="updateReAmount" parameterType="com.hzfh.api.sales.model.ProductTask">
+		update product_task set task_amout=task_amout+${taskAmout},curr_amout=curr_amout-${taskAmout}
+		where product_no=${productNo} and dept_no=${deptNo}
+	</update>
+    <update id="updateAddCurrentAmount">
+        update product_task set curr_amout=curr_amout+#{currentAmount} where product_no=#{productNo} and dept_no=#{deptNo}
+    </update>
+    <update id="updateReduceCurrentAmount">
+        update product_task set curr_amout=curr_amout-#{currentAmount} where product_no=#{productNo} and dept_no=#{deptNo}
+    </update>
+</mapper>

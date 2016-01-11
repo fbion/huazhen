@@ -1,0 +1,49 @@
+<?xml version="1.0"?>
+<scriptConfig xmlns="http://www.hzfh.com/web"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://www.hzfh.com/web ../../schemas/resources/Script.xsd">
+
+    <scriptMappings>
+        <!--Common begin-->
+        <script name="jQuery" order="1" isDevelop="false">jquery-1.11.1.min.js?t=20151126</script>
+        <script name="echarts-plain" order="2" isDevelop="false">echarts-plain.js?t=20151126</script>
+        <script name="common" order="3" isDevelop="false">common.js?t=20151126</script>
+        <script name="pagination" order="6" isDevelop="false">jquery.pagination.js?t=20151126</script>
+		<script name="html5shiv" order="4" isDevelop="false" limitBrowserType="IEOnly" limitBrowserVersion="8">html5shiv.min.js?t=20151126</script>
+        <script name="respond" order="5" isDevelop="false" limitBrowserType="IEOnly" limitBrowserVersion="8">respond.min.js?t=20151126</script>
+        <script name="jqueryElastislide" order="11" isDevelop="false">jquery.elastislide.js</script>
+        <script name="jqueryEasing" order="12" isDevelop="false">jquery.easing.1.3.js</script>
+       
+        <script name="environmentVariable" order="8" isDevelop="true" type="Inline"></script>
+        <script name="json2" order="9" isDevelop="true">common/json2.js?t=20151126</script>
+        <script name="base" order="10" isDevelop="true">common/base.js?t=20151126</script>
+        <script name="enumList" order="21" isDevelop="true">common/enumList.js?t=20151126</script>
+        <script name="validform" order="16" isDevelop="true">common/Validform_v5.3.2_min.js?t=20151126</script>
+        <script name="base64" order="17" isDevelop="true">common/base64.js?t=20151126</script>
+        <script name="n-linkage" order="18" isDevelop="true">common/n-linkage.js?t=20151126</script>
+        <script name="passwordStrength" order="19" isDevelop="true">common/passwordStrength.js?t=20151126</script>
+
+        <script name="index" order="27" isDevelop="true">customer/index.js?t=20151126</script>
+
+        <!-- Customer here -->
+        <script name="register" order="20" isDevelop="true">customer/register.js?t=20151126</script>
+        <script name="newRegister" order="21" isDevelop="true">customer/newRegister.js?t=20151126</script>
+        <script name="login" order="20" isDevelop="true">customer/login.js?t=20151126</script>
+        <script name="reservation" order="19" isDevelop="true">customer/reservation.js?t=20151126</script>
+        <script name="investment" order="19" isDevelop="true">customer/investment.js?t=20151126</script>
+        <script name="productFeatures" order="19" isDevelop="true">product/productFeatures.js?t=20151126</script>
+        <script name="personalInfo" order="20" isDevelop="true">customer/personalInfo.js?t=20151126</script>
+        <script name="editPassword" order="25" isDevelop="true">customer/editPassword.js?t=20151126</script>
+        <script name="productDetails" order="20" isDevelop="true">product/productDetails.js?t=20151126</script>
+        <script name="investInfo" order="20" isDevelop="true">product/investInfo.js?t=20151126</script>
+        <script name="forgetPassword" order="20" isDevelop="true">customer/forgetPassword.js?t=20151126</script>
+        <script name="resetPassword" order="20" isDevelop="true">customer/resetPassword.js?t=20151126</script>
+        <script name="education" order="26" isDevelop="true">customer/education.js?t=20151126</script>
+        <script name="myInvite" order="26" isDevelop="true">customer/myInvite.js?t=20151126</script> 
+		<script name="store" order="26" isDevelop="true">customer/store.js?t=20151126</script>
+		<script name="errorPage" order="28" isDevelop="true">customer/errorPage.js</script>
+		<script name="verifyTelephone" order="20" isDevelop="true">customer/verifyTelephone.js</script>
+
+
+    </scriptMappings>
+</scriptConfig>

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hzfh.service.employee.mapper.ProbationWorkSummaryMapper">
+	<resultMap type="com.hzfh.api.employee.model.ProbationWorkSummary" id="resultMapProbationWorkSummary">
+		<result property="id" column="id"/>
+		<result property="empNo" column="emp_no"/>
+		<result property="companyNo" column="company_no"/>
+		<result property="deptNo" column="dept_no"/>
+		<result property="positionNo" column="position_no"/>
+		<result property="startTime" column="start_time" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
+		<result property="endTime" column="end_time" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
+		<result property="selfEvaluation" column="self_evaluation"/>
+		<result property="workSuggestion" column="work_suggestion"/>
+		<result property="workSummary" column="work_summary"/>
+		<result property="activitiNo" column="activiti_no"/>
+		<result property="inUserNo" column="in_user_no"/>
+		<result property="inTime" column="in_time" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
+		<result property="editUserNo" column="edit_user_no"/>
+		<result property="editTime" column="edit_time" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
+		<result property="editComment" column="edit_comment"/>
+	</resultMap>
+	<select id="getList" resultMap="resultMapProbationWorkSummary">
+		SELECT id,emp_no,company_no,dept_no,position_no,start_time,end_time,self_evaluation,work_suggestion,work_summary,activiti_no,in_user_no,in_time,edit_user_no,edit_time,edit_comment
+		FROM probation_work_summary
+	</select>
+	<select id="getPagingList" resultMap="resultMapProbationWorkSummary" parameterType="com.hzfh.api.employee.model.query.ProbationWorkSummaryCondition" statementType="STATEMENT">
+		SELECT id,emp_no,company_no,dept_no,position_no,start_time,end_time,self_evaluation,work_suggestion,work_summary,activiti_no,in_user_no,in_time,edit_user_no,edit_time,edit_comment FROM probation_work_summary where 1=1
+		<if test="empNo!=0"> and emp_no='${empNo}'</if>
+		<if test="companyNo!=0"> and company_no=${companyNo}</if>
+		<if test="deptNo!=0"> and dept_no=${deptNo}</if>
+		<if test="positionNo!=0"> and position_no=${positionNo}</if>
+		<if test="workMateString !=null"> and emp_no in (${workMateString})</if>
+		<if test="dateUp !=null and dateDown !=null"> and '${dateDown}' &lt;= start_time and start_time &lt; '${dateUp}'</if>
+		ORDER BY
+		<foreach item="item" collection="sortItemList" separator=",">
+			${item.sortFeild} ${item.sortType}
+		</foreach>
+		LIMIT ${startIndex},${pageSize}
+	</select>
+	<select id="getTotalCount" resultType="int" parameterType="com.hzfh.api.employee.model.query.ProbationWorkSummaryCondition" statementType="STATEMENT">
+		SELECT count(1) FROM probation_work_summary where 1=1
+		<if test="empNo!=0"> and emp_no='${empNo}'</if>
+		<if test="companyNo!=0"> and company_no=${companyNo}</if>
+		<if test="deptNo!=0"> and dept_no=${deptNo}</if>
+		<if test="positionNo!=0"> and position_no=${positionNo}</if>
+		<if test="workMateString !=null"> and emp_no in (${workMateString})</if>
+		<if test="dateUp !=null and dateDown !=null"> and '${dateDown}' &lt;= start_time and start_time &lt; '${dateUp}'</if>
+	</select>
+	<select id="getInfo" resultMap="resultMapProbationWorkSummary" parameterType="int">
+		SELECT id,emp_no,company_no,dept_no,position_no,start_time,end_time,self_evaluation,work_suggestion,work_summary,activiti_no,in_user_no,in_time,edit_user_no,edit_time,edit_comment FROM probation_work_summary where id=#{id}
+	</select>
+    <select id="getInfoByEmpNo" resultMap="resultMapProbationWorkSummary" parameterType="int">
+        SELECT id,emp_no,activiti_no FROM probation_work_summary where emp_no =#{empNo}
+    </select>
+    <select id="getInfoByActivitiNo" resultMap="resultMapProbationWorkSummary" parameterType="String">
+        SELECT id,emp_no,company_no,dept_no,position_no,start_time,end_time,self_evaluation,work_suggestion,work_summary,activiti_no,in_user_no,in_time,edit_user_no,edit_time,edit_comment FROM probation_work_summary where activiti_no=#{activitiNo}
+    </select>
+	<insert id="add" parameterType="com.hzfh.api.employee.model.ProbationWorkSummary" useGeneratedKeys="true" keyProperty="id">
+		insert into probation_work_summary
+		(emp_no,company_no,dept_no,position_no,start_time,end_time,self_evaluation,work_suggestion,work_summary,activiti_no,in_user_no,in_time,edit_user_no,edit_time,edit_comment)
+		values
+		(#{empNo},#{companyNo},#{deptNo},#{positionNo},#{startTime},#{endTime},#{selfEvaluation},#{workSuggestion},#{workSummary},#{activitiNo},#{inUserNo},current_timestamp(),#{editUserNo},current_timestamp(),#{editComment})
+	</insert>
+	<update id="update" parameterType="com.hzfh.api.employee.model.ProbationWorkSummary">
+		update probation_work_summary set 
+		emp_no=#{empNo},company_no=#{companyNo},dept_no=#{deptNo},position_no=#{positionNo},start_time=#{startTime},end_time=#{endTime},self_evaluation=#{selfEvaluation},work_suggestion=#{workSuggestion},work_summary=#{workSummary},activiti_no=#{activitiNo},edit_user_no=#{editUserNo},edit_time=current_timestamp(),edit_comment=#{editComment}
+		where id=#{id}
+	</update>
+	<delete id="delete" parameterType="int">
+		delete from probation_work_summary where id = #{id}
+	</delete>
+</mapper>

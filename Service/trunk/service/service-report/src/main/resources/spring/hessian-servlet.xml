@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://www.springframework.org/schema/beans" xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+
+       http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context-4.0.xsd"
+	default-autowire="byName" default-lazy-init="false">
+	<context:component-scan base-package="com.hzfh.service" />
+	<context:annotation-config />
+	<bean id="hessianMapping"
+		class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+		<property name="mappings">
+			<props>
+				<prop key="/companySalesDaily">companySalesDailyService</prop>
+				<prop key="/companySalesTotal">companySalesTotalService</prop>
+				<prop key="/deptSalesDaily">deptSalesDailyService</prop>
+				<prop key="/deptSalesTotal">deptSalesTotalService</prop>
+				<prop key="/empSalesDaily">empSalesDailyService</prop>
+				<prop key="/empSalesTotal">empSalesTotalService</prop>
+                <prop key="/addSalesReport">addSalesReportService</prop>
+                <prop key="/addCustomerReport">addCustomerReportService</prop>
+                <prop key="/paymentReport">paymentReportService</prop>
+                <prop key="/paymentReportDeatil">paymentReportDeatilService</prop>
+			</props>
+		</property>
+	</bean>
+    <bean id="paymentReportServiceImpl" class="com.hzfh.service.report.serviceImpl.PaymentReportServiceImpl" />
+    <bean id="paymentReportService"
+          class="org.springframework.remoting.caucho.HessianServiceExporter">
+        <property name="service" ref="paymentReportServiceImpl" />
+        <property name="serviceInterface" value="com.hzfh.api.report.service.PaymentReportService" />
+    </bean>
+    <bean id="paymentReportDeatilServiceImpl" class="com.hzfh.service.report.serviceImpl.PaymentReportDeatilServiceImpl" />
+    <bean id="paymentReportDeatilService"
+          class="org.springframework.remoting.caucho.HessianServiceExporter">
+        <property name="service" ref="paymentReportDeatilServiceImpl" />
+        <property name="serviceInterface" value="com.hzfh.api.report.service.PaymentReportDeatilService" />
+    </bean>
+
+    <bean id="companySalesDailyServiceImpl" class="com.hzfh.service.report.serviceImpl.CompanySalesDailyServiceImpl" />
+  <bean id="companySalesDailyService"
+		class="org.springframework.remoting.caucho.HessianServiceExporter">
+    <property name="service" ref="companySalesDailyServiceImpl" />
+    <property name="serviceInterface" value="com.hzfh.api.report.service.CompanySalesDailyService" />
+  </bean>
+    <bean id="addSalesReportServiceImpl" class="com.hzfh.service.report.serviceImpl.AddSalesReportServiceImpl" />
+    <bean id="addSalesReportService"
+          class="org.springframework.remoting.caucho.HessianServiceExporter">
+        <property name="service" ref="addSalesReportServiceImpl" />
+        <property name="serviceInterface" value="com.hzfh.api.report.service.AddSalesReportService" />
+    </bean>
+  <bean id="companySalesTotalServiceImpl" class="com.hzfh.service.report.serviceImpl.CompanySalesTotalServiceImpl" />
+  <bean id="companySalesTotalService"
+		class="org.springframework.remoting.caucho.HessianServiceExporter">
+    <property name="service" ref="companySalesTotalServiceImpl" />
+    <property name="serviceInterface" value="com.hzfh.api.report.service.CompanySalesTotalService" />
+  </bean>
+
+  <bean id="deptSalesDailyServiceImpl" class="com.hzfh.service.report.serviceImpl.DeptSalesDailyServiceImpl" />
+  <bean id="deptSalesDailyService"
+		class="org.springframework.remoting.caucho.HessianServiceExporter">
+    <property name="service" ref="deptSalesDailyServiceImpl" />
+    <property name="serviceInterface" value="com.hzfh.api.report.service.DeptSalesDailyService" />
+  </bean>
+
+  <bean id="deptSalesTotalServiceImpl" class="com.hzfh.service.report.serviceImpl.DeptSalesTotalServiceImpl" />
+  <bean id="deptSalesTotalService"
+		class="org.springframework.remoting.caucho.HessianServiceExporter">
+    <property name="service" ref="deptSalesTotalServiceImpl" />
+    <property name="serviceInterface" value="com.hzfh.api.report.service.DeptSalesTotalService" />
+  </bean>
+
+  <bean id="empSalesDailyServiceImpl" class="com.hzfh.service.report.serviceImpl.EmpSalesDailyServiceImpl" />
+  <bean id="empSalesDailyService"
+		class="org.springframework.remoting.caucho.HessianServiceExporter">
+    <property name="service" ref="empSalesDailyServiceImpl" />
+    <property name="serviceInterface" value="com.hzfh.api.report.service.EmpSalesDailyService" />
+  </bean>
+
+  <bean id="empSalesTotalServiceImpl" class="com.hzfh.service.report.serviceImpl.EmpSalesTotalServiceImpl" />
+  <bean id="empSalesTotalService"
+		class="org.springframework.remoting.caucho.HessianServiceExporter">
+    <property name="service" ref="empSalesTotalServiceImpl" />
+    <property name="serviceInterface" value="com.hzfh.api.report.service.EmpSalesTotalService" />
+  </bean>
+
+    <bean id="addCustomerReportServiceImpl" class="com.hzfh.service.report.serviceImpl.AddCustomerReportServiceImpl" />
+    <bean id="addCustomerReportService"
+          class="org.springframework.remoting.caucho.HessianServiceExporter">
+        <property name="service" ref="addCustomerReportServiceImpl" />
+        <property name="serviceInterface" value="com.hzfh.api.report.service.AddCustomerReportService" />
+    </bean>
+</beans>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hzfh.service.customer.mapper.ActivityCustomerDetailMapper">
+	<resultMap type="com.hzfh.api.customer.model.ActivityCustomerDetail" id="resultMapActivityCustomerDetail">
+		<result property="id" column="id"/>
+		<result property="activityCustomerTaskNo" column="activity_customer_task_no"/>
+		<result property="taskStatus" column="task_status"/>
+		<result property="invitedNo" column="invited_no"/>
+		<result property="activityAwardId" column="activity_award_id"/>
+		<result property="finishTime" column="finish_time" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
+	</resultMap>
+	<select id="getList" resultMap="resultMapActivityCustomerDetail">
+		SELECT id,activity_customer_task_no,task_status,finish_time,invited_no,activity_award_id
+		FROM activity_customer_detail
+	</select>
+	<select id="getPagingList" resultMap="resultMapActivityCustomerDetail" parameterType="com.hzfh.api.customer.model.query.ActivityCustomerDetailCondition" statementType="STATEMENT">
+		SELECT id,activity_customer_task_no,task_status,finish_time,invited_no,activity_award_id FROM activity_customer_detail where 1=1
+		ORDER BY
+		<foreach item="item" collection="sortItemList" separator=",">
+			${item.sortFeild} ${item.sortType}
+		</foreach>
+		LIMIT ${startIndex},${pageSize}
+	</select>
+	<select id="getTotalCount" resultType="int" parameterType="com.hzfh.api.customer.model.query.ActivityCustomerDetailCondition" statementType="STATEMENT">
+		SELECT count(1) FROM activity_customer_detail where 1=1
+	</select>
+	<select id="getInfo" resultMap="resultMapActivityCustomerDetail" parameterType="int">
+		SELECT id,activity_customer_task_no,task_status,finish_time,invited_no,activity_award_id FROM activity_customer_detail where id=#{id}
+	</select>
+	<select id="getActivityCustomerDetailById" resultMap="resultMapActivityCustomerDetail" parameterType="int">
+		SELECT id,activity_customer_task_no,task_status,finish_time,invited_no,activity_award_id FROM activity_customer_detail where activity_customer_task_no=#{activityCustomerTaskNo}
+	</select>
+	<insert id="add" parameterType="com.hzfh.api.customer.model.ActivityCustomerDetail" useGeneratedKeys="true" keyProperty="id">
+		insert into activity_customer_detail
+		(activity_customer_task_no,task_status,finish_time,invited_no,activity_award_id)
+		values
+		(#{activityCustomerTaskNo},#{taskStatus},#{finishTime},#{invitedNo},#{activityAwardId})
+	</insert>
+	<update id="update" parameterType="com.hzfh.api.customer.model.ActivityCustomerDetail">
+		update activity_customer_detail set 
+		activity_customer_task_no=#{activityCustomerTaskNo},task_status=#{taskStatus},finish_time=#{finishTime},invited_no=#{invitedNo},activity_award_id=#{activityAwardId}
+		where id=#{id}
+	</update>
+	<delete id="delete" parameterType="int">
+		delete from activity_customer_detail where id = #{id}
+	</delete>
+</mapper>

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hzfh.service.customer.mapper.ActivityCustomerExperienceGoldMapper">
+	<resultMap type="com.hzfh.api.customer.model.ActivityCustomerExperienceGold" id="resultMapActivityCustomerExperienceGold">
+		<result property="id" column="id"/>
+		<result property="p2pCustomerNo" column="p2p_customer_no"/>
+		<result property="useTime" column="use_time" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
+		<result property="gainTime" column="gain_time" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
+		<result property="sendTime" column="send_time" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
+		<result property="startTime" column="start_time" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
+		<result property="endTime" column="end_time" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
+		<result property="myActivityNo" column="my_activity_no"/>
+		<result property="experienceGoldNo" column="experience_gold_no"/>
+		<result property="status" column="status"/>
+	</resultMap>
+	<select id="getList" resultMap="resultMapActivityCustomerExperienceGold">
+		SELECT id,p2p_customer_no,use_time,gain_time,send_time,start_time,end_time,my_activity_no,status,experience_gold_no
+		FROM activity_customer_experience_gold
+	</select>
+	<select id="getPagingList" resultMap="resultMapActivityCustomerExperienceGold" parameterType="com.hzfh.api.customer.model.query.ActivityCustomerExperienceGoldCondition" statementType="STATEMENT">
+		SELECT id,p2p_customer_no,use_time,gain_time,send_time,start_time,end_time,my_activity_no,status,experience_gold_no FROM activity_customer_experience_gold where 1=1
+		ORDER BY
+		<foreach item="item" collection="sortItemList" separator=",">
+			${item.sortFeild} ${item.sortType}
+		</foreach>
+		LIMIT ${startIndex},${pageSize}
+	</select>
+	<select id="getTotalCount" resultType="int" parameterType="com.hzfh.api.customer.model.query.ActivityCustomerExperienceGoldCondition" statementType="STATEMENT">
+		SELECT count(1) FROM activity_customer_experience_gold where 1=1
+	</select>
+	<select id="getInfo" resultMap="resultMapActivityCustomerExperienceGold" parameterType="int">
+		SELECT id,p2p_customer_no,use_time,gain_time,send_time,start_time,end_time,my_activity_no,status,experience_gold_no FROM activity_customer_experience_gold where id=#{id}
+	</select>
+	<insert id="add" parameterType="com.hzfh.api.customer.model.ActivityCustomerExperienceGold" useGeneratedKeys="true" keyProperty="id">
+		insert into activity_customer_experience_gold
+		(p2p_customer_no,use_time,gain_time,send_time,start_time,end_time,my_activity_no,status,experience_gold_no)
+		values
+		(#{p2pCustomerNo},#{useTime},#{gainTime},#{sendTime},#{startTime},#{endTime},#{myActivityNo},#{status},#{experienceGoldNo})
+	</insert>
+	<update id="update" parameterType="com.hzfh.api.customer.model.ActivityCustomerExperienceGold">
+		update activity_customer_experience_gold set 
+		p2p_customer_no=#{p2pCustomerNo},use_time=#{useTime},gain_time=#{gainTime},send_time=#{sendTime},start_time=#{startTime},end_time=#{endTime},my_activity_no=#{myActivityNo},status=#{status},experience_gold_no=#{experienceGoldNo}
+		where id=#{id}
+	</update>
+	<delete id="delete" parameterType="int">
+		delete from activity_customer_experience_gold where id = #{id}
+	</delete>
+	<update id="updateStatusById">
+		update activity_customer_experience_gold set 
+		status=#{status}
+		where id=#{id}
+	</update>
+</mapper>

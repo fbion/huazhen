@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hzfh.service.customer.mapper.ActivityAwardRelationMapper">
+	<resultMap type="com.hzfh.api.customer.model.ActivityAwardRelation" id="resultMapActivityAwardRelation">
+		<result property="id" column="id"/>
+		<result property="conditionId" column="condition_id"/>
+		<result property="activityRewardType" column="activity_reward_type"/>
+		<result property="relatedNo" column="related_no"/>
+		<result property="inUserNo" column="in_user_no"/>
+		<result property="inTime" column="in_time" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
+		<result property="editUserNo" column="edit_user_no"/>
+		<result property="editTime" column="edit_time" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
+		<result property="editComment" column="edit_comment"/>
+	</resultMap>
+	<select id="getList" resultMap="resultMapActivityAwardRelation">
+		SELECT id,condition_id,activity_reward_type,related_no,in_user_no,in_time,edit_user_no,edit_time,edit_comment
+		FROM activity_award_relation
+	</select>
+	<select id="getPagingList" resultMap="resultMapActivityAwardRelation" parameterType="com.hzfh.api.customer.model.query.ActivityAwardRelationCondition" statementType="STATEMENT">
+		SELECT id,condition_id,activity_reward_type,related_no,in_user_no,in_time,edit_user_no,edit_time,edit_comment FROM activity_award_relation where 1=1
+		ORDER BY
+		<foreach item="item" collection="sortItemList" separator=",">
+			${item.sortFeild} ${item.sortType}
+		</foreach>
+		LIMIT ${startIndex},${pageSize}
+	</select>
+	<select id="getTotalCount" resultType="int" parameterType="com.hzfh.api.customer.model.query.ActivityAwardRelationCondition" statementType="STATEMENT">
+		SELECT count(1) FROM activity_award_relation where 1=1
+	</select>
+	<select id="getInfo" resultMap="resultMapActivityAwardRelation" parameterType="int">
+		SELECT id,condition_id,activity_reward_type,related_no,in_user_no,in_time,edit_user_no,edit_time,edit_comment FROM activity_award_relation where id=#{id}
+	</select>
+	<insert id="add" parameterType="com.hzfh.api.customer.model.ActivityAwardRelation" useGeneratedKeys="true" keyProperty="id">
+		insert into activity_award_relation
+		(condition_id,activity_reward_type,related_no,in_user_no,in_time,edit_user_no,edit_time,edit_comment)
+		values
+		(#{conditionId},#{activityRewardType},#{relatedNo},#{inUserNo},current_timestamp(),#{editUserNo},current_timestamp(),#{editComment})
+	</insert>
+	<update id="update" parameterType="com.hzfh.api.customer.model.ActivityAwardRelation">
+		update activity_award_relation set 
+		condition_id=#{conditionId},activity_reward_type=#{activityRewardType},related_no=#{relatedNo},edit_user_no=#{editUserNo},edit_time=current_timestamp(),edit_comment=#{editComment}
+		where id=#{id}
+	</update>
+	<update id="updateCidById">
+		update activity_award_relation set
+		condition_id=${mid},edit_time=current_timestamp()
+		where id=${id}
+	</update>
+	<delete id="delete" parameterType="int">
+		delete from activity_award_relation where id = #{id}
+	</delete>
+	<select id="getInfoByActId" resultMap="resultMapActivityAwardRelation" parameterType="int">
+		SELECT a.id,a.condition_id,a.activity_reward_type,a.related_no,a.in_user_no,a.in_time,a.edit_user_no,a.edit_time,a.edit_comment 
+		FROM activity_award_relation a
+		inner join activity_condition_relation b
+		inner join activity_rule_relation c
+		on    a.condition_id = b.condition_no
+		and   b.id = c.rule_no
+		and   c.activity_no = #{id}
+	</select>
+	<select id="getInfoByConId" resultMap="resultMapActivityAwardRelation" parameterType="int">
+		SELECT id,condition_id,activity_reward_type,related_no,in_user_no,in_time,edit_user_no,edit_time,edit_comment FROM activity_award_relation where condition_id=#{id} ORDER BY id DESC
+	</select>
+	<select id="getInfoByRelatedNo" resultMap="resultMapActivityAwardRelation" parameterType="int">
+		SELECT id,condition_id,activity_reward_type,related_no,in_user_no,in_time,edit_user_no,edit_time,edit_comment FROM activity_award_relation where related_no=#{id} and activity_reward_type=#{type}
+	</select>
+	<delete id="deleteInfoByCondId" parameterType="int">
+		delete from activity_award_relation where condition_id = #{id}
+	</delete>
+</mapper>

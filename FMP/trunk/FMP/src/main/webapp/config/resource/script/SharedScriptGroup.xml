@@ -1,0 +1,108 @@
+<?xml version="1.0"?>
+<scriptConfig xmlns="http://www.hzfh.com/web"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://www.hzfh.com/web ../../Schemas/Resources/Script.xsd">
+
+    <sharedScriptGroups default="Common">
+
+        <scriptGroup name="Common">
+            <scriptName>jQuery</scriptName>
+            <scriptName>style</scriptName>
+            <scriptName>jgGrid</scriptName>
+            <scriptName>gridCN</scriptName>
+            <scriptName>base</scriptName>
+            <scriptName>enumList</scriptName>
+            <scriptName>environmentVariable</scriptName>
+            <scriptName>loginVariable</scriptName>
+        </scriptGroup>
+
+        <scriptGroup name="NewCommonWithEasyUI">
+            <scriptName>jQuery</scriptName>
+            <scriptName>easyUi</scriptName>
+            <scriptName>global</scriptName>
+            <scriptName>base</scriptName>
+            <scriptName>enumList</scriptName>
+            <scriptName>environmentVariable</scriptName>
+            <scriptName>loginVariable</scriptName>
+        </scriptGroup>
+        
+        <scriptGroup name="CommonWithDate">
+            <scriptName>jQuery</scriptName>
+            <scriptName>style</scriptName>
+            <scriptName>datePicker</scriptName>
+            <scriptName>jgGrid</scriptName>
+            <scriptName>gridCN</scriptName>
+            <scriptName>base</scriptName>
+            <scriptName>enumList</scriptName>
+            <scriptName>environmentVariable</scriptName>
+            <scriptName>loginVariable</scriptName>
+        </scriptGroup>
+        
+        <scriptGroup name="CommonWithTree">
+            <scriptName>jQuery</scriptName>
+            <scriptName>style</scriptName>
+            <scriptName>jgGrid</scriptName>
+            <scriptName>gridCN</scriptName>
+            <scriptName>base</scriptName>
+            <scriptName>enumList</scriptName>
+            <scriptName>environmentVariable</scriptName>
+            <scriptName>loginVariable</scriptName>
+            <scriptName>dhtmlxCommon</scriptName>
+            <scriptName>dhtmlxTree</scriptName>
+        </scriptGroup>
+
+        <scriptGroup name="CommonWithLinkage">
+            <scriptName>jQuery</scriptName>
+            <scriptName>style</scriptName>
+            <scriptName>jgGrid</scriptName>
+            <scriptName>gridCN</scriptName>
+            <scriptName>base</scriptName>
+            <scriptName>enumList</scriptName>
+            <scriptName>nLinkage</scriptName>
+            <scriptName>environmentVariable</scriptName>
+            <scriptName>loginVariable</scriptName>
+        </scriptGroup>
+
+        <scriptGroup name="CommonWithLinkageAndData">
+            <scriptName>jQuery</scriptName>
+            <scriptName>style</scriptName>
+            <scriptName>jgGrid</scriptName>
+            <scriptName>gridCN</scriptName>
+            <scriptName>datePicker</scriptName>
+            <scriptName>base</scriptName>
+            <scriptName>enumList</scriptName>
+            <scriptName>nLinkage</scriptName>
+            <scriptName>environmentVariable</scriptName>
+            <scriptName>loginVariable</scriptName>
+        </scriptGroup>
+
+        <scriptGroup name="Empty">
+        </scriptGroup>
+
+        <scriptGroup name="JQueryOnly">
+            <scriptName>jQuery</scriptName>
+        </scriptGroup>
+
+        <scriptGroup name="NCommon">
+            <scriptName>jQuery</scriptName>
+            <scriptName>style</scriptName>
+            <scriptName>base</scriptName>
+            <scriptName>environmentVariable</scriptName>
+            <scriptName>enumList</scriptName>
+            <scriptName>loginVariable</scriptName>
+            <scriptName>datePicker</scriptName>
+        </scriptGroup>
+
+        <scriptGroup name="Detail">
+            <scriptName>environmentVariable</scriptName>
+            <scriptName>loginVariable</scriptName>
+            <scriptName>jQuery</scriptName>
+            <scriptName>style</scriptName>
+            <scriptName>base</scriptName>
+            <scriptName>enumList</scriptName>
+            <scriptName>jgGrid</scriptName>
+            <scriptName>gridCN</scriptName>
+        </scriptGroup>
+    </sharedScriptGroups>
+
+</scriptConfig>

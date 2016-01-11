@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hzfh.service.customer.mapper.ActivitiesMapper">
+	<resultMap type="com.hzfh.api.customer.model.Activities" id="resultMapActivities">
+		<result property="id" column="id"/>
+		<result property="activityName" column="activity_name"/>
+		<result property="activityStatus" column="activity_status"/>
+		<result property="activityType" column="activity_type"/>
+		<result property="startTime" column="start_time" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
+		<result property="endTime" column="end_time" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
+		<result property="status" column="status"/>
+		<result property="isDisplay" column="is_display"/>
+		<result property="activityRule" column="activity_rule"/>
+		<result property="inUserNo" column="in_user_no"/>
+		<result property="inTime" column="in_time" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
+		<result property="editUserNo" column="edit_user_no"/>
+		<result property="editTime" column="edit_time" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
+		<result property="editComment" column="edit_comment"/>
+		<result property="isTest" column="is_test"/>
+	</resultMap>
+	<select id="getList" resultMap="resultMapActivities">
+		SELECT id,activity_name,activity_status,activity_type,start_time,end_time,status,is_display,activity_rule,in_user_no,in_time,edit_user_no,edit_time,edit_comment,is_test
+		FROM activities
+	</select>
+	<select id="getPagingList" resultMap="resultMapActivities" parameterType="com.hzfh.api.customer.model.query.ActivitiesCondition" statementType="STATEMENT">
+		SELECT id,activity_name,activity_status,activity_type,start_time,end_time,status,is_display,activity_rule,in_user_no,in_time,edit_user_no,edit_time,edit_comment,is_test FROM activities where 1=1
+		<if test="activityType !=0">and activity_type=${activityType}</if>
+		<if test="status !=2">and status=${status}</if>
+		<if test="startTime!=null and startTime!=''"> and start_time &gt;= '${startTime}'</if>
+        <if test="endTime!=null and endTime!=''"> and end_time &lt;= '${endTime}'</if>
+		ORDER BY
+		<foreach item="item" collection="sortItemList" separator=",">
+			${item.sortFeild} ${item.sortType}
+		</foreach>
+		LIMIT ${startIndex},${pageSize}
+	</select>
+	<select id="getTotalCount" resultType="int" parameterType="com.hzfh.api.customer.model.query.ActivitiesCondition" statementType="STATEMENT">
+		SELECT count(1) FROM activities where 1=1
+		<if test="activityType !=0">and activity_type=${activityType}</if>
+		<if test="status !=2">and status=${status}</if>
+		<if test="startTime!=null and startTime!=''"> and start_time &gt;= '${startTime}'</if>
+        <if test="endTime!=null and endTime!=''"> and end_time &lt;= '${endTime}'</if>
+	</select>
+	<select id="getInfo" resultMap="resultMapActivities" parameterType="int">
+		SELECT id,activity_name,activity_status,activity_type,start_time,end_time,status,is_display,activity_rule,in_user_no,in_time,edit_user_no,edit_time,edit_comment,is_test FROM activities where id=#{id} 
+		and end_time &gt; NOW() and  start_time &lt; NOW()   ORDER BY activities.start_time DESC  LIMIT 1
+	</select>
+	<select id="getInfoByActivitytype" resultMap="resultMapActivities" parameterType="int">
+		SELECT id,activity_name,activity_status,activity_type,start_time,end_time,status,is_display,activity_rule,in_user_no,in_time,edit_user_no,edit_time,edit_comment,is_test FROM 
+		activities where activity_type=#{activityType} and end_time &gt; NOW() and  start_time &lt; NOW()   ORDER BY activities.start_time DESC  LIMIT 1
+	</select>
+	<insert id="add" parameterType="com.hzfh.api.customer.model.Activities" useGeneratedKeys="true" keyProperty="id">
+		insert into activities
+		(activity_name,activity_status,activity_type,start_time,end_time,status,is_display,activity_rule,in_user_no,in_time,edit_user_no,edit_time,edit_comment,is_test)
+		values
+		(#{activityName},#{activityStatus},#{activityType},#{startTime},#{endTime},#{status},#{isDisplay},#{activityRule},#{inUserNo},current_timestamp(),#{editUserNo},current_timestamp(),#{editComment},#{isTest})
+	</insert>
+	<update id="update" parameterType="com.hzfh.api.customer.model.Activities">
+		update activities set 
+		activity_name=#{activityName},activity_status=#{activityStatus},activity_type=#{activityType},start_time=#{startTime},end_time=#{endTime},status=#{status},is_display=#{isDisplay},activity_rule=#{activityRule},edit_user_no=#{editUserNo},edit_time=current_timestamp(),edit_comment=#{editComment},is_test=#{isTest}
+		where id=#{id}
+	</update>
+	<delete id="delete" parameterType="int">
+		delete from activities where id = #{id}
+	</delete>
+	<update id="updateActivitiesByIdAndStatus">
+		update activities set 
+		status=#{status},edit_time=current_timestamp()
+		where id=#{id}
+	</update>
+	<select id="getActivitiesTypeCountById" resultType="int" parameterType="int">
+		SELECT count(1) FROM activities where 1=1
+		<if test="activityType !=0">and activity_type=${activityType}</if>
+	</select>
+	<select id="getConds" resultType="int" parameterType="int">
+		SELECT COUNT(1) FROM 
+		activities a
+		INNER JOIN activity_rule_relation b
+		INNER JOIN activity_condition_relation c
+		INNER JOIN activity_condition d
+		on  a.id = b.activity_no
+		AND b.rule_no = c.id
+		AND c.condition_no = d.id 
+		AND a.id=#{id}
+		<if test="activityType !=0">and a.activity_type=${activityType}</if>
+	</select>
+	<select id="getBouns" resultType="int" parameterType="int">
+		SELECT COUNT(1) FROM 
+		activities a
+		INNER JOIN activity_rule_relation b
+		INNER JOIN activity_condition_relation c
+		INNER JOIN activity_condition d
+		on  a.id = b.activity_no
+		AND b.rule_no = c.id
+		AND c.condition_no = d.id 
+		AND d.id = ${condId}
+		<if test="activityType !=0">and a.activity_type=${activityType}</if>
+	</select>
+</mapper>

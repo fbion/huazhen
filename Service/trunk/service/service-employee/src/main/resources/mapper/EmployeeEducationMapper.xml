@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hzfh.service.employee.mapper.EmployeeEducationMapper">
+	<resultMap type="com.hzfh.api.employee.model.EmployeeEducation" id="resultMapEmployeeEducation">
+		<result property="id" column="id"/>
+		<result property="empNo" column="emp_no"/>
+		<result property="education" column="education"/>
+		<result property="degree" column="degree"/>
+		<result property="graduationSchool" column="graduation_school"/>
+		<result property="major" column="major"/>
+		<result property="admissionTime" column="admission_time"/>
+		<result property="graduationTime" column="graduation_time"/>
+		<result property="inUserNo" column="in_user_no"/>
+		<result property="inTime" column="in_time" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
+		<result property="editUserNo" column="edit_user_no"/>
+		<result property="editTime" column="edit_time" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
+		<result property="editComment" column="edit_comment"/>
+	</resultMap>
+	<sql id="Base_Column_List" >
+		id,emp_no,education,degree,graduation_school,major,admission_time,graduation_time,in_user_no,in_time,edit_user_no,edit_time,edit_comment
+    </sql>
+	<select id="getList" resultMap="resultMapEmployeeEducation">
+		SELECT <include refid="Base_Column_List"/> FROM employee_education
+	</select>
+	<select id="getPagingList" resultMap="resultMapEmployeeEducation" parameterType="com.hzfh.api.employee.model.query.EmployeeEducationCondition" statementType="STATEMENT">
+		SELECT <include refid="Base_Column_List"/> FROM employee_education where 1=1
+		ORDER BY
+		<foreach item="item" collection="sortItemList" separator=",">
+			${item.sortFeild} ${item.sortType}
+		</foreach>
+		LIMIT ${startIndex},${pageSize}
+	</select>
+	<select id="getTotalCount" resultType="int" parameterType="com.hzfh.api.employee.model.query.EmployeeEducationCondition" statementType="STATEMENT">
+		SELECT count(1) FROM employee_education where 1=1
+	</select>
+	<select id="getInfo" resultMap="resultMapEmployeeEducation" parameterType="int">
+		SELECT <include refid="Base_Column_List"/> FROM employee_education where id=#{id}
+	</select>
+	<insert id="add" parameterType="com.hzfh.api.employee.model.EmployeeEducation" useGeneratedKeys="true" keyProperty="id">
+		insert into employee_education
+		(emp_no,education,degree,graduation_school,major,admission_time,graduation_time,in_user_no,in_time,edit_user_no,edit_time,edit_comment)
+		values
+		(#{empNo},#{education},#{degree},#{graduationSchool},#{major},#{admissionTime},#{graduationTime},#{inUserNo},current_timestamp(),#{editUserNo},current_timestamp(),#{editComment})
+	</insert>
+	<update id="update" parameterType="com.hzfh.api.employee.model.EmployeeEducation">
+		update employee_education set 
+		emp_no=#{empNo},education=#{education},degree=#{degree},graduation_school=#{graduationSchool},major=#{major},admission_time=#{admissionTime},graduation_time=#{graduationTime},edit_user_no=#{editUserNo},edit_time=current_timestamp(),edit_comment=#{editComment}
+		where id=#{id}
+	</update>
+	<delete id="delete" parameterType="int">
+		delete from employee_education where id = #{id}
+	</delete>
+	<select id="getEmpEduByEmpNo" resultMap="resultMapEmployeeEducation">
+		SELECT <include refid="Base_Column_List"/> FROM employee_education
+		 where emp_no=#{empNo}
+	</select>
+</mapper>

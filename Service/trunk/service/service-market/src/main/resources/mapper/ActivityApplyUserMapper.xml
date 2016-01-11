@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hzfh.service.market.mapper.ActivityApplyUserMapper">
+	<resultMap type="com.hzfh.api.market.model.ActivityApplyUser" id="resultMapActivityApplyUser">
+		<result property="id" column="id"/>
+		<result property="activityId" column="activity_id"/>
+		<result property="name" column="name"/>
+		<result property="cellphone" column="cellphone"/>
+		<result property="email" column="email"/>
+		<result property="unit" column="unit"/>
+		<result property="job" column="job"/>
+	</resultMap>
+	<select id="getList" resultMap="resultMapActivityApplyUser">
+		SELECT id,activity_id,name,cellphone,email,unit,job
+		FROM activity_apply_user
+	</select>
+	<select id="getPagingList" resultMap="resultMapActivityApplyUser" parameterType="com.hzfh.api.market.model.query.ActivityApplyUserCondition" statementType="STATEMENT">
+		SELECT id,activity_id,name,cellphone,email,unit,job FROM activity_apply_user where 1=1
+		<if test="activityNo != 0">and activity_id = ${activityNo}</if>
+		ORDER BY
+		<foreach item="item" collection="sortItemList" separator=",">
+			${item.sortFeild} ${item.sortType}
+		</foreach>
+		LIMIT ${startIndex},${pageSize}
+	</select>
+	<select id="getTotalCount" resultType="int" parameterType="com.hzfh.api.market.model.query.ActivityApplyUserCondition" statementType="STATEMENT">
+		SELECT count(1) FROM activity_apply_user where 1=1
+		<if test="activityNo != 0">and activity_id = ${activityNo}</if>
+	</select>
+	<select id="getInfo" resultMap="resultMapActivityApplyUser" parameterType="int">
+		SELECT id,activity_id,name,cellphone,email,unit,job FROM activity_apply_user where id=#{id}
+	</select>
+	<insert id="add" parameterType="com.hzfh.api.market.model.ActivityApplyUser" useGeneratedKeys="true" keyProperty="id">
+		insert into activity_apply_user
+		(activity_id,name,cellphone,email,unit,job)
+		values
+		(#{activityId},#{name},#{cellphone},#{email},#{unit},#{job})
+	</insert>
+	<update id="update" parameterType="com.hzfh.api.market.model.ActivityApplyUser">
+		update activity_apply_user set 
+		activity_id=#{activityId},name=#{name},cellphone=#{cellphone},email=#{email},unit=#{unit},job=#{job}
+		where id=#{id}
+	</update>
+	<delete id="delete" parameterType="int">
+		delete from activity_apply_user where id = #{id}
+	</delete>
+	<select id="getInfoByCellphone" resultMap="resultMapActivityApplyUser">
+		SELECT id,activity_id,name,cellphone,email,unit,job
+		FROM activity_apply_user where cellphone = #{cellphone} and activity_id = #{id}
+	</select>
+</mapper>

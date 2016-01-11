@@ -1,0 +1,283 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+        "http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+    <package name="importData" extends="struts-login" namespace="/baseInfo/importData">
+        <action name="list" class="com.hzfh.fmp.controller.baseInfo.ImportDataAction">
+            <result>/baseInfo/importData.jsp</result>
+        </action>
+    </package>
+    <package name="ajaxImportData" extends="struts-error" namespace="/baseInfo/importData">
+        <action name="ajaxImportData" class="com.hzfh.fmp.controller.baseInfo.ajax.AjaxImportData">
+            <result type="json">
+                <param name="includeProperties">
+                    desc
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+    </package>
+    <package name="dicData" extends="struts-login" namespace="/baseInfo/dicData">
+        <action name="list" class="com.hzfh.fmp.controller.baseInfo.DicDataAction">
+            <result>/baseInfo/dicDataList.jsp</result>
+        </action>
+    </package>
+    <package name="ajaxDicData" extends="struts-error" namespace="/baseInfo/dicData">
+        <action name="ajaxListDicData" class="com.hzfh.fmp.controller.baseInfo.ajax.AjaxDicDataAction">
+            <result type="json">
+                <param name="includeProperties">
+                    resultList.*,
+                    pageSize, pageIndex, pageCount, recordCount
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+        <action name="ajaxEditDicData" class="com.hzfh.fmp.controller.baseInfo.ajax.AjaxDicDataAction" method="edit">
+            <result type="json">
+                <param name="includeProperties">
+                    errCode,errDesc
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+        <action name="ajaxFlushDicDataMemcached" class="com.hzfh.fmp.controller.baseInfo.ajax.AjaxDicDataAction" method="flushDicDataMemcached">
+            <result type="json">
+                <param name="includeProperties">
+                    errCode,errDesc
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+    </package>
+    <package name="dicType" extends="struts-login" namespace="/baseInfo/dicType">
+        <action name="list" class="com.hzfh.fmp.controller.baseInfo.DicTypeAction">
+            <result>/baseInfo/dicTypeList.jsp</result>
+        </action>
+    </package>
+    <package name="ajaxDicType" extends="struts-error" namespace="/baseInfo/dicType">
+        <action name="ajaxListDicType" class="com.hzfh.fmp.controller.baseInfo.ajax.AjaxDicTypeAction">
+            <result type="json">
+                <param name="includeProperties">
+                    resultList.*,
+                    pageSize, pageIndex, pageCount, recordCount
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+        <action name="ajaxEditDicType" class="com.hzfh.fmp.controller.baseInfo.ajax.AjaxDicTypeAction" method="edit">
+            <result type="json">
+                <param name="includeProperties">
+                    errCode,errDesc
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+    </package>
+    <package name="AjaxProvinceAction" extends="struts-error" namespace="/baseInfo/province">
+        <action name="ajaxProvince" class="com.hzfh.fmp.controller.baseInfo.ajax.AjaxProvinceAction">
+            <result type="json">
+                <param name="includeProperties">
+                    resultList.*
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+    </package>
+
+    <package name="AjaxCityAction" extends="struts-error" namespace="/baseInfo/city">
+        <action name="ajaxCity" class="com.hzfh.fmp.controller.baseInfo.ajax.AjaxCityAction">
+            <result type="json">
+                <param name="includeProperties">
+                    resultList.*
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+    </package>
+
+    <package name="AjaxDistrictAction" extends="struts-error" namespace="/baseInfo/district">
+        <action name="ajaxDistrict" class="com.hzfh.fmp.controller.baseInfo.ajax.AjaxDistrictAction">
+            <result type="json">
+                <param name="includeProperties">
+                    resultList.*
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+    </package>
+
+    <package name="letter" extends="struts-login" namespace="/baseInfo/letter">
+        <action name="list" class="com.hzfh.fmp.controller.baseInfo.LetterAction">
+            <result>/baseInfo/letterList.jsp</result>
+        </action>
+        <action name="remindList" class="com.hzfh.fmp.controller.baseInfo.LetterAction" method="remindExecute">
+            <result>/baseInfo/remindList.jsp</result>
+        </action>
+        <action name="edit" class="com.hzfh.fmp.controller.baseInfo.LetterAddAction">
+            <result>/baseInfo/letterAdd.jsp</result>
+        </action>
+    </package>
+    <package name="bannerInfo" extends="struts-login" namespace="/baseInfo/bannerInfo">
+        <action name="list" class="com.hzfh.fmp.controller.baseInfo.BannerInfoAction">
+            <result>/baseInfo/bannerInfoList.jsp</result>
+        </action>
+        <action name="edit" class="com.hzfh.fmp.controller.baseInfo.BannerInfoAddAction">
+            <result>/baseInfo/bannerInfoAdd.jsp</result>
+        </action>
+    </package>
+    <package name="ajaxBannerInfo" extends="json-default" namespace="/baseInfo/bannerInfo">
+        <action name="ajaxListBannerInfo" class="com.hzfh.fmp.controller.baseInfo.ajax.AjaxBannerInfoAction">
+            <result type="json">
+                <param name="includeProperties">
+                    resultList.*,
+                    pageSize, pageIndex, pageCount, recordCount
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+        <action name="ajaxEditBannerInfo" class="com.hzfh.fmp.controller.baseInfo.ajax.AjaxBannerInfoAction" method="edit">
+            <result type="json">
+                <param name="includeProperties">
+                    errCode,errDesc
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+        <action name="ajaxGetBannerInfo" class="com.hzfh.fmp.controller.baseInfo.ajax.AjaxBannerInfoAction" method="getInfoById">
+            <result type="json">
+                <param name="includeProperties">
+                    info.*,errCode,errDesc
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+    </package>
+    <package name="announcement" extends="struts-login" namespace="/baseInfo/announcement">
+        <action name="list" class="com.hzfh.fmp.controller.baseInfo.AnnouncementAction">
+            <result>/baseInfo/announcementList.jsp</result>
+        </action>
+        <action name="edit" class="com.hzfh.fmp.controller.baseInfo.AnnouncementAddAction">
+            <result>/baseInfo/announcementAdd.jsp</result>
+        </action>
+    </package>
+    <package name="ajaxAnnouncement" extends="json-default" namespace="/baseInfo/announcement">
+        <action name="ajaxListAnnouncement" class="com.hzfh.fmp.controller.baseInfo.ajax.AjaxAnnouncementAction">
+            <result type="json">
+                <param name="includeProperties">
+                    resultList.*,
+                    pageSize, pageIndex, pageCount, recordCount
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+        <action name="ajaxEditAnnouncement" class="com.hzfh.fmp.controller.baseInfo.ajax.AjaxAnnouncementAction" method="edit">
+            <result type="json">
+                <param name="includeProperties">
+                    errCode,errDesc
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+        <action name="ajaxGetAnnouncement" class="com.hzfh.fmp.controller.baseInfo.ajax.AjaxAnnouncementAction" method="getInfoById">
+            <result type="json">
+                <param name="includeProperties">
+                    info.*,errCode,errDesc
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+    </package>
+    <package name="ajaxLetter" extends="struts-error" namespace="/baseInfo/letter">
+        <action name="ajaxListLetter" class="com.hzfh.fmp.controller.baseInfo.ajax.AjaxLetterAction">
+            <result type="json">
+                <param name="includeProperties">
+                    resultList.*,
+                    pageSize, pageIndex, pageCount, recordCount
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+        <action name="ajaxEditLetter" class="com.hzfh.fmp.controller.baseInfo.ajax.AjaxLetterAction" method="edit">
+            <result type="json">
+                <param name="includeProperties">
+                    errCode,errDesc
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+        <action name="ajaxGetLetter" class="com.hzfh.fmp.controller.baseInfo.ajax.AjaxLetterAction" method="getInfoById">
+            <result type="json">
+                <param name="includeProperties">
+                    info.*,listStep.*,errCode,errDesc
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+
+            </result>
+        </action>
+    </package>
+	<package namespace="/baseInfo/calendar" extends="struts-login" name="calendar">
+	<action name="list" class="com.hzfh.fmp.controller.baseInfo.CalendarAction">
+		<result>/baseInfo/calendarList.jsp</result>
+	</action>
+	<action name="edit"
+	class="com.hzfh.fmp.controller.baseInfo.CalendarAddAction">
+		<result>/baseInfo/calendarList.jsp</result>
+	</action>
+</package>
+	<package namespace="/baseInfo/calendar" extends="struts-error"
+		name="ajaxCalendar">
+		<action name="ajaxListCalendar"
+			class="com.hzfh.fmp.controller.baseInfo.ajax.AjaxCalendarAction">
+			<result type="json">
+				<param name="includeProperties"> resultList.*,xml,json </param>
+				<param name="noCache">true</param>
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+		<action name="ajaxEditCalendar"
+			class="com.hzfh.fmp.controller.baseInfo.ajax.AjaxCalendarAction"
+			method="edit">
+			<result type="json">
+				<param name="includeProperties"> errCode,errDesc </param>
+				<param name="noCache">true</param>
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+		<action name="ajaxGetCalendar"
+			class="com.hzfh.fmp.controller.baseInfo.ajax.AjaxCalendarAction"
+			method="getInfoById">
+			<result type="json">
+				<param name="includeProperties"> info.*,errCode,errDesc </param>
+				<param name="noCache">true</param>
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+	</package>
+
+    <package name="mailList" extends="struts-login" namespace="/baseInfo/mailList">
+        <action name="list" class="com.hzfh.fmp.controller.baseInfo.MailListAction">
+            <result>/baseInfo/mailList.jsp</result>
+        </action>
+    </package>
+</struts>

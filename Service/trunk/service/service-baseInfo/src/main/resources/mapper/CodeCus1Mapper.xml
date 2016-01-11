@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hzfh.service.baseInfo.mapper.CodeCus1Mapper">
+	<resultMap type="com.hzfh.api.baseInfo.model.CodeCus1" id="resultMapCodeCus1">
+		<result property="id" column="id"/>
+		<result property="inTime" column="in_time" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
+	</resultMap>
+	<select id="getList" resultMap="resultMapCodeCus1">
+		SELECT id,in_time
+		FROM code_cus1 order by in_time desc
+	</select>
+	<select id="getPagingList" resultMap="resultMapCodeCus1" parameterType="com.hzfh.api.baseInfo.model.query.CodeCus1Condition" statementType="STATEMENT">
+		SELECT id,in_time FROM code_cus1 where 1=1
+		ORDER BY
+		<foreach item="item" collection="sortItemList" separator=",">
+			${item.sortFeild} ${item.sortType}
+		</foreach>
+		LIMIT ${startIndex},${pageSize}
+	</select>
+	<select id="getTotalCount" resultType="int" parameterType="com.hzfh.api.baseInfo.model.query.CodeCus1Condition" statementType="STATEMENT">
+		SELECT count(1) FROM code_cus1 where 1=1
+	</select>
+	<select id="getInfo" resultMap="resultMapCodeCus1" parameterType="int">
+		SELECT id,in_time FROM code_cus1 where id=#{id}
+	</select>
+	<insert id="add" parameterType="com.hzfh.api.baseInfo.model.CodeCus1" useGeneratedKeys="true" keyProperty="id">
+		insert into code_cus1
+		(in_time)
+		values
+		(current_timestamp())
+	</insert>
+	<update id="update" parameterType="com.hzfh.api.baseInfo.model.CodeCus1">
+		update code_cus1 set 
+		
+		where id=#{id}
+	</update>
+	<delete id="delete" parameterType="int">
+		delete from code_cus1 where id = #{id}
+	</delete>
+</mapper>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+        "http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+    <!--     <constant name="struts.enable.DynamicMethodInvocation" value="true"/> -->
+    <constant name="struts.devMode" value="true"/>
+    <constant name="struts.i18n.encoding" value="UTF-8"></constant>
+    <constant name="struts.multipart.saveDir" value="/Users/paul"></constant>
+    <constant name="struts.multipart.maxSize" value="50000000"/>
+
+    <include file="struts/struts-product.xml"/>
+    <include file="struts/struts-customer.xml"/>
+    <include file="struts/struts-system.xml"/>
+    <include file="struts/struts-order.xml"/>
+    <include file="struts/struts-payment.xml"/>
+</struts>

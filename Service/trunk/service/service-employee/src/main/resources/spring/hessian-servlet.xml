@@ -1,0 +1,397 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://www.springframework.org/schema/beans" xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+
+       http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context-4.0.xsd"
+	default-autowire="byName" default-lazy-init="false">
+	<context:component-scan base-package="com.hzfh.service" />
+	<context:annotation-config />
+	<bean id="hessianMapping"
+		class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+		<property name="mappings">
+			<props>
+				<prop key="/company">companyService</prop>
+				<prop key="/department">departmentService</prop>
+				<prop key="/deptYearNeed">deptYearNeedService</prop>
+				<prop key="/deptYearNeedDetail">deptYearNeedDetailService</prop>
+				<prop key="/yearNeed">yearNeedService</prop>
+				<prop key="/yearNeedDetail">yearNeedDetailService</prop>
+				<prop key="/empBrokerageLadder">empBrokerageLadderService</prop>
+				<prop key="/employee">employeeService</prop>
+                <prop key="/employeeDetail">employeeDetailService</prop>
+                <prop key="/employeeEducation">employeeEducationService</prop>
+                <prop key="/familyMembers">familyMembersService</prop>
+                <prop key="/fixedAssets">fixedAssetsService</prop>
+                <prop key="/employeeCredential">employeeCredentialService</prop>
+				<prop key="/other">otherService</prop>
+				<prop key="/overtime">overtimeService</prop>
+				<prop key="/payment">paymentService</prop>
+				<prop key="/position">positionService</prop>
+				<prop key="/positionLevel">positionLevelService</prop>
+				<prop key="/welfare">welfareService</prop>
+				<prop key="/achievementCommission">achievementCommissionService</prop>
+				<prop key="/subsidy">subsidyService</prop>
+				<prop key="/subsidyTotal">subsidyTotalService</prop>
+				<prop key="/recruitAskRecord">recruitAskRecordService</prop>
+			    <prop key="/interviewEvaluationRecord">interviewEvaluationRecordService</prop>
+			    <prop key="/evaluationContent">evaluationContentService</prop>
+				<prop key="/evaluationScore">evaluationScoreService</prop>
+				<prop key="/subsidyTotal">subsidyTotalService</prop>
+                <prop key="/workExperience">workExperienceService</prop>
+                <prop key="/empCompilePlan">empCompilePlanService</prop>
+                <prop key="/employeeInformation">employeeInformationService</prop>
+                <prop key="/suppliers">suppliersService</prop>
+                <prop key="/tempRecruitDetail">tempRecruitDetailService</prop>
+				<prop key="/tempRecruitNeed">tempRecruitNeedService</prop>
+				<prop key="/attendanceApplication">attendanceApplicationService</prop>
+				<prop key="/resignApplication">resignApplicationService</prop>
+				<prop key="/personalChange">personalChangeService</prop>
+			    <prop key="/probationWorkSummary">probationWorkSummaryService</prop>
+      	        <prop key="/managerEvaluation">managerEvaluationService</prop>
+      	        <prop key="/probationEvaluation">probationEvaluationService</prop>
+				<prop key="/probationEvaluationContent">probationEvaluationContentService</prop>
+				<prop key="/probationEvaluationContentTemplate">probationEvaluationContentTemplateService</prop>
+				<prop key="/probationEvaluationScore">probationEvaluationScoreService</prop>
+				<prop key="/recruitFollow">recruitFollowService</prop>
+                <prop key="/extendProbationApplication">extendProbationApplicationService</prop>
+      	        <prop key="/yearNeedTotal">yearNeedTotalService</prop>
+      	        <prop key="/needRelease">needReleaseService</prop>
+      	        <prop key="/knowledgeBase">knowledgeBaseService</prop>
+      	        <prop key="/knowledgeAttachment">knowledgeAttachmentService</prop>
+                <prop key="/commissionWealthCenter">commissionWealthCenterService</prop>
+                <prop key="/registration">registrationService</prop>
+      	</props>
+		</property>
+	</bean>
+  <bean id="knowledgeBaseServiceImpl" class="com.hzfh.service.employee.serviceImpl.KnowledgeBaseServiceImpl" />
+  <bean id="knowledgeBaseService" class="org.springframework.remoting.caucho.HessianServiceExporter">
+    <property name="service" ref="knowledgeBaseServiceImpl" />
+    <property name="serviceInterface" value="com.hzfh.api.employee.service.KnowledgeBaseService" />
+  </bean>
+  <bean id="companyServiceImpl" class="com.hzfh.service.employee.serviceImpl.CompanyServiceImpl" />
+  <bean id="companyService"
+		class="org.springframework.remoting.caucho.HessianServiceExporter">
+    <property name="service" ref="companyServiceImpl" />
+    <property name="serviceInterface" value="com.hzfh.api.employee.service.CompanyService" />
+  </bean>
+<bean id="recruitFollowServiceImpl" class="com.hzfh.service.employee.serviceImpl.RecruitFollowServiceImpl" />
+  <bean id="recruitFollowService"
+		class="org.springframework.remoting.caucho.HessianServiceExporter">
+    <property name="service" ref="recruitFollowServiceImpl" />
+    <property name="serviceInterface" value="com.hzfh.api.employee.service.RecruitFollowService" />
+  </bean>
+  <bean id="departmentServiceImpl" class="com.hzfh.service.employee.serviceImpl.DepartmentServiceImpl" />
+  <bean id="departmentService"
+		class="org.springframework.remoting.caucho.HessianServiceExporter">
+    <property name="service" ref="departmentServiceImpl" />
+    <property name="serviceInterface" value="com.hzfh.api.employee.service.DepartmentService" />
+  </bean>
+<bean id="extendProbationApplicationServiceImpl" class="com.hzfh.service.employee.serviceImpl.ExtendProbationApplicationServiceImpl" />
+  <bean id="extendProbationApplicationService"
+		class="org.springframework.remoting.caucho.HessianServiceExporter">
+    <property name="service" ref="extendProbationApplicationServiceImpl" />
+    <property name="serviceInterface" value="com.hzfh.api.employee.service.ExtendProbationApplicationService" />
+  </bean>
+  <bean id="empBrokerageLadderServiceImpl" class="com.hzfh.service.employee.serviceImpl.EmpBrokerageLadderServiceImpl" />
+  <bean id="empBrokerageLadderService"
+		class="org.springframework.remoting.caucho.HessianServiceExporter">
+    <property name="service" ref="empBrokerageLadderServiceImpl" />
+    <property name="serviceInterface" value="com.hzfh.api.employee.service.EmpBrokerageLadderService" />
+  </bean>
+
+  <bean id="employeeServiceImpl" class="com.hzfh.service.employee.serviceImpl.EmployeeServiceImpl" />
+  <bean id="employeeService"
+		class="org.springframework.remoting.caucho.HessianServiceExporter">
+    <property name="service" ref="employeeServiceImpl" />
+    <property name="serviceInterface" value="com.hzfh.api.employee.service.EmployeeService" />
+  </bean>
+
+  <bean id="employeeDetailServiceImpl" class="com.hzfh.service.employee.serviceImpl.EmployeeDetailServiceImpl" />
+  <bean id="employeeDetailService"
+        class="org.springframework.remoting.caucho.HessianServiceExporter">
+    <property name="service" ref="employeeDetailServiceImpl" />
+    <property name="serviceInterface" value="com.hzfh.api.employee.service.EmployeeDetailService" />
+  </bean>
+
+  <bean id="employeeEducationServiceImpl" class="com.hzfh.service.employee.serviceImpl.EmployeeEducationServiceImpl" />
+  <bean id="employeeEducationService"
+        class="org.springframework.remoting.caucho.HessianServiceExporter">
+    <property name="service" ref="employeeEducationServiceImpl" />
+    <property name="serviceInterface" value="com.hzfh.api.employee.service.EmployeeEducationService" />
+  </bean>
+  <bean id="deptYearNeedServiceImpl" class="com.hzfh.service.employee.serviceImpl.DeptYearNeedServiceImpl" />
+  <bean id="deptYearNeedService"
+		class="org.springframework.remoting.caucho.HessianServiceExporter">
+    <property name="service" ref="deptYearNeedServiceImpl" />
+    <property name="serviceInterface" value="com.hzfh.api.employee.service.DeptYearNeedService" />
+  </bean>
+
+  <bean id="deptYearNeedDetailServiceImpl" class="com.hzfh.service.employee.serviceImpl.DeptYearNeedDetailServiceImpl" />
+  <bean id="deptYearNeedDetailService"
+		class="org.springframework.remoting.caucho.HessianServiceExporter">
+    <property name="service" ref="deptYearNeedDetailServiceImpl" />
+    <property name="serviceInterface" value="com.hzfh.api.employee.service.DeptYearNeedDetailService" />
+  </bean>
+   <bean id="yearNeedServiceImpl" class="com.hzfh.service.employee.serviceImpl.YearNeedServiceImpl" />
+  <bean id="yearNeedService"
+		class="org.springframework.remoting.caucho.HessianServiceExporter">
+    <property name="service" ref="yearNeedServiceImpl" />
+    <property name="serviceInterface" value="com.hzfh.api.employee.service.YearNeedService" />
+  </bean>
+
+  <bean id="yearNeedDetailServiceImpl" class="com.hzfh.service.employee.serviceImpl.YearNeedDetailServiceImpl" />
+  <bean id="yearNeedDetailService"
+		class="org.springframework.remoting.caucho.HessianServiceExporter">
+    <property name="service" ref="yearNeedDetailServiceImpl" />
+    <property name="serviceInterface" value="com.hzfh.api.employee.service.YearNeedDetailService" />
+  </bean>
+  <bean id="familyMembersServiceImpl" class="com.hzfh.service.employee.serviceImpl.FamilyMembersServiceImpl" />
+  <bean id="familyMembersService"
+        class="org.springframework.remoting.caucho.HessianServiceExporter">
+    <property name="service" ref="familyMembersServiceImpl" />
+    <property name="serviceInterface" value="com.hzfh.api.employee.service.FamilyMembersService" />
+  </bean>
+
+<bean id="fixedAssetsServiceImpl" class="com.hzfh.service.employee.serviceImpl.FixedAssetsServiceImpl" />
+  <bean id="fixedAssetsService"
+		class="org.springframework.remoting.caucho.HessianServiceExporter">
+    <property name="service" ref="fixedAssetsServiceImpl" />
+    <property name="serviceInterface" value="com.hzfh.api.employee.service.FixedAssetsService" />
+  </bean>
+
+  <bean id="employeeCredentialServiceImpl" class="com.hzfh.service.employee.serviceImpl.EmployeeCredentialServiceImpl" />
+  <bean id="employeeCredentialService"
+        class="org.springframework.remoting.caucho.HessianServiceExporter">
+    <property name="service" ref="employeeCredentialServiceImpl" />
+    <property name="serviceInterface" value="com.hzfh.api.employee.service.EmployeeCredentialService" />
+  </bean>
+
+  <bean id="otherServiceImpl" class="com.hzfh.service.employee.serviceImpl.OtherServiceImpl" />
+  <bean id="otherService"
+		class="org.springframework.remoting.caucho.HessianServiceExporter">
+    <property name="service" ref="otherServiceImpl" />
+    <property name="serviceInterface" value="com.hzfh.api.employee.service.OtherService" />
+  </bean>
+
+  <bean id="overtimeServiceImpl" class="com.hzfh.service.employee.serviceImpl.OvertimeServiceImpl" />
+  <bean id="overtimeService"
+		class="org.springframework.remoting.caucho.HessianServiceExporter">
+    <property name="service" ref="overtimeServiceImpl" />
+    <property name="serviceInterface" value="com.hzfh.api.employee.service.OvertimeService" />
+  </bean>
+
+  <bean id="paymentServiceImpl" class="com.hzfh.service.employee.serviceImpl.PaymentServiceImpl" />
+  <bean id="paymentService"
+		class="org.springframework.remoting.caucho.HessianServiceExporter">
+    <property name="service" ref="paymentServiceImpl" />
+    <property name="serviceInterface" value="com.hzfh.api.employee.service.PaymentService" />
+  </bean>
+
+  <bean id="positionServiceImpl" class="com.hzfh.service.employee.serviceImpl.PositionServiceImpl" />
+  <bean id="positionService"
+		class="org.springframework.remoting.caucho.HessianServiceExporter">
+    <property name="service" ref="positionServiceImpl" />
+    <property name="serviceInterface" value="com.hzfh.api.employee.service.PositionService" />
+  </bean>
+
+  <bean id="positionLevelServiceImpl" class="com.hzfh.service.employee.serviceImpl.PositionLevelServiceImpl" />
+  <bean id="positionLevelService"
+		class="org.springframework.remoting.caucho.HessianServiceExporter">
+    <property name="service" ref="positionLevelServiceImpl" />
+    <property name="serviceInterface" value="com.hzfh.api.employee.service.PositionLevelService" />
+  </bean>
+
+  <bean id="welfareServiceImpl" class="com.hzfh.service.employee.serviceImpl.WelfareServiceImpl" />
+  <bean id="welfareService"
+		class="org.springframework.remoting.caucho.HessianServiceExporter">
+    <property name="service" ref="welfareServiceImpl" />
+    <property name="serviceInterface" value="com.hzfh.api.employee.service.WelfareService" />
+  </bean>
+
+  <bean id="achievementCommissionServiceImpl" class="com.hzfh.service.employee.serviceImpl.AchievementCommissionServiceImpl" />
+  <bean id="achievementCommissionService"
+		class="org.springframework.remoting.caucho.HessianServiceExporter">
+    <property name="service" ref="achievementCommissionServiceImpl" />
+    <property name="serviceInterface" value="com.hzfh.api.employee.service.AchievementCommissionService" />
+  </bean>
+
+  <bean id="subsidyServiceImpl" class="com.hzfh.service.employee.serviceImpl.SubsidyServiceImpl" />
+  <bean id="subsidyService"
+		class="org.springframework.remoting.caucho.HessianServiceExporter">
+    <property name="service" ref="subsidyServiceImpl" />
+    <property name="serviceInterface" value="com.hzfh.api.employee.service.SubsidyService" />
+  </bean>
+
+  <bean id="subsidyTotalServiceImpl" class="com.hzfh.service.employee.serviceImpl.SubsidyTotalServiceImpl" />
+  <bean id="subsidyTotalService"
+		class="org.springframework.remoting.caucho.HessianServiceExporter">
+    <property name="service" ref="subsidyTotalServiceImpl" />
+    <property name="serviceInterface" value="com.hzfh.api.employee.service.SubsidyTotalService" />
+  </bean>
+  
+  <bean id="suppliersServiceImpl" class="com.hzfh.service.employee.serviceImpl.SuppliersServiceImpl" />
+  <bean id="suppliersService"
+		class="org.springframework.remoting.caucho.HessianServiceExporter">
+    <property name="service" ref="suppliersServiceImpl" />
+    <property name="serviceInterface" value="com.hzfh.api.employee.service.SuppliersService" />
+  </bean>
+  
+  <bean id="recruitAskRecordServiceImpl" class="com.hzfh.service.employee.serviceImpl.RecruitAskRecordServiceImpl" />
+  <bean id="recruitAskRecordService"
+		class="org.springframework.remoting.caucho.HessianServiceExporter">
+    <property name="service" ref="recruitAskRecordServiceImpl" />
+    <property name="serviceInterface" value="com.hzfh.api.employee.service.RecruitAskRecordService" />
+  </bean>
+  
+  <bean id="interviewEvaluationRecordServiceImpl" class="com.hzfh.service.employee.serviceImpl.InterviewEvaluationRecordServiceImpl" />
+  <bean id="interviewEvaluationRecordService"
+		class="org.springframework.remoting.caucho.HessianServiceExporter">
+    <property name="service" ref="interviewEvaluationRecordServiceImpl" />
+    <property name="serviceInterface" value="com.hzfh.api.employee.service.InterviewEvaluationRecordService" />
+  </bean>
+  
+  <bean id="evaluationContentServiceImpl" class="com.hzfh.service.employee.serviceImpl.EvaluationContentServiceImpl" />
+  <bean id="evaluationContentService"
+		class="org.springframework.remoting.caucho.HessianServiceExporter">
+    <property name="service" ref="evaluationContentServiceImpl" />
+    <property name="serviceInterface" value="com.hzfh.api.employee.service.EvaluationContentService" />
+  </bean>
+
+  <bean id="evaluationScoreServiceImpl" class="com.hzfh.service.employee.serviceImpl.EvaluationScoreServiceImpl" />
+  <bean id="evaluationScoreService"
+		class="org.springframework.remoting.caucho.HessianServiceExporter">
+    <property name="service" ref="evaluationScoreServiceImpl" />
+    <property name="serviceInterface" value="com.hzfh.api.employee.service.EvaluationScoreService" />
+  </bean>
+
+  <bean id="workExperienceServiceImpl" class="com.hzfh.service.employee.serviceImpl.WorkExperienceServiceImpl" />
+  <bean id="workExperienceService"
+        class="org.springframework.remoting.caucho.HessianServiceExporter">
+    <property name="service" ref="workExperienceServiceImpl" />
+    <property name="serviceInterface" value="com.hzfh.api.employee.service.WorkExperienceService" />
+  </bean>
+
+    <bean id="empCompilePlanServiceImpl" class="com.hzfh.service.employee.serviceImpl.EmpCompilePlanServiceImpl" />
+    <bean id="empCompilePlanService"
+          class="org.springframework.remoting.caucho.HessianServiceExporter">
+        <property name="service" ref="empCompilePlanServiceImpl" />
+        <property name="serviceInterface" value="com.hzfh.api.employee.service.EmpCompilePlanService" />
+    </bean>
+
+    <bean id="employeeInformationServiceImpl" class="com.hzfh.service.employee.serviceImpl.EmployeeInformationServiceImpl" />
+    <bean id="employeeInformationService"
+          class="org.springframework.remoting.caucho.HessianServiceExporter">
+        <property name="service" ref="employeeInformationServiceImpl" />
+        <property name="serviceInterface" value="com.hzfh.api.employee.service.EmployeeInformationService" />
+    </bean>
+ <bean id="knowledgeAttachmentServiceImpl" class="com.hzfh.service.employee.serviceImpl.KnowledgeAttachmentServiceImpl" />
+  <bean id="knowledgeAttachmentService"
+		class="org.springframework.remoting.caucho.HessianServiceExporter">
+    <property name="service" ref="knowledgeAttachmentServiceImpl" />
+    <property name="serviceInterface" value="com.hzfh.api.employee.service.KnowledgeAttachmentService" />
+  </bean>
+<bean id="tempRecruitNeedServiceImpl" class="com.hzfh.service.employee.serviceImpl.TempRecruitNeedServiceImpl" />
+  <bean id="tempRecruitNeedService"
+		class="org.springframework.remoting.caucho.HessianServiceExporter">
+    <property name="service" ref="tempRecruitNeedServiceImpl" />
+    <property name="serviceInterface" value="com.hzfh.api.employee.service.TempRecruitNeedService" />
+  </bean>
+  <bean id="tempRecruitDetailServiceImpl" class="com.hzfh.service.employee.serviceImpl.TempRecruitDetailServiceImpl" />
+  <bean id="tempRecruitDetailService"
+		class="org.springframework.remoting.caucho.HessianServiceExporter">
+    <property name="service" ref="tempRecruitDetailServiceImpl" />
+    <property name="serviceInterface" value="com.hzfh.api.employee.service.TempRecruitDetailService" />
+  </bean>
+  
+  <bean id="attendanceApplicationServiceImpl" class="com.hzfh.service.employee.serviceImpl.AttendanceApplicationServiceImpl" />
+  <bean id="attendanceApplicationService"
+		class="org.springframework.remoting.caucho.HessianServiceExporter">
+    <property name="service" ref="attendanceApplicationServiceImpl" />
+    <property name="serviceInterface" value="com.hzfh.api.employee.service.AttendanceApplicationService" />
+  </bean>
+  
+    <bean id="personalChangeServiceImpl" class="com.hzfh.service.employee.serviceImpl.PersonalChangeServiceImpl" />
+  <bean id="personalChangeService"
+		class="org.springframework.remoting.caucho.HessianServiceExporter">
+    <property name="service" ref="personalChangeServiceImpl" />
+    <property name="serviceInterface" value="com.hzfh.api.employee.service.PersonalChangeService" />
+  </bean>
+  
+  
+  <bean id="resignApplicationServiceImpl" class="com.hzfh.service.employee.serviceImpl.ResignApplicationServiceImpl" />
+  <bean id="resignApplicationService"
+		class="org.springframework.remoting.caucho.HessianServiceExporter">
+    <property name="service" ref="resignApplicationServiceImpl" />
+    <property name="serviceInterface" value="com.hzfh.api.employee.service.ResignApplicationService" />
+  </bean>
+  
+  <bean id="probationWorkSummaryServiceImpl" class="com.hzfh.service.employee.serviceImpl.ProbationWorkSummaryServiceImpl" />
+  <bean id="probationWorkSummaryService"
+		class="org.springframework.remoting.caucho.HessianServiceExporter">
+    <property name="service" ref="probationWorkSummaryServiceImpl" />
+    <property name="serviceInterface" value="com.hzfh.api.employee.service.ProbationWorkSummaryService" />
+  </bean>
+  
+  <bean id="managerEvaluationServiceImpl" class="com.hzfh.service.employee.serviceImpl.ManagerEvaluationServiceImpl" />
+  <bean id="managerEvaluationService"
+		class="org.springframework.remoting.caucho.HessianServiceExporter">
+    <property name="service" ref="managerEvaluationServiceImpl" />
+    <property name="serviceInterface" value="com.hzfh.api.employee.service.ManagerEvaluationService" />
+  </bean>
+  
+  <bean id="probationEvaluationServiceImpl" class="com.hzfh.service.employee.serviceImpl.ProbationEvaluationServiceImpl" />
+  <bean id="probationEvaluationService"
+		class="org.springframework.remoting.caucho.HessianServiceExporter">
+    <property name="service" ref="probationEvaluationServiceImpl" />
+    <property name="serviceInterface" value="com.hzfh.api.employee.service.ProbationEvaluationService" />
+  </bean>
+
+  <bean id="probationEvaluationContentServiceImpl" class="com.hzfh.service.employee.serviceImpl.ProbationEvaluationContentServiceImpl" />
+  <bean id="probationEvaluationContentService"
+		class="org.springframework.remoting.caucho.HessianServiceExporter">
+    <property name="service" ref="probationEvaluationContentServiceImpl" />
+    <property name="serviceInterface" value="com.hzfh.api.employee.service.ProbationEvaluationContentService" />
+  </bean>
+
+  <bean id="probationEvaluationContentTemplateServiceImpl" class="com.hzfh.service.employee.serviceImpl.ProbationEvaluationContentTemplateServiceImpl" />
+  <bean id="probationEvaluationContentTemplateService"
+		class="org.springframework.remoting.caucho.HessianServiceExporter">
+    <property name="service" ref="probationEvaluationContentTemplateServiceImpl" />
+    <property name="serviceInterface" value="com.hzfh.api.employee.service.ProbationEvaluationContentTemplateService" />
+  </bean>
+
+  <bean id="probationEvaluationScoreServiceImpl" class="com.hzfh.service.employee.serviceImpl.ProbationEvaluationScoreServiceImpl" />
+  <bean id="probationEvaluationScoreService"
+		class="org.springframework.remoting.caucho.HessianServiceExporter">
+    <property name="service" ref="probationEvaluationScoreServiceImpl" />
+    <property name="serviceInterface" value="com.hzfh.api.employee.service.ProbationEvaluationScoreService" />
+  </bean>
+<bean id="yearNeedTotalServiceImpl" class="com.hzfh.service.employee.serviceImpl.YearNeedTotalServiceImpl" />
+  <bean id="yearNeedTotalService"
+		class="org.springframework.remoting.caucho.HessianServiceExporter">
+    <property name="service" ref="yearNeedTotalServiceImpl" />
+    <property name="serviceInterface" value="com.hzfh.api.employee.service.YearNeedTotalService" />
+  </bean>
+ <bean id="needReleaseServiceImpl" class="com.hzfh.service.employee.serviceImpl.NeedReleaseServiceImpl" />
+  <bean id="needReleaseService"
+		class="org.springframework.remoting.caucho.HessianServiceExporter">
+    <property name="service" ref="needReleaseServiceImpl" />
+    <property name="serviceInterface" value="com.hzfh.api.employee.service.NeedReleaseService" />
+  </bean>
+    <bean id="commissionWealthCenterServiceImpl" class="com.hzfh.service.employee.serviceImpl.CommissionWealthCenterServiceImpl" />
+    <bean id="commissionWealthCenterService"
+          class="org.springframework.remoting.caucho.HessianServiceExporter">
+        <property name="service" ref="commissionWealthCenterServiceImpl" />
+        <property name="serviceInterface" value="com.hzfh.api.employee.service.CommissionWealthCenterService" />
+    </bean>
+	<bean id="registrationServiceImpl" class="com.hzfh.service.employee.serviceImpl.RegistrationServiceImpl" />
+  <bean id="registrationService"
+		class="org.springframework.remoting.caucho.HessianServiceExporter">
+    <property name="service" ref="registrationServiceImpl" />
+    <property name="serviceInterface" value="com.hzfh.api.employee.service.RegistrationService" />
+  </bean>
+
+</beans>

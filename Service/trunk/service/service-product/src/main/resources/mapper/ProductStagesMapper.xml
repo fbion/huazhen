@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hzfh.service.product.mapper.ProductStagesMapper">
+	<resultMap type="com.hzfh.api.product.model.ProductStages" id="resultMapProductStages">
+		<result property="id" column="id"/>
+		<result property="sumMoney" column="sum_money"/>
+		<result property="productNo" column="product_no"/>
+		<result property="stage" column="stage"/>
+		<result property="start" column="start" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
+		<result property="end" column="end" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
+		<result property="dayCount" column="day_count"/>
+		<result property="amount" column="amount"/>
+		<result property="reason" column="reason"/>
+		<result property="inUserNo" column="in_user_no"/>
+		<result property="inTime" column="in_time" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
+		<result property="editUserNo" column="edit_user_no"/>
+		<result property="editTime" column="edit_time" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
+		<result property="editComment" column="edit_comment"/>
+	</resultMap>
+	<select id="getList" resultMap="resultMapProductStages">
+		SELECT id,sum_money,product_no,stage,start,end,day_count,amount,reason,in_user_no,in_time,edit_user_no,edit_time,edit_comment
+		FROM product_stages
+	</select>
+	<select id="getPagingList" resultMap="resultMapProductStages" parameterType="com.hzfh.api.product.model.query.ProductStagesCondition" statementType="STATEMENT">
+		SELECT id,sum_money,product_no,stage,start,end,day_count,amount,reason,in_user_no,in_time,edit_user_no,edit_time,edit_comment FROM product_stages where 1=1
+		<if test="productNo !=0">and product_no =${productNo}</if>
+		<if test="stages !=null and stages !=''">and stage=${stages}</if>
+		
+		ORDER BY
+		<foreach item="item" collection="sortItemList" separator=",">
+			${item.sortFeild} ${item.sortType}
+		</foreach>
+		LIMIT ${startIndex},${pageSize}
+	</select>
+	<select id="getTotalCount" resultType="int" parameterType="com.hzfh.api.product.model.query.ProductStagesCondition" statementType="STATEMENT">
+		SELECT count(1) FROM product_stages where 1=1
+		<if test="productNo !=0">and product_no =${productNo}</if>
+		<if test="stages !=null and stages !=''">and stage=${stages}</if>
+	</select>
+	<select id="getInfo" resultMap="resultMapProductStages" parameterType="int">
+		SELECT id,sum_money,product_no,stage,start,end,day_count,amount,reason,in_user_no,in_time,edit_user_no,edit_time,edit_comment FROM product_stages where id=#{id}
+	</select>
+	<insert id="add" parameterType="com.hzfh.api.product.model.ProductStages" useGeneratedKeys="true" keyProperty="id">
+		insert into product_stages
+		(sum_money,product_no,stage,start,end,day_count,amount,reason,in_user_no,in_time,edit_user_no,edit_time,edit_comment)
+		values
+		(#{sumMoney},#{productNo},#{stage},#{start},#{end},#{dayCount},#{amount},#{reason},#{inUserNo},current_timestamp(),#{editUserNo},current_timestamp(),#{editComment})
+	</insert>
+	<update id="update" parameterType="com.hzfh.api.product.model.ProductStages">
+		update product_stages set 
+		sum_money=#{sumMoney},product_no=#{productNo},stage=#{stage},start=#{start},end=#{end},day_count=#{dayCount},amount=#{amount},reason=#{reason},edit_user_no=#{editUserNo},edit_time=current_timestamp(),edit_comment=#{editComment}
+		where id=#{id}
+	</update>
+	<delete id="delete" parameterType="int">
+		delete from product_stages where id = #{id}
+	</delete>
+	<select id="getProductMaxStage" resultType="java.lang.Integer" >
+		SELECT max(stage) FROM product_stages where product_no=#{productNo}
+	</select>
+	<select id="getProductStageId" resultType="int">
+		SELECT id FROM product_stages where product_no=${product_no} and stage=${stagesNumber}
+	</select>
+	
+</mapper>

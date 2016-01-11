@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<scriptConfig xmlns="http://www.hzfh.com/web"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://www.hzfh.com/web ../../Schemas/Resources/Script.xsd">
+
+    <sharedScriptGroups default="Common">
+
+        <scriptGroup name="Common">
+            <scriptName>jQuery</scriptName>
+            <!-- <scriptName>echarts-plain</scriptName> -->
+            <scriptName>common</scriptName>
+            <scriptName>environmentVariable</scriptName>
+            <scriptName>base</scriptName>
+        </scriptGroup>
+    </sharedScriptGroups>
+</scriptConfig>

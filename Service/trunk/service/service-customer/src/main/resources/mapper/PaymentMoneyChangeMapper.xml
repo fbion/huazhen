@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hzfh.service.customer.mapper.PaymentMoneyChangeMapper">
+	<resultMap type="com.hzfh.api.customer.model.PaymentMoneyChange" id="resultMapPaymentMoneyChange">
+		<result property="id" column="id"/>
+		<result property="accountNo" column="account_no"/>
+		<result property="p2pCustomerNo" column="p2p_customer_no"/>
+		<result property="accountType" column="account_type"/>
+		<result property="p2pCustomerName" column="p2p_customer_name"/>
+		<result property="moneyTransferType" column="money_transfer_type"/>
+		<result property="moneyChangeType" column="money_change_type"/>
+		<result property="moneyAmountPre" column="money_amount_pre"/>
+		<result property="moneyAmountLater" column="money_amount_later"/>
+		<result property="moneyWithdraw" column="money_withdraw"/>
+		<result property="refSn" column="ref_sn"/>
+		<result property="orderNo" column="order_no"/>
+		<result property="refBatched" column="ref_batched"/>
+		<result property="timeCreate" column="time_create" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
+		<result property="note" column="note"/>
+		<result property="dateWork" column="date_work" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
+	</resultMap>
+	<select id="getList" resultMap="resultMapPaymentMoneyChange">
+		SELECT id,account_no,p2p_customer_no,account_type,p2p_customer_name,money_transfer_type,money_change_type,money_amount_pre,money_amount_later,money_withdraw,ref_sn,order_no,ref_batched,time_create,note,date_work
+		FROM payment_money_change
+	</select>
+	<select id="getPagingList" resultMap="resultMapPaymentMoneyChange" parameterType="com.hzfh.api.customer.model.query.PaymentMoneyChangeCondition" statementType="STATEMENT">
+		SELECT id,account_no,p2p_customer_no,account_type,p2p_customer_name,money_transfer_type,money_change_type,money_amount_pre,money_amount_later,money_withdraw,ref_sn,order_no,ref_batched,time_create,note,date_work FROM payment_money_change where 1=1
+		<if test="customerNo!=0">and p2p_customer_no=${customerNo}</if>
+		<if test="moneyChangeType !=0 and moneyChangeType!=-1"> and money_change_type =${moneyChangeType}</if>
+		<if test="moneyChangeType ==-1"> and money_change_type not in(1,3)</if>
+		<if test="startTime !=null and startTime!=''"> and '${startTime}' &lt;= time_create </if>
+		<if test="endTime !=null and endTime!=''"> and '${endTime}' &gt; time_create</if>
+		ORDER BY
+		<foreach item="item" collection="sortItemList" separator=",">
+			${item.sortFeild} ${item.sortType}
+		</foreach>
+		LIMIT ${startIndex},${pageSize}
+	</select>
+	<select id="getTotalCount" resultType="int" parameterType="com.hzfh.api.customer.model.query.PaymentMoneyChangeCondition" statementType="STATEMENT">
+		SELECT count(1) FROM payment_money_change where 1=1
+		<if test="customerNo!=0">and p2p_customer_no=${customerNo}</if>
+		<if test="moneyChangeType !=0 and moneyChangeType!=-1"> and money_change_type =${moneyChangeType}</if>
+		<if test="moneyChangeType ==-1"> and money_change_type not in(1,3)</if>
+		<if test="startTime !=null and startTime!=''"> and '${startTime}' &lt;= time_create </if>
+		<if test="endTime !=null and endTime!=''"> and '${endTime}' &gt; time_create</if>
+	</select>
+	<select id="getInfo" resultMap="resultMapPaymentMoneyChange" parameterType="int">
+		SELECT id,account_no,p2p_customer_no,account_type,p2p_customer_name,money_transfer_type,money_change_type,money_amount_pre,money_amount_later,money_withdraw,ref_sn,order_no,ref_batched,time_create,note,date_work FROM payment_money_change where id=#{id}
+	</select>
+	<select id="getInfoByMoneyChangeTypeAndRefSn" resultMap="resultMapPaymentMoneyChange">
+		SELECT id,account_no,p2p_customer_no,account_type,p2p_customer_name,money_transfer_type,money_change_type,money_amount_pre,money_amount_later,money_withdraw,ref_sn,order_no,ref_batched,time_create,note,date_work FROM payment_money_change where money_change_type=#{moneyChangeType} and ref_sn=#{requestNo}
+	</select>
+	<insert id="add" parameterType="com.hzfh.api.customer.model.PaymentMoneyChange" useGeneratedKeys="true" keyProperty="id">
+		insert into payment_money_change
+		(account_no,p2p_customer_no,account_type,p2p_customer_name,money_transfer_type,money_change_type,money_amount_pre,money_amount_later,money_withdraw,ref_sn,order_no,ref_batched,time_create,note,date_work)
+		values
+		(#{accountNo},#{p2pCustomerNo},#{accountType},#{p2pCustomerName},#{moneyTransferType},#{moneyChangeType},#{moneyAmountPre},#{moneyAmountLater},#{moneyWithdraw},#{refSn},#{orderNo},#{refBatched},current_timestamp(),#{note},#{dateWork})
+	</insert>
+	<update id="update" parameterType="com.hzfh.api.customer.model.PaymentMoneyChange">
+		update payment_money_change set 
+		account_no=#{accountNo},p2p_customer_no=#{p2pCustomerNo},account_type=#{accountType},p2p_customer_name=#{p2pCustomerName},money_transfer_type=#{moneyTransferType},money_change_type=#{moneyChangeType},money_amount_pre=#{moneyAmountPre},money_amount_later=#{moneyAmountLater},money_withdraw=#{moneyWithdraw},ref_sn=#{refSn},order_no=#{orderNo},ref_batched=#{refBatched},time_create=#{timeCreate},note=#{note},date_work=#{dateWork}
+		where id=#{id}
+	</update>
+	<delete id="delete" parameterType="int">
+		delete from payment_money_change where id = #{id}
+	</delete>
+</mapper>

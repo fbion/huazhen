@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hzfh.service.customer.mapper.PaymentMoneyRechargeMapper">
+	<resultMap type="com.hzfh.api.customer.model.PaymentMoneyRecharge" id="resultMapPaymentMoneyRecharge">
+		<result property="sn" column="sn"/>
+		<result property="accountNo" column="account_no"/>
+		<result property="customerNo" column="customer_no"/>
+		<result property="accountType" column="account_type"/>
+		<result property="customerName" column="customer_name"/>
+		<result property="rechargeType" column="recharge_type"/>
+		<result property="bankType" column="bank_type"/>
+		<result property="amount" column="amount"/>
+		<result property="note" column="note"/>
+		<result property="state" column="state"/>
+		<result property="resultCode" column="result_code"/>
+		<result property="resultNote" column="result_note"/>
+		<result property="timeCreate" column="time_create" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
+		<result property="bankTime" column="bank_time" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
+		<result property="channelNo" column="channel_no"/>
+		<result property="monitorBatched" column="monitor_batched"/>
+		<result property="checkState" column="check_state"/>
+		<result property="dateWork" column="date_work" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
+		<result property="dateSettle" column="date_settle" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
+		<result property="checkDate" column="check_date" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
+		<result property="moneyFactorage" column="money_factorage"/>
+		<result property="customerMoneyFactorage" column="customer_money_factorage"/>
+		<result property="factorageState" column="factorage_state"/>
+	</resultMap>
+	<select id="getList" resultMap="resultMapPaymentMoneyRecharge">
+		SELECT sn,account_no,customer_no,account_type,customer_name,recharge_type,bank_type,amount,note,state,result_code,result_note,time_create,bank_time,channel_no,monitor_batched,check_state,date_work,date_settle,check_date,money_factorage,customer_money_factorage,factorage_state
+		FROM payment_money_recharge
+	</select>
+	<select id="getPagingList" resultMap="resultMapPaymentMoneyRecharge" parameterType="com.hzfh.api.customer.model.query.PaymentMoneyRechargeCondition" statementType="STATEMENT">
+		SELECT sn,account_no,customer_no,account_type,customer_name,recharge_type,bank_type,amount,note,state,result_code,result_note,time_create,bank_time,channel_no,monitor_batched,check_state,date_work,date_settle,check_date,money_factorage,customer_money_factorage,factorage_state FROM payment_money_recharge where 1=1
+		<if test="sn !=null"> and sn = ${sn}</if>
+		<if test="customerNo !=0"> and customer_no = ${customerNo}</if>
+		<if test="state !=null"> and state in (${state})</if>
+		<if test="dateUp !=null and dateDown !=null"> and '${dateDown}' &lt;= time_create and time_create &lt; '${dateUp}'</if>
+		ORDER BY
+		<foreach item="item" collection="sortItemList" separator=",">
+			${item.sortFeild} ${item.sortType}
+		</foreach>
+		LIMIT ${startIndex},${pageSize}
+	</select>
+	<select id="getTotalCount" resultType="int" parameterType="com.hzfh.api.customer.model.query.PaymentMoneyRechargeCondition" statementType="STATEMENT">
+		SELECT count(1) FROM payment_money_recharge where 1=1
+		<if test="sn !=null"> and sn = ${sn}</if>
+		<if test="customerNo !=0"> and customer_no = ${customerNo}</if>
+		<if test="state !=null"> and state in (${state})</if>
+		<if test="dateUp !=null and dateDown !=null"> and '${dateDown}' &lt;= time_create and time_create &lt; '${dateUp}'</if>
+	</select>
+	<select id="getInfo" resultMap="resultMapPaymentMoneyRecharge" parameterType="int">
+		SELECT sn,account_no,customer_no,account_type,customer_name,recharge_type,bank_type,amount,note,state,result_code,result_note,time_create,bank_time,channel_no,monitor_batched,check_state,date_work,date_settle,check_date,money_factorage,customer_money_factorage,factorage_state FROM payment_money_recharge where sn=#{id}
+	</select>
+	<select id="getbySn" resultMap="resultMapPaymentMoneyRecharge" >
+		SELECT sn,account_no,customer_no,account_type,customer_name,recharge_type,bank_type,amount,note,state,result_code,result_note,time_create,bank_time,channel_no,monitor_batched,check_state,date_work,date_settle,check_date,money_factorage,customer_money_factorage,factorage_state FROM payment_money_recharge where sn=#{sn}
+	</select>
+	<select id="getInfoByStateAndSn" resultMap="resultMapPaymentMoneyRecharge" >
+		SELECT sn,account_no,customer_no,account_type,customer_name,recharge_type,bank_type,amount,note,state,result_code,result_note,time_create,bank_time,channel_no,monitor_batched,check_state,date_work,date_settle,check_date,money_factorage,customer_money_factorage,factorage_state FROM payment_money_recharge where sn=#{sn}
+		 and state = #{status}
+	</select>
+	
+	<insert id="add" parameterType="com.hzfh.api.customer.model.PaymentMoneyRecharge" useGeneratedKeys="true" keyProperty="id">
+		insert into payment_money_recharge
+		(sn,account_no,customer_no,account_type,customer_name,recharge_type,bank_type,amount,note,state,result_code,result_note,time_create,bank_time,channel_no,monitor_batched,check_state,date_work,date_settle,check_date,money_factorage,customer_money_factorage,factorage_state)
+		values
+		(#{sn},#{accountNo},#{customerNo},#{accountType},#{customerName},#{rechargeType},#{bankType},#{amount},#{note},#{state},#{resultCode},#{resultNote},#{timeCreate},#{bankTime},#{channelNo},#{monitorBatched},#{checkState},#{dateWork},#{dateSettle},#{checkDate},#{moneyFactorage},#{customerMoneyFactorage},#{factorageState})
+	</insert>
+	<update id="update" parameterType="com.hzfh.api.customer.model.PaymentMoneyRecharge">
+		update payment_money_recharge set 
+		account_no=#{accountNo},customer_no=#{customerNo},account_type=#{accountType},customer_name=#{customerName},recharge_type=#{rechargeType},bank_type=#{bankType},amount=#{amount},note=#{note},state=#{state},result_code=#{resultCode},result_note=#{resultNote},time_create=#{timeCreate},bank_time=#{bankTime},channel_no=#{channelNo},monitor_batched=#{monitorBatched},check_state=#{checkState},date_work=#{dateWork},date_settle=#{dateSettle},check_date=#{checkDate},money_factorage=#{moneyFactorage},customer_money_factorage=#{customerMoneyFactorage},factorage_state=#{factorageState}
+		where sn=#{id}
+	</update>
+	<update id="updateRecharge" parameterType="com.hzfh.api.customer.model.PaymentMoneyRecharge">
+		update payment_money_recharge set 
+		amount=#{amount},state=#{state},result_code=#{resultCode},result_note=#{resultNote},money_factorage=#{moneyFactorage},customer_money_factorage=#{customerMoneyFactorage}
+		where sn=#{sn}
+	</update>
+	<delete id="delete" parameterType="int">
+		delete from payment_money_recharge where id = #{id}
+	</delete>
+	
+	<select id="getListByCustomerNo" resultMap="resultMapPaymentMoneyRecharge" parameterType="int">
+		SELECT sn,account_no,customer_no,account_type,customer_name,recharge_type,bank_type,amount,note,state,result_code,result_note,time_create,bank_time,channel_no,monitor_batched,check_state,date_work,date_settle,check_date,money_factorage,customer_money_factorage,factorage_state
+		FROM payment_money_recharge where customer_no=#{customerNo}
+	</select>
+	<select id="getRechargeMoneyByCustomerNoAndStatusAndToday" resultType="java.lang.Double">
+		select SUM(amount)  from payment_money_recharge where to_days(bank_time)=to_days(now()) and state= #{status} and customer_no =#{customerNo}
+	</select>
+	
+	<update id="updateRechargeType">
+		update payment_money_recharge set 
+		recharge_type=#{typeNo}
+		where customer_no=#{customerNo}
+		and sn=#{snNo}
+	</update>
+	
+	<update id="updatePayType">
+		update payment_money_recharge set 
+		bank_type=#{typeNo}
+		where customer_no=#{customerNo}
+		and sn=#{snNo}
+	</update>
+	
+	<update id="updateMoneyAmount">
+		update payment_money_recharge set 
+		amount=#{money}
+		where customer_no=#{customerNo}
+		and sn=#{snNo}
+	</update>
+	
+	<update id="updateState">
+		update payment_money_recharge set 
+		state=#{stateNo}
+		where customer_no=#{customerNo}
+		and sn=#{snNo}
+	</update>
+	<update id="updateStateBySn">
+		update payment_money_recharge set 
+		state=#{state}
+		where sn=#{sn}
+	</update>
+	
+	
+</mapper>

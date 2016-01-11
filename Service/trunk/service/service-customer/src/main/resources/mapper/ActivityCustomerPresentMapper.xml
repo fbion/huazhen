@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hzfh.service.customer.mapper.ActivityCustomerPresentMapper">
+	<resultMap type="com.hzfh.api.customer.model.ActivityCustomerPresent" id="resultMapActivityCustomerPresent">
+		<result property="id" column="id"/>
+		<result property="presentNo" column="present_no"/>
+		<result property="p2pCustomerNo" column="p2p_customer_no"/>
+		<result property="recipient" column="recipient"/>
+		<result property="phone" column="phone"/>
+		<result property="email" column="email"/>
+		<result property="provinceNo" column="province_no"/>
+		<result property="cityNo" column="city_no"/>
+		<result property="districtNo" column="district_no"/>
+		<result property="address" column="address"/>
+		<result property="acquisitionTime" column="acquisition_time" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
+		<result property="status" column="status"/>
+		<result property="comment" column="comment"/>
+		<result property="myActivityNo" column="my_activity_no"/>
+	</resultMap>
+	<select id="getList" resultMap="resultMapActivityCustomerPresent">
+		SELECT id,present_no,p2p_customer_no,recipient,phone,email,province_no,city_no,district_no,address,acquisition_time,status,comment,my_activity_no
+		FROM activity_customer_present
+	</select>
+	<select id="getPagingList" resultMap="resultMapActivityCustomerPresent" parameterType="com.hzfh.api.customer.model.query.ActivityCustomerPresentCondition" statementType="STATEMENT">
+		SELECT id,present_no,p2p_customer_no,recipient,phone,email,province_no,city_no,district_no,address,acquisition_time,status,comment,my_activity_no FROM activity_customer_present where 1=1
+		ORDER BY
+		<foreach item="item" collection="sortItemList" separator=",">
+			${item.sortFeild} ${item.sortType}
+		</foreach>
+		LIMIT ${startIndex},${pageSize}
+	</select>
+	<select id="getTotalCount" resultType="int" parameterType="com.hzfh.api.customer.model.query.ActivityCustomerPresentCondition" statementType="STATEMENT">
+		SELECT count(1) FROM activity_customer_present where 1=1
+	</select>
+	<select id="getInfo" resultMap="resultMapActivityCustomerPresent" parameterType="int">
+		SELECT id,present_no,p2p_customer_no,recipient,phone,email,province_no,city_no,district_no,address,acquisition_time,status,comment,my_activity_no FROM activity_customer_present where id=#{id}
+	</select>
+	<insert id="add" parameterType="com.hzfh.api.customer.model.ActivityCustomerPresent" useGeneratedKeys="true" keyProperty="id">
+		insert into activity_customer_present
+		(present_no,p2p_customer_no,recipient,phone,email,province_no,city_no,district_no,address,acquisition_time,status,comment,my_activity_no)
+		values
+		(#{presentNo},#{p2pCustomerNo},#{recipient},#{phone},#{email},#{provinceNo},#{cityNo},#{districtNo},#{address},#{acquisitionTime},#{status},#{comment},#{myActivityNo})
+	</insert>
+	<update id="update" parameterType="com.hzfh.api.customer.model.ActivityCustomerPresent">
+		update activity_customer_present set 
+		present_no=#{presentNo},p2p_customer_no=#{p2pCustomerNo},recipient=#{recipient},phone=#{phone},email=#{email},province_no=#{provinceNo},city_no=#{cityNo},district_no=#{districtNo},address=#{address},acquisition_time=#{acquisitionTime},status=#{status},comment=#{comment},my_activity_no=#{myActivityNo}
+		where id=#{id}
+	</update>
+	<delete id="delete" parameterType="int">
+		delete from activity_customer_present where id = #{id}
+	</delete>
+</mapper>

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hzfh.service.sales.mapper.ApplyCustomerMapper">
+	<resultMap type="com.hzfh.api.sales.model.ApplyCustomer" id="resultMapApplyCustomer">
+		<result property="id" column="id"/>
+		<result property="activityNo" column="activity_no"/>
+		<result property="empNo" column="emp_no"/>
+		<result property="customerNo" column="customer_no"/>
+		<result property="name" column="name"/>
+		<result property="riskAppetite" column="risk_appetite"/>
+		<result property="sex" column="sex"/>
+		<result property="tel" column="tel"/>
+		<result property="level" column="level"/>
+		<result property="isSend" column="is_send"/>
+		<result property="isSign" column="is_sign"/>
+		<result property="mark" column="mark"/>
+		<result property="inUserNo" column="in_user_no"/>
+		<result property="inTime" column="in_time" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
+		<result property="editUserNo" column="edit_user_no"/>
+		<result property="editTime" column="edit_time" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
+		<result property="editComment" column="edit_comment"/>
+	</resultMap>
+	<select id="getListByEmpNo" resultMap="resultMapApplyCustomer" parameterType="com.hzfh.api.sales.model.ApplyCustomer">
+		SELECT id,activity_no,emp_no,customer_no,name,risk_appetite,sex,tel,level,is_send,is_sign,mark,in_user_no,in_time,edit_user_no,edit_time,edit_comment
+		FROM apply_customer where emp_no=#{empNo} and activity_no=#{activityNo}
+	</select>
+	<select id="getPagingList" resultMap="resultMapApplyCustomer" parameterType="com.hzfh.api.sales.model.query.ApplyCustomerCondition" statementType="STATEMENT">
+		SELECT id,activity_no,emp_no,customer_no,name,risk_appetite,sex,tel,level,is_send,is_sign,mark,in_user_no,in_time,edit_user_no,edit_time,edit_comment FROM apply_customer where 1=1
+		<if test="activityNo!=0"> and activity_no=${activityNo}</if>
+		<if test="empNo!=0"> and emp_no=${empNo}</if>
+		ORDER BY
+		<foreach item="item" collection="sortItemList" separator=",">
+			${item.sortFeild} ${item.sortType}
+		</foreach>
+		LIMIT ${startIndex},${pageSize}
+	</select>
+	<select id="getTotalCount" resultType="int" parameterType="com.hzfh.api.sales.model.query.ApplyCustomerCondition" statementType="STATEMENT">
+		SELECT count(1) FROM apply_customer where 1=1
+		<if test="activityNo!=0"> and activity_no=${activityNo}</if>
+		<if test="empNo!=0"> and emp_no=${empNo}</if>
+	</select>
+	<select id="getInfo" resultMap="resultMapApplyCustomer" parameterType="int">
+		SELECT id,activity_no,emp_no,customer_no,name,risk_appetite,sex,tel,level,is_send,is_sign,mark,in_user_no,in_time,edit_user_no,edit_time,edit_comment FROM apply_customer where id=#{id}
+	</select>
+	<select id="getInfoByCus" resultMap="resultMapApplyCustomer" parameterType="com.hzfh.api.sales.model.ApplyCustomer">
+		SELECT id,activity_no,emp_no,customer_no,name,risk_appetite,sex,tel,level,is_send,is_sign,mark,in_user_no,in_time,edit_user_no,edit_time,edit_comment FROM apply_customer where customer_no=#{customerNo} and activity_no=#{activityNo}
+	</select>
+	
+	<insert id="add" parameterType="com.hzfh.api.sales.model.ApplyCustomer" useGeneratedKeys="true" keyProperty="id">
+		insert into apply_customer
+		(activity_no,emp_no,customer_no,name,risk_appetite,sex,tel,level,is_send,is_sign,mark,in_user_no,in_time,edit_user_no,edit_time,edit_comment)
+		values
+		(#{activityNo},#{empNo},#{customerNo},#{name},#{riskAppetite},#{sex},#{tel},#{level},#{isSend},#{isSign},#{mark},#{inUserNo},current_timestamp(),#{editUserNo},current_timestamp(),#{editComment})
+	</insert>
+	<update id="update" parameterType="com.hzfh.api.sales.model.ApplyCustomer">
+		update apply_customer set 
+		activity_no=#{activityNo},emp_no=#{empNo},customer_no=#{customerNo},name=#{name},risk_appetite=#{riskAppetite},sex=#{sex},tel=#{tel},level=#{level},is_send=#{isSend},is_sign=#{isSign},mark=#{mark},edit_user_no=#{editUserNo},edit_time=current_timestamp(),edit_comment=#{editComment}
+		where id=#{id}
+	</update>
+	<delete id="delete" parameterType="int">
+		delete from apply_customer where id = #{id}
+	</delete>
+</mapper>

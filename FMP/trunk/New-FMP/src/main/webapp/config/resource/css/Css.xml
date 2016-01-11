@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<cssConfig xmlns="http://www.hzfh.com/web"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://www.hzfh.com/web ../../Schemas/Resources/Css.xsd">
+
+    <cssMappings>
+        <!--Common begin-->
+        <css name="base" order="5">base.css?t=1230</css>
+        <css name="common" order="10">common.css?t=1230</css>
+        <css name="page" order="12">page.css?t=1230</css>
+        <css name="global" order="15">global.css?t=1230</css>
+        <css name="jquery-ui" order="25">grid/jquery-ui.css?t=1230</css>
+        <css name="jqgrid" order="35">grid/ui.jqgrid.css?t=1230</css>
+        <css name="pagination" order="75">pagination.css?t=1230</css>
+        <css name="easyUi" order="45" >easyUI/default/easyui.css?t=1230</css>
+        <css name="icon" order="50" >easyUI/icon.css?t=1230</css>
+		<css name="dhtmlxTree" order="65" >dhtmlxTree/dhtmlxtree.css?t=1230</css>
+		<css name="zTreeDemo" order="85">zTree/zTreeDemo.css?t=1230</css>
+		<css name="zTreeStyle" order="95">zTree/zTreeStyle.css?t=1230</css>
+        <css name="autocomplete" order="100">jquery.autocomplete.css?t=1230</css>
+        <css name="dhtmlxscheduler" order="100">calendar/dhtmlxscheduler.css?t=1230</css>
+        <css name="select2" order="100">select2.css?t=1230</css>
+        <css name="select2-bootstrap" order="100">select2-bootstrap.css?t=1230</css>
+    </cssMappings>
+
+</cssConfig>

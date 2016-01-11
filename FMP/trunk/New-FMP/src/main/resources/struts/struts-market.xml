@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+        "http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+	<package name="ajaxActivityApplyUser" extends="json-default" namespace="/market/activityApply">
+		<action name="applyList" class="com.hzfh.fmp.controller.market.ajax.AjaxApplyListAction">
+			<result>/market/applyList.jsp</result>
+		</action>
+	</package>
+    <package name="activityUsers" extends="struts-login" namespace="/market/activityUsers">
+        <action name="list" class="com.hzfh.fmp.controller.market.ActivityUsersAction">
+            <result>/market/activityUsersList.jsp</result>
+        </action>
+		<action name="edit" class="com.hzfh.fmp.controller.market.ActivityUsersAddAction">
+            <result>/market/activityUsersAdd.jsp</result>
+        </action>
+        <action name="detail" class="com.hzfh.fmp.controller.market.ActivityUsersAddAction" method="executeDetail">
+            <result>/market/activityUsersDetail.jsp</result>
+        </action>
+    </package>
+    <package name="ajaxActivityUsers" extends="struts-error" namespace="/market/activityUsers">
+        <action name="ajaxListActivityUsers" class="com.hzfh.fmp.controller.market.ajax.AjaxActivityUsersAction">
+            <result type="json">
+                <param name="includeProperties">
+                    resultList.*,
+                    pageSize, pageIndex, pageCount, recordCount
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+        <action name="ajaxEditActivityUsers" class="com.hzfh.fmp.controller.market.ajax.AjaxActivityUsersAction" method="edit">
+            <result type="json">
+                <param name="includeProperties">
+                    errCode,errDesc
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+		<action name="ajaxGetActivityUsers" class="com.hzfh.fmp.controller.market.ajax.AjaxActivityUsersAction" method="getInfoById">
+            <result type="json">
+                <param name="includeProperties">
+                    info.*,errCode,errDesc
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+        
+        
+    </package>
+    <package name="drawSetting" extends="struts-login" namespace="/market/drawSetting">
+        <action name="list" class="com.hzfh.fmp.controller.market.DrawSettingAction">
+            <result>/market/drawSettingList.jsp</result>
+        </action>
+        <action name="resetDrawSeeting" class="com.hzfh.fmp.controller.market.DrawSettingAction" method="resetDrawSeeting">
+            <result>/market/drawSettingList.jsp</result>
+        </action>
+		<action name="edit" class="com.hzfh.fmp.controller.market.DrawSettingAddAction">
+            <result>/market/drawSettingAdd.jsp</result>
+        </action>
+        <action name="detail" class="com.hzfh.fmp.controller.market.DrawSettingAddAction" method="executeDetail">
+            <result>/market/drawSettingDetail.jsp</result>
+        </action>
+    </package>
+    <package name="ajaxDrawSetting" extends="struts-error" namespace="/market/drawSetting">
+    	<action name="ajaxAddSelctUser" class="com.hzfh.fmp.controller.market.ajax.AjaxDrawSettingAction" method="ajaxAddSelctUser">
+            <result type="json">
+                <param name="includeProperties">
+                    checkValue.*
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+        <action name="ajaxListDrawSetting" class="com.hzfh.fmp.controller.market.ajax.AjaxDrawSettingAction">
+            <result type="json">
+                <param name="includeProperties">
+                    resultList.*,
+                    pageSize, pageIndex, pageCount, recordCount
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+        <action name="ajaxEditDrawSetting" class="com.hzfh.fmp.controller.market.ajax.AjaxDrawSettingAction" method="edit">
+            <result type="json">
+                <param name="includeProperties">
+                    errCode,errDesc,checkValue
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+		<action name="ajaxGetDrawSetting" class="com.hzfh.fmp.controller.market.ajax.AjaxDrawSettingAction" method="getInfoById">
+            <result type="json">
+                <param name="includeProperties">
+                    info.*,errCode,errDesc
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+        <action name="ajaxGetDrawSettingInfo" class="com.hzfh.fmp.controller.market.ajax.AjaxDrawSettingAction" method="ajaxGetDrawSettingInfo">
+            <result type="json">
+                <param name="includeProperties">
+                    activityUsers.*,checkValue,hidRoundSetting
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+       <action name="ajaxDeldrawUser" class="com.hzfh.fmp.controller.market.ajax.AjaxDrawSettingAction" method="ajaxDeldrawUser">
+            <result type="json">
+                <param name="includeProperties">
+                    activityUsers.*,delUserid,checkValue
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+        <action name="getInfoListByUsername" class="com.hzfh.fmp.controller.market.ajax.AjaxDrawSettingAction" method="getInfoListByUsername">
+            <result >/market/drawUserList.jsp</result>
+        </action>
+    </package>
+
+    <package name="winningRecord" extends="struts-login" namespace="/market/winningRecord">
+        <action name="list" class="com.hzfh.fmp.controller.market.WinningRecordAction">
+            <result>/market/winningRecordList.jsp</result>
+        </action>
+		<action name="edit" class="com.hzfh.fmp.controller.market.WinningRecordAddAction">
+            <result>/market/winningRecordAdd.jsp</result>
+        </action>
+        <action name="detail" class="com.hzfh.fmp.controller.market.WinningRecordAddAction" method="executeDetail">
+            <result>/market/winningRecordDetail.jsp</result>
+        </action>
+    </package>
+    <package name="ajaxWinningRecord" extends="struts-error" namespace="/market/winningRecord">
+        <action name="ajaxListWinningRecord" class="com.hzfh.fmp.controller.market.ajax.AjaxWinningRecordAction">
+            <result type="json">
+                <param name="includeProperties">
+                    resultList.*,
+                    pageSize, pageIndex, pageCount, recordCount
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+        <action name="ajaxEditWinningRecord" class="com.hzfh.fmp.controller.market.ajax.AjaxWinningRecordAction" method="edit">
+            <result type="json">
+                <param name="includeProperties">
+                    errCode,errDesc
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+        <action name="ajaxGetAwardWinningRecord" class="com.hzfh.fmp.controller.market.ajax.AjaxWinningRecordAction" method="getAward">
+            <result type="json">
+                <param name="includeProperties">
+                    errCode,errDesc
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+        <action name="ajaxUndoGetAwardWinningRecord" class="com.hzfh.fmp.controller.market.ajax.AjaxWinningRecordAction" method="undoGetAward">
+            <result type="json">
+                <param name="includeProperties">
+                    errCode,errDesc
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+        
+        <action name="exportExcel" class="com.hzfh.fmp.controller.market.ajax.AjaxWinningRecordAction" method="exportExcel">
+        </action>
+		<action name="ajaxGetWinningRecord" class="com.hzfh.fmp.controller.market.ajax.AjaxWinningRecordAction" method="getInfoById">
+            <result type="json">
+                <param name="includeProperties">
+                    info.*,errCode,errDesc
+                </param>
+                <param name="noCache">true</param>
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+    </package>
+
+</struts>

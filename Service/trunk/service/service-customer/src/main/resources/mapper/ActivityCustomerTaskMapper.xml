@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hzfh.service.customer.mapper.ActivityCustomerTaskMapper">
+	<resultMap type="com.hzfh.api.customer.model.ActivityCustomerTask" id="resultMapActivityCustomerTask">
+		<result property="id" column="id"/>
+		<result property="p2pCustomerNo" column="p2p_customer_no"/>
+		<result property="activityNo" column="activity_no"/>
+	</resultMap>
+	<select id="getList" resultMap="resultMapActivityCustomerTask">
+		SELECT id,p2p_customer_no,activity_no
+		FROM activity_customer_task
+	</select>
+	<select id="getPagingList" resultMap="resultMapActivityCustomerTask" parameterType="com.hzfh.api.customer.model.query.ActivityCustomerTaskCondition" statementType="STATEMENT">
+		SELECT id,p2p_customer_no,activity_no FROM activity_customer_task where 1=1
+		ORDER BY
+		<foreach item="item" collection="sortItemList" separator=",">
+			${item.sortFeild} ${item.sortType}
+		</foreach>
+		LIMIT ${startIndex},${pageSize}
+	</select>
+	<select id="getTotalCount" resultType="int" parameterType="com.hzfh.api.customer.model.query.ActivityCustomerTaskCondition" statementType="STATEMENT">
+		SELECT count(1) FROM activity_customer_task where 1=1
+	</select>
+	<select id="getInfo" resultMap="resultMapActivityCustomerTask" parameterType="int">
+		SELECT id,p2p_customer_no,activity_no FROM activity_customer_task where id=#{id}
+	</select>
+	<select id="getInfoByCondition" resultMap="resultMapActivityCustomerTask" parameterType="int">
+		SELECT id,p2p_customer_no,activity_no FROM activity_customer_task where p2p_customer_no=#{customerId} and activity_no=#{activityId}
+	</select>
+	<insert id="add" parameterType="com.hzfh.api.customer.model.ActivityCustomerTask" useGeneratedKeys="true" keyProperty="id">
+		insert into activity_customer_task
+		(p2p_customer_no,activity_no)
+		values
+		(#{p2pCustomerNo},#{activityNo})
+	</insert>
+	<update id="update" parameterType="com.hzfh.api.customer.model.ActivityCustomerTask">
+		update activity_customer_task set 
+		p2p_customer_no=#{p2pCustomerNo},activity_no=#{activityNo}
+		where id=#{id}
+	</update>
+	<delete id="delete" parameterType="int">
+		delete from activity_customer_task where id = #{id}
+	</delete>
+</mapper>

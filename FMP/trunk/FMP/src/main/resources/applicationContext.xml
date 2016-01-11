@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <context:property-placeholder location="classpath:*.properties"/>
+    <context:component-scan base-package="com.hzfh.fmp"/>
+
+    <!--Memcached start-->
+    <bean name="memcachedClientBuilder" class="net.rubyeye.xmemcached.XMemcachedClientBuilder">
+        <!-- XMemcachedClientBuilder have two arguments.First is server list,and second is weights array. -->
+        <constructor-arg>
+            <list>
+                <bean class="java.net.InetSocketAddress">
+                    <constructor-arg>
+                        <value>${memcached.server1.host}</value>
+                    </constructor-arg>
+                    <constructor-arg>
+                        <value>${memcached.server1.port}</value>
+                    </constructor-arg>
+                </bean>
+            </list>
+        </constructor-arg>
+        <constructor-arg>
+            <list>
+                <value>${memcached.server1.weight}</value>
+            </list>
+        </constructor-arg>
+        <property name="connectionPoolSize" value="${memcached.connectionPoolSize}"/>
+        <property name="failureMode" value="${memcached.failureMode}"/>
+        <property name="commandFactory">
+            <bean class="net.rubyeye.xmemcached.command.TextCommandFactory"/>
+        </property>
+        <property name="sessionLocator">
+            <bean class="net.rubyeye.xmemcached.impl.KetamaMemcachedSessionLocator"/>
+        </property>
+        <property name="transcoder">
+            <bean class="net.rubyeye.xmemcached.transcoders.SerializingTranscoder"/>
+        </property>
+    </bean>
+    <!-- Use factory bean to build memcached client -->
+    <bean name="memcachedClient" factory-bean="memcachedClientBuilder"
+          factory-method="build" destroy-method="shutdown">
+    </bean>
+    <bean id="cacheManager" class="com.hzfh.fmp.model.common.cache.CacheManager" init-method="init">
+        <property name="cacheService" ref="memCachedService"/>
+    </bean>
+    <!--Memcached end-->
+
+    <bean name="cookieManager" class="com.hzframework.web.cookie.CookieManager">
+        <constructor-arg name="topDomain">
+            <value>${web.top.domain}</value>
+        </constructor-arg>
+    </bean>
+
+    <bean id="stateValues" class="com.hzfh.fmp.model.common.state.StateValues" init-method="init">
+        <property name="cookieManager" ref="cookieManager"/>
+    </bean>
+
+    <bean id="propertyConfigurer"
+          class="com.hzframework.helper.PropertyHelper">
+        <property name="ignoreResourceNotFound" value="true"/>
+        <property name="fileEncoding" value="utf-8"/>
+        <property name="locations">
+            <list>
+                <value>classpath:webInfo.properties</value>
+                <value>classpath*:security.properties</value>
+                <value>classpath*:properties/params.properties</value>
+                <value>classpath*:properties/role.properties</value>
+                <value>classpath*:properties/audit.properties</value>
+                <value>classpath*:properties/department.properties</value>
+                <value>classpath*:properties/dictionary.properties</value>
+                <value>classpath*:properties/letters.properties</value>
+                <value>classpath*:properties/mail.xml</value>
+            </list>
+        </property>
+    </bean>
+</beans>
